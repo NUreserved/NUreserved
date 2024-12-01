@@ -175,8 +175,8 @@ private fun EmailField(
     var email by remember { mutableStateOf("") }
 
     TextField(
-        value = email1,
-        onValueChange = { email1 = it },
+        value = email,
+        onValueChange = { email = it },
         singleLine = true,
         label = {
             Text(
@@ -214,8 +214,8 @@ private fun PasswordField(
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
-        value = password1,
-        onValueChange = { password1 = it },
+        value = password,
+        onValueChange = { password = it },
         singleLine = true,
         label = {
             Text(
@@ -228,16 +228,16 @@ private fun PasswordField(
                 )
             )
         },
-        visualTransformation = if (passwordVisible1) VisualTransformation.None else PasswordVisualTransformation(),
+        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             val image: ImageVector =
-                if (!passwordVisible1) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
+                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
                     R.drawable.ic_password_visibility_on
                 )
-            IconButton(onClick = { passwordVisible1 = !passwordVisible1 }) {
+            IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
                     imageVector = image,
-                    contentDescription = if (passwordVisible1) "Hide password" else "Show password",
+                    contentDescription = if (passwordVisible) "Hide password" else "Show password",
                     tint = Color(0xFFF8F5F5)
                 )
             }
