@@ -173,7 +173,8 @@ private fun EmailField(
     email: String,
     poppinsFamily: FontFamily
 ) {
-    var email1 = email
+    var email by remember { mutableStateOf("") }
+
     TextField(
         value = email1,
         onValueChange = { email1 = it },
