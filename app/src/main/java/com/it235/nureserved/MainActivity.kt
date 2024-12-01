@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import com.it235.nureserved.ui.theme.NUreservedTheme
+//import com.it235.nureserved.ui.theme.NUreservedTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +35,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun Main() {
-    NUreservedTheme {
+//    NUreservedTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             SplashScreen(innerPadding)
         }
-    }
+//    }
 }
 
 @Composable
