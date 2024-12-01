@@ -50,16 +50,26 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier){
-    val poppinsSemiBoldItalic = FontFamily(
-        Font(R.font.poppins_semibold_italic)
-    )
-
-    val poppinsMedium = FontFamily(
-        Font(R.font.poppins_medium)
-    )
-
-    val poppinsRegular = FontFamily(
-        Font(R.font.poppins)
+    val poppinsFamily = FontFamily(
+        Font(R.font.poppins_black, FontWeight.Black),
+        Font(R.font.poppins_blackitalic, FontWeight.Black, FontStyle.Italic),
+        Font(R.font.poppins_bold, FontWeight.Bold),
+        Font(R.font.poppins_bolditalic, FontWeight.Bold, FontStyle.Italic),
+        Font(R.font.poppins_extrabold, FontWeight.ExtraBold),
+        Font(R.font.poppins_extrabolditalic, FontWeight.ExtraBold, FontStyle.Italic),
+        Font(R.font.poppins_extralight, FontWeight.ExtraLight),
+        Font(R.font.poppins_extralightitalic, FontWeight.ExtraLight, FontStyle.Italic),
+        Font(R.font.poppins_italic, FontWeight.Normal, FontStyle.Italic),
+        Font(R.font.poppins_light, FontWeight.Light),
+        Font(R.font.poppins_lightitalic, FontWeight.Light, FontStyle.Italic),
+        Font(R.font.poppins_medium, FontWeight.Medium),
+        Font(R.font.poppins_regular, FontWeight.Normal),
+        Font(R.font.poppins_mediumitalic, FontWeight.Medium, FontStyle.Italic),
+        Font(R.font.poppins_regular, FontWeight.Normal),
+        Font(R.font.poppins_semibold, FontWeight.SemiBold),
+        Font(R.font.poppins_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
+        Font(R.font.poppins_thin, FontWeight.Thin),
+        Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
     )
 
     var email by remember { mutableStateOf("") }
@@ -106,20 +116,20 @@ fun LoginScreen(modifier: Modifier = Modifier){
                     ){
                         Logo()
                         Spacer(modifier = Modifier.height(20.dp))
-                        AppTitle(poppinsSemiBoldItalic)
+                        AppTitle(poppinsFamily)
                         Spacer(modifier = Modifier.height(40.dp))
 
-                        EmailField(email, poppinsMedium)
+                        EmailField(email, poppinsFamily)
                         Spacer(modifier = Modifier.height(10.dp))
-                        PasswordField(password, poppinsMedium, passwordVisible)
+                        PasswordField(password, poppinsFamily, passwordVisible)
 
                         Spacer(modifier = Modifier.height(15.dp))
 
-                        LoginButton(poppinsMedium)
+                        LoginButton(poppinsFamily)
 
                         Spacer(modifier = Modifier.height(40.dp))
 
-                        LoginNote(poppinsRegular)
+                        LoginNote(poppinsFamily)
 
                     }
 
@@ -144,12 +154,12 @@ private fun Logo() {
 }
 
 @Composable
-private fun AppTitle(poppinsSemiBoldItalic: FontFamily) {
+private fun AppTitle(poppinsFamily: FontFamily) {
     Text(
         color = Color(0xFF35408e),
         text = "NUreserved",
         style = TextStyle(
-            fontFamily = poppinsSemiBoldItalic,
+            fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
             fontStyle = FontStyle.Italic
@@ -161,7 +171,7 @@ private fun AppTitle(poppinsSemiBoldItalic: FontFamily) {
 @OptIn(ExperimentalMaterial3Api::class)
 private fun EmailField(
     email: String,
-    poppinsMedium: FontFamily
+    poppinsFamily: FontFamily
 ) {
     var email1 = email
     TextField(
@@ -173,7 +183,7 @@ private fun EmailField(
                 color = Color(0xFFF8F5F5),
                 text = "Email",
                 style = TextStyle(
-                    fontFamily = poppinsMedium,
+                    fontFamily = poppinsFamily,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -198,7 +208,7 @@ private fun EmailField(
 @OptIn(ExperimentalMaterial3Api::class)
 private fun PasswordField(
     password: String,
-    poppinsMedium: FontFamily,
+    poppinsFamily: FontFamily,
     passwordVisible: Boolean
 ) {
     var password1 = password
@@ -212,7 +222,7 @@ private fun PasswordField(
                 color = Color(0xFFF8F5F5),
                 text = "Password",
                 style = TextStyle(
-                    fontFamily = poppinsMedium,
+                    fontFamily = poppinsFamily,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -248,7 +258,7 @@ private fun PasswordField(
 }
 
 @Composable
-private fun LoginButton(poppinsMedium: FontFamily) {
+private fun LoginButton(poppinsFamily: FontFamily) {
     Button(
         onClick = {},
         modifier = Modifier
@@ -263,7 +273,7 @@ private fun LoginButton(poppinsMedium: FontFamily) {
         Text(
             text = "Log in",
             style = TextStyle(
-                fontFamily = poppinsMedium,
+                fontFamily = poppinsFamily,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
             )
@@ -272,7 +282,7 @@ private fun LoginButton(poppinsMedium: FontFamily) {
 }
 
 @Composable
-private fun LoginNote(poppinsRegular: FontFamily) {
+private fun LoginNote(poppinsFamily: FontFamily) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
@@ -280,7 +290,7 @@ private fun LoginNote(poppinsRegular: FontFamily) {
         text = "Login with your office 365 account to use and benefit from the service" +
                 "we offer",
         style = TextStyle(
-            fontFamily = poppinsRegular,
+            fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
         ),
         textAlign = TextAlign.Center,
