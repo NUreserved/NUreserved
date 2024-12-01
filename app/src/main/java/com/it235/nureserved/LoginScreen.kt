@@ -121,9 +121,9 @@ fun LoginScreen(modifier: Modifier = Modifier){
                             AppTitle(poppinsFamily)
                             Spacer(modifier = Modifier.height(40.dp))
 
-                            EmailField(email, poppinsFamily)
+                            EmailField(poppinsFamily)
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(password, poppinsFamily, passwordVisible)
+                            PasswordField(poppinsFamily)
 
                             Spacer(modifier = Modifier.height(15.dp))
 
@@ -170,7 +170,6 @@ private fun AppTitle(poppinsFamily: FontFamily) {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun EmailField(
-    email: String,
     poppinsFamily: FontFamily
 ) {
     var email by remember { mutableStateOf("") }
@@ -208,7 +207,6 @@ private fun EmailField(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun PasswordField(
-    password: String,
     poppinsFamily: FontFamily,
     passwordVisible: Boolean
 ) {
