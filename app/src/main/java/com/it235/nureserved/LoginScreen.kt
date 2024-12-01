@@ -287,11 +287,12 @@ private fun LoginNote(poppinsFamily: FontFamily) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-        text = "Login with your office 365 account to use and benefit from the service" +
-                "we offer",
+        text = "Login with your Office 365 account to use and benefit from the service" +
+                " we offer",
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
+            color = Color(0xFF0F0F0F)
         ),
         textAlign = TextAlign.Center,
     )
