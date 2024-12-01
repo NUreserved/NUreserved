@@ -90,10 +90,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
             //login
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .graphicsLayer{
-                        renderEffect = BlurEffect(radiusX = 15f, radiusY = 15f)
-                    },
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ){
