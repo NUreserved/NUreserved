@@ -74,9 +74,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
             Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
         )
 
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var passwordVisible by remember { mutableStateOf(false) }
+
 
         Scaffold(
             modifier = Modifier
@@ -208,7 +206,6 @@ private fun EmailField(
 @OptIn(ExperimentalMaterial3Api::class)
 private fun PasswordField(
     poppinsFamily: FontFamily,
-    passwordVisible: Boolean
 ) {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
