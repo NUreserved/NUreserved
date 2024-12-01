@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,8 +44,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
+@PreviewScreenSizes
+@Preview(
+    showBackground = true,
+)
 @Composable
-fun GreetingPreview() {
+fun MainScreenPreview() {
     MainScreen()
 }
