@@ -45,101 +45,101 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.it235.nureserved.ui.theme.NUreservedTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier){
-    val poppinsFamily = FontFamily(
-        Font(R.font.poppins_black, FontWeight.Black),
-        Font(R.font.poppins_blackitalic, FontWeight.Black, FontStyle.Italic),
-        Font(R.font.poppins_bold, FontWeight.Bold),
-        Font(R.font.poppins_bolditalic, FontWeight.Bold, FontStyle.Italic),
-        Font(R.font.poppins_extrabold, FontWeight.ExtraBold),
-        Font(R.font.poppins_extrabolditalic, FontWeight.ExtraBold, FontStyle.Italic),
-        Font(R.font.poppins_extralight, FontWeight.ExtraLight),
-        Font(R.font.poppins_extralightitalic, FontWeight.ExtraLight, FontStyle.Italic),
-        Font(R.font.poppins_italic, FontWeight.Normal, FontStyle.Italic),
-        Font(R.font.poppins_light, FontWeight.Light),
-        Font(R.font.poppins_lightitalic, FontWeight.Light, FontStyle.Italic),
-        Font(R.font.poppins_medium, FontWeight.Medium),
-        Font(R.font.poppins_regular, FontWeight.Normal),
-        Font(R.font.poppins_mediumitalic, FontWeight.Medium, FontStyle.Italic),
-        Font(R.font.poppins_regular, FontWeight.Normal),
-        Font(R.font.poppins_semibold, FontWeight.SemiBold),
-        Font(R.font.poppins_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
-        Font(R.font.poppins_thin, FontWeight.Thin),
-        Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
-    )
+    NUreservedTheme {
+        val poppinsFamily = FontFamily(
+            Font(R.font.poppins_black, FontWeight.Black),
+            Font(R.font.poppins_blackitalic, FontWeight.Black, FontStyle.Italic),
+            Font(R.font.poppins_bold, FontWeight.Bold),
+            Font(R.font.poppins_bolditalic, FontWeight.Bold, FontStyle.Italic),
+            Font(R.font.poppins_extrabold, FontWeight.ExtraBold),
+            Font(R.font.poppins_extrabolditalic, FontWeight.ExtraBold, FontStyle.Italic),
+            Font(R.font.poppins_extralight, FontWeight.ExtraLight),
+            Font(R.font.poppins_extralightitalic, FontWeight.ExtraLight, FontStyle.Italic),
+            Font(R.font.poppins_italic, FontWeight.Normal, FontStyle.Italic),
+            Font(R.font.poppins_light, FontWeight.Light),
+            Font(R.font.poppins_lightitalic, FontWeight.Light, FontStyle.Italic),
+            Font(R.font.poppins_medium, FontWeight.Medium),
+            Font(R.font.poppins_regular, FontWeight.Normal),
+            Font(R.font.poppins_mediumitalic, FontWeight.Medium, FontStyle.Italic),
+            Font(R.font.poppins_regular, FontWeight.Normal),
+            Font(R.font.poppins_semibold, FontWeight.SemiBold),
+            Font(R.font.poppins_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
+            Font(R.font.poppins_thin, FontWeight.Thin),
+            Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
+        )
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var passwordVisible by remember { mutableStateOf(false) }
 
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-    ){ innerPadding ->
-
-        Box(
+        Scaffold(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
-        ){
-            //background image
-            Image(
-                modifier = Modifier
-                    .fillMaxSize(),
-                painter = painterResource(R.drawable.splash_background),
-                contentDescription = "Logo",
-                contentScale = ContentScale.Crop,
-            )
+        ){ innerPadding ->
 
-            //login
-            Column(
+            Box(
                 modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .padding(innerPadding)
+                    .fillMaxSize()
             ){
-                Card(
+                //background image
+                Image(
                     modifier = Modifier
-                        .fillMaxWidth(0.9f),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFFFFFFF)
-                    )
+                        .fillMaxSize(),
+                    painter = painterResource(R.drawable.splash_background),
+                    contentDescription = "Logo",
+                    contentScale = ContentScale.Crop,
+                )
+
+                //login
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ){
-                    Column(
+                    Card(
                         modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                            .fillMaxWidth(0.9f),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFFFFFFFF)
+                        )
                     ){
-                        Logo()
-                        Spacer(modifier = Modifier.height(20.dp))
-                        AppTitle(poppinsFamily)
-                        Spacer(modifier = Modifier.height(40.dp))
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ){
+                            Logo()
+                            Spacer(modifier = Modifier.height(20.dp))
+                            AppTitle(poppinsFamily)
+                            Spacer(modifier = Modifier.height(40.dp))
 
-                        EmailField(email, poppinsFamily)
-                        Spacer(modifier = Modifier.height(10.dp))
-                        PasswordField(password, poppinsFamily, passwordVisible)
+                            EmailField(email, poppinsFamily)
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(password, poppinsFamily, passwordVisible)
 
-                        Spacer(modifier = Modifier.height(15.dp))
+                            Spacer(modifier = Modifier.height(15.dp))
 
-                        LoginButton(poppinsFamily)
+                            LoginButton(poppinsFamily)
 
-                        Spacer(modifier = Modifier.height(40.dp))
+                            Spacer(modifier = Modifier.height(40.dp))
 
-                        LoginNote(poppinsFamily)
+                            LoginNote(poppinsFamily)
+                        }
 
                     }
-
                 }
-            }
 
+            }
         }
     }
-
-
 }
 
 @Composable
@@ -297,7 +297,7 @@ private fun LoginNote(poppinsFamily: FontFamily) {
     )
 }
 
-@Preview(showBackground = true, apiLevel = 33)
+@Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen(){
     LoginScreen()
