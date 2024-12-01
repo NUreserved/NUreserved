@@ -40,6 +40,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -278,269 +279,275 @@ fun RowHeader(){
 @Composable
 fun RoomReservationForm(modifier: Modifier = Modifier){
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ){
-        val poppinsSemiBold = FontFamily(
-            Font(R.font.poppins_semibold)
-        )
+    Scaffold(
 
-        RowHeader()
-
+    ){ innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
         ){
-
-            Column(){
-                InputFieldAndLabel(inputLabel = "Name of Organization/Department/College:", modifier = Modifier.height(5.dp)){
-                    OutlineTextFieldComposable()
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Column(){
-                InputFieldAndLabel(inputLabel = "Title of the Activity:", modifier = Modifier.height(5.dp)){
-                    OutlineTextFieldComposable()
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            RowLayout(){
-                InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
-                    DatePickerTextField()
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-//                    .padding(start = 20.dp)
-            ){
-                //col 1
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                ){
-                    RowLayout(){
-                        InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                            Row(modifier = Modifier.weight(3f)) {
-                                DatePickerTextField()
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    RowLayout(){
-                        InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                            Row(modifier = Modifier.weight(3f)){
-                                TimePicker()
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.width(10.dp))
-
-                //col 2
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                ){
-                    RowLayout(){
-                        InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                            Row(modifier = Modifier.weight(3f)) {
-                                DatePickerTextField()
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    RowLayout(){
-                        InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                            Row(modifier = Modifier.weight(3f)){
-                                TimePicker()
-                            }
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
-                text = "Requested by:",
-                color = Color(0xFF0F0F0F),
-                style = TextStyle(
-                    fontFamily = Resources.poppinsMedium,
-                    fontWeight = FontWeight.Medium,
-                )
+            val poppinsSemiBold = FontFamily(
+                Font(R.font.poppins_semibold)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
-
-            RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    InputFieldAndLabel(inputLabel = "Given Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                        Row(modifier = Modifier.weight(6f)){
-                            OutlineTextFieldComposable()
-                        }
-                    }
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    InputFieldAndLabel(inputLabel = "Middle Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                        Row(modifier = Modifier.weight(6f)){
-                            OutlineTextFieldComposable()
-                        }
-                    }
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    InputFieldAndLabel(inputLabel = "Surname", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                        Row(modifier = Modifier.weight(6f)){
-                            OutlineTextFieldComposable()
-                        }
-                    }
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            RowLayout(){
-                InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
-                    OutlineTextFieldComposable()
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            RowLayout(){
-                InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
-                    OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            HorizontalDivider(
-                color = Color(0xFFEEEEEE),
-                thickness = 2.dp,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
-                text = "Venue",
-                color = Color(0xFF0F0F0F),
-                style = TextStyle(
-                    fontFamily = Resources.poppinsMedium,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
+            RowHeader()
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
             ){
-                //row 1
+
+                Column(){
+                    InputFieldAndLabel(inputLabel = "Name of Organization/Department/College:", modifier = Modifier.height(5.dp)){
+                        OutlineTextFieldComposable()
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Column(){
+                    InputFieldAndLabel(inputLabel = "Title of the Activity:", modifier = Modifier.height(5.dp)){
+                        OutlineTextFieldComposable()
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                RowLayout(){
+                    InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
+                        DatePickerTextField()
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+//                    .padding(start = 20.dp)
                 ){
-                    FilterChipComposable(roomNumber = "Room 202", modifier = Modifier.weight(1f))
+                    //col 1
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                    ){
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
+                                Row(modifier = Modifier.weight(3f)) {
+                                    DatePickerTextField()
+                                }
+                            }
+                        }
 
-                    Spacer(modifier = Modifier.width(3.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
-                    FilterChipComposable(roomNumber = "Room 205", modifier = Modifier.weight(1f))
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
+                                Row(modifier = Modifier.weight(3f)){
+                                    TimePicker()
+                                }
+                            }
+                        }
+                    }
 
-                    Spacer(modifier = Modifier.width(3.dp))
+                    Spacer(modifier = Modifier.width(10.dp))
 
-                    FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
+                    //col 2
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                    ){
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
+                                Row(modifier = Modifier.weight(3f)) {
+                                    DatePickerTextField()
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
+                                Row(modifier = Modifier.weight(3f)){
+                                    TimePicker()
+                                }
+                            }
+                        }
+                    }
                 }
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                //row 2
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ){
-                    FilterChipComposable(roomNumber = "Room 316", modifier = Modifier.weight(1f))
-
-                    Spacer(modifier = Modifier.width(3.dp))
-
-                    FilterChipComposable(roomNumber = "Room 317", modifier = Modifier.weight(1f))
-
-                    Spacer(modifier = Modifier.width(3.dp))
-
-                    FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ){
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF35408E),
-                        contentColor = Color(0xFFFEFEFE)
-                    ),
-                    shape = RoundedCornerShape(10.dp)
-                ){
-                    Text(
-                        text = "Next",
-                        style = TextStyle(
-                            fontFamily = Resources.poppinsMedium,
-                            fontWeight = FontWeight.Medium,
-                            fontSize = 18.sp
-                        )
+                Text(
+                    text = "Requested by:",
+                    color = Color(0xFF0F0F0F),
+                    style = TextStyle(
+                        fontFamily = Resources.poppinsMedium,
+                        fontWeight = FontWeight.Medium,
                     )
-                }
-            }
+                )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
+
+                RowLayout(modifier = Modifier.padding(start = 20.dp)){
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        InputFieldAndLabel(inputLabel = "Given Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
+                            Row(modifier = Modifier.weight(6f)){
+                                OutlineTextFieldComposable()
+                            }
+                        }
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                RowLayout(modifier = Modifier.padding(start = 20.dp)){
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        InputFieldAndLabel(inputLabel = "Middle Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
+                            Row(modifier = Modifier.weight(6f)){
+                                OutlineTextFieldComposable()
+                            }
+                        }
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                RowLayout(modifier = Modifier.padding(start = 20.dp)){
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        InputFieldAndLabel(inputLabel = "Surname", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
+                            Row(modifier = Modifier.weight(6f)){
+                                OutlineTextFieldComposable()
+                            }
+                        }
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                RowLayout(){
+                    InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
+                        OutlineTextFieldComposable()
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                RowLayout(){
+                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
+                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                HorizontalDivider(
+                    color = Color(0xFFEEEEEE),
+                    thickness = 2.dp,
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Text(
+                    text = "Venue",
+                    color = Color(0xFF0F0F0F),
+                    style = TextStyle(
+                        fontFamily = Resources.poppinsMedium,
+                        fontWeight = FontWeight.Medium,
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ){
+                    //row 1
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ){
+                        FilterChipComposable(roomNumber = "Room 202", modifier = Modifier.weight(1f))
+
+                        Spacer(modifier = Modifier.width(3.dp))
+
+                        FilterChipComposable(roomNumber = "Room 205", modifier = Modifier.weight(1f))
+
+                        Spacer(modifier = Modifier.width(3.dp))
+
+                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    //row 2
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ){
+                        FilterChipComposable(roomNumber = "Room 316", modifier = Modifier.weight(1f))
+
+                        Spacer(modifier = Modifier.width(3.dp))
+
+                        FilterChipComposable(roomNumber = "Room 317", modifier = Modifier.weight(1f))
+
+                        Spacer(modifier = Modifier.width(3.dp))
+
+                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ){
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF35408E),
+                            contentColor = Color(0xFFFEFEFE)
+                        ),
+                        shape = RoundedCornerShape(10.dp)
+                    ){
+                        Text(
+                            text = "Next",
+                            style = TextStyle(
+                                fontFamily = Resources.poppinsMedium,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 18.sp
+                            )
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+            }
 
         }
-
     }
+
 
 }
