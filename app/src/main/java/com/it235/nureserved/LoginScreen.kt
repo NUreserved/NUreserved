@@ -210,8 +210,9 @@ private fun PasswordField(
     poppinsFamily: FontFamily,
     passwordVisible: Boolean
 ) {
-    var password1 = password
-    var passwordVisible1 = passwordVisible
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
     TextField(
         value = password1,
         onValueChange = { password1 = it },
