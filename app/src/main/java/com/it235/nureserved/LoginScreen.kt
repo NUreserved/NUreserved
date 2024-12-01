@@ -135,6 +135,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
                         TextField(
                             value = email,
                             onValueChange = { email = it },
+                            singleLine = true,
                             label = {
                                 Text (
                                     color = Color(0xFFF8F5F5),
@@ -165,6 +166,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
                         TextField(
                             value = password,
                             onValueChange = { password = it },
+                            singleLine = true,
                             label = {
                                 Text (
                                     color = Color(0xFFF8F5F5),
