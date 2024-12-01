@@ -104,134 +104,22 @@ fun LoginScreen(modifier: Modifier = Modifier){
                             .fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ){
-                        Image(
-                            modifier = Modifier
-                                .width(90.dp)
-                                .padding(top = 40.dp),
-                            painter = painterResource(R.drawable.logo),
-                            contentDescription = "",
-                        )
-
+                        Logo()
                         Spacer(modifier = Modifier.height(20.dp))
-
-                        Text(
-                            color = Color(0xFF35408e),
-                            text = "NUreserved",
-                            style = TextStyle(
-                                fontFamily = poppinsSemiBoldItalic,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 24.sp,
-                                fontStyle = FontStyle.Italic
-                            )
-                        )
-
+                        AppTitle(poppinsSemiBoldItalic)
                         Spacer(modifier = Modifier.height(40.dp))
 
-                        TextField(
-                            value = email,
-                            onValueChange = { email = it },
-                            singleLine = true,
-                            label = {
-                                Text (
-                                    color = Color(0xFFF8F5F5),
-                                    text = "Email",
-                                    style = TextStyle(
-                                        fontFamily = poppinsMedium,
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Medium,
-                                    )
-                                )
-                            },
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color(0xFFAFAFAF),
-                                focusedTextColor = Color(0xFFF8F5F5),
-                                unfocusedTextColor = Color(0xFFF8F5F5),
-                                cursorColor = Color(0xFFF8F5F5),
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                            ),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp)
-                        )
-
+                        EmailField(email, poppinsMedium)
                         Spacer(modifier = Modifier.height(10.dp))
-
-                        TextField(
-                            value = password,
-                            onValueChange = { password = it },
-                            singleLine = true,
-                            label = {
-                                Text (
-                                    color = Color(0xFFF8F5F5),
-                                    text = "Password",
-                                    style = TextStyle(
-                                        fontFamily = poppinsMedium,
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Medium,
-                                    )
-                                )
-                            },
-                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                            trailingIcon = {
-                                val image: ImageVector = if(!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(R.drawable.ic_password_visibility_on)
-                                IconButton(onClick = { passwordVisible = !passwordVisible}){
-                                    Icon(imageVector = image, contentDescription = if (passwordVisible) "Hide password" else "Show password",
-                                        tint = Color(0xFFF8F5F5))
-                                }
-                            },
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color(0xFFAFAFAF),
-                                focusedTextColor = Color(0xFFF8F5F5),
-                                unfocusedTextColor = Color(0xFFF8F5F5),
-                                cursorColor = Color(0xFFF8F5F5),
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                            ),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp)
-                        )
+                        PasswordField(password, poppinsMedium, passwordVisible)
 
                         Spacer(modifier = Modifier.height(15.dp))
 
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .padding(start = 20.dp, end = 20.dp)
-                                .fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFF35408E),
-                                contentColor = Color(0xFFF8F5F5)
-                            ),
-                            shape = RoundedCornerShape(10.dp)
-                        ){
-                            Text (
-                                text = "Log in",
-                                style = TextStyle(
-                                    fontFamily = poppinsMedium,
-                                    fontSize = 18.sp,
-                                    fontWeight = FontWeight.Medium,
-                                )
-                            )
-                        }
+                        LoginButton(poppinsMedium)
 
                         Spacer(modifier = Modifier.height(40.dp))
 
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-                            text = "Login with your office 365 account to use and benefit from the service" +
-                                    "we offer",
-                            style = TextStyle(
-                                fontFamily = poppinsRegular,
-                                fontWeight = FontWeight.Normal,
-                            ),
-                            textAlign = TextAlign.Center,
-                        )
+                        LoginNote(poppinsRegular)
 
                     }
 
@@ -244,7 +132,162 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
 }
 
-@Preview(showBackground = true)
+@Composable
+private fun Logo() {
+    Image(
+        modifier = Modifier
+            .width(90.dp)
+            .padding(top = 40.dp),
+        painter = painterResource(R.drawable.logo),
+        contentDescription = "",
+    )
+}
+
+@Composable
+private fun AppTitle(poppinsSemiBoldItalic: FontFamily) {
+    Text(
+        color = Color(0xFF35408e),
+        text = "NUreserved",
+        style = TextStyle(
+            fontFamily = poppinsSemiBoldItalic,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp,
+            fontStyle = FontStyle.Italic
+        )
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun EmailField(
+    email: String,
+    poppinsMedium: FontFamily
+) {
+    var email1 = email
+    TextField(
+        value = email1,
+        onValueChange = { email1 = it },
+        singleLine = true,
+        label = {
+            Text(
+                color = Color(0xFFF8F5F5),
+                text = "Email",
+                style = TextStyle(
+                    fontFamily = poppinsMedium,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            )
+        },
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color(0xFFAFAFAF),
+            focusedTextColor = Color(0xFFF8F5F5),
+            unfocusedTextColor = Color(0xFFF8F5F5),
+            cursorColor = Color(0xFFF8F5F5),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp)
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun PasswordField(
+    password: String,
+    poppinsMedium: FontFamily,
+    passwordVisible: Boolean
+) {
+    var password1 = password
+    var passwordVisible1 = passwordVisible
+    TextField(
+        value = password1,
+        onValueChange = { password1 = it },
+        singleLine = true,
+        label = {
+            Text(
+                color = Color(0xFFF8F5F5),
+                text = "Password",
+                style = TextStyle(
+                    fontFamily = poppinsMedium,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            )
+        },
+        visualTransformation = if (passwordVisible1) VisualTransformation.None else PasswordVisualTransformation(),
+        trailingIcon = {
+            val image: ImageVector =
+                if (!passwordVisible1) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
+                    R.drawable.ic_password_visibility_on
+                )
+            IconButton(onClick = { passwordVisible1 = !passwordVisible1 }) {
+                Icon(
+                    imageVector = image,
+                    contentDescription = if (passwordVisible1) "Hide password" else "Show password",
+                    tint = Color(0xFFF8F5F5)
+                )
+            }
+        },
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color(0xFFAFAFAF),
+            focusedTextColor = Color(0xFFF8F5F5),
+            unfocusedTextColor = Color(0xFFF8F5F5),
+            cursorColor = Color(0xFFF8F5F5),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp)
+    )
+}
+
+@Composable
+private fun LoginButton(poppinsMedium: FontFamily) {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp)
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF35408E),
+            contentColor = Color(0xFFF8F5F5)
+        ),
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Text(
+            text = "Log in",
+            style = TextStyle(
+                fontFamily = poppinsMedium,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        )
+    }
+}
+
+@Composable
+private fun LoginNote(poppinsRegular: FontFamily) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
+        text = "Login with your office 365 account to use and benefit from the service" +
+                "we offer",
+        style = TextStyle(
+            fontFamily = poppinsRegular,
+            fontWeight = FontWeight.Normal,
+        ),
+        textAlign = TextAlign.Center,
+    )
+}
+
+@Preview(showBackground = true, apiLevel = 33)
 @Composable
 fun PreviewLoginScreen(){
     LoginScreen()
