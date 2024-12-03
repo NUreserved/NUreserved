@@ -1,6 +1,7 @@
 package com.it235.nureserved
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +35,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -42,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,8 +77,6 @@ fun LoginScreen(modifier: Modifier = Modifier){
             Font(R.font.poppins_thin, FontWeight.Thin),
             Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
         )
-
-
 
         Scaffold(
             modifier = Modifier
@@ -127,8 +129,10 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
                             LoginButton(poppinsFamily)
 
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Spacer(modifier = Modifier.height(15.dp))
 
+                            RegisterNote(poppinsFamily)
+                            Spacer(modifier = Modifier.height(40.dp))
                             LoginNote(poppinsFamily)
                         }
 
@@ -276,6 +280,26 @@ private fun LoginButton(poppinsFamily: FontFamily) {
             )
         )
     }
+}
+
+@Composable
+fun RegisterNote(poppinsFamily: FontFamily) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth(),
+        text = buildAnnotatedString {
+            append("No account yet? ")
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                append("Register")
+            }
+        },
+        style = TextStyle(
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.Normal,
+            color = Color(0xFF0F0F0F)
+        ),
+        textAlign = TextAlign.Center,
+    )
 }
 
 @Composable
