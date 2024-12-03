@@ -319,5 +319,5 @@ private fun LoginNote(poppinsFamily: FontFamily) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen(){
-    com.it235.nureserved.LoginScreen()
+    LoginScreen()
 }
