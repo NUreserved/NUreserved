@@ -7,12 +7,6 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.ui.authscreenui.LoginScreen
 import com.it235.nureserved.ui.authscreenui.SignUpScreen
 
-// Define routes for navigation
-object AuthScreenRoutes {
-    var LoginScreen = "Login"
-    var SignUpScreen = "SignUp"
-}
-
 // Navigation for authentication screens
 @Composable
 fun AuthScreenNav() {
@@ -20,12 +14,12 @@ fun AuthScreenNav() {
 
     NavHost(
         navController = navController,
-        startDestination = AuthScreenRoutes.LoginScreen,
+        startDestination = Routes.LoginScreen,
     ) {
-        composable(route = AuthScreenRoutes.LoginScreen) {
+        composable(route = Routes.LoginScreen) {
             LoginScreen(navController)
         }
-        composable(route = AuthScreenRoutes.SignUpScreen) {
+        composable(route = Routes.SignUpScreen) {
             SignUpScreen(navController)
         }
     }
