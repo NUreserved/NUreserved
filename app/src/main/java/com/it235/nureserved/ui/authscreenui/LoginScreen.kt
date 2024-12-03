@@ -53,6 +53,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.Routes
+import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @Composable
@@ -60,28 +61,6 @@ fun LoginScreen(
     navController: NavController
 ){
     NUreservedTheme {
-        val poppinsFamily = FontFamily(
-            Font(R.font.poppins_black, FontWeight.Black),
-            Font(R.font.poppins_blackitalic, FontWeight.Black, FontStyle.Italic),
-            Font(R.font.poppins_bold, FontWeight.Bold),
-            Font(R.font.poppins_bolditalic, FontWeight.Bold, FontStyle.Italic),
-            Font(R.font.poppins_extrabold, FontWeight.ExtraBold),
-            Font(R.font.poppins_extrabolditalic, FontWeight.ExtraBold, FontStyle.Italic),
-            Font(R.font.poppins_extralight, FontWeight.ExtraLight),
-            Font(R.font.poppins_extralightitalic, FontWeight.ExtraLight, FontStyle.Italic),
-            Font(R.font.poppins_italic, FontWeight.Normal, FontStyle.Italic),
-            Font(R.font.poppins_light, FontWeight.Light),
-            Font(R.font.poppins_lightitalic, FontWeight.Light, FontStyle.Italic),
-            Font(R.font.poppins_medium, FontWeight.Medium),
-            Font(R.font.poppins_regular, FontWeight.Normal),
-            Font(R.font.poppins_mediumitalic, FontWeight.Medium, FontStyle.Italic),
-            Font(R.font.poppins_regular, FontWeight.Normal),
-            Font(R.font.poppins_semibold, FontWeight.SemiBold),
-            Font(R.font.poppins_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
-            Font(R.font.poppins_thin, FontWeight.Thin),
-            Font(R.font.poppins_thinitalic, FontWeight.Thin, FontStyle.Italic)
-        )
-
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
@@ -121,22 +100,22 @@ fun LoginScreen(
                         ){
                             Logo()
                             Spacer(modifier = Modifier.height(20.dp))
-                            AppTitle(poppinsFamily)
+                            AppTitle()
                             Spacer(modifier = Modifier.height(40.dp))
 
-                            EmailField(poppinsFamily)
+                            EmailField()
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(poppinsFamily)
+                            PasswordField()
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            LoginButton(poppinsFamily)
+                            LoginButton()
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            NoAccountNote(poppinsFamily, navController)
+                            NoAccountNote(navController)
                             Spacer(modifier = Modifier.height(40.dp))
-                            LoginNote(poppinsFamily)
+                            LoginNote()
                         }
 
                     }
@@ -159,7 +138,7 @@ private fun Logo() {
 }
 
 @Composable
-private fun AppTitle(poppinsFamily: FontFamily) {
+private fun AppTitle() {
     Text(
         color = Color(0xFF35408e),
         text = "NUreserved",
@@ -174,9 +153,7 @@ private fun AppTitle(poppinsFamily: FontFamily) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField(
-    poppinsFamily: FontFamily
-) {
+private fun EmailField() {
     var email by remember { mutableStateOf("") }
 
     TextField(
@@ -211,9 +188,7 @@ private fun EmailField(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField(
-    poppinsFamily: FontFamily,
-) {
+private fun PasswordField() {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -262,7 +237,7 @@ private fun PasswordField(
 }
 
 @Composable
-private fun LoginButton(poppinsFamily: FontFamily) {
+private fun LoginButton() {
     Button(
         onClick = {},
         modifier = Modifier
@@ -286,7 +261,7 @@ private fun LoginButton(poppinsFamily: FontFamily) {
 }
 
 @Composable
-fun NoAccountNote(poppinsFamily: FontFamily, navController: NavController) {
+fun NoAccountNote(navController: NavController) {
     // Create an annotated string for the "No account yet? Register" text
     val annotatedText = buildAnnotatedString {
         append("No account yet? ")
@@ -320,7 +295,7 @@ fun NoAccountNote(poppinsFamily: FontFamily, navController: NavController) {
 }
 
 @Composable
-private fun LoginNote(poppinsFamily: FontFamily) {
+private fun LoginNote() {
     Text(
         modifier = Modifier
             .fillMaxWidth()

@@ -53,6 +53,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.Routes
+import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @Composable
@@ -121,22 +122,22 @@ fun SignUpScreen(
                         ){
                             Logo()
                             Spacer(modifier = Modifier.height(20.dp))
-                            AppTitle(poppinsFamily)
+                            AppTitle()
                             Spacer(modifier = Modifier.height(40.dp))
 
-                            EmailField(poppinsFamily)
+                            EmailField()
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(poppinsFamily)
+                            PasswordField()
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            RegisterButton(poppinsFamily)
+                            RegisterButton()
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            AccountExistNote(poppinsFamily, navController)
+                            AccountExistNote(navController)
                             Spacer(modifier = Modifier.height(40.dp))
-                            RegisterNote(poppinsFamily)
+                            RegisterNote()
                         }
 
                     }
@@ -159,7 +160,7 @@ private fun Logo() {
 }
 
 @Composable
-private fun AppTitle(poppinsFamily: FontFamily) {
+private fun AppTitle() {
     Text(
         color = Color(0xFF35408e),
         text = "NUreserved",
@@ -174,9 +175,7 @@ private fun AppTitle(poppinsFamily: FontFamily) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField(
-    poppinsFamily: FontFamily
-) {
+private fun EmailField() {
     var email by remember { mutableStateOf("") }
 
     TextField(
@@ -211,9 +210,7 @@ private fun EmailField(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField(
-    poppinsFamily: FontFamily,
-) {
+private fun PasswordField() {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -262,7 +259,7 @@ private fun PasswordField(
 }
 
 @Composable
-private fun RegisterButton(poppinsFamily: FontFamily) {
+private fun RegisterButton() {
     Button(
         onClick = {},
         modifier = Modifier
@@ -286,7 +283,7 @@ private fun RegisterButton(poppinsFamily: FontFamily) {
 }
 
 @Composable
-fun AccountExistNote(poppinsFamily: FontFamily, navController: NavController) {
+fun AccountExistNote(navController: NavController) {
     // Create an annotated string for the "No account yet? Register" text
     val annotatedText = buildAnnotatedString {
         append("Already have an account? ")
@@ -320,7 +317,7 @@ fun AccountExistNote(poppinsFamily: FontFamily, navController: NavController) {
 }
 
 @Composable
-private fun RegisterNote(poppinsFamily: FontFamily) {
+private fun RegisterNote() {
     Text(
         modifier = Modifier
             .fillMaxWidth()
