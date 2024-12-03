@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -48,11 +49,16 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.Routes
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier){
+fun SignUpScreen(
+    navController: NavController
+){
     NUreservedTheme {
         val poppinsFamily = FontFamily(
             Font(R.font.poppins_black, FontWeight.Black),
@@ -128,7 +134,7 @@ fun SignUpScreen(modifier: Modifier = Modifier){
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            AccountExistNote(poppinsFamily)
+                            AccountExistNote(poppinsFamily, navController)
                             Spacer(modifier = Modifier.height(40.dp))
                             RegisterNote(poppinsFamily)
                         }
@@ -280,22 +286,32 @@ private fun RegisterButton(poppinsFamily: FontFamily) {
 }
 
 @Composable
-fun AccountExistNote(poppinsFamily: FontFamily) {
+fun AccountExistNote(poppinsFamily: FontFamily, navController: NavController) {
+    val annotatedText = buildAnnotatedString {
+        append("Already have an account? ")
+        pushStringAnnotation(tag = "Login", annotation = "Login")
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+            append("Login")
+        }
+        pop()
+    }
+
     Text(
         modifier = Modifier
-            .fillMaxWidth(),
-        text = buildAnnotatedString {
-            append("Already have an account? ")
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                append("Sign in")
-            }
-        },
+            .fillMaxWidth()
+            .clickable {
+                annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
+                    .firstOrNull()?.let {
+                        navController.popBackStack()
+                    }
+            },
+        text = annotatedText,
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
             color = Color(0xFF0F0F0F)
         ),
-        textAlign = TextAlign.Center,
+        textAlign = TextAlign.Center
     )
 }
 
@@ -319,5 +335,6 @@ private fun RegisterNote(poppinsFamily: FontFamily) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewSignUpScreen(){
-    SignUpScreen()
+    val navController = rememberNavController()
+    SignUpScreen(navController = navController)
 }

@@ -21,10 +21,10 @@ fun AuthScreenNav() {
         startDestination = Routes.LoginScreen,
     ) {
         composable(route = Routes.LoginScreen) {
-            LoginScreen()
+            LoginScreen(navController)
         }
         composable(route = Routes.SignUpScreen) {
-            SignUpScreen()
+            SignUpScreen(navController)
         }
     }
 }
