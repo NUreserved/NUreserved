@@ -52,7 +52,7 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier){
+fun LoginScreen(modifier: Modifier = Modifier){
     NUreservedTheme {
         val poppinsFamily = FontFamily(
             Font(R.font.poppins_black, FontWeight.Black),
@@ -124,13 +124,13 @@ fun SignUpScreen(modifier: Modifier = Modifier){
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            RegisterButton(poppinsFamily)
+                            LoginButton(poppinsFamily)
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            AccountExistNote(poppinsFamily)
+                            NoAccountNote(poppinsFamily)
                             Spacer(modifier = Modifier.height(40.dp))
-                            RegisterNote(poppinsFamily)
+                            LoginNote(poppinsFamily)
                         }
 
                     }
@@ -256,7 +256,7 @@ private fun PasswordField(
 }
 
 @Composable
-private fun RegisterButton(poppinsFamily: FontFamily) {
+private fun LoginButton(poppinsFamily: FontFamily) {
     Button(
         onClick = {},
         modifier = Modifier
@@ -269,7 +269,7 @@ private fun RegisterButton(poppinsFamily: FontFamily) {
         shape = RoundedCornerShape(10.dp)
     ) {
         Text(
-            text = "Sign up",
+            text = "Log in",
             style = TextStyle(
                 fontFamily = poppinsFamily,
                 fontSize = 18.sp,
@@ -280,14 +280,14 @@ private fun RegisterButton(poppinsFamily: FontFamily) {
 }
 
 @Composable
-fun AccountExistNote(poppinsFamily: FontFamily) {
+fun NoAccountNote(poppinsFamily: FontFamily) {
     Text(
         modifier = Modifier
             .fillMaxWidth(),
         text = buildAnnotatedString {
-            append("Already have an account? ")
+            append("No account yet? ")
             withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                append("Sign in")
+                append("Register")
             }
         },
         style = TextStyle(
@@ -300,7 +300,7 @@ fun AccountExistNote(poppinsFamily: FontFamily) {
 }
 
 @Composable
-private fun RegisterNote(poppinsFamily: FontFamily) {
+private fun LoginNote(poppinsFamily: FontFamily) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
@@ -318,6 +318,6 @@ private fun RegisterNote(poppinsFamily: FontFamily) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewSignUpScreen(){
-    SignUpScreen()
+fun PreviewLoginScreen(){
+    com.it235.nureserved.LoginScreen()
 }
