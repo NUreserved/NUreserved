@@ -8,7 +8,7 @@ import com.it235.nureserved.ui.authscreenui.LoginScreen
 import com.it235.nureserved.ui.authscreenui.SignUpScreen
 
 // Define routes for navigation
-object Routes {
+object AuthScreenRoutes {
     var LoginScreen = "Login"
     var SignUpScreen = "SignUp"
 }
@@ -20,12 +20,12 @@ fun AuthScreenNav() {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.LoginScreen,
+        startDestination = AuthScreenRoutes.LoginScreen,
     ) {
-        composable(route = Routes.LoginScreen) {
+        composable(route = AuthScreenRoutes.LoginScreen) {
             LoginScreen(navController)
         }
-        composable(route = Routes.SignUpScreen) {
+        composable(route = AuthScreenRoutes.SignUpScreen) {
             SignUpScreen(navController)
         }
     }

@@ -38,8 +38,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -52,7 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.Routes
+import com.it235.nureserved.AuthScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -281,7 +279,7 @@ fun NoAccountNote(navController: NavController) {
                 // Navigate to the SignUpScreen when "Register" is clicked
                 annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(Routes.SignUpScreen)
+                        navController.navigate(AuthScreenRoutes.SignUpScreen)
                     }
             },
         text = annotatedText,
