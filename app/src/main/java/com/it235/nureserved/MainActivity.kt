@@ -58,7 +58,7 @@ private fun Main() {
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            LoginScreen()
+            AuthScreenNav()
         }
     }
 }

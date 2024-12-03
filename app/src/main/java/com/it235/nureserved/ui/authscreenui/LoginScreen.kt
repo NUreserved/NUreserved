@@ -1,7 +1,7 @@
-package com.it235.nureserved
+package com.it235.nureserved.ui.authscreenui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,12 +49,16 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.it235.nureserved.R
+import com.it235.nureserved.Routes
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier){
+fun LoginScreen(
+    navController: NavController
+){
     NUreservedTheme {
         val poppinsFamily = FontFamily(
             Font(R.font.poppins_black, FontWeight.Black),
@@ -85,7 +89,6 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
             Box(
                 modifier = Modifier
-                    .padding(innerPadding)
                     .fillMaxSize()
             ){
                 //background image
@@ -131,7 +134,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            RegisterNote(poppinsFamily)
+                            NoAccountNote(poppinsFamily, navController)
                             Spacer(modifier = Modifier.height(40.dp))
                             LoginNote(poppinsFamily)
                         }
@@ -283,22 +286,32 @@ private fun LoginButton(poppinsFamily: FontFamily) {
 }
 
 @Composable
-fun RegisterNote(poppinsFamily: FontFamily) {
+fun NoAccountNote(poppinsFamily: FontFamily, navController: NavController) {
+    val annotatedText = buildAnnotatedString {
+        append("No account yet? ")
+        pushStringAnnotation(tag = "Register", annotation = "Register")
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+            append("Register")
+        }
+        pop()
+    }
+
     Text(
         modifier = Modifier
-            .fillMaxWidth(),
-        text = buildAnnotatedString {
-            append("No account yet? ")
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                append("Register")
-            }
-        },
+            .fillMaxWidth()
+            .clickable {
+                annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
+                    .firstOrNull()?.let {
+                        navController.navigate(Routes.SignUpScreen)
+                    }
+            },
+        text = annotatedText,
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
             color = Color(0xFF0F0F0F)
         ),
-        textAlign = TextAlign.Center,
+        textAlign = TextAlign.Center
     )
 }
 
@@ -322,5 +335,6 @@ private fun LoginNote(poppinsFamily: FontFamily) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen(){
-    LoginScreen()
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }
