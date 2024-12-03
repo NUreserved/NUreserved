@@ -1,5 +1,6 @@
 package com.it235.nureserved
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -82,35 +84,34 @@ fun Content(text: String){
 fun Header(
     title: String,
     onBackClick: () -> Unit,
-    backgroundColor: Color = Color(0xfff8f5f5)
 ){
 
-    TopAppBar(
-        title = {
-            Text(
-                text = title,
-                fontSize = 20.sp,
-                fontFamily = poppinsFamily,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xff333333)
-                )
-        },
-        navigationIcon = {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back button",
-                    tint = Color(0xff333333)
-                )
-            }
-        },
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFFF8F5F5))
+            .padding(start = 20.dp, top = 15.dp, bottom = 15.dp, end = 20.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ){
+        IconButton(onClick = onBackClick) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back button",
+                tint = Color(0xff333333)
+            )
+        }
 
-        colors = topAppBarColors(
-            containerColor = backgroundColor
-        ),
-        modifier = Modifier.fillMaxWidth()
-    )
+        Spacer(modifier = Modifier.width(10.dp))
 
+        Text(
+            text = title,
+            fontSize = 20.sp,
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xff0f0f0f)
+        )
+
+    }
 }
 
 
@@ -127,10 +128,11 @@ fun AppTermsAndCondition(modifier: Modifier = Modifier){
                 .verticalScroll(rememberScrollState())
         ){
             Header(
-                title = "Terms and Conditions",
-                onBackClick = {},
-                backgroundColor = Color(0xfff8f5f5)
+                title = "Terms And Conditions",
+                onBackClick = {}
             )
+
+            //Content here
 
         }
     }
