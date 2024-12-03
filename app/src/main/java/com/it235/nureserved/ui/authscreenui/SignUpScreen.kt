@@ -287,8 +287,10 @@ private fun RegisterButton(poppinsFamily: FontFamily) {
 
 @Composable
 fun AccountExistNote(poppinsFamily: FontFamily, navController: NavController) {
+    // Create an annotated string for the "No account yet? Register" text
     val annotatedText = buildAnnotatedString {
         append("Already have an account? ")
+        // Add a clickable annotation for the "Register" part
         pushStringAnnotation(tag = "Login", annotation = "Login")
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
             append("Login")
@@ -296,10 +298,12 @@ fun AccountExistNote(poppinsFamily: FontFamily, navController: NavController) {
         pop()
     }
 
+    // Display the annotated text as a clickable Text composable
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
+                // Navigate back to the login screen when "Login" is clicked
                 annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
                         navController.popBackStack()
