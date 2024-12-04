@@ -1,6 +1,7 @@
 package com.it235.nureserved.ui.homesreenui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -48,6 +49,7 @@ import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -66,7 +68,7 @@ fun HomeScreen(navController: NavController) {
                 NavigationBar()
             }
         ){ innerPadding ->
-            HomeScreenContent(innerPadding)
+            HomeScreenContent(innerPadding, navController)
         }
     }
 }
@@ -145,7 +147,7 @@ fun NavigationBar() {
 }
 
 @Composable
-fun HomeScreenContent(innerPadding: PaddingValues) {
+fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController) {
     val secondFloorList = listOf(
         "Room 201" to "Available",
         "Room 202" to "Unavailable",
@@ -169,14 +171,14 @@ fun HomeScreenContent(innerPadding: PaddingValues) {
             .padding(innerPadding), // Adjust padding here
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        item { Floor("2nd Floor", secondFloorList) }
-        item { Floor("3rd Floor", thirdFloorList) }
-        item { Floor("4th Floor", fourthFloorList) }
+        item { Floor("2nd Floor", secondFloorList, navController) }
+        item { Floor("3rd Floor", thirdFloorList, navController) }
+        item { Floor("4th Floor", fourthFloorList, navController) }
     }
 }
 
 @Composable
-fun Floor(floorName: String, floorList: List<Pair<String, String>>) {
+fun Floor(floorName: String, floorList: List<Pair<String, String>>, navController: NavController) {
     Text(
         text = floorName,
         modifier = Modifier
@@ -193,13 +195,13 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>) {
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         items(floorList) { roomNameAndStatus ->
-            Card(roomNameAndStatus)
+            Card(roomNameAndStatus, navController)
         }
     }
 }
 
 @Composable
-fun Card(roomNameAndStatus: Pair<String, String>) {
+fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) {
     val imagePainter = // Set the size to match the modifier dimensions
         rememberAsyncImagePainter(
             ImageRequest.Builder(LocalContext.current).data(data = R.drawable.sample_lab_room)
@@ -216,6 +218,7 @@ fun Card(roomNameAndStatus: Pair<String, String>) {
         ),
         modifier = Modifier
             .width(240.dp)
+            .clickable { navController.navigate(ScreenRoutes.RoomDetails.route) }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()

@@ -49,7 +49,7 @@ fun RoomDetails(navController: NavController) {
 
         Scaffold (
             topBar = {
-                RDTopBar(scrollBehavior)
+                RDTopBar(scrollBehavior, navController)
             }
         ) { innerPadding ->
             RoomDetailsContent(innerPadding)
@@ -59,14 +59,14 @@ fun RoomDetails(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior) {
+fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavController) {
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             titleContentColor = MaterialTheme.colorScheme.primary,
         ),
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.arrow_back),
                     contentDescription = "Back",
