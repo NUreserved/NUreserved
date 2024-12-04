@@ -53,13 +53,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -243,5 +245,6 @@ fun Card(roomNameAndStatus: Pair<String, String>) {
 )
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController)
 }
