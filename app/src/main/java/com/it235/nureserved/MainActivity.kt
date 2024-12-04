@@ -7,21 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.it235.nureserved.ui.authscreenui.LoginScreen
+import com.it235.nureserved.ui.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -38,10 +34,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun Main() {
     NUreservedTheme {
+        val navController = rememberNavController()
         val showSplash = remember { mutableStateOf(true) }
 
         LaunchedEffect(Unit) {
-            delay(1000) // 2000 milliseconds = 2 seconds
+            delay(1000)
             showSplash.value = false
         }
 
@@ -58,30 +55,11 @@ private fun Main() {
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            AuthScreenNav()
+            NavHost(navController = navController, startDestination = ScreenRoutes.Login.route) {
+                composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
+                composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
+            }
         }
-    }
-}
-
-@Composable
-fun SplashScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.splash_background),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.Center)
-                .size(240.dp)
-        )
     }
 }
 
