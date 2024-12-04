@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +43,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import coil.size.Scale
 import com.it235.nureserved.R
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -195,6 +200,16 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>) {
 
 @Composable
 fun Card(roomNameAndStatus: Pair<String, String>) {
+    val imagePainter = // Set the size to match the modifier dimensions
+        rememberAsyncImagePainter(
+            ImageRequest.Builder(LocalContext.current).data(data = R.drawable.sample_lab_room)
+                .apply(block = fun ImageRequest.Builder.() {
+                    size(240, 120) // Set the size to match the modifier dimensions
+                    scale(Scale.FILL)
+                }).build()
+        )
+
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = if (roomNameAndStatus.second == "Unavailable") Color(0xFFdb5e5f) else Color(0xFF49844b),
@@ -206,7 +221,7 @@ fun Card(roomNameAndStatus: Pair<String, String>) {
             modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.sample_lab_room),
+                painter = imagePainter,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
