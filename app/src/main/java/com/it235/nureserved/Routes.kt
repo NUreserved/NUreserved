@@ -1,6 +1,7 @@
 package com.it235.nureserved
 
-object Routes {
-    var LoginScreen = "Login"
-    var SignUpScreen = "SignUp"
+sealed class ScreenRoutes(val route: String) {
+    object Login : ScreenRoutes("login")
+    object Home : ScreenRoutes("home")
+    object SignUp : ScreenRoutes("signup")
 }

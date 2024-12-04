@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.Routes
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -279,7 +279,7 @@ fun NoAccountNote(navController: NavController) {
                 // Navigate to the SignUpScreen when "Register" is clicked
                 annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(Routes.SignUpScreen)
+                        navController.navigate(route = ScreenRoutes.SignUp.route)
                     }
             },
         text = annotatedText,
