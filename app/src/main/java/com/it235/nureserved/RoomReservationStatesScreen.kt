@@ -95,20 +95,6 @@ fun StateCard(roomNumber: String, reservationStatus: String, @DrawableRes roomIm
     Spacer(modifier = Modifier.height(10.dp))
 }
 
-//@Composable
-//fun StateCardsContainer(){
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
-//    ){
-//
-//        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.room202, cardContainerColor = 0xFF49844b)
-//        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.room202, cardContainerColor = 0xFF49844b)
-//
-//    }
-//}
-
 @Composable
 fun RoomReservationStatesScreen(){
     var selectedTabIndex by remember { mutableStateOf(0) }
