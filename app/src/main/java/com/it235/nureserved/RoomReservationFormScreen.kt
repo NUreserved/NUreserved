@@ -263,7 +263,7 @@ fun RowHeader(textHeader: String = "ROOM RESERVATIONS", modifier: Modifier = Mod
             contentDescription = "NUreserved logo",
         )
 
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = modifier)
 
         Text(
             text = "ROOM RESERVATION FORM",
