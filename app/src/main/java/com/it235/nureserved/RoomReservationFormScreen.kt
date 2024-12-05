@@ -266,7 +266,7 @@ fun RowHeader(textHeader: String = "ROOM RESERVATIONS", modifier: Modifier = Mod
         Spacer(modifier = modifier)
 
         Text(
-            text = "ROOM RESERVATION FORM",
+            text = textHeader,
             color = Color(0xFF0F0F0F),
             style = TextStyle(
                 fontFamily = poppinsFamily,
