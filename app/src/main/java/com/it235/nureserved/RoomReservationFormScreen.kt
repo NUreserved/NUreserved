@@ -66,6 +66,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
+import com.it235.nureserved.font.poppinsFamily
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -79,7 +80,7 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
         text = inputLabel,
         color = Color(0xFF0F0F0F),
         style = TextStyle(
-            fontFamily = Resources.poppinsMedium,
+            fontFamily = poppinsFamily,
             fontWeight = FontWeight.Medium,
         )
     )
@@ -220,7 +221,7 @@ fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text){
         singleLine = true,
         onValueChange = { inputValue = it },
         textStyle = TextStyle(
-            fontFamily = Resources.poppinsMedium,
+            fontFamily = poppinsFamily,
             fontWeight = FontWeight.Medium,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
@@ -268,7 +269,7 @@ fun RowHeader(){
             text = "ROOM RESERVATION FORM",
             color = Color(0xFF0F0F0F),
             style = TextStyle(
-                fontFamily = Resources.poppinsSemiBold,
+                fontFamily = poppinsFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
@@ -385,7 +386,7 @@ fun RoomReservationForm(modifier: Modifier = Modifier){
                     text = "Requested by:",
                     color = Color(0xFF0F0F0F),
                     style = TextStyle(
-                        fontFamily = Resources.poppinsMedium,
+                        fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Medium,
                     )
                 )
@@ -470,7 +471,7 @@ fun RoomReservationForm(modifier: Modifier = Modifier){
                     text = "Venue",
                     color = Color(0xFF0F0F0F),
                     style = TextStyle(
-                        fontFamily = Resources.poppinsMedium,
+                        fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Medium,
                     )
                 )
@@ -534,7 +535,7 @@ fun RoomReservationForm(modifier: Modifier = Modifier){
                         Text(
                             text = "Next",
                             style = TextStyle(
-                                fontFamily = Resources.poppinsMedium,
+                                fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Medium,
                                 fontSize = 18.sp
                             )
