@@ -1,10 +1,12 @@
 package com.it235.nureserved.ui.homesreenui
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,15 +42,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.it235.nureserved.R
@@ -80,7 +84,8 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
 
-    var showPopup by remember { mutableStateOf(false) }
+    var showNotificationPopup by remember { mutableStateOf(false) }
+    var showProfilePopup by remember { mutableStateOf(false) }
 
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -101,20 +106,72 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
                     contentDescription = "Filters content based on chosen criteria"
                 )
             };
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
                     contentDescription = "Notifications about the status of reservation"
                 )
+                DropdownMenu(
+                    expanded = showNotificationPopup,
+                    onDismissRequest = { showNotificationPopup = false }
+                ) {
+                    Text(
+                        text = "Notifications",
+                        modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
+                        style = TextStyle(
+                            fontFamily = poppinsFamily,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp
+                        )
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                buildAnnotatedString {
+                                    append("Greetings! The room you reserved with tracking number #131256 is now ")
+                                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                        append("Approved")
+                                    }
+                                }
+                            )
+                        },
+                        onClick = { /* Handle notification click */ },
+                        leadingIcon = {
+                            Canvas(modifier = Modifier.size(16.dp)) {
+                                drawCircle(color = Color(0xFF49844b))
+                            }
+                        }
+                    )
+                    Spacer(modifier = Modifier.size(8.dp))
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                buildAnnotatedString {
+                                    append("Greetings! Due to unforeseen circumstances, your reservation request with tracking number #54764 got ")
+                                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                        append("Declined")
+                                    }
+                                }
+                            )
+                        },
+                        onClick = { /* Handle notification click */ },
+                        leadingIcon = {
+                            Canvas(modifier = Modifier.size(16.dp)) {
+                                drawCircle(color = Color(0xFFDB5E5F))
+                            }
+                        }
+                    )
+                    Spacer(modifier = Modifier.size(8.dp))
+                }
             };
-            IconButton(onClick = { showPopup = !showPopup }) {
+            IconButton(onClick = { showProfilePopup = !showProfilePopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.account_circle),
                     contentDescription = "Contains important settings"
                 )
                 DropdownMenu(
-                    expanded = showPopup,
-                    onDismissRequest = { showPopup = false}
+                    expanded = showProfilePopup,
+                    onDismissRequest = { showProfilePopup = false}
                 ) {
                     DropdownMenuItem(
                         text = { Text("Theme") },
