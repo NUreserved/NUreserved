@@ -248,7 +248,7 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
 }
 
 @Composable
-fun RowHeader(){
+fun RowHeader(textHeader: String = "ROOM RESERVATIONS", modifier: Modifier = Modifier.width(10.dp)){
     Row(
         modifier = Modifier
             .fillMaxWidth()
