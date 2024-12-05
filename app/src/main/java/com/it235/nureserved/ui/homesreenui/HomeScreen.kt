@@ -16,6 +16,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +32,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -77,6 +80,8 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
 
+    var showPopup by remember { mutableStateOf(false) }
+
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -102,11 +107,46 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
                     contentDescription = "Notifications about the status of reservation"
                 )
             };
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = { showPopup = !showPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.account_circle),
                     contentDescription = "Contains important settings"
                 )
+                DropdownMenu(
+                    expanded = showPopup,
+                    onDismissRequest = { showPopup = false}
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Theme") },
+                        onClick = { /* Handle settings click */ },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.dark_mode),
+                                contentDescription = "Dark mode icon"
+                            )
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Terms and Conditions") },
+                        onClick = { /* Handle settings click */ },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.article),
+                                contentDescription = "Terms and conditions icon"
+                            )
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Logout") },
+                        onClick = { /* Handle settings click */ },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.logout),
+                                contentDescription = "Logout icon"
+                            )
+                        }
+                    )
+                }
             }
         },
         scrollBehavior = scrollBehavior,
