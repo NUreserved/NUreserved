@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.it235.nureserved.font.poppinsFamily
 
 @Composable
 fun RuleComposable(rule: String){
@@ -47,7 +48,7 @@ fun RuleComposable(rule: String){
         Text(
             text = "•",
             style = TextStyle(
-                fontFamily = Resources.poppinsNormal,
+                fontFamily = poppinsFamily,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal
             )
@@ -58,7 +59,7 @@ fun RuleComposable(rule: String){
         Text(
             text = rule,
             style = TextStyle(
-                fontFamily = Resources.poppinsNormal,
+                fontFamily = poppinsFamily,
                 fontWeight = FontWeight.Normal
             ),
             textAlign = TextAlign.Justify
@@ -88,7 +89,7 @@ fun RoomReservationTermsConditionScreen(modifier: Modifier = Modifier){
                 Text(
                     text = "RULES ON THE USE OF ROOM",
                     style = TextStyle(
-                        fontFamily = Resources.poppinsSemiBold,
+                        fontFamily = poppinsFamily,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -138,7 +139,7 @@ fun RoomReservationTermsConditionScreen(modifier: Modifier = Modifier){
                 Text(
                     text = "I have read and understood the rules and regulation of Facility Use and Reservation",
                     style = TextStyle(
-                        fontFamily = Resources.poppinsNormal,
+                        fontFamily = poppinsFamily,
                         fontWeight = FontWeight.Normal
                     )
                 )
@@ -166,7 +167,7 @@ fun RoomReservationTermsConditionScreen(modifier: Modifier = Modifier){
                     Text(
                         text = "Submit Request",
                         style = TextStyle(
-                            fontFamily = Resources.poppinsMedium,
+                            fontFamily = poppinsFamily,
                             fontWeight = FontWeight.Medium,
                             fontSize = 18.sp
                         )
