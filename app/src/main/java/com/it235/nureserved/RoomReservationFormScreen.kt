@@ -293,7 +293,7 @@ fun RoomReservationForm(modifier: Modifier = Modifier){
                 Font(R.font.poppins_semibold)
             )
 
-            RowHeader()
+            RowHeader("ROOM RESERVATIONS FORM")
 
             Column(
                 modifier = Modifier
