@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.homesreenui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -45,6 +47,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,26 +66,29 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
+    // TODO Add comment
+    var showText by remember { mutableStateOf(false) }
+
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold(
             topBar = {
-                TopBar(scrollBehavior)
+                TopBar(scrollBehavior, showText, onFilterClick = { showText = !showText })
             },
 
             bottomBar = {
                 NavigationBar()
             }
         ){ innerPadding ->
-            HomeScreenContent(innerPadding, navController)
+            HomeScreenContent(innerPadding, navController, showText)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
+fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterClick: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -100,7 +106,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior) {
             )
         },
         actions = {
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = onFilterClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.filter_alt),
                     contentDescription = "Filters content based on chosen criteria"
@@ -244,7 +250,7 @@ fun NavigationBar() {
 }
 
 @Composable
-fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController) {
+fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController, showText: Boolean) {
     val secondFloorList = listOf(
         "Room 201" to "Available",
         "Room 202" to "Unavailable",
@@ -263,14 +269,49 @@ fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController)
         "Room 403" to "Unavailable",
     )
 
-    LazyColumn(
+    Column(
         modifier = Modifier
-            .padding(innerPadding), // Adjust padding here
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(innerPadding)
     ) {
-        item { Floor("2nd Floor", secondFloorList, navController) }
-        item { Floor("3rd Floor", thirdFloorList, navController) }
-        item { Floor("4th Floor", fourthFloorList, navController) }
+        if (showText) {
+            ReservationDatePicker()
+        }
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item { Spacer(modifier = Modifier.size(0.dp))}
+            item { Floor("2nd Floor", secondFloorList, navController) }
+            item { Floor("3rd Floor", thirdFloorList, navController) }
+            item { Floor("4th Floor", fourthFloorList, navController) }
+            item { Spacer(modifier = Modifier.size(0.dp))}
+        }
+    }
+}
+
+@Composable
+private fun ReservationDatePicker() {
+    Column(
+        modifier = Modifier
+            .padding(start = 16.dp, top = 16.dp)
+    ) {
+        Text(
+            text = "Show rooms available for reservation on",
+            style = TextStyle(
+                fontFamily = poppinsFamily,
+                fontStyle = FontStyle.Italic,
+                fontSize = 16.sp
+            )
+        )
+        AssistChip(
+            onClick = { /* Handle click */ },
+            label = { Text("Select date") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.calendar_today),
+                    contentDescription = "Calendar icon"
+                )
+            },
+        )
     }
 }
 
@@ -279,7 +320,7 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>, navControlle
     Text(
         text = floorName,
         modifier = Modifier
-            .padding(start = 16.dp, top = 16.dp, bottom = 8.dp),
+            .padding(start = 16.dp),
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Medium,
