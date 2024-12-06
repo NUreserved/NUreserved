@@ -20,6 +20,7 @@ import com.it235.nureserved.ui.authscreenui.LoginScreen
 import com.it235.nureserved.ui.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.homesreenui.HomeScreen
 import com.it235.nureserved.ui.homesreenui.RoomDetails
+import com.it235.nureserved.ui.reservationscreenui.RoomReservationStatesScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
