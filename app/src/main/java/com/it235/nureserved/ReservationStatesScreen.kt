@@ -35,7 +35,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.it235.nureserved.components.RowHeader
+import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
 @Composable()
