@@ -121,7 +121,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
         title = {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "App logo",
+                contentDescription = "",
                 modifier = Modifier.size(32.dp),
             )
         },
