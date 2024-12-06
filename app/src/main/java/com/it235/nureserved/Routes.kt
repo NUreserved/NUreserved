@@ -5,4 +5,5 @@ sealed class ScreenRoutes(val route: String) {
     object Home : ScreenRoutes("home")
     object SignUp : ScreenRoutes("signup")
     object RoomDetails : ScreenRoutes("room_details")
+    object RoomStates : ScreenRoutes("room_states")
 }
