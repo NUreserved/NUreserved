@@ -134,6 +134,320 @@ fun AppTermsAndCondition(modifier: Modifier = Modifier){
 
             //Content here
 
+            Row (
+                modifier = Modifier
+                        .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "Welcome to NUreserved! By using this app, you agree to the following terms and conditions. Please read these carefully before proceeding.",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "1. Eligibility",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("NUreserved is exclusively for National University Fairview students.")
+            Content("Users must be currently enrolled and use valid university credentials to access the app.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "2. Purpose",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("NUreserved is a platform designed for reserving rooms on campus.")
+            Content("It is intended for personal, non-commercial use only.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "3. User Responsibilities",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("Provide accurate and up-to-date information during registration.")
+            Content("Use the app responsibly and in compliance with university policies.")
+            Content("Cancel reservations promptly if no longer needed.")
+            Content("Avoid sharing login credentials or engaging in unauthorized activities.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "4. Room Reservations",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("Room availability is subject to change based on university schedules.")
+            Content("While we aim for accuracy, reservation requests are not guaranteed.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "5. Prohibited Activities",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("Do not disrupt the app’s functionality or attempt unauthorized access.")
+            Content("Avoid making false reservations or misusing the platform.")
+            Content("Refrain from sharing your login credentials with others.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "6. Privacy and Data Security",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("NUreserved collects and protects user data in line with its Privacy Policy.")
+            Content("While we implement security measures, absolute data security cannot be guaranteed.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "7. Intellectual Property",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("All content and features within NUreserved are the property of National University Fairview or its developers.")
+            Content("Users may not copy, modify, or distribute any part of the app without prior permission.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "8. Limitation of Liability",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("NUreserved and its developers are not responsible for missed reservations")
+            Content("Use the app at your own risk.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "9. Account Termination",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "We reserve the right to suspend or terminate accounts for violating these terms or misusing the app.",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "10. Changes to Terms",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("NUreserved may update these terms and conditions at any time.")
+            Content("Continued use of the app indicates acceptance of any changes.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "11. Governing Law",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Content("These terms are governed by the laws of the Philippines.")
+            Content("Any disputes will be resolved under these laws.")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "12. Contact Information",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "For questions or concerns, contact us at:",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "Email: nureserved@email.com",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 30.dp)
+            ){
+                Text(
+                    text = "By using NUreserved, you acknowledge that you have read, understood, and agree to these terms and conditions.",
+                    style = TextStyle(
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Normal
+                    ),
+                    textAlign = TextAlign.Justify
+                )
+            }
+
         }
     }
 
