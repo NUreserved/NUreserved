@@ -80,7 +80,7 @@ fun HomeScreen(navController: NavController) {
 
         Scaffold(
             topBar = {
-                TopBar(scrollBehavior, showText, onFilterClick = { showText = !showText })
+                TopBar(scrollBehavior = scrollBehavior, onFilterClick = { showText = !showText })
             },
 
             bottomBar = {
