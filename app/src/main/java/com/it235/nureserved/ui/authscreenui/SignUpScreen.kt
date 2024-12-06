@@ -75,7 +75,7 @@ fun SignUpScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     painter = painterResource(R.drawable.splash_background),
-                    contentDescription = "Logo",
+                    contentDescription = "",
                     contentScale = ContentScale.Crop,
                 )
 
