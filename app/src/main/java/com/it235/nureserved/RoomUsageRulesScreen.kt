@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.it235.nureserved.components.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
 @Composable
@@ -67,7 +68,7 @@ fun RuleComposable(rule: String){
 }
 
 @Composable
-fun RoomReservationTermsConditionScreen(modifier: Modifier = Modifier){
+fun RoomUsageRules(modifier: Modifier = Modifier){
 
     Scaffold(
 
@@ -78,7 +79,7 @@ fun RoomReservationTermsConditionScreen(modifier: Modifier = Modifier){
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ){
-            RowHeader()
+            RowHeader("ROOM RESERVATIONS")
 
             Row(
                 modifier = Modifier
