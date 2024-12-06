@@ -63,6 +63,7 @@ private fun Main() {
                 composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(ScreenRoutes.RoomDetails.route) { RoomDetails(navController)}
+                composable(ScreenRoutes.RoomStates.route) { RoomReservationStatesScreen(navController) }
             }
         }
     }
