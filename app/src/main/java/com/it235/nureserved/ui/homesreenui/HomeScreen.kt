@@ -129,13 +129,13 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
             IconButton(onClick = onFilterClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.filter_alt),
-                    contentDescription = "Filters content based on chosen criteria"
+                    contentDescription = "Filter icon to filter content based on chosen criteria"
                 )
             };
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
-                    contentDescription = "Notifications about the status of reservation"
+                    contentDescription = "Notification icon about the status of reservation"
                 )
                 DropdownMenu(
                     expanded = showNotificationPopup,
