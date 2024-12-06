@@ -205,7 +205,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.dark_mode),
-                                contentDescription = "Dark mode icon"
+                                contentDescription = "Theme icon"
                             )
                         }
                     )
