@@ -1,4 +1,4 @@
-package com.it235.nureserved
+package com.it235.nureserved.ui.reservationscreenui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -35,6 +35,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.it235.nureserved.R
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
