@@ -18,6 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.ui.authscreenui.LoginScreen
 import com.it235.nureserved.ui.authscreenui.SignUpScreen
+import com.it235.nureserved.ui.homesreenui.HomeScreen
+import com.it235.nureserved.ui.homesreenui.RoomDetails
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -58,6 +60,8 @@ private fun Main() {
             NavHost(navController = navController, startDestination = ScreenRoutes.Login.route) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
                 composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
+                composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
+                composable(ScreenRoutes.RoomDetails.route) { RoomDetails(navController)}
             }
         }
     }
