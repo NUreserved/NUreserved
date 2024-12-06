@@ -181,3 +181,45 @@ fun RoomReservationStatesScreen(navController: NavController){
     }
 
 }
+
+@Composable
+fun NavigationBar(navController: NavController) {
+    var selectedItem by remember { mutableIntStateOf(2) }
+    val items = listOf("Home", "Reserve", "Reservations")
+    val selectedIcons = listOf(
+        painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
+        painterResource(id = R.drawable.edit_24dp_e8eaed_fill1),
+        painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill1)
+    )
+    val unselectedIcons =
+        listOf(
+            painterResource(id = R.drawable.home_24dp_e8eaed_fill0),
+            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
+            painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill0)
+        )
+
+    androidx.compose.material3.NavigationBar {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
+                        contentDescription = item
+                    )
+                },
+                label = { Text(item) },
+                selected = selectedItem == index,
+                onClick = {
+                    selectedItem = index
+
+                    if(index == 0){
+                        navController.navigate(ScreenRoutes.Home.route) {
+                            popUpTo(ScreenRoutes.RoomStates.route) { inclusive = true }
+                        }
+                    }
+
+                }
+            )
+        }
+    }
+}
