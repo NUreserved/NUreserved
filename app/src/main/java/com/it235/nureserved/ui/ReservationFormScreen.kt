@@ -1,4 +1,4 @@
-package com.it235.nureserved
+package com.it235.nureserved.ui
 
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
@@ -46,8 +46,13 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.it235.nureserved.R
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -228,13 +233,12 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
 }
 
 @Composable
-fun RoomReservationForm(modifier: Modifier = Modifier){
-
-    Scaffold(
-
-    ){ innerPadding ->
+fun RoomReservationForm(
+    navController: NavController
+){
+    Scaffold{ innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
@@ -499,6 +503,11 @@ fun RoomReservationForm(modifier: Modifier = Modifier){
 
         }
     }
+}
 
-
+@Preview(showBackground = true)
+@Composable
+fun RoomReservationFormPreview() {
+    val navController = rememberNavController()
+    RoomReservationForm(navController)
 }
