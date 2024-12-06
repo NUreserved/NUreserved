@@ -1,6 +1,5 @@
 package com.it235.nureserved.ui.homesreenui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -20,6 +19,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,9 +30,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -66,8 +69,11 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
-    // TODO Add comment
+
+    // State variable to control the visibility of text
     var showText by remember { mutableStateOf(false) }
+    // State variable to control the visibility of the date picker
+    var showDatePicker by remember { mutableStateOf(false) }
 
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -81,7 +87,21 @@ fun HomeScreen(navController: NavController) {
                 NavigationBar()
             }
         ){ innerPadding ->
-            HomeScreenContent(innerPadding, navController, showText)
+            HomeScreenContent(
+                innerPadding = innerPadding,
+                navController = navController,
+                showText = showText,
+                onShowDatePickerChange = { showDatePicker = it }
+            )
+        }
+
+        if (showDatePicker) {
+            DatePickerModal(
+                onDateSelected = { selectedDate ->
+                    showDatePicker = false
+                },
+                onDismiss = { showDatePicker = false }
+            )
         }
     }
 }
@@ -250,7 +270,12 @@ fun NavigationBar() {
 }
 
 @Composable
-fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController, showText: Boolean) {
+fun HomeScreenContent(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    showText: Boolean,
+    onShowDatePickerChange: (Boolean) -> Unit
+) {
     val secondFloorList = listOf(
         "Room 201" to "Available",
         "Room 202" to "Unavailable",
@@ -274,7 +299,7 @@ fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController,
             .padding(innerPadding)
     ) {
         if (showText) {
-            ReservationDatePicker()
+            ReservationDatePickerChip(onShowDatePickerChange)
         }
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -289,7 +314,7 @@ fun HomeScreenContent(innerPadding: PaddingValues, navController: NavController,
 }
 
 @Composable
-private fun ReservationDatePicker() {
+private fun ReservationDatePickerChip(onShowDatePickerChange: (Boolean) -> Unit) {
     Column(
         modifier = Modifier
             .padding(start = 16.dp, top = 16.dp)
@@ -303,7 +328,7 @@ private fun ReservationDatePicker() {
             )
         )
         AssistChip(
-            onClick = { /* Handle click */ },
+            onClick = { onShowDatePickerChange(true) },
             label = { Text("Select date") },
             leadingIcon = {
                 Icon(
@@ -312,6 +337,34 @@ private fun ReservationDatePicker() {
                 )
             },
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DatePickerModal(
+    onDateSelected: (Long?) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val datePickerState = rememberDatePickerState()
+
+    DatePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = {
+                onDateSelected(datePickerState.selectedDateMillis)
+                onDismiss()
+            }) {
+                Text("OK")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    ) {
+        DatePicker(state = datePickerState)
     }
 }
 
