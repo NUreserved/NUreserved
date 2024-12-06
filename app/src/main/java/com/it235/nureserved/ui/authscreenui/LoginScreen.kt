@@ -107,7 +107,7 @@ fun LoginScreen(
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            LoginButton()
+                            LoginButton(navController)
 
                             Spacer(modifier = Modifier.height(15.dp))
 
@@ -235,9 +235,13 @@ private fun PasswordField() {
 }
 
 @Composable
-private fun LoginButton() {
+private fun LoginButton(navController: NavController) {
     Button(
-        onClick = {},
+        onClick = {
+            navController.navigate(ScreenRoutes.Home.route) {
+                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+            }
+        },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
@@ -279,7 +283,7 @@ fun NoAccountNote(navController: NavController) {
                 // Navigate to the SignUpScreen when "Register" is clicked
                 annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(route = ScreenRoutes.SignUp.route)
+                        navController.navigate(ScreenRoutes.SignUp.route)
                     }
             },
         text = annotatedText,
