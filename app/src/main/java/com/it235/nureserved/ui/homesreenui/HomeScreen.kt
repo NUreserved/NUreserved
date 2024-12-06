@@ -84,7 +84,7 @@ fun HomeScreen(navController: NavController) {
             },
 
             bottomBar = {
-                NavigationBar()
+                NavigationBar(navController)
             }
         ){ innerPadding ->
             HomeScreenContent(
@@ -237,7 +237,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
 }
 
 @Composable
-fun NavigationBar() {
+fun NavigationBar(navController: NavController) {
     var selectedItem by remember { mutableIntStateOf(0) }
     val items = listOf("Home", "Reserve", "Reservations")
     val selectedIcons = listOf(
@@ -263,7 +263,15 @@ fun NavigationBar() {
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = {
+                    selectedItem = index
+
+                    if(index == 2){
+                        navController.navigate(ScreenRoutes.RoomStates.route) {
+                            popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                        }
+                    }
+                }
             )
         }
     }
