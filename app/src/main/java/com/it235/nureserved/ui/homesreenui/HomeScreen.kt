@@ -80,7 +80,7 @@ fun HomeScreen(navController: NavController) {
 
         Scaffold(
             topBar = {
-                TopBar(scrollBehavior, showText, onFilterClick = { showText = !showText })
+                TopBar(scrollBehavior = scrollBehavior, onFilterClick = { showText = !showText })
             },
 
             bottomBar = {
@@ -108,7 +108,7 @@ fun HomeScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterClick: () -> Unit) {
+fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -121,7 +121,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
         title = {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "App logo",
+                contentDescription = null,
                 modifier = Modifier.size(32.dp),
             )
         },
@@ -129,13 +129,13 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
             IconButton(onClick = onFilterClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.filter_alt),
-                    contentDescription = "Filters content based on chosen criteria"
+                    contentDescription = "Filter icon to filter content based on chosen criteria"
                 )
             };
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
-                    contentDescription = "Notifications about the status of reservation"
+                    contentDescription = "Notification icon about the status of reservation"
                 )
                 DropdownMenu(
                     expanded = showNotificationPopup,
@@ -205,7 +205,7 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.dark_mode),
-                                contentDescription = "Dark mode icon"
+                                contentDescription = "Theme icon"
                             )
                         }
                     )
