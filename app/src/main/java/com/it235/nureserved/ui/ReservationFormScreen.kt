@@ -53,6 +53,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -479,7 +480,7 @@ fun RoomReservationForm(
                     horizontalArrangement = Arrangement.End
                 ){
                     Button(
-                        onClick = {},
+                        onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF35408E),
                             contentColor = Color(0xFFFEFEFE)
@@ -505,7 +506,7 @@ fun RoomReservationForm(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, heightDp = 3000)
 @Composable
 fun RoomReservationFormPreview() {
     val navController = rememberNavController()

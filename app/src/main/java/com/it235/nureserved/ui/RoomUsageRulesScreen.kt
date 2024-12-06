@@ -1,4 +1,4 @@
-package com.it235.nureserved
+package com.it235.nureserved.ui
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -29,8 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -68,13 +71,13 @@ fun RuleComposable(rule: String){
 }
 
 @Composable
-fun RoomUsageRules(modifier: Modifier = Modifier){
+fun RoomUsageRules(navController: NavController){
 
     Scaffold(
 
     ){ innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -180,6 +183,11 @@ fun RoomUsageRules(modifier: Modifier = Modifier){
 
         }
     }
+}
 
-
+@Preview(showBackground = true, heightDp = 3000)
+@Composable
+fun RoomUsageRules() {
+    val navController = rememberNavController()
+    RoomUsageRules(navController)
 }
