@@ -16,8 +16,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,9 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.font.poppinsFamily
 
 
@@ -103,27 +108,52 @@ fun Header(
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TermsAndConditionsScreen(navController: NavController){
-
-    Scaffold(){ innerPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                ),
+                title = {
+                     Text(
+                        text = "Terms and Conditions",
+                        style = TextStyle(
+                            fontFamily = poppinsFamily,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 22.sp
+                        )
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back button",
+                        )
+                    }
+                }
+            )
+        }
+    ){ innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ){
-            Header(
-                title = "Terms And Conditions",
-                onBackClick = {}
-            )
 
             //Content here
 
             Row (
                 modifier = Modifier
-                        .fillMaxWidth()
-                    .padding(start = 20.dp, end = 30.dp)
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, start = 20.dp, end = 30.dp)
             ){
                 Text(
                     text = "Welcome to NUreserved! By using this app, you agree to the following terms and conditions. Please read these carefully before proceeding.",
@@ -438,4 +468,10 @@ fun TermsAndConditionsScreen(navController: NavController){
     }
 
 
+}
+
+@Preview
+@Composable
+fun PreviewTermsAndConditionsScreen(){
+    TermsAndConditionsScreen(navController = rememberNavController())
 }
