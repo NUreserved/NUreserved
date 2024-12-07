@@ -268,7 +268,7 @@ fun NavigationBar(navController: NavController) {
 
                     if(index == 2){
                         navController.navigate(ScreenRoutes.RoomStates.route) {
-                            popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+
                         }
                     }
                 }
