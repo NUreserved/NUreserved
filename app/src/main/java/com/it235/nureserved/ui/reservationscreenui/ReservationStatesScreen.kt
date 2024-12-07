@@ -50,7 +50,7 @@ import com.it235.nureserved.font.poppinsFamily
 @Composable()
 fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStatus: String, @DrawableRes roomImage: Int, cardContainerColor: Long){
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = Color(cardContainerColor),
