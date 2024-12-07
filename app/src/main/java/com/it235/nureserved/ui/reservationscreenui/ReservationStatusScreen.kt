@@ -239,6 +239,14 @@ fun NavigationBar(navController: NavController) {
                         }
                     }
 
+                    else if(index == 1){
+                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
+                    }
+
+                    else{
+                        navController.navigate(ScreenRoutes.RoomReservationStatus.route)
+                    }
+
                 }
             )
         }
