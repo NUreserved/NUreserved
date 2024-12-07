@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.it235.nureserved.ui.AppTermsAndCondition
 import com.it235.nureserved.ui.RoomReservationForm
 import com.it235.nureserved.ui.RoomUsageRules
+import com.it235.nureserved.ui.TermsAndConditionsScreen
 import com.it235.nureserved.ui.authscreenui.LoginScreen
 import com.it235.nureserved.ui.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.homesreenui.HomeScreen
@@ -69,6 +69,7 @@ private fun Main() {
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController)}
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController)}
                 composable(ScreenRoutes.RoomFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
+                composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
             }
         }
     }

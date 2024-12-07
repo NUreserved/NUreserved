@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.it235.nureserved.font.poppinsFamily
 
 
@@ -103,11 +104,11 @@ fun Header(
 
 
 @Composable
-fun AppTermsAndCondition(modifier: Modifier = Modifier){
+fun TermsAndConditionsScreen(navController: NavController){
 
     Scaffold(){ innerPadding ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
