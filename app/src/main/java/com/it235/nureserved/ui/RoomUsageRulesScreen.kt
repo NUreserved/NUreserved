@@ -81,7 +81,8 @@ fun RuleComposable(rule: String){
 fun ReservationConfirmationDialog(
     navController: NavController,
     showDialog: Boolean,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    showSuccessfulDialog: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
@@ -100,9 +101,7 @@ fun ReservationConfirmationDialog(
        },
         confirmButton = {
             TextButton(
-                onClick = {
-                    onDismiss()
-                }
+                onClick = { onDismiss(); showSuccessfulDialog() }
             ) {
                 Text("Confirm")
             }
@@ -123,7 +122,7 @@ fun ReservationRequestSuccessDialog(navController: NavController) {
         onDismissRequest = { },
         title = {
             Text(
-                text = "Request submitted succesfully",
+                text = "Request submitted successfully",
                 textAlign = TextAlign.Center
             )
         },
@@ -166,7 +165,8 @@ fun RoomUsageRules(navController: NavController){
             ReservationConfirmationDialog(
                 navController = navController,
                 showDialog = showConfirmationDialog,
-                onDismiss = { showConfirmationDialog = false; showSuccessfulDialog = true },
+                onDismiss = { showConfirmationDialog = false },
+                showSuccessfulDialog = { showSuccessfulDialog = true },
             )
         }
 
