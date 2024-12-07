@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -77,6 +79,7 @@ fun RuleComposable(rule: String){
 
 @Composable
 fun ReservationConfirmationDialog(
+    navController: NavController,
     showDialog: Boolean,
     onDismiss: () -> Unit
 ) {
@@ -99,7 +102,6 @@ fun ReservationConfirmationDialog(
             TextButton(
                 onClick = {
                     onDismiss()
-                    // Handle the submit action here
                 }
             ) {
                 Text("Confirm")
@@ -116,17 +118,60 @@ fun ReservationConfirmationDialog(
 }
 
 @Composable
-fun RoomUsageRules(navController: NavController){
-    var showDialog by remember { mutableStateOf(false) }
-
-    Scaffold(
-
-    ){ innerPadding ->
-        if (showDialog) {
-            ReservationConfirmationDialog(
-                showDialog = showDialog,
-                onDismiss = { showDialog = false }
+fun ReservationRequestSuccessDialog(navController: NavController) {
+    AlertDialog(
+        onDismissRequest = { },
+        title = {
+            Text(
+                text = "Request submitted succesfully",
+                textAlign = TextAlign.Center
             )
+        },
+        icon = {
+            Icon(
+                modifier = Modifier.size(50.dp),
+                painter = painterResource(id = R.drawable.check_circle),
+                contentDescription = "Check circle icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Your request has been submitted successfully. You will be notified once your request has been approved.",
+                textAlign = TextAlign.Center
+            )
+       },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    navController.navigate(ScreenRoutes.Home.route) {
+                        popUpTo(ScreenRoutes.Home.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            ) {
+                Text("Finish")
+            }
+        }
+    )
+}
+
+@Composable
+fun RoomUsageRules(navController: NavController){
+    var showConfirmationDialog by remember { mutableStateOf(false) }
+    var showSuccessfulDialog by remember { mutableStateOf(false) }
+
+    Scaffold { innerPadding ->
+        if (showConfirmationDialog) {
+            ReservationConfirmationDialog(
+                navController = navController,
+                showDialog = showConfirmationDialog,
+                onDismiss = { showConfirmationDialog = false; showSuccessfulDialog = true },
+            )
+        }
+
+        if (showSuccessfulDialog) {
+            ReservationRequestSuccessDialog(navController)
         }
 
         Column(
@@ -213,7 +258,7 @@ fun RoomUsageRules(navController: NavController){
             ){
 
                 Button(
-                    onClick = { showDialog = true },
+                    onClick = { showConfirmationDialog = true },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF35408E),
                         contentColor = Color(0xFFFEFEFE)
@@ -238,7 +283,7 @@ fun RoomUsageRules(navController: NavController){
     }
 }
 
-@Preview(showBackground = true, heightDp = 3000)
+@Preview(showBackground = true, heightDp = 1500)
 @Composable
 fun RoomUsageRules() {
     val navController = rememberNavController()
