@@ -86,7 +86,12 @@ fun HomeScreen(navController: NavController) {
 
         Scaffold(
             topBar = {
-                TopBar(scrollBehavior, showText, onFilterClick = { showText = !showText })
+                TopBar(
+                    navController,
+                    scrollBehavior,
+                    showText,
+                    onFilterClick = { showText = !showText }
+                )
             },
 
             bottomBar = {
@@ -115,7 +120,11 @@ fun HomeScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterClick: () -> Unit) {
+fun TopBar(
+    navController: NavController,
+    scrollBehavior: TopAppBarScrollBehavior,
+    showText: Boolean,
+    onFilterClick: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -218,7 +227,9 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
                     )
                     DropdownMenuItem(
                         text = { Text("Terms and Conditions") },
-                        onClick = { /* Handle settings click */ },
+                        onClick = {
+                            showProfilePopup = false;
+                            navController.navigate(ScreenRoutes.TermsAndConditions.route) },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.article),
