@@ -6,4 +6,5 @@ sealed class ScreenRoutes(val route: String) {
     object SignUp : ScreenRoutes("signup")
     object RoomDetails : ScreenRoutes("room_details")
     object RoomStates : ScreenRoutes("room_states")
+    object RoomFilledOutForm : ScreenRoutes("room_filled_out_form")
 }
