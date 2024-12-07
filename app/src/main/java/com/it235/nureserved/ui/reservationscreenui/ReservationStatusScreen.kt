@@ -234,9 +234,7 @@ fun NavigationBar(navController: NavController) {
                     selectedItem = index
 
                     if(index == 0){
-                        navController.navigate(ScreenRoutes.Home.route) {
-                            popUpTo(ScreenRoutes.RoomReservationStatus.route) { inclusive = true }
-                        }
+                        navController.navigate(ScreenRoutes.Home.route)
                     }
 
                     else if(index == 1){
