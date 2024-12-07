@@ -143,14 +143,28 @@ fun RoomReservationStatesScreen(navController: NavController){
 
             when(selectedTabIndex){
                 0 -> {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
-                    ){
-                        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
-                        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
+
+                    if(selectedActiveStateContent == 0){
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
+                                .verticalScroll(rememberScrollState())
+                        ){
+                            StateCard(modifier = Modifier.clickable {
+                                selectedActiveStateContent += 1
+                            },
+                                roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
+
+                            StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
+
+                        }
                     }
+
+                    else{
+                        ReservationFilledOutFormScreen(navController)
+                    }
+
                 }
                 1 -> {
                     Column(
