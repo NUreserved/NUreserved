@@ -227,7 +227,9 @@ fun TopBar(
                     )
                     DropdownMenuItem(
                         text = { Text("Terms and Conditions") },
-                        onClick = { navController.navigate(ScreenRoutes.TermsAndConditions.route) },
+                        onClick = {
+                            showProfilePopup = false;
+                            navController.navigate(ScreenRoutes.TermsAndConditions.route) },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.article),
