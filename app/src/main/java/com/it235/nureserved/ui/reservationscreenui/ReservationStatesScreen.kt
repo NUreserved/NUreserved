@@ -105,6 +105,7 @@ fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStat
 @Composable
 fun RoomReservationStatesScreen(navController: NavController){
     var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedActiveStateContent by remember { mutableStateOf(0) }
     val tabs = listOf("Active", "Pending", "History")
 
     Scaffold(
