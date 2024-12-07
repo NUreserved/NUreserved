@@ -45,7 +45,7 @@ import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
 @Composable()
-fun StateCard(roomNumber: String, reservationStatus: String, @DrawableRes roomImage: Int, cardContainerColor: Long){
+fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStatus: String, @DrawableRes roomImage: Int, cardContainerColor: Long){
     Card(
         modifier = Modifier
             .fillMaxWidth(),
