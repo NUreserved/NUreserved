@@ -64,16 +64,22 @@ import coil.size.Scale
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.RoomReservationForm
+import com.it235.nureserved.ui.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
 
+    // State variable to control the selected item
+    var selectedItem by remember { mutableIntStateOf(0) }
     // State variable to control the visibility of text
     var showText by remember { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by remember { mutableStateOf(false) }
+    // State variable to control the navigation
+    var hasNavigated by remember { mutableStateOf(false) }
 
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -84,24 +90,25 @@ fun HomeScreen(navController: NavController) {
             },
 
             bottomBar = {
-                NavigationBar(navController)
+                NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
             }
         ){ innerPadding ->
-            HomeScreenContent(
-                innerPadding = innerPadding,
-                navController = navController,
-                showText = showText,
-                onShowDatePickerChange = { showDatePicker = it }
-            )
-        }
-
-        if (showDatePicker) {
-            DatePickerModal(
-                onDateSelected = { selectedDate ->
-                    showDatePicker = false
-                },
-                onDismiss = { showDatePicker = false }
-            )
+            when (selectedItem) {
+                0 -> HomeScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController,
+                    showText = showText,
+                    onShowDatePickerChange = { showDatePicker = it },
+                    showDatePicker = showDatePicker
+                )
+                1 -> {
+                    if (!hasNavigated) {
+                        hasNavigated = true
+                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
+                    }
+                }
+                2 -> RoomReservationStatusScreen(navController, innerPadding)
+            }
         }
     }
 }
@@ -237,8 +244,11 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, showText: Boolean, onFilterC
 }
 
 @Composable
-fun NavigationBar(navController: NavController) {
-    var selectedItem by remember { mutableIntStateOf(0) }
+fun NavigationBar(
+    navController: NavController,
+    selectedItem: Int,
+    onItemSelected: (Int) -> Unit
+) {
     val items = listOf("Home", "Reserve", "Reservations")
     val selectedIcons = listOf(
         painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
@@ -263,13 +273,7 @@ fun NavigationBar(navController: NavController) {
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = {
-                    selectedItem = index
-                    when (item) {
-                        "Reserve" -> navController.navigate(ScreenRoutes.RoomReservationForm.route)
-                        "Reservations" -> navController.navigate(ScreenRoutes.RoomReservationStatus.route)
-                    }
-                }
+                onClick = { onItemSelected(index) }
             )
         }
     }
@@ -280,8 +284,18 @@ fun HomeScreenContent(
     innerPadding: PaddingValues,
     navController: NavController,
     showText: Boolean,
-    onShowDatePickerChange: (Boolean) -> Unit
+    onShowDatePickerChange: (Boolean) -> Unit,
+    showDatePicker: Boolean
 ) {
+    if (showDatePicker) {
+        DatePickerModal(
+            onDateSelected = { selectedDate ->
+                onShowDatePickerChange(false)
+            },
+            onDismiss = { onShowDatePickerChange(false) }
+        )
+    }
+
     val secondFloorList = listOf(
         "Room 201" to "Available",
         "Room 202" to "Unavailable",
