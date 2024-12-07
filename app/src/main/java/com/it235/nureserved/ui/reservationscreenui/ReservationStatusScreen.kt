@@ -106,7 +106,7 @@ fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStat
 }
 
 @Composable
-fun RoomReservationStatesScreen(navController: NavController){
+fun RoomReservationStatusScreen(navController: NavController){
     var selectedTabIndex by remember { mutableStateOf(0) }
     var selectedActiveStateContent by remember { mutableStateOf(0) }
     val tabs = listOf("Active", "Pending", "History")
@@ -235,7 +235,7 @@ fun NavigationBar(navController: NavController) {
 
                     if(index == 0){
                         navController.navigate(ScreenRoutes.Home.route) {
-                            popUpTo(ScreenRoutes.RoomStates.route) { inclusive = true }
+                            popUpTo(ScreenRoutes.RoomReservationStatus.route) { inclusive = true }
                         }
                     }
 

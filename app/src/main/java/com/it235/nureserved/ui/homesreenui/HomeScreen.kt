@@ -265,11 +265,9 @@ fun NavigationBar(navController: NavController) {
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-
-                    if(index == 2){
-                        navController.navigate(ScreenRoutes.RoomStates.route) {
-
-                        }
+                    when (item) {
+                        "Reserve" -> navController.navigate(ScreenRoutes.RoomReservationForm.route)
+                        "Reservations" -> navController.navigate(ScreenRoutes.RoomReservationStatus.route)
                     }
                 }
             )
