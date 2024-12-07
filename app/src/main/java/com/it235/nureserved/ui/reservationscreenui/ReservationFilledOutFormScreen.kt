@@ -449,7 +449,7 @@ fun ReservationFilledOutFormScreen(navController: NavController){
                 ){
                     Button(
                         onClick = {
-                            navController.navigate(ScreenRoutes.RoomStates.route)
+                            navController.navigate(ScreenRoutes.RoomReservationStatus.route)
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF35408E),
