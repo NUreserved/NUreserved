@@ -139,43 +139,6 @@ fun RoomReservationStatusScreen(
     var showDatePicker by remember { mutableStateOf(false) }
     var hasNavigated by remember { mutableStateOf(false) }
 
-        TabRow(
-            selectedTabIndex = selectedTabIndex,
-            contentColor = Color(0xFF35408E),
-            divider = {},
-            indicator = {tabPositions ->
-                TabRowDefaults.SecondaryIndicator(
-                    Modifier
-                        .tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                    color = Color(0xFF35408E)
-                )
-            }
-        ) {
-            tabs.forEachIndexed{ index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text (text = title) }
-                )
-            }
-        }
-
-        when(selectedTabIndex){
-            0 -> {
-
-                if(selectedActiveStateContent == 0){
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
-                            .verticalScroll(rememberScrollState())
-                    ){
-                        StateCard(modifier = Modifier.clickable {
-                            selectedActiveStateContent += 1
-                        },
-                            roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
-
-                        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
     Scaffold(
         topBar = {
             TopBar(
