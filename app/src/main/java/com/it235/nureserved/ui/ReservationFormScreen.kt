@@ -79,7 +79,7 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePicker(modifier: Modifier = Modifier){
+fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var selectedTime by remember { mutableStateOf("00:00") }
     var showDialog by remember { mutableStateOf(false) }
 
