@@ -290,20 +290,16 @@ fun RoomReservationForm(
                             .weight(1f)
                     ){
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    DatePickerTextField()
-                                }
+                            Row(modifier = Modifier.weight(3f)) {
+                                DatePickerTextField(labelValue = "From")
                             }
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    TimePicker()
-                                }
+                            Row(modifier = Modifier.weight(3f)){
+                                TimePicker(labelValue = "From")
                             }
                         }
                     }
@@ -316,20 +312,16 @@ fun RoomReservationForm(
                             .weight(1f)
                     ){
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    DatePickerTextField()
-                                }
+                            Row(modifier = Modifier.weight(3f)) {
+                                DatePickerTextField(labelValue = "From")
                             }
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    TimePicker()
-                                }
+                            Row(modifier = Modifier.weight(3f)){
+                                TimePicker(labelValue = "To")
                             }
                         }
                     }
