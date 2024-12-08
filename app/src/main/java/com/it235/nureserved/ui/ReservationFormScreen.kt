@@ -91,6 +91,9 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         onValueChange = { selectedTime = it },
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
+        label = {
+            Text( text = labelValue )
+        },
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color(0xFFEEEEEE),
             focusedContainerColor = Color(0xFFEEEEEE),
