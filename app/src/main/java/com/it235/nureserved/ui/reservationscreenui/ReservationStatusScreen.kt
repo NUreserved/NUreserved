@@ -206,14 +206,9 @@ fun RoomReservationStatusScreen(
                 showDatePicker = showDatePicker
             )
             1 -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
-                        .verticalScroll(rememberScrollState())
-                ){
-                    StateCard(roomNumber = "Room 307", reservationStatus = "Submitted: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFFd69c40)
-                    StateCard(roomNumber = "Room 307", reservationStatus = "Submitted: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFFd69c40)
+                if (!hasNavigated) {
+                    hasNavigated = true
+                    navController.navigate(ScreenRoutes.RoomReservationForm.route)
                 }
             }
 
