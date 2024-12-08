@@ -121,6 +121,7 @@ fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStat
     Spacer(modifier = Modifier.height(10.dp))
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RoomReservationStatusScreen(
     navController: NavController,
