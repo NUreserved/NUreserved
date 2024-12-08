@@ -181,6 +181,7 @@ fun RoomReservationStatusScreen(
         bottomBar = {
             NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
         }
+    ){innerPadding ->
             1 -> {
                 Column(
                     modifier = Modifier
