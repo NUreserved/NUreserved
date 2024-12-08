@@ -186,14 +186,6 @@ fun RoomReservationStatusScreen(
             )
         },
 
-                    }
-                }
-
-                else{
-                    ReservationFilledOutFormScreen(navController)
-                }
-
-            }
         bottomBar = {
             NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
         }
