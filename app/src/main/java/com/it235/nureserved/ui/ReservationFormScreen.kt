@@ -150,6 +150,9 @@ fun DatePickerTextField(labelValue: String = ""){
         value = selectedDate,
         onValueChange = { selectedDate = it},
         readOnly = true,
+        label = {
+          Text ( text = labelValue )
+        },
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color(0xFFEEEEEE),
