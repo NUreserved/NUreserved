@@ -113,15 +113,17 @@ fun RoomReservationStatusScreen(
     navController: NavController,
     innerPadding: PaddingValues
 ) {
+
     var selectedTabIndex by remember { mutableStateOf(0) }
     var selectedActiveStateContent by remember { mutableStateOf(0) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    var selectedItem by remember { mutableIntStateOf(2) }
     val tabs = listOf("Active", "Pending", "History")
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-    ){
+    // State variable to control the visibility of text
+    var showText by remember { mutableStateOf(false) }
+    // State variable to control the visibility of the date picker
+    var showDatePicker by remember { mutableStateOf(false) }
+    var hasNavigated by remember { mutableStateOf(false) }
 
         TabRow(
             selectedTabIndex = selectedTabIndex,
@@ -182,6 +184,14 @@ fun RoomReservationStatusScreen(
             NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
         }
     ){innerPadding ->
+        when (selectedItem) {
+            0 -> HomeScreenContent(
+                innerPadding = innerPadding,
+                navController = navController,
+                showText = showText,
+                onShowDatePickerChange = { showDatePicker = it },
+                showDatePicker = showDatePicker
+            )
             1 -> {
                 Column(
                     modifier = Modifier
