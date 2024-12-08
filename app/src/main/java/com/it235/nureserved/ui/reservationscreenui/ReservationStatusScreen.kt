@@ -160,6 +160,15 @@ fun RoomReservationStatusScreen(
                             roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
 
                         StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
+    Scaffold(
+        topBar = {
+            TopBar(
+                navController,
+                scrollBehavior,
+                showText,
+                onFilterClick = { showText = !showText }
+            )
+        },
 
                     }
                 }
@@ -169,6 +178,9 @@ fun RoomReservationStatusScreen(
                 }
 
             }
+        bottomBar = {
+            NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
+        }
             1 -> {
                 Column(
                     modifier = Modifier
