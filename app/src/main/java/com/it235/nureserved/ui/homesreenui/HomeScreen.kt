@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.homesreenui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -64,51 +65,82 @@ import coil.size.Scale
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.RoomReservationForm
+import com.it235.nureserved.ui.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
 
+    // State variable to control the selected item
+    var selectedItem by remember { mutableIntStateOf(0) }
     // State variable to control the visibility of text
     var showText by remember { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by remember { mutableStateOf(false) }
+    // State variable to control the navigation
+    var hasNavigated by remember { mutableStateOf(false) }
+    // State variable to store the previous selected item
+    var previousSelectedItem by remember { mutableIntStateOf(0) }
+
+    BackHandler {
+        if (selectedItem != 0) {
+            selectedItem = previousSelectedItem
+        } else {
+            navController.popBackStack()
+        }
+    }
 
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold(
             topBar = {
-                TopBar(scrollBehavior = scrollBehavior, onFilterClick = { showText = !showText })
+                TopBar(
+                    navController,
+                    scrollBehavior = scrollBehavior,
+                    onFilterClick = { showText = !showText }
+                )
             },
 
             bottomBar = {
-                NavigationBar()
+                NavigationBar(
+                    navController,
+                    selectedItem,
+                    onItemSelected = {
+                        previousSelectedItem = selectedItem
+                        selectedItem = it
+                })
             }
         ){ innerPadding ->
-            HomeScreenContent(
-                innerPadding = innerPadding,
-                navController = navController,
-                showText = showText,
-                onShowDatePickerChange = { showDatePicker = it }
-            )
-        }
-
-        if (showDatePicker) {
-            DatePickerModal(
-                onDateSelected = { selectedDate ->
-                    showDatePicker = false
-                },
-                onDismiss = { showDatePicker = false }
-            )
+            when (selectedItem) {
+                0 -> HomeScreenContent(
+                    innerPadding = innerPadding,
+                    navController = navController,
+                    showText = showText,
+                    onShowDatePickerChange = { showDatePicker = it },
+                    showDatePicker = showDatePicker
+                )
+                1 -> {
+                    if (!hasNavigated) {
+                        hasNavigated = true
+                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
+                    }
+                }
+                2 -> {
+                    RoomReservationStatusScreen(navController, innerPadding)
+                }
+            }
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
+fun TopBar(
+    navController: NavController,
+    scrollBehavior: TopAppBarScrollBehavior,
+    onFilterClick: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -211,7 +243,9 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
                     )
                     DropdownMenuItem(
                         text = { Text("Terms and Conditions") },
-                        onClick = { /* Handle settings click */ },
+                        onClick = {
+                            showProfilePopup = false;
+                            navController.navigate(ScreenRoutes.TermsAndConditions.route) },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.article),
@@ -237,8 +271,11 @@ fun TopBar(scrollBehavior: TopAppBarScrollBehavior, onFilterClick: () -> Unit) {
 }
 
 @Composable
-fun NavigationBar() {
-    var selectedItem by remember { mutableIntStateOf(0) }
+fun NavigationBar(
+    navController: NavController,
+    selectedItem: Int,
+    onItemSelected: (Int) -> Unit
+) {
     val items = listOf("Home", "Reserve", "Reservations")
     val selectedIcons = listOf(
         painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
@@ -263,7 +300,7 @@ fun NavigationBar() {
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = { onItemSelected(index) }
             )
         }
     }
@@ -274,8 +311,18 @@ fun HomeScreenContent(
     innerPadding: PaddingValues,
     navController: NavController,
     showText: Boolean,
-    onShowDatePickerChange: (Boolean) -> Unit
+    onShowDatePickerChange: (Boolean) -> Unit,
+    showDatePicker: Boolean
 ) {
+    if (showDatePicker) {
+        DatePickerModal(
+            onDateSelected = { selectedDate ->
+                onShowDatePickerChange(false)
+            },
+            onDismiss = { onShowDatePickerChange(false) }
+        )
+    }
+
     val secondFloorList = listOf(
         "Room 201" to "Available",
         "Room 202" to "Unavailable",
