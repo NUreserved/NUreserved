@@ -2,6 +2,25 @@ package com.it235.nureserved.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Branding colors
+val darkGray = Color(0xFF333333)
+val brandColorBlue = Color(0xFF35408e)
+val brandColorGold = Color(0xFFFFd41b)
+val indicationColorBlue = brandColorBlue
+val indicatorColorRed = Color(0xFFDB5E5F)
+val indicatorColorGreen = Color(0xFF49844B)
+val indicatorColorOrange = Color(0xFFD69C40)
+val indicatorColorDarkGray = darkGray
+val backgroundColorWhite1 = Color(0xFFFEFEFE)
+val backgroundColorWhite2 = Color(0xFFEEEEEE)
+val backgroundColorWhite3 = Color(0xFFF8F5F5)
+val backgroundColorWhite4 = Color(0xFFAFAFAF)
+val iconColor1 = Color(0xFF7B7A7A)
+val iconColor2 = darkGray
+val textColor1 = Color(0xFF0F0F0F)
+val textColor2 = darkGray
+
+// All colors below are schemes generated from the Material Design color tool
 val primaryLight = Color(0xFF535A92)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFDFE0FF)
