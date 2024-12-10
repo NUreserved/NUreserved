@@ -73,7 +73,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     painter = painterResource(R.drawable.splash_background),
-                    contentDescription = null,
+                    contentDescription = "Background image",
                     contentScale = ContentScale.Crop,
                 )
 
@@ -131,7 +131,7 @@ private fun Logo() {
             .width(90.dp)
             .padding(top = 40.dp),
         painter = painterResource(R.drawable.logo),
-        contentDescription = null,
+        contentDescription = "App logo",
     )
 }
 
