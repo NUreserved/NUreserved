@@ -114,7 +114,6 @@ fun RoomReservationStatusScreen(
     innerPadding: PaddingValues
 ) {
     var selectedTabIndex by remember { mutableStateOf(0) }
-    var selectedActiveStateContent by remember { mutableStateOf(0) }
     val tabs = listOf("Active", "Pending", "History")
 
     Column(
@@ -146,28 +145,28 @@ fun RoomReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Approved: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFF49844b
+                    )
 
-                if(selectedActiveStateContent == 0){
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
-                            .verticalScroll(rememberScrollState())
-                    ){
-                        StateCard(modifier = Modifier.clickable {
-                            selectedActiveStateContent += 1
-                        },
-                            roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
-
-                        StateCard(roomNumber = "Room 307", reservationStatus = "Approved: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFF49844b)
-
-                    }
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Approved: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFF49844b
+                    )
                 }
-
-                else{
-                    ReservationFilledOutFormScreen(navController)
-                }
-
             }
             1 -> {
                 Column(
@@ -176,8 +175,18 @@ fun RoomReservationStatusScreen(
                         .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
                         .verticalScroll(rememberScrollState())
                 ){
-                    StateCard(roomNumber = "Room 307", reservationStatus = "Submitted: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFFd69c40)
-                    StateCard(roomNumber = "Room 307", reservationStatus = "Submitted: 11:05 am, 11/30/24", roomImage = R.drawable.sample_room, cardContainerColor = 0xFFd69c40)
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Submitted: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFFd69c40)
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Submitted: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFFd69c40)
                 }
             }
 
