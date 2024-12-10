@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.homesreenui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -80,6 +81,16 @@ fun HomeScreen(navController: NavController) {
     var showDatePicker by remember { mutableStateOf(false) }
     // State variable to control the navigation
     var hasNavigated by remember { mutableStateOf(false) }
+    // State variable to store the previous selected item
+    var previousSelectedItem by remember { mutableIntStateOf(0) }
+
+    BackHandler {
+        if (selectedItem != 0) {
+            selectedItem = previousSelectedItem
+        } else {
+            navController.popBackStack()
+        }
+    }
 
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -95,7 +106,13 @@ fun HomeScreen(navController: NavController) {
             },
 
             bottomBar = {
-                NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
+                NavigationBar(
+                    navController,
+                    selectedItem,
+                    onItemSelected = {
+                        previousSelectedItem = selectedItem
+                        selectedItem = it
+                })
             }
         ){ innerPadding ->
             when (selectedItem) {
@@ -112,12 +129,13 @@ fun HomeScreen(navController: NavController) {
                         navController.navigate(ScreenRoutes.RoomReservationForm.route)
                     }
                 }
-                2 -> RoomReservationStatusScreen(navController, innerPadding)
+                2 -> {
+                    RoomReservationStatusScreen(navController, innerPadding)
+                }
             }
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(

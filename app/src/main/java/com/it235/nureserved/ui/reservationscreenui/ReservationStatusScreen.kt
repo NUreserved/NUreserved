@@ -129,9 +129,6 @@ fun RoomReservationStatusScreen(
 ) {
 
     var selectedTabIndex by remember { mutableStateOf(0) }
-    var selectedActiveStateContent by remember { mutableStateOf(0) }
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    var selectedItem by remember { mutableIntStateOf(2) }
     val tabs = listOf("Active", "Pending", "History")
     // State variable to control the visibility of text
     var showText by remember { mutableStateOf(false) }
@@ -152,19 +149,51 @@ fun RoomReservationStatusScreen(
         bottomBar = {
             NavigationBar(navController, selectedItem, onItemSelected = { selectedItem = it })
         }
-    ){innerPadding ->
-        when (selectedItem) {
-            0 -> HomeScreenContent(
-                innerPadding = innerPadding,
-                navController = navController,
-                showText = showText,
-                onShowDatePickerChange = { showDatePicker = it },
-                showDatePicker = showDatePicker
-            )
+        
+        when(selectedTabIndex){
+            0 -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Approved: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFF49844b
+                    )
+
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Approved: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFF49844b
+                    )
+                }
+            }
             1 -> {
-                if (!hasNavigated) {
-                    hasNavigated = true
-                    navController.navigate(ScreenRoutes.RoomReservationForm.route)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
+                        .verticalScroll(rememberScrollState())
+                ){
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Submitted: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFFd69c40)
+                    StateCard(
+                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        roomNumber = "Room 307",
+                        reservationStatus = "Submitted: 11:05 am, 11/30/24",
+                        roomImage = R.drawable.sample_room,
+                        cardContainerColor = 0xFFd69c40)
                 }
             }
 

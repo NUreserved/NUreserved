@@ -73,7 +73,7 @@ private fun Main() {
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController)}
                 composable(ScreenRoutes.RoomFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
-                composable(ScreenRoutes.RoomReservationStatus.route) { RoomReservationStatusScreen(navController, innerPadding = PaddingValues(0.dp)) }
+                composable(ScreenRoutes.ReservationFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
             }
         }
     }
