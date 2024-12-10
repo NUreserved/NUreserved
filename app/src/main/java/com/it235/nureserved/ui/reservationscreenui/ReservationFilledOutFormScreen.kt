@@ -46,9 +46,11 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RowHeader
@@ -241,9 +243,6 @@ fun ReservationFilledOutFormScreen(navController: NavController){
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ){
-            val poppinsSemiBold = FontFamily(
-                Font(R.font.poppins_semibold)
-            )
 
             Column(
                 modifier = Modifier
@@ -449,7 +448,7 @@ fun ReservationFilledOutFormScreen(navController: NavController){
                 ){
                     Button(
                         onClick = {
-                            navController.navigate(ScreenRoutes.RoomReservationStatus.route)
+                            navController.popBackStack()
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF35408E),
@@ -473,4 +472,13 @@ fun ReservationFilledOutFormScreen(navController: NavController){
 
         }
     }
+}
+
+@Preview(
+    showBackground = true,
+    heightDp = 1000
+)
+@Composable
+fun PreviewReservationFilledOutFormScreen(){
+    ReservationFilledOutFormScreen(navController = rememberNavController())
 }

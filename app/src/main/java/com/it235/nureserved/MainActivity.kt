@@ -70,6 +70,7 @@ private fun Main() {
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController)}
                 composable(ScreenRoutes.RoomFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
+                composable(ScreenRoutes.ReservationFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
             }
         }
     }
