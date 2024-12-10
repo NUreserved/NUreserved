@@ -7,14 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -26,7 +24,6 @@ import com.it235.nureserved.ui.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.homesreenui.HomeScreen
 import com.it235.nureserved.ui.homesreenui.RoomDetails
 import com.it235.nureserved.ui.reservationscreenui.ReservationFilledOutFormScreen
-import com.it235.nureserved.ui.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
