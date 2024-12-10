@@ -99,8 +99,7 @@ fun HomeScreen(navController: NavController) {
             topBar = {
                 TopBar(
                     navController,
-                    scrollBehavior,
-                    showText,
+                    scrollBehavior = scrollBehavior,
                     onFilterClick = { showText = !showText }
                 )
             },
@@ -141,7 +140,6 @@ fun HomeScreen(navController: NavController) {
 fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    showText: Boolean,
     onFilterClick: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
@@ -163,13 +161,13 @@ fun TopBar(
             IconButton(onClick = onFilterClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.filter_alt),
-                    contentDescription = "Filters content based on chosen criteria"
+                    contentDescription = "Filter icon to filter content based on chosen criteria"
                 )
             };
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
-                    contentDescription = "Notifications about the status of reservation"
+                    contentDescription = "Notification icon about the status of reservation"
                 )
                 DropdownMenu(
                     expanded = showNotificationPopup,
@@ -239,7 +237,7 @@ fun TopBar(
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.dark_mode),
-                                contentDescription = "Dark mode icon"
+                                contentDescription = "Theme icon"
                             )
                         }
                     )
