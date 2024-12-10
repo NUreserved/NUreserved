@@ -69,7 +69,7 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.arrow_back),
-                    contentDescription = "Back",
+                    contentDescription = "Back Icon",
                 )
             }
         },
