@@ -10,4 +10,5 @@ sealed class ScreenRoutes(val route: String) {
     object RoomReservationForm : ScreenRoutes("room_reservation_form")
     object RoomUsageRules : ScreenRoutes("room_usage_rules")
     object TermsAndConditions : ScreenRoutes("terms_and_conditions")
+    object ReservationFilledOutForm : ScreenRoutes("reservation_filled_out_form")
 }
