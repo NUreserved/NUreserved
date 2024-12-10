@@ -79,7 +79,7 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePicker(modifier: Modifier = Modifier){
+fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var selectedTime by remember { mutableStateOf("00:00") }
     var showDialog by remember { mutableStateOf(false) }
 
@@ -91,6 +91,9 @@ fun TimePicker(modifier: Modifier = Modifier){
         onValueChange = { selectedTime = it },
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
+        label = {
+            Text( text = labelValue )
+        },
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color(0xFFEEEEEE),
             focusedContainerColor = Color(0xFFEEEEEE),
@@ -128,7 +131,7 @@ fun TimePicker(modifier: Modifier = Modifier){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerTextField(){
+fun DatePickerTextField(labelValue: String = ""){
     var selectedDate by remember { mutableStateOf("") }
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
@@ -147,6 +150,9 @@ fun DatePickerTextField(){
         value = selectedDate,
         onValueChange = { selectedDate = it},
         readOnly = true,
+        label = {
+          Text ( text = labelValue )
+        },
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color(0xFFEEEEEE),
@@ -290,20 +296,16 @@ fun RoomReservationForm(
                             .weight(1f)
                     ){
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    DatePickerTextField()
-                                }
+                            Row(modifier = Modifier.weight(3f)) {
+                                DatePickerTextField(labelValue = "From")
                             }
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    TimePicker()
-                                }
+                            Row(modifier = Modifier.weight(3f)){
+                                TimePicker(labelValue = "From")
                             }
                         }
                     }
@@ -316,20 +318,16 @@ fun RoomReservationForm(
                             .weight(1f)
                     ){
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    DatePickerTextField()
-                                }
+                            Row(modifier = Modifier.weight(3f)) {
+                                DatePickerTextField(labelValue = "From")
                             }
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    TimePicker()
-                                }
+                            Row(modifier = Modifier.weight(3f)){
+                                TimePicker(labelValue = "To")
                             }
                         }
                     }

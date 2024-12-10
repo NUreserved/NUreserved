@@ -79,7 +79,7 @@ fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStat
                 modifier = Modifier
                     .weight(4f)
                     .fillMaxHeight()
-                    .padding(start = 20.dp),
+                    .padding(start = 15.dp),
                 verticalArrangement = Arrangement.Center
             ){
                 Text(
