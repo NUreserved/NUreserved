@@ -1,4 +1,4 @@
-package com.it235.nureserved
+package com.it235.nureserved.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.it235.nureserved.R
 
 @Composable
 fun SplashScreen() {

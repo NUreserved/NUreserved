@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
