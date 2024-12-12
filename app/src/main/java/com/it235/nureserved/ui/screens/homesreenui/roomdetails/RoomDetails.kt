@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -53,6 +55,19 @@ fun RoomDetails(navController: NavController) {
         Scaffold (
             topBar = {
                 RDTopBar(scrollBehavior, navController)
+            },
+            floatingActionButton = {
+                ExtendedFloatingActionButton(
+                    text = {
+                        Text("Reserve")
+                   },
+                    icon = {
+                        Icon(
+                            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
+                            contentDescription = "Reserve icon")
+                   },
+                    onClick = { navController.navigate(ScreenRoutes.RoomReservationForm.route) }
+                )
             }
         ) { innerPadding ->
             RoomDetailsContent(innerPadding)
@@ -94,7 +109,8 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 @Composable
 fun RoomDetailsContent(innerPaddingValues: PaddingValues) {
     LazyColumn(
-        modifier = Modifier.padding(innerPaddingValues)
+        modifier = Modifier
+            .padding(innerPaddingValues)
     ) {
         item {
             RoomImage()
@@ -102,6 +118,7 @@ fun RoomDetailsContent(innerPaddingValues: PaddingValues) {
             RoomDetails()
             Spacer(modifier = Modifier.size(32.dp))
             ScheduleGrid(sampleSchedule)
+            Spacer(modifier = Modifier.size(88.dp))
         }
     }
 }
