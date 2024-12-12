@@ -190,75 +190,88 @@ fun ScheduleGrid(days: List<DaySchedule>) {
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Row (
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            IconButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.chevron_left),
-                    contentDescription = "Left arrow",
-                )
-            }
-            Spacer(modifier = Modifier.size(16.dp))
-            Text(
-                text = "Dec 1–3"
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            IconButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.chevron_right),
-                    contentDescription = "Right arrow",
-                )
-            }
-        }
+        dateNavigator()
         Spacer(modifier = Modifier.size(16.dp))
         Row {
-            Column(
-                horizontalAlignment = Alignment.End
-            ) {
-                Spacer(modifier = Modifier.size(20.dp))
-                timeSlots.forEachIndexed { index, timeSlot ->
-                    Text(
-                        text = timeSlot
-                    )
-                    // Add spacing between time slots except for the last one
-                    if (index < timeSlots.size - 1) {
-                        Spacer(modifier = Modifier.size(16.dp)) // Add spacing here
-                    }
-                }
-            }
-
+            timeIndicator()
             Spacer(modifier = Modifier.size(8.dp))
+            timeGrid(days)
+        }
+    }
+}
 
-            days.forEach { day ->
-                Row() {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = day.day,
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        day.timeSlots.forEach { timeSlot ->
-                            Box(
-                                modifier = Modifier
-                                    .size(width = 100.dp, height = 40.dp)
-                                    .border(
-                                        width = 0.5.dp,
-                                        color = if (isSystemInDarkTheme()) Color.White else Color.Black,
-                                    )
-                                    .background(
-                                        if (timeSlot.isAvailable) Color.Transparent else indicatorColorRed
-                                    )
+@Composable
+private fun timeGrid(days: List<DaySchedule>) {
+    days.forEach { day ->
+        Row() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = day.day,
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                day.timeSlots.forEach { timeSlot ->
+                    Box(
+                        modifier = Modifier
+                            .size(width = 100.dp, height = 40.dp)
+                            .border(
+                                width = 0.5.dp,
+                                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                             )
-                        }
-                    }
+                            .background(
+                                if (timeSlot.isAvailable) Color.Transparent else indicatorColorRed
+                            )
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun timeIndicator() {
+    Column(
+        horizontalAlignment = Alignment.End
+    ) {
+        Spacer(modifier = Modifier.size(20.dp))
+        timeSlots.forEachIndexed { index, timeSlot ->
+            Text(
+                text = timeSlot
+            )
+            // Add spacing between time slots except for the last one
+            if (index < timeSlots.size - 1) {
+                Spacer(modifier = Modifier.size(16.dp)) // Add spacing here
+            }
+        }
+    }
+}
+
+@Composable
+private fun dateNavigator() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.chevron_left),
+                contentDescription = "Left arrow",
+            )
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            text = "Dec 1–3"
+        )
+        Spacer(modifier = Modifier.size(16.dp))
+        IconButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.chevron_right),
+                contentDescription = "Right arrow",
+            )
         }
     }
 }
