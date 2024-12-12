@@ -10,7 +10,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
@@ -24,7 +23,7 @@ import com.it235.nureserved.ui.screens.TermsAndConditionsScreen
 import com.it235.nureserved.ui.screens.authscreenui.LoginScreen
 import com.it235.nureserved.ui.screens.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
-import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
+import com.it235.nureserved.ui.screens.homesreenui.roomdetails.RoomDetails
 import com.it235.nureserved.ui.screens.reservationscreenui.ReservationFilledOutFormScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay

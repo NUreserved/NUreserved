@@ -17,6 +17,7 @@ val backgroundColorWhite3 = Color(0xFFF8F5F5)
 val backgroundColorWhite4 = Color(0xFFAFAFAF)
 val iconColor1 = Color(0xFF7B7A7A)
 val iconColor2 = darkGray
+val iconColor3 = Color(0xFFFEFEFE)
 val textColor1 = Color(0xFF0F0F0F)
 val textColor2 = darkGray
 
