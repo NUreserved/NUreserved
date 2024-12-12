@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui
+package com.it235.nureserved.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

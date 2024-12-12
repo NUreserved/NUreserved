@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.homesreenui
+package com.it235.nureserved.ui.screens.homesreenui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
@@ -65,8 +65,7 @@ import coil.size.Scale
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.RoomReservationForm
-import com.it235.nureserved.ui.reservationscreenui.RoomReservationStatusScreen
+import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui
+package com.it235.nureserved.ui.screens
 
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
@@ -50,7 +50,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
