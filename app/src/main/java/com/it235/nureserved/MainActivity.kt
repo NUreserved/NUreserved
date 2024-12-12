@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.compose.NavHost
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
 private fun Main() {
     NUreservedTheme {
         val navController = rememberNavController()
-        val showSplash = remember { mutableStateOf(true) }
+        val showSplash = rememberSaveable { mutableStateOf(true) }
 
         LaunchedEffect(Unit) {
             delay(1000)
