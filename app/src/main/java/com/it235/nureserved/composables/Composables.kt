@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,13 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.it235.nureserved.R
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.theme.brandColorBlue
 
 @Composable
 fun RowHeader(textHeader: String = "ROOM RESERVATIONS", modifier: Modifier = Modifier.width(10.dp)){
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFFF8F5F5))
+            .background(brandColorBlue)
             .padding(start = 20.dp, top = 15.dp, bottom = 15.dp, end = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
     ){
@@ -40,12 +43,11 @@ fun RowHeader(textHeader: String = "ROOM RESERVATIONS", modifier: Modifier = Mod
 
         Text(
             text = textHeader,
-            color = Color(0xFF0F0F0F),
-            style = TextStyle(
-                fontFamily = poppinsFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp
-            )
+            style = LocalTextStyle.current.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+            ),
         )
     }
 }
