@@ -28,6 +28,7 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -63,11 +64,10 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
     Text(
         modifier = inputWidth,
         text = inputLabel,
-        color = Color(0xFF0F0F0F),
-        style = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
-        )
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
     )
 
     Spacer(modifier = modifier)
@@ -94,12 +94,10 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
             Text( text = labelValue )
         },
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         ),
         trailingIcon = {
             IconButton(onClick = { showDialog = !showDialog}){
@@ -154,12 +152,10 @@ fun DatePickerTextField(labelValue: String = ""){
         },
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         ),
         trailingIcon = {
             Icon(
@@ -217,12 +213,10 @@ fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text){
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         )
     )
 }
@@ -336,11 +330,10 @@ fun RoomReservationForm(
 
                 Text(
                     text = "Requested by:",
-                    color = Color(0xFF0F0F0F),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -421,11 +414,10 @@ fun RoomReservationForm(
 
                 Text(
                     text = "Venue",
-                    color = Color(0xFF0F0F0F),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
