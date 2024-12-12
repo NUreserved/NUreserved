@@ -5,6 +5,8 @@ import android.icu.util.Calendar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -169,20 +171,22 @@ fun DatePickerTextField(labelValue: String = ""){
 }
 
 @Composable
-fun FilterChipComposable(roomNumber: String, modifier: Modifier = Modifier){
-    var selected by remember { mutableStateOf(false) }
+fun FilterChipComposable(
+    roomNumber: String,
+    isSelected: Boolean,
+    onRoomSelected: (String) -> Unit
+){
 
     FilterChip(
-        modifier = modifier,
         colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = Color(0xFFEEEEEE)
+            selectedContainerColor = LocalTextStyle.current.color
         ),
-        onClick = { selected = !selected},
+        onClick = { onRoomSelected(roomNumber) },
         label = {
-            Text( text = roomNumber )
+            Text(text = roomNumber)
         },
-        selected = selected,
-        leadingIcon = if(selected){
+        selected = isSelected,
+        leadingIcon = if (isSelected) {
             {
                 Icon(
                     imageVector = Icons.Filled.Done,
@@ -190,7 +194,7 @@ fun FilterChipComposable(roomNumber: String, modifier: Modifier = Modifier){
                     modifier = Modifier.size(FilterChipDefaults.IconSize)
                 )
             }
-        } else{
+        } else {
             null
         }
     )
@@ -232,6 +236,7 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RoomReservationForm(
     navController: NavController
@@ -424,40 +429,23 @@ fun RoomReservationForm(
 
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 ){
-                    //row 1
-                    Row(
+                    var selectedRoom by remember { mutableStateOf<String?>(null) }
+
+                    FlowRow(
                         modifier = Modifier
-                            .fillMaxWidth()
-                    ){
-                        FilterChipComposable(roomNumber = "Room 202", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 205", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
-                    }
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    //row 2
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    ){
-                        FilterChipComposable(roomNumber = "Room 316", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 317", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                    ) {
+                        val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
+                        rooms.forEach { room ->
+                            FilterChipComposable(
+                                roomNumber = room,
+                                isSelected = selectedRoom == room,
+                                onRoomSelected = { selectedRoom = it }
+                            )
+                        }
                     }
                 }
 
