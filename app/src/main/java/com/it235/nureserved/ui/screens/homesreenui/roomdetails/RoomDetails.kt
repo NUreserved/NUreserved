@@ -1,7 +1,12 @@
 package com.it235.nureserved.ui.screens.homesreenui.roomdetails
 
+import android.widget.Space
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -9,7 +14,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -37,6 +47,9 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.iconColor1
+import com.it235.nureserved.ui.theme.iconColor3
+import com.it235.nureserved.ui.theme.indicatorColorRed
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,12 +101,16 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 
 @Composable
 fun RoomDetailsContent(innerPaddingValues: PaddingValues) {
-    Column(
+    LazyColumn(
         modifier = Modifier.padding(innerPaddingValues)
     ) {
-        RoomImage()
-        Spacer(modifier = Modifier.size(16.dp))
-        RoomDetails()
+        item {
+            RoomImage()
+            Spacer(modifier = Modifier.size(16.dp))
+            RoomDetails()
+            Spacer(modifier = Modifier.size(32.dp))
+            ScheduleGrid(sampleSchedule)
+        }
     }
 }
 
@@ -174,7 +191,87 @@ private fun RoomDetails() {
     }
 }
 
-@Preview (showBackground = true)
+@Composable
+fun ScheduleGrid(days: List<DaySchedule>) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            IconButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.chevron_left),
+                    contentDescription = "Left arrow",
+                )
+            }
+            Spacer(modifier = Modifier.size(16.dp))
+            Text(
+                text = "Dec 1–3"
+            )
+            Spacer(modifier = Modifier.size(16.dp))
+            IconButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.chevron_right),
+                    contentDescription = "Right arrow",
+                )
+            }
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        Row {
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
+                Spacer(modifier = Modifier.size(20.dp))
+                timeSlots.forEachIndexed { index, timeSlot ->
+                    Text(
+                        text = timeSlot
+                    )
+                    // Add spacing between time slots except for the last one
+                    if (index < timeSlots.size - 1) {
+                        Spacer(modifier = Modifier.size(16.dp)) // Add spacing here
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.size(8.dp))
+
+            days.forEach { day ->
+                Row() {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = day.day,
+                        )
+                        Spacer(modifier = Modifier.size(8.dp))
+                        day.timeSlots.forEach { timeSlot ->
+                            Box(
+                                modifier = Modifier
+                                    .size(width = 100.dp, height = 40.dp)
+                                    .border(
+                                        width = 0.5.dp,
+                                        color = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                                    )
+                                    .background(
+                                        if (timeSlot.isAvailable) Color.Transparent else indicatorColorRed
+                                    )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview (showBackground = true, heightDp = 2000)
 @Composable
 fun RoomDetailsPreview() {
     val navController = rememberNavController()
