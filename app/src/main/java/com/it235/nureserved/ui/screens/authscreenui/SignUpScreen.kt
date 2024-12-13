@@ -136,7 +136,7 @@ private fun Logo() {
             .width(90.dp)
             .padding(top = 40.dp),
         painter = painterResource(R.drawable.logo),
-        contentDescription = "App logo",
+        contentDescription = null,
     )
 }
 
