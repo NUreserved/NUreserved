@@ -87,7 +87,7 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                     Text(
                         modifier = Modifier
                             .padding(end = 16.dp),
-                        text = "Expires by 20:40 today",
+                        text = "Valid until 8:40 PM today",
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
                             lineHeight = 16.sp
@@ -128,7 +128,7 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date and time of activity",
-                    value = "11/29/24 08:00 AM – 11/29/24 05:00 PM"
+                    value = "Nov 29, 8:00 AM – 5:00 PM"
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
@@ -221,10 +221,14 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
             Text(
                 text = "Approved by Jane Crisha Doe\n(janecrishadoe@gmail.com)",
                 color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                ),
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -289,7 +293,8 @@ private fun TextContentComposable(
         )
         Text(
             modifier = Modifier
-                .weight(0.5f),
+                .weight(0.5f)
+                .padding(end = 16.dp),
             text = value,
             style = LocalTextStyle.current.copy(
                 fontSize = 13.sp,
