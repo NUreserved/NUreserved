@@ -211,6 +211,9 @@ fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text, l
         value = inputValue,
         singleLine = true,
         onValueChange = { inputValue = it },
+        label = {
+            Text( text = labelValue )
+        },
         textStyle = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Medium,
