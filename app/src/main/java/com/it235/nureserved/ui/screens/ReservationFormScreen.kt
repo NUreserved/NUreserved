@@ -5,6 +5,8 @@ import android.icu.util.Calendar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +30,7 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -63,11 +66,10 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
     Text(
         modifier = inputWidth,
         text = inputLabel,
-        color = Color(0xFF0F0F0F),
-        style = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
-        )
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
     )
 
     Spacer(modifier = modifier)
@@ -94,12 +96,10 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
             Text( text = labelValue )
         },
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         ),
         trailingIcon = {
             IconButton(onClick = { showDialog = !showDialog}){
@@ -154,12 +154,10 @@ fun DatePickerTextField(labelValue: String = ""){
         },
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         ),
         trailingIcon = {
             Icon(
@@ -173,20 +171,22 @@ fun DatePickerTextField(labelValue: String = ""){
 }
 
 @Composable
-fun FilterChipComposable(roomNumber: String, modifier: Modifier = Modifier){
-    var selected by remember { mutableStateOf(false) }
+fun FilterChipComposable(
+    roomNumber: String,
+    isSelected: Boolean,
+    onRoomSelected: (String) -> Unit
+){
 
     FilterChip(
-        modifier = modifier,
         colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = Color(0xFFEEEEEE)
+            selectedContainerColor = LocalTextStyle.current.color
         ),
-        onClick = { selected = !selected},
+        onClick = { onRoomSelected(roomNumber) },
         label = {
-            Text( text = roomNumber )
+            Text(text = roomNumber)
         },
-        selected = selected,
-        leadingIcon = if(selected){
+        selected = isSelected,
+        leadingIcon = if (isSelected) {
             {
                 Icon(
                     imageVector = Icons.Filled.Done,
@@ -194,7 +194,7 @@ fun FilterChipComposable(roomNumber: String, modifier: Modifier = Modifier){
                     modifier = Modifier.size(FilterChipDefaults.IconSize)
                 )
             }
-        } else{
+        } else {
             null
         }
     )
@@ -217,12 +217,10 @@ fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text){
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
+            unfocusedBorderColor = LocalTextStyle.current.color,
+            focusedBorderColor = LocalTextStyle.current.color,
+            focusedTextColor = LocalTextStyle.current.color,
+            cursorColor = LocalTextStyle.current.color,
         )
     )
 }
@@ -238,6 +236,7 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RoomReservationForm(
     navController: NavController
@@ -336,11 +335,10 @@ fun RoomReservationForm(
 
                 Text(
                     text = "Requested by:",
-                    color = Color(0xFF0F0F0F),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -421,51 +419,33 @@ fun RoomReservationForm(
 
                 Text(
                     text = "Venue",
-                    color = Color(0xFF0F0F0F),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 ){
-                    //row 1
-                    Row(
+                    var selectedRoom by remember { mutableStateOf<String?>(null) }
+
+                    FlowRow(
                         modifier = Modifier
-                            .fillMaxWidth()
-                    ){
-                        FilterChipComposable(roomNumber = "Room 202", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 205", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
-                    }
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    //row 2
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    ){
-                        FilterChipComposable(roomNumber = "Room 316", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 317", modifier = Modifier.weight(1f))
-
-                        Spacer(modifier = Modifier.width(3.dp))
-
-                        FilterChipComposable(roomNumber = "Room 215", modifier = Modifier.weight(1f))
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                    ) {
+                        val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
+                        rooms.forEach { room ->
+                            FilterChipComposable(
+                                roomNumber = room,
+                                isSelected = selectedRoom == room,
+                                onRoomSelected = { selectedRoom = it }
+                            )
+                        }
                     }
                 }
 

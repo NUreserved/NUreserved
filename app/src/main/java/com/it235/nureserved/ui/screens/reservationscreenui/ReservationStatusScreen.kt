@@ -124,13 +124,11 @@ fun RoomReservationStatusScreen(
 
         TabRow(
             selectedTabIndex = selectedTabIndex,
-            contentColor = Color(0xFF35408E),
             divider = {},
             indicator = {tabPositions ->
                 TabRowDefaults.SecondaryIndicator(
                     Modifier
                         .tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                    color = Color(0xFF35408E)
                 )
             }
         ) {

@@ -3,6 +3,7 @@ package com.it235.nureserved.ui.screens.reservationscreenui
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +29,7 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -55,6 +57,9 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RowHeader
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.theme.darkGray
+import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,11 +68,10 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
     Text(
         modifier = inputWidth,
         text = inputLabel,
-        color = Color(0xFF0F0F0F),
-        style = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
-        )
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
     )
 
     Spacer(modifier = modifier)
@@ -204,21 +208,14 @@ fun OutlineTextFieldComposable(inputValue: String = "", keyboardType: KeyboardTy
         singleLine = true,
         enabled = false,
         onValueChange = {},
-        textStyle = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
+        textStyle = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
-            disabledTextColor = Color(0xFF0F0F0F),
-            disabledContainerColor = Color(0xFFEEEEEE),
-            disabledBorderColor = Color(0xFF0F0F0F)
+            disabledBorderColor = if (isSystemInDarkTheme()) white else darkGray,
+            disabledTextColor = if (isSystemInDarkTheme()) white else darkGray
         )
     )
 }
