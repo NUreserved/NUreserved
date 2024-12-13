@@ -285,7 +285,55 @@ fun RoomReservationForm(
                         }
                     }
 
-                    if(index != inputLabels.lastIndex) Spacer(modifier = Modifier.height(20.dp))
+                    if(index != inputLabels.lastIndex) {
+                        Space("h", 20)
+
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
+                                DatePickerTextField()
+                            }
+                        }
+
+                        Space("h", 20)
+
+                        Text(
+                            text = "Requested by:",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                            ),
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp),
+                        ){
+                            nameLabels.forEachIndexed{index, nameLabel ->
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ){
+                                    InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
+                                        Row(modifier = Modifier.weight(6f)){
+                                            OutlineTextFieldComposable()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Space("h", 20)
+
+                        RowLayout(){
+                            InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
+                                OutlineTextFieldComposable()
+                            }
+                        }
+
+                        Space("h", 20)
+                    }
                 }
 
                 Space("h", 20)
