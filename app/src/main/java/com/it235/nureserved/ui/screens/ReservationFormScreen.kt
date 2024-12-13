@@ -275,6 +275,8 @@ fun RoomReservationForm(
                     "Name of Organization/Department/College:",
                     "Title of the Activity:"
                 );
+                
+                val nameLabels = listOf("Given Name", "Middle Name", "Surname");
 
                 inputLabels.forEachIndexed{ index, inputLabel ->
                     Column(){
