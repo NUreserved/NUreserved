@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.screens.reservationscreenui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -62,6 +64,39 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
             }
 
             Spacer(modifier = Modifier.height(32.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                )
+            ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    StatusContentComposable()
+
+                    Text(
+                        modifier = Modifier
+                            .padding(end = 16.dp),
+                        text = "Expires by 20:40 today",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Card(
                 modifier = Modifier
@@ -126,12 +161,12 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Middle name",
-                    value = ""
+                    value = "Marcio"
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Surname",
-                    value = "11/29/24"
+                    value = "Dela Cruz"
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
@@ -143,6 +178,28 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
         }
+    }
+}
+
+@Composable
+private fun StatusContentComposable() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier
+                .size(16.dp)
+                .background(color = indicatorColorGreen, shape = CircleShape),
+        ) {}
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            text = "Active",
+            style = LocalTextStyle.current.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            )
+        )
     }
 }
 
