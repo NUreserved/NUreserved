@@ -338,60 +338,57 @@ fun RoomReservationForm(
 
                 Space("h", 20)
 
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
-                        DatePickerTextField()
-                    }
-                }
-
-                Space("h", 20)
-
-                Row(
+                Column (
                     modifier = Modifier
-                        .fillMaxWidth()
-//                    .padding(start = 20.dp)
+                        .fillMaxWidth(),
                 ){
-                    //col 1
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                    ){
-                        RowLayout(){
-                            Row(modifier = Modifier.weight(3f)) {
-                                DatePickerTextField(labelValue = "From")
-                            }
+
+                    val dateAndTimePickers = listOf<@Composable () -> Unit>(
+                        {
+                            DatePickerTextField(labelValue = "From", modifier = Modifier.weight(1f))
+                            Space("w", 10)
+                            DatePickerTextField(labelValue = "To", modifier = Modifier.weight(1f))
+                        },
+                        {
+                            TimePicker(labelValue = "From", modifier = Modifier.weight(1f))
+                            Space("w", 10)
+                            TimePicker(labelValue = "To", modifier = Modifier.weight(1f))
                         }
+                    )
 
-                        Space("h", 10)
+                    val dateAndTimePickersLabels = listOf<@Composable () -> Unit>(
+                        {
+                            Text(
+                                text = "Date/s of the Activity",
+                                style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                ),
+                            )
+                        },
+                        {
+                            Text(
+                                text = "Time of the Activity",
+                                style = LocalTextStyle.current.copy(
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold,
+                                ),
+                            )
+                        },
+                    )
 
-                        RowLayout(){
-                            Row(modifier = Modifier.weight(3f)){
-                                TimePicker(labelValue = "From")
-                            }
+
+                    dateAndTimePickers.forEachIndexed{index, dateAndTimePicker ->
+                        if (index == 1){
+                            Space("h", 10)
+                        }
+                        dateAndTimePickersLabels[index]()
+                        Space("h", 5)
+                        Row(modifier = Modifier.fillMaxWidth()){
+                            dateAndTimePicker()
                         }
                     }
 
-                    Space("w", 10)
-
-                    //col 2
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                    ){
-                        RowLayout(){
-                            Row(modifier = Modifier.weight(3f)) {
-                                DatePickerTextField(labelValue = "From")
-                            }
-                        }
-
-                        Space("h", 10)
-
-                        RowLayout(){
-                            Row(modifier = Modifier.weight(3f)){
-                                TimePicker(labelValue = "To")
-                            }
-                        }
-                    }
                 }
 
                 Space("h", 20)
