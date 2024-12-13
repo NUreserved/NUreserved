@@ -454,6 +454,14 @@ fun RoomReservationForm(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                Column(){
+                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
+                        OutlineTextFieldComposable(labelValue = "Email of your Adviser/Program Chair/Dean/Teacher")
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
