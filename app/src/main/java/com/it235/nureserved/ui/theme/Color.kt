@@ -18,6 +18,8 @@ val iconColor2 = darkGray
 val iconColor3 = white
 val textColor1 = Color(0xFF0F0F0F)
 val textColor2 = darkGray
+val textColor3 = Color(0xFF808080)
+val textColor4 = white4
 
 // Branding colors
 val brandColorBlue = Color(0xFF35408e)
