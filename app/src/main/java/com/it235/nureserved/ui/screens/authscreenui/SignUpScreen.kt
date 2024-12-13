@@ -105,7 +105,9 @@ fun SignUpScreen(
 
                             EmailField()
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField()
+                            PasswordField(labelValue = "Password")
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(labelValue = "Confirm Password")
 
                             Spacer(modifier = Modifier.height(15.dp))
 
