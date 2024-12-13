@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -134,6 +135,11 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                     field = "Venue",
                     value = "Room 301"
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Expected # of Attendees",
+                    value = "25"
+                )
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
@@ -175,6 +181,48 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+
+                ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HeadingComposable(value = "Recommending Approval")
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Name",
+                    value = "John Peter Doe"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Relationship",
+                    value = "Adviser"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Email",
+                    value = "johnpeterdoe@gmail.com"
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = "Approved by Jane Crisha Doe\n(janecrishadoe@gmail.com)",
+                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                textAlign = TextAlign.Center
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
         }
