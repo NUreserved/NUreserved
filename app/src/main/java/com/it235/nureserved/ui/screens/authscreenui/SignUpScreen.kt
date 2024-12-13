@@ -201,7 +201,7 @@ private fun PasswordField(labelValue: String = "") {
         label = {
             Text(
                 color = Color(0xFFF8F5F5),
-                text = "Password",
+                text = labelValue,
                 style = TextStyle(
                     fontFamily = poppinsFamily,
                     fontSize = 18.sp,
