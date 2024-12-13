@@ -136,7 +136,13 @@ fun RoomReservationStatusScreen(
                 },
                 sheetState = sheetState
             ) {
-                ReservationFilledOutFormScreen(navController)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    ReservationFilledOutFormScreen(navController)
+                }
             }
         }
 
