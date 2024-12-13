@@ -467,6 +467,27 @@ fun RoomReservationForm(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ){
+
+                    Button(
+                        onClick = { navController.popBackStack() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF333333),
+                            contentColor = Color(0xFFFEFEFE)
+                        ),
+                        shape = RoundedCornerShape(10.dp)
+                    ){
+                        Text(
+                            text = "Back",
+                            style = TextStyle(
+                                fontFamily = poppinsFamily,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 18.sp
+                            )
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
                     Button(
                         onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
                         colors = ButtonDefaults.buttonColors(
