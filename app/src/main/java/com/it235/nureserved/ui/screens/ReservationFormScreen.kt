@@ -251,9 +251,6 @@ fun RoomReservationForm(
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ){
-            val poppinsSemiBold = FontFamily(
-                Font(R.font.poppins_semibold)
-            )
 
             RowHeader("ROOM RESERVATIONS FORM")
 
