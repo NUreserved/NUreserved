@@ -528,8 +528,8 @@ fun RoomReservationForm(
                     Button(
                         onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF333333),
-                            contentColor = Color(0xFFFEFEFE)
+                            containerColor = darkGray,
+                            contentColor = white
                         ),
                         shape = RoundedCornerShape(10.dp)
                     ){
