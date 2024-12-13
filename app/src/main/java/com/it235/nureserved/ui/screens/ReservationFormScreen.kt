@@ -284,7 +284,7 @@ fun RoomReservationForm(
                     if(index != inputLabels.lastIndex) Spacer(modifier = Modifier.height(20.dp))
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 RowLayout(){
                     InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
@@ -292,7 +292,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 Row(
                     modifier = Modifier
@@ -310,7 +310,7 @@ fun RoomReservationForm(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Space("h", 10)
 
                         RowLayout(){
                             Row(modifier = Modifier.weight(3f)){
@@ -319,7 +319,7 @@ fun RoomReservationForm(
                         }
                     }
 
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Space("w", 10)
 
                     //col 2
                     Column(
@@ -332,7 +332,7 @@ fun RoomReservationForm(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Space("h", 10)
 
                         RowLayout(){
                             Row(modifier = Modifier.weight(3f)){
@@ -342,7 +342,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 Text(
                     text = "Requested by:",
@@ -352,7 +352,7 @@ fun RoomReservationForm(
                     ),
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Space("h", 10)
 
                 RowLayout(modifier = Modifier.padding(start = 20.dp)){
                     Row(
@@ -386,7 +386,7 @@ fun RoomReservationForm(
 
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Space("h", 10)
 
                 RowLayout(modifier = Modifier.padding(start = 20.dp)){
                     Row(
@@ -403,7 +403,7 @@ fun RoomReservationForm(
 
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 RowLayout(){
                     InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
@@ -411,7 +411,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 RowLayout(){
                     InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
@@ -419,14 +419,14 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 HorizontalDivider(
                     color = Color(0xFFEEEEEE),
                     thickness = 2.dp,
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 Text(
                     text = "Venue",
@@ -436,7 +436,7 @@ fun RoomReservationForm(
                     ),
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Space("h", 10)
 
                 Column(
                     modifier = Modifier
@@ -460,7 +460,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 Column(){
                     InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
@@ -468,7 +468,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
                 Row(
                     modifier = Modifier
@@ -494,7 +494,7 @@ fun RoomReservationForm(
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Space("w", 10)
 
                     Button(
                         onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
@@ -515,7 +515,7 @@ fun RoomReservationForm(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Space("h", 20)
 
             }
 
