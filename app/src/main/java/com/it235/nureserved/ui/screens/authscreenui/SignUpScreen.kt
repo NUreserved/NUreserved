@@ -188,7 +188,7 @@ private fun EmailField() {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField() {
+private fun PasswordField(labelValue: String = "") {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
