@@ -168,7 +168,7 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
                 modifier = Modifier.clickable{datePickerDialog.show()}
             )
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }
 
