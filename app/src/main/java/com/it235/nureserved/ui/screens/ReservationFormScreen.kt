@@ -201,7 +201,7 @@ fun FilterChipComposable(
 }
 
 @Composable
-fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text){
+fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = ""){
     var inputValue by remember { mutableStateOf("") }
 
 
