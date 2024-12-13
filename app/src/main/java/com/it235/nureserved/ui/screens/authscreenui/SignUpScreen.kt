@@ -68,6 +68,7 @@ fun SignUpScreen(
 
             Box(
                 modifier = Modifier
+                    .padding(innerPadding)
                     .fillMaxSize()
             ){
                 //background image
