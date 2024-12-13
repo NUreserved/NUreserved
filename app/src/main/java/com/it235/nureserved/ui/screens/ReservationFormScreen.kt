@@ -258,19 +258,19 @@ fun RoomReservationForm(
                 modifier = Modifier
                     .padding(start = 20.dp, end = 20.dp, top = 10.dp)
             ){
+                val inputLabels = listOf(
+                    "Name of Organization/Department/College:",
+                    "Title of the Activity:"
+                );
 
-                Column(){
-                    InputFieldAndLabel(inputLabel = "Name of Organization/Department/College:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable()
+                inputLabels.forEachIndexed{ index, inputLabel ->
+                    Column(){
+                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp)){
+                            OutlineTextFieldComposable()
+                        }
                     }
-                }
 
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Column(){
-                    InputFieldAndLabel(inputLabel = "Title of the Activity:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable()
-                    }
+                    if(index != inputLabels.lastIndex) Spacer(modifier = Modifier.height(20.dp))
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
