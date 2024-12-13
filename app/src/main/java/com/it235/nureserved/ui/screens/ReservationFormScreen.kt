@@ -63,7 +63,10 @@ import com.it235.nureserved.ui.theme.white
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modifier: Modifier, inputType: @Composable () -> Unit){
+fun InputFieldAndLabel(
+    inputWidth: Modifier = Modifier,
+    inputLabel: String, modifier: Modifier,
+    inputType: @Composable (() -> Unit)? = null){
 
     Text(
         modifier = inputWidth,
