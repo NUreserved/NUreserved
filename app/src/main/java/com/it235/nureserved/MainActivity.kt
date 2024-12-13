@@ -24,7 +24,6 @@ import com.it235.nureserved.ui.screens.authscreenui.LoginScreen
 import com.it235.nureserved.ui.screens.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
 import com.it235.nureserved.ui.screens.homesreenui.roomdetails.RoomDetails
-import com.it235.nureserved.ui.screens.reservationscreenui.ReservationFilledOutFormScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -69,9 +68,7 @@ private fun Main() {
                 composable(ScreenRoutes.RoomDetails.route) { RoomDetails(navController) }
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
-                composable(ScreenRoutes.RoomFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
-                composable(ScreenRoutes.ReservationFilledOutForm.route) { ReservationFilledOutFormScreen(navController) }
             }
         }
     }

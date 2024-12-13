@@ -1,481 +1,340 @@
 package com.it235.nureserved.ui.screens.reservationscreenui
 
-import android.app.TimePickerDialog
-import android.icu.util.Calendar
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.RowHeader
-import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.theme.darkGray
-import com.it235.nureserved.ui.theme.textColor1
-import com.it235.nureserved.ui.theme.white
+import com.it235.nureserved.ui.theme.indicatorColorGreen
+import com.it235.nureserved.ui.theme.textColor3
+import com.it235.nureserved.ui.theme.textColor4
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modifier: Modifier, inputType: @Composable () -> Unit){
+fun ReservationFilledOutFormScreen(navController: NavController) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column(
+            modifier = Modifier
+                .widthIn(max = 500.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Column (
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.check_circle),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorGreen
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request approved",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+            }
 
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                )
+            ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    StatusContentComposable()
+
+                    Text(
+                        modifier = Modifier
+                            .padding(end = 16.dp),
+                        text = "Valid until 8:40 PM today",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+
+                ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HeadingComposable(value = "Event Details")
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Name of Organization/Department/College",
+                    value = "Student Executives"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Activity title",
+                    value = "Meeting for Paskong Nationalian"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Date filled",
+                    value = "11/29/24"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Date and time of activity",
+                    value = "Nov 29, 8:00 AM – 5:00 PM"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Venue",
+                    value = "Room 301"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Expected # of Attendees",
+                    value = "25"
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+
+                ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HeadingComposable(value = "Requester Details")
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Last name",
+                    value = "Juan"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Middle name",
+                    value = "Marcio"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Surname",
+                    value = "Dela Cruz"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Position",
+                    value = "BSIT Representative"
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+
+                ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HeadingComposable(value = "Recommending Approval")
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Name",
+                    value = "John Peter Doe"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Relationship",
+                    value = "Adviser"
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextContentComposable(
+                    field = "Email",
+                    value = "johnpeterdoe@gmail.com"
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = "Approved by Jane Crisha Doe\n(janecrishadoe@gmail.com)",
+                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                textAlign = TextAlign.Center,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+        }
+    }
+}
+
+@Composable
+private fun StatusContentComposable() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier
+                .size(16.dp)
+                .background(color = indicatorColorGreen, shape = CircleShape),
+        ) {}
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            text = "Active",
+            style = LocalTextStyle.current.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            )
+        )
+    }
+}
+
+@Composable
+private fun HeadingComposable(
+    value: String
+) {
     Text(
-        modifier = inputWidth,
-        text = inputLabel,
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp),
+        text = value.uppercase(),
         style = LocalTextStyle.current.copy(
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold,
         ),
     )
-
-    Spacer(modifier = modifier)
-
-    inputType()
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TimePicker(modifier: Modifier = Modifier){
-    var selectedTime by remember { mutableStateOf("00:00") }
-    var showDialog by remember { mutableStateOf(false) }
-
-    OutlinedTextField(
-//        modifier = Modifier
-//            .fillMaxWidth(),
-        modifier = modifier,
-        value = selectedTime,
-        onValueChange = { selectedTime = it },
-        shape = RoundedCornerShape(10.dp),
-        readOnly = true,
-        colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
-        ),
-        trailingIcon = {
-            IconButton(onClick = { showDialog = !showDialog}){
-                Icon(
-                    imageVector = Icons.Default.DateRange,
-                    contentDescription = "Select time"
-                )
-            }
-        }
-    )
-
-    if(showDialog){
-        val context = LocalContext.current
-        val calendar = Calendar.getInstance()
-
-        TimePickerDialog(
-            context,
-            {_, hourOfDay, minute ->
-                selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-                showDialog = false
-            },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            true
-        ).show()
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DatePickerTextField(){
-    var selectedDate by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val calendar = Calendar.getInstance()
-
-    val datePickerDialog = android.app.DatePickerDialog(
-        context,
-        { _, year, month, dayOfMonth ->
-            selectedDate = "$dayOfMonth/${month + 1}/$year"
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    )
-
-    OutlinedTextField(
-        value = selectedDate,
-        onValueChange = { selectedDate = it},
-        readOnly = true,
-        shape = RoundedCornerShape(10.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFEEEEEE),
-            focusedContainerColor = Color(0xFFEEEEEE),
-            unfocusedBorderColor = Color(0xFF0F0F0F),
-            focusedBorderColor = Color(0xFF0F0F0F),
-            focusedTextColor = Color(0xFF0F0F0F),
-            cursorColor = Color(0xFF0F0F0F),
-        ),
-        trailingIcon = {
-            Icon(
-                imageVector = Icons.Default.DateRange,
-                contentDescription = "Select Date",
-                modifier = Modifier.clickable{datePickerDialog.show()}
-            )
-        },
-        modifier = Modifier.fillMaxWidth()
-    )
 }
 
 @Composable
-fun FilterChipComposable(roomNumber: String, modifier: Modifier = Modifier){
-    var selected by remember { mutableStateOf(false) }
-
-    FilterChip(
-        modifier = modifier,
-        colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = Color(0xFFEEEEEE)
-        ),
-        onClick = { selected = !selected},
-        label = {
-            Text( text = roomNumber )
-        },
-        selected = selected,
-        leadingIcon = if(selected){
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Done Icon",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        } else{
-            null
-        }
-    )
-}
-
-@Composable
-fun OutlineTextFieldComposable(inputValue: String = "", keyboardType: KeyboardType = KeyboardType.Text){
-
-    OutlinedTextField(
+private fun TextContentComposable(
+    field: String,
+    value: String
+) {
+    Row(
         modifier = Modifier
             .fillMaxWidth(),
-        value = inputValue,
-        singleLine = true,
-        enabled = false,
-        onValueChange = {},
-        textStyle = LocalTextStyle.current.copy(
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Bold,
-        ),
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-        colors = OutlinedTextFieldDefaults.colors(
-            disabledBorderColor = if (isSystemInDarkTheme()) white else darkGray,
-            disabledTextColor = if (isSystemInDarkTheme()) white else darkGray
-        )
-    )
-}
-
-@Composable
-fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
-    Row(
-        modifier = modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        content()
-    }
-}
-
-@Composable
-fun ReservationFilledOutFormScreen(navController: NavController){
-    Scaffold{ innerPadding ->
-        Column(
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
-        ){
-
-            Column(
-                modifier = Modifier
-                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
-            ){
-
-                Column(){
-                    InputFieldAndLabel(inputLabel = "Name of Organization/Department/College:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable(inputValue = "Student Executives")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Column(){
-                    InputFieldAndLabel(inputLabel = "Title of the Activity:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable(inputValue = "Meeting for Paskong Nationalian")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable(inputValue = "11/29/24")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ){
-                    //col 1
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                    ){
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    OutlineTextFieldComposable(inputValue = "11/29/24")
-                                }
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "From:", modifier = Modifier.width(5.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    OutlineTextFieldComposable(inputValue = "8:00 AM")
-                                }
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.width(10.dp))
-
-                    //col 2
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                    ){
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)) {
-                                    OutlineTextFieldComposable(inputValue = "11/29/24")
-                                }
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "To:", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(1f)){
-                                Row(modifier = Modifier.weight(3f)){
-                                    OutlineTextFieldComposable(inputValue = "5:00 PM")
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Text(
-                    text = "Requested by:",
-                    color = Color(0xFF0F0F0F),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        InputFieldAndLabel(inputLabel = "Given Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                            Row(modifier = Modifier.weight(6f)){
-                                OutlineTextFieldComposable(inputValue = "Aaron")
-                            }
-                        }
-                    }
-
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        InputFieldAndLabel(inputLabel = "Middle Name", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                            Row(modifier = Modifier.weight(6f)){
-                                OutlineTextFieldComposable()
-                            }
-                        }
-                    }
-
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                RowLayout(modifier = Modifier.padding(start = 20.dp)){
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        InputFieldAndLabel(inputLabel = "Surname", modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                            Row(modifier = Modifier.weight(6f)){
-                                OutlineTextFieldComposable("Hernandez")
-                            }
-                        }
-                    }
-
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable("BSIT Representative")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number, inputValue = "20")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Venue", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable(inputValue = "Room 301")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ){
-                    Text(
-                        text = "Reservation Status:",
-                        style = TextStyle(
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Medium,
-                        )
-                    )
-
-                    Spacer(modifier = Modifier.width(10.dp))
-
-                    Text(
-                        text = "Active",
-                        style = TextStyle(
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Medium,
-                        )
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ){
-                    Button(
-                        onClick = {
-                            navController.popBackStack()
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF35408E),
-                            contentColor = Color(0xFFFEFEFE)
-                        ),
-                        shape = RoundedCornerShape(10.dp)
-                    ){
-                        Text(
-                            text = "Back",
-                            style = TextStyle(
-                                fontFamily = poppinsFamily,
-                                fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp
-                            )
-                        )
-                    }
-                }
-
-
-            }
-
-        }
+                .padding(start = 16.dp)
+                .weight(0.5f).widthIn(max = 200.dp),
+            color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+            text = field,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+        Text(
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(end = 16.dp),
+            text = value,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
     }
 }
 
 @Preview(
-    showBackground = true,
-    heightDp = 1000
+    showBackground = true
 )
 @Composable
-fun PreviewReservationFilledOutFormScreen(){
+fun Default() {
+    ReservationFilledOutFormScreen(navController = rememberNavController())
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 480
+)
+@Composable
+fun Preview480() {
+    ReservationFilledOutFormScreen(navController = rememberNavController())
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 550
+)
+@Composable
+fun Preview550() {
+    ReservationFilledOutFormScreen(navController = rememberNavController())
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 720
+)
+@Composable
+fun Preview720() {
     ReservationFilledOutFormScreen(navController = rememberNavController())
 }
