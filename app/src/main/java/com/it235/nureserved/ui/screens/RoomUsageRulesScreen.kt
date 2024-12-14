@@ -159,6 +159,7 @@ fun ReservationRequestSuccessDialog(navController: NavController) {
 fun RoomUsageRules(navController: NavController){
     var showConfirmationDialog by remember { mutableStateOf(false) }
     var showSuccessfulDialog by remember { mutableStateOf(false) }
+    var checked by remember { mutableStateOf(false) }
 
     Scaffold { innerPadding ->
         if (showConfirmationDialog) {
@@ -230,7 +231,6 @@ fun RoomUsageRules(navController: NavController){
                     .padding(start = 30.dp),
                 verticalAlignment = Alignment.CenterVertically
             ){
-                var checked by remember { mutableStateOf(false) }
 
                 Checkbox(
                     checked = checked,
@@ -259,6 +259,7 @@ fun RoomUsageRules(navController: NavController){
 
                 Button(
                     onClick = { showConfirmationDialog = true },
+                    enabled = checked,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF35408E),
                         contentColor = Color(0xFFFEFEFE)
