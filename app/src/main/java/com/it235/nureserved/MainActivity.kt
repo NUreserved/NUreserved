@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.ui.screens.RoomReservationForm
 import com.it235.nureserved.ui.screens.RoomUsageRules
 import com.it235.nureserved.ui.screens.SplashScreen
@@ -42,6 +43,8 @@ private fun Main() {
     NUreservedTheme {
         val navController = rememberNavController()
         val showSplash = rememberSaveable { mutableStateOf(true) }
+        val auth = FirebaseAuth.getInstance()
+        val isLoggedIn = auth.currentUser != null
 
         LaunchedEffect(Unit) {
             delay(1000)
@@ -61,7 +64,10 @@ private fun Main() {
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            NavHost(navController = navController, startDestination = ScreenRoutes.Login.route) {
+            NavHost(
+                navController = navController,
+                startDestination = if (isLoggedIn) ScreenRoutes.Home.route else ScreenRoutes.Login.route
+            ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
                 composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
