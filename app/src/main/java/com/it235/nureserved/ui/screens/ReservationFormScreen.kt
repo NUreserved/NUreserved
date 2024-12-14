@@ -100,8 +100,15 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
         label = {
-            Text( text = labelValue )
+            Text(
+                text = labelValue
+            )
         },
+        textStyle = TextStyle(
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 13.sp
+        ),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = LocalTextStyle.current.color,
             focusedBorderColor = LocalTextStyle.current.color,
@@ -157,8 +164,19 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
         onValueChange = { selectedDate = it},
         readOnly = true,
         label = {
-          Text ( text = labelValue )
+          Text (
+              text = labelValue,
+              style = LocalTextStyle.current.copy(
+                  fontSize = 13.sp,
+                  fontWeight = FontWeight.Normal
+              )
+          )
         },
+        textStyle = TextStyle(
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 13.sp
+        ),
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = LocalTextStyle.current.color,
