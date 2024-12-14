@@ -219,7 +219,13 @@ fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text, l
         singleLine = true,
         onValueChange = { inputValue = it },
         label = {
-            Text( text = labelValue )
+            Text(
+                text = labelValue,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Normal,
+                )
+            )
         },
         textStyle = TextStyle(
             fontFamily = poppinsFamily,
