@@ -254,12 +254,9 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
 
 @Composable
 fun Space(dimension: String, dimensionValue: Int){
-    if(dimension == "h"){
-        Spacer(modifier = Modifier.height(dimensionValue.dp))
-    }
-
-    else{
-        Spacer(modifier = Modifier.width(dimensionValue.dp))
+    when(dimension){
+        "h" -> Spacer(modifier = Modifier.height(dimensionValue.dp))
+        "w" -> Spacer(modifier = Modifier.width(dimensionValue.dp))
     }
 }
 
