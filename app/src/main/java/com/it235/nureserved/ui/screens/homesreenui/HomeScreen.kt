@@ -64,6 +64,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
@@ -266,7 +267,12 @@ fun TopBar(
                     )
                     DropdownMenuItem(
                         text = { Text("Logout") },
-                        onClick = { /* Handle settings click */ },
+                        onClick = {
+                            FirebaseAuth.getInstance().signOut()
+                            navController.navigate(ScreenRoutes.Login.route) {
+                                popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                            }
+                        },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.logout),
