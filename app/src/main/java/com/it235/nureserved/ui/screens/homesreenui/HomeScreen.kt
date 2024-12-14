@@ -38,10 +38,12 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,21 +75,31 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 fun HomeScreen(navController: NavController) {
 
     // State variable to control the selected item
-    var selectedItem by remember { mutableIntStateOf(0) }
+    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of text
-    var showText by remember { mutableStateOf(false) }
+    var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
-    var showDatePicker by remember { mutableStateOf(false) }
+    var showDatePicker by rememberSaveable { mutableStateOf(false) }
     // State variable to control the navigation
-    var hasNavigated by remember { mutableStateOf(false) }
+    var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
-    var previousSelectedItem by remember { mutableIntStateOf(0) }
+    var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
 
     BackHandler {
         if (selectedItem != 0) {
             selectedItem = previousSelectedItem
         } else {
             navController.popBackStack()
+        }
+    }
+
+    // Add a listener to reset the selected item when navigating back from RoomReservationForm
+    LaunchedEffect(navController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.route == ScreenRoutes.RoomReservationForm.route) {
+                selectedItem = 0
+                hasNavigated = false
+            }
         }
     }
 
