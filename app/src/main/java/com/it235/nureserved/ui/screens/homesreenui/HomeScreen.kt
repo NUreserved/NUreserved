@@ -38,6 +38,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -89,6 +90,16 @@ fun HomeScreen(navController: NavController) {
             selectedItem = previousSelectedItem
         } else {
             navController.popBackStack()
+        }
+    }
+
+    // Add a listener to reset the selected item when navigating back from RoomReservationForm
+    LaunchedEffect(navController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.route == ScreenRoutes.RoomReservationForm.route) {
+                selectedItem = 0
+                hasNavigated = false
+            }
         }
     }
 
