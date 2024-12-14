@@ -94,8 +94,6 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var showDialog by remember { mutableStateOf(false) }
 
     OutlinedTextField(
-//        modifier = Modifier
-//            .fillMaxWidth(),
         modifier = modifier,
         value = selectedTime,
         onValueChange = { selectedTime = it },
