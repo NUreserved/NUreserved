@@ -271,14 +271,6 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
     }
 }
 
-@Composable
-fun Space(dimension: String, dimensionValue: Int){
-    when(dimension){
-        "h" -> Spacer(modifier = Modifier.height(dimensionValue.dp))
-        "w" -> Spacer(modifier = Modifier.width(dimensionValue.dp))
-    }
-}
-
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RoomReservationForm(
