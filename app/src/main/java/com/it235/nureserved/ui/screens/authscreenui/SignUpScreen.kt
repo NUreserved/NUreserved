@@ -1,6 +1,7 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.clickable
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -38,8 +38,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -54,6 +52,10 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white3
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
 fun SignUpScreen(
@@ -75,7 +77,7 @@ fun SignUpScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     painter = painterResource(R.drawable.splash_background),
-                    contentDescription = "Background image",
+                    contentDescription = null,
                     contentScale = ContentScale.Crop,
                 )
 
@@ -105,7 +107,9 @@ fun SignUpScreen(
 
                             EmailField()
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField()
+                            PasswordField(labelValue = "Password")
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(labelValue = "Confirm Password")
 
                             Spacer(modifier = Modifier.height(15.dp))
 
@@ -133,14 +137,14 @@ private fun Logo() {
             .width(90.dp)
             .padding(top = 40.dp),
         painter = painterResource(R.drawable.logo),
-        contentDescription = "App logo",
+        contentDescription = null,
     )
 }
 
 @Composable
 private fun AppTitle() {
     Text(
-        color = Color(0xFF35408e),
+        color = brandColorBlue,
         text = "NUreserved",
         style = TextStyle(
             fontFamily = poppinsFamily,
@@ -162,7 +166,7 @@ private fun EmailField() {
         singleLine = true,
         label = {
             Text(
-                color = Color(0xFFF8F5F5),
+                color = white3,
                 text = "Email",
                 style = TextStyle(
                     fontFamily = poppinsFamily,
@@ -172,10 +176,10 @@ private fun EmailField() {
             )
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -188,7 +192,7 @@ private fun EmailField() {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField() {
+private fun PasswordField(labelValue: String = "") {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -198,8 +202,8 @@ private fun PasswordField() {
         singleLine = true,
         label = {
             Text(
-                color = Color(0xFFF8F5F5),
-                text = "Password",
+                color = white3,
+                text = labelValue,
                 style = TextStyle(
                     fontFamily = poppinsFamily,
                     fontSize = 18.sp,
@@ -217,15 +221,15 @@ private fun PasswordField() {
                 Icon(
                     imageVector = image,
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
-                    tint = Color(0xFFF8F5F5)
+                    tint = white3
                 )
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -244,8 +248,8 @@ private fun RegisterButton() {
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF35408E),
-            contentColor = Color(0xFFF8F5F5)
+            containerColor = brandColorBlue,
+            contentColor = white3
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
@@ -288,7 +292,7 @@ fun AccountExistNote(navController: NavController) {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center
     )
@@ -305,7 +309,7 @@ private fun RegisterNote() {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center,
     )
