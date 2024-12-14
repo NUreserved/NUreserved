@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732994046489",
+    "project_id": "nureserved",
+    "storage_bucket": "nureserved.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732994046489:android:ab9a4db4c1cf4d42273888",
+        "android_client_info": {
+          "package_name": "com.it235.nureserved"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPG1MKvkeoKn7tvclaL6RM5_IjvOeEHBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
