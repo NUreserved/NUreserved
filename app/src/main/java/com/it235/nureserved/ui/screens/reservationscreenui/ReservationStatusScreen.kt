@@ -198,13 +198,13 @@ fun RoomReservationStatusScreen(
                         .verticalScroll(rememberScrollState())
                 ){
                     StateCard(
-                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
                         roomImage = R.drawable.sample_room,
                         cardContainerColor = 0xFFd69c40)
                     StateCard(
-                        modifier = Modifier.clickable(onClick = { navController.navigate(ScreenRoutes.ReservationFilledOutForm.route) }),
+                        modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
                         roomImage = R.drawable.sample_room,
