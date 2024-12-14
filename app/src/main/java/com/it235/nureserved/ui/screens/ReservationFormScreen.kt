@@ -102,10 +102,9 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
                 text = labelValue
             )
         },
-        textStyle = TextStyle(
-            fontFamily = poppinsFamily,
+        textStyle = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
-            fontSize = 13.sp
         ),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = LocalTextStyle.current.color,
@@ -170,10 +169,9 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
               )
           )
         },
-        textStyle = TextStyle(
-            fontFamily = poppinsFamily,
+        textStyle = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
-            fontSize = 13.sp
         ),
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
@@ -476,10 +474,9 @@ fun RoomReservationForm(
                     ){
                         Text(
                             text = "Back",
-                            style = TextStyle(
-                                fontFamily = poppinsFamily,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp
                             )
                         )
                     }
@@ -496,10 +493,9 @@ fun RoomReservationForm(
                     ){
                         Text(
                             text = "Next",
-                            style = TextStyle(
-                                fontFamily = poppinsFamily,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp
                             )
                         )
                     }
