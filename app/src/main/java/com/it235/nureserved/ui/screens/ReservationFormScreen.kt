@@ -45,8 +45,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,16 +52,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RowHeader
+import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.white
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modifier: Modifier, inputType: @Composable () -> Unit){
+fun InputFieldAndLabel(
+    inputWidth: Modifier = Modifier,
+    inputLabel: String, modifier: Modifier,
+    inputType: @Composable (() -> Unit)? = null){
 
     Text(
         modifier = inputWidth,
@@ -76,7 +77,11 @@ fun InputFieldAndLabel(inputWidth: Modifier = Modifier, inputLabel: String, modi
 
     Spacer(modifier = modifier)
 
-    inputType()
+    when{
+        inputType == null && inputLabel == "Date Filled" -> DatePickerTextField()
+        inputType == null -> OutlineTextFieldComposable()
+        else -> inputType()
+    }
 
 }
 
@@ -87,16 +92,20 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var showDialog by remember { mutableStateOf(false) }
 
     OutlinedTextField(
-//        modifier = Modifier
-//            .fillMaxWidth(),
         modifier = modifier,
         value = selectedTime,
         onValueChange = { selectedTime = it },
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
         label = {
-            Text( text = labelValue )
+            Text(
+                text = labelValue
+            )
         },
+        textStyle = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Normal,
+        ),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = LocalTextStyle.current.color,
             focusedBorderColor = LocalTextStyle.current.color,
@@ -152,8 +161,18 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
         onValueChange = { selectedDate = it},
         readOnly = true,
         label = {
-          Text ( text = labelValue )
+          Text (
+              text = labelValue,
+              style = LocalTextStyle.current.copy(
+                  fontSize = 13.sp,
+                  fontWeight = FontWeight.Normal
+              )
+          )
         },
+        textStyle = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Normal,
+        ),
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = LocalTextStyle.current.color,
@@ -203,18 +222,24 @@ fun FilterChipComposable(
 }
 
 @Composable
-fun OutlineTextFieldComposable(keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = ""){
+fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = ""){
     var inputValue by remember { mutableStateOf("") }
 
 
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         value = inputValue,
         singleLine = true,
         onValueChange = { inputValue = it },
         label = {
-            Text( text = labelValue )
+            Text(
+                text = labelValue,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Normal,
+                )
+            )
         },
         textStyle = TextStyle(
             fontFamily = poppinsFamily,
@@ -238,17 +263,6 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
         verticalAlignment = Alignment.CenterVertically
     ){
         content()
-    }
-}
-
-@Composable
-fun Space(dimension: String, dimensionValue: Int){
-    if(dimension == "h"){
-        Spacer(modifier = Modifier.height(dimensionValue.dp))
-    }
-
-    else{
-        Spacer(modifier = Modifier.width(dimensionValue.dp))
     }
 }
 
@@ -280,18 +294,14 @@ fun RoomReservationForm(
 
                 inputLabels.forEachIndexed{ index, inputLabel ->
                     Column(){
-                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp)){
-                            OutlineTextFieldComposable()
-                        }
+                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp))
                     }
 
                     if(index != inputLabels.lastIndex) {
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp)){
-                                DatePickerTextField()
-                            }
+                            InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp))
                         }
 
                         Space("h", 20)
@@ -310,26 +320,24 @@ fun RoomReservationForm(
                                 .padding(start = 20.dp),
                         ){
                             nameLabels.forEachIndexed{index, nameLabel ->
+
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically
                                 ){
                                     InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                                        Row(modifier = Modifier.weight(6f)){
-                                            OutlineTextFieldComposable()
-                                        }
+                                        OutlineTextFieldComposable(modifier = Modifier.weight(6f))
                                     }
                                 }
+
                             }
                         }
 
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp)){
-                                OutlineTextFieldComposable()
-                            }
+                            InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp))
                         }
 
                         Space("h", 20)
@@ -466,10 +474,9 @@ fun RoomReservationForm(
                     ){
                         Text(
                             text = "Back",
-                            style = TextStyle(
-                                fontFamily = poppinsFamily,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp
                             )
                         )
                     }
@@ -486,10 +493,9 @@ fun RoomReservationForm(
                     ){
                         Text(
                             text = "Next",
-                            style = TextStyle(
-                                fontFamily = poppinsFamily,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp
                             )
                         )
                     }
