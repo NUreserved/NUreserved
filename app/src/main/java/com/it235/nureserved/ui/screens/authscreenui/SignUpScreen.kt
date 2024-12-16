@@ -277,8 +277,8 @@ private fun RegisterButton(
     password: String,
     confirmPassword: String,
     navController: NavController,
-    dialogMessage: (String) -> Unit,
-    showSignUpErrorDialog: () -> Unit
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()

@@ -279,8 +279,8 @@ private fun LoginButton(
     email: String,
     password: String,
     navController: NavController,
-    dialogMessage: (String) -> Unit,
-    showLoginErrorDialog: () -> Unit
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
