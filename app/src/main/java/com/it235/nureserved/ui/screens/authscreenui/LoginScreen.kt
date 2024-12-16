@@ -92,14 +92,6 @@ fun LoginScreen(
                 }
             }
         ){ innerPadding ->
-            // Handles the visibility of logout dialog
-            if (showLoginErrorDialog) {
-                ErrorDialog(
-                    title = "Log in error",
-                    onDismiss = { showLoginErrorDialog = false },
-                    dialogMessage = dialogMessage,
-                )
-            }
 
             Box(
                 modifier = Modifier
@@ -300,8 +292,6 @@ private fun LoginButton(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "Log in successful", Toast.LENGTH_SHORT).show()
-
                             navController.navigate(ScreenRoutes.Home.route) {
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }

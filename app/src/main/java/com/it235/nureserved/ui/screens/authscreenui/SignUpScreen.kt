@@ -88,14 +88,6 @@ fun SignUpScreen(
                 }
             }
         ){ innerPadding ->
-            // Handles the visibility of logout dialog
-            if (showSignUpErrorDialog) {
-                ErrorDialog(
-                    title = "Sign up error",
-                    onDismiss = { showSignUpErrorDialog = false },
-                    dialogMessage = dialogMessage,
-                )
-            }
 
             Box(
                 modifier = Modifier
@@ -313,8 +305,6 @@ private fun RegisterButton(
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-
-                                Toast.makeText(context, "Sign up successful!", Toast.LENGTH_SHORT).show()
                                 navController.popBackStack()
 
                             } else {
