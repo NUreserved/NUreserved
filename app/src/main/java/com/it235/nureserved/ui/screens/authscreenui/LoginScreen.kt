@@ -302,7 +302,7 @@ fun NoAccountNote(navController: NavController) {
         append("No account yet? ")
         // Add a clickable annotation for the "Register" part
         pushStringAnnotation(tag = "Register", annotation = "Register")
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = brandColorBlue)) {
             append("Register")
         }
         pop()

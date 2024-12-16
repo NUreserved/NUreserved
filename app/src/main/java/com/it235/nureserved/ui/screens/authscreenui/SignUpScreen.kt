@@ -319,7 +319,7 @@ fun AccountExistNote(navController: NavController) {
         append("Already have an account? ")
         // Add a clickable annotation for the "Register" part
         pushStringAnnotation(tag = "Login", annotation = "Login")
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = brandColorBlue)) {
             append("Login")
         }
         pop()
