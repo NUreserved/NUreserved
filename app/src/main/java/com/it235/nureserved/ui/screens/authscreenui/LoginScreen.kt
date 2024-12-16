@@ -171,7 +171,7 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
         singleLine = true,
         placeholder = {
             Text(
-                color = Color(0xFFF8F5F5),
+                color = white3,
                 text = "Email",
                 style = TextStyle(
                     fontFamily = poppinsFamily,
@@ -181,10 +181,10 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
             )
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -208,7 +208,7 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
         singleLine = true,
         placeholder = {
             Text(
-                color = Color(0xFFF8F5F5),
+                color = white3,
                 text = "Password",
                 style = TextStyle(
                     fontFamily = poppinsFamily,
@@ -227,15 +227,15 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
                 Icon(
                     imageVector = image,
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
-                    tint = Color(0xFFF8F5F5)
+                    tint = white3
                 )
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -279,8 +279,8 @@ private fun LoginButton(email: String, password: String, navController: NavContr
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF35408E),
-            contentColor = Color(0xFFF8F5F5)
+            containerColor = brandColorBlue,
+            contentColor = white3
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
@@ -323,7 +323,7 @@ fun NoAccountNote(navController: NavController) {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center
     )
@@ -340,7 +340,7 @@ private fun LoginNote() {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center,
     )
