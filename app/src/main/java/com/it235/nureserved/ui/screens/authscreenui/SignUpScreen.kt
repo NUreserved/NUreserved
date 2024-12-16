@@ -82,7 +82,14 @@ fun SignUpScreen(
                         .padding(bottom = 100.dp),
                     contentAlignment = Alignment.BottomEnd
                 ){
-                    SnackbarHost(hostState = snackbarHostState)
+                    SnackbarHost(
+                        hostState = snackbarHostState
+                    ){data ->
+                        Snackbar(
+                            snackbarData = data,
+                            containerColor = indicatorColorRed
+                        )
+                    }
                 }
             }
         ){ innerPadding ->
