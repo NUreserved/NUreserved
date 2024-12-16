@@ -105,9 +105,9 @@ fun SignUpScreen(
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
                             Logo()
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Space("h", 20)
                             AppTitle()
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
 
 
                             var email by remember { mutableStateOf("") }
@@ -115,20 +115,20 @@ fun SignUpScreen(
                             var confirmPassword by remember { mutableStateOf("") }
 
                             EmailField(email) {email = it}
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Space("h", 10)
 
                             PasswordField(labelValue = "Password",password) {password = it}
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Space("h", 10)
                             PasswordField(labelValue = "Confirm Password", confirmPassword){confirmPassword = it}
-                            
-                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Space("h", 15)
 
                             RegisterButton(email, password, confirmPassword, navController)
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Space("h", 15)
 
                             AccountExistNote(navController)
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
                             RegisterNote()
                         }
 
