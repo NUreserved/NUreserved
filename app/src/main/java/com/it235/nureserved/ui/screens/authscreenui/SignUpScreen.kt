@@ -32,11 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -53,6 +51,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
+import com.it235.nureserved.composables.ErrorDialog
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -66,11 +65,22 @@ fun SignUpScreen(
     navController: NavController
 ){
     NUreservedTheme {
+        // State variable to control the visibility of signup error dialog
+        var showSignUpErrorDialog by remember { mutableStateOf(false) }
+        var dialogMessage by remember { mutableStateOf("") }
 
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
         ){ innerPadding ->
+            // Handles the visibility of logout dialog
+            if (showSignUpErrorDialog) {
+                ErrorDialog(
+                    title = "Sign up error",
+                    onDismiss = { showSignUpErrorDialog = false },
+                    dialogMessage = dialogMessage,
+                )
+            }
 
             Box(
                 modifier = Modifier
@@ -109,7 +119,6 @@ fun SignUpScreen(
                             AppTitle()
                             Space("h", 40)
 
-
                             var email by remember { mutableStateOf("") }
                             var password by remember { mutableStateOf("") }
                             var confirmPassword by remember { mutableStateOf("") }
@@ -123,7 +132,14 @@ fun SignUpScreen(
 
                             Space("h", 15)
 
-                            RegisterButton(email, password, confirmPassword, navController)
+                            RegisterButton(
+                                email,
+                                password,
+                                confirmPassword,
+                                navController,
+                                dialogMessage = { dialogMessage = it },
+                                showSignUpErrorDialog = { showSignUpErrorDialog = true }
+                            )
 
                             Space("h", 15)
 
@@ -249,7 +265,14 @@ private fun PasswordField(labelValue: String = "", value: String, onValueChange:
 
 //register button
 @Composable
-private fun RegisterButton(email: String, password: String, confirmPassword: String, navController: NavController) {
+private fun RegisterButton(
+    email: String,
+    password: String,
+    confirmPassword: String,
+    navController: NavController,
+    dialogMessage: (String) -> Unit,
+    showSignUpErrorDialog: () -> Unit
+) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
 
@@ -260,7 +283,8 @@ private fun RegisterButton(email: String, password: String, confirmPassword: Str
             // regex
             val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
             if (!email.matches(EmailRegex)) {
-                Toast.makeText(context, "Please use a valid NU email address.", Toast.LENGTH_SHORT).show()
+                dialogMessage("Please use a valid NU Fairview email address to continue.")
+                showSignUpErrorDialog()
                 return@Button
             }
 
@@ -271,24 +295,21 @@ private fun RegisterButton(email: String, password: String, confirmPassword: Str
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
 
-                                Toast.makeText(context, "Sign-up successful!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Sign up successful!", Toast.LENGTH_SHORT).show()
                                 navController.popBackStack()
 
                             } else {
-                                Toast.makeText(
-                                    context,
-                                    "Login failed: ${task.exception?.message}",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                dialogMessage("Sign up failed: ${task.exception?.message}")
+                                showSignUpErrorDialog()
                             }
                         }
                 } else {
-                    Toast.makeText(context, "Password Does not match", Toast.LENGTH_SHORT).show()
+                    dialogMessage("Password does not match. Please ensure your passwords are exactly the same.")
+                    showSignUpErrorDialog()
                 }
             } else {
-
-                Toast.makeText(context, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
-
+                dialogMessage("Please fill in all the fields with your email and/or password.")
+                showSignUpErrorDialog()
             }
 
         },

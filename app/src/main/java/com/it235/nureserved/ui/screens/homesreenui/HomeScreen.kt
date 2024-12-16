@@ -88,6 +88,8 @@ fun HomeScreen(navController: NavController) {
     var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
+    // State variable to control the visibility of logout confirmation dialog
+    var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
 
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
 

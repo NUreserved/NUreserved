@@ -54,6 +54,8 @@ import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.ErrorDialog
+import com.it235.nureserved.composables.SuccessDialog
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -66,11 +68,23 @@ import com.it235.nureserved.ui.theme.white4
 fun LoginScreen(
     navController: NavController
 ){
+    // State variable to control the visibility of login error dialog
+    var showLoginErrorDialog by remember { mutableStateOf(false) }
+    var dialogMessage by remember { mutableStateOf("") }
+
     NUreservedTheme {
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
         ){ innerPadding ->
+            // Handles the visibility of logout dialog
+            if (showLoginErrorDialog) {
+                ErrorDialog(
+                    title = "Log in error",
+                    onDismiss = { showLoginErrorDialog = false },
+                    dialogMessage = dialogMessage,
+                )
+            }
 
             Box(
                 modifier = Modifier
@@ -113,12 +127,20 @@ fun LoginScreen(
                             var password by remember { mutableStateOf("") }
 
                             EmailField(email) {email = it}
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(password) {password = it}
+
+                            EmailField(email) {email = it}
                             Space("h", 10)
                             PasswordField(password) {password = it}
 
-                            Space("h", 15)
-
-                            LoginButton(email, password, navController)
+                            LoginButton(
+                                email,
+                                password,
+                                navController,
+                                dialogMessage = { dialogMessage = it },
+                                showLoginErrorDialog = { showLoginErrorDialog = true },
+                            )
 
                             Space("h", 15)
 
@@ -248,7 +270,13 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
 
 //login
 @Composable
-private fun LoginButton(email: String, password: String, navController: NavController) {
+private fun LoginButton(
+    email: String,
+    password: String,
+    navController: NavController,
+    dialogMessage: (String) -> Unit,
+    showLoginErrorDialog: () -> Unit
+) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
 
@@ -259,21 +287,20 @@ private fun LoginButton(email: String, password: String, navController: NavContr
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            Toast.makeText(context, "Log in successful", Toast.LENGTH_SHORT).show()
+
                             navController.navigate(ScreenRoutes.Home.route) {
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
-                            Toast.makeText(
-                                context,
-                                "Login failed: ${task.exception?.message}",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            dialogMessage("Login failed: ${task.exception?.message}")
+                            showLoginErrorDialog()
                         }
                     }
             } else {
-                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                dialogMessage("Please fill in all the fields with username and password.")
+                showLoginErrorDialog()
             }
-
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
