@@ -105,25 +105,25 @@ fun LoginScreen(
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
                             Logo()
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Space("h", 20)
                             AppTitle()
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
 
                             var email by remember { mutableStateOf("") }
                             var password by remember { mutableStateOf("") }
 
                             EmailField(email) {email = it}
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Space("h", 10)
                             PasswordField(password) {password = it}
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Space("h", 15)
 
                             LoginButton(email, password, navController)
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Space("h", 15)
 
                             NoAccountNote(navController)
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
                             LoginNote()
                         }
 
