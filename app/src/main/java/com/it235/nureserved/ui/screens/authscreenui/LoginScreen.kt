@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,10 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -23,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -56,6 +54,8 @@ import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.ErrorDialog
+import com.it235.nureserved.composables.SuccessDialog
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -63,9 +63,9 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 fun LoginScreen(
     navController: NavController
 ){
-    // State variable to control the visibility of logout confirmation dialog
+    // State variable to control the visibility of login error dialog
     var showLoginErrorDialog by remember { mutableStateOf(false) }
-    var loginErrorException by remember { mutableStateOf("") }
+    var dialogMessage by remember { mutableStateOf("") }
 
     NUreservedTheme {
         Scaffold(
@@ -74,9 +74,10 @@ fun LoginScreen(
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showLoginErrorDialog) {
-                LoginErrorDialog(
+                ErrorDialog(
+                    title = "Log in error",
                     onDismiss = { showLoginErrorDialog = false },
-                    loginErrorException,
+                    dialogMessage = dialogMessage,
                 )
             }
 
@@ -130,8 +131,8 @@ fun LoginScreen(
                                 email,
                                 password,
                                 navController,
-                                loginErrorException = { loginErrorException = it },
-                                showLoginErrorDialog = { showLoginErrorDialog = true }
+                                dialogMessage = { dialogMessage = it },
+                                showLoginErrorDialog = { showLoginErrorDialog = true },
                             )
 
                             Spacer(modifier = Modifier.height(15.dp))
@@ -267,7 +268,7 @@ private fun LoginButton(
     email: String,
     password: String,
     navController: NavController,
-    loginErrorException: (String) -> Unit,
+    dialogMessage: (String) -> Unit,
     showLoginErrorDialog: () -> Unit
 ) {
     val context = LocalContext.current
@@ -280,16 +281,18 @@ private fun LoginButton(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            Toast.makeText(context, "Log in successful", Toast.LENGTH_SHORT).show()
+
                             navController.navigate(ScreenRoutes.Home.route) {
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
-                            loginErrorException("Login failed: ${task.exception?.message}")
+                            dialogMessage("Login failed: ${task.exception?.message}")
                             showLoginErrorDialog()
                         }
                     }
             } else {
-                loginErrorException("Please fill in all the fields with username and password.")
+                dialogMessage("Please fill in all the fields with username and password.")
                 showLoginErrorDialog()
             }
 
@@ -312,38 +315,6 @@ private fun LoginButton(
             )
         )
     }
-}
-
-@Composable
-private fun LoginErrorDialog(
-    onDismiss: () -> Unit,
-    loginErrorException: String
-) {
-
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Log in error") },
-        icon = {
-            Icon(
-                modifier = Modifier.size(24.dp),
-                painter = painterResource(id = R.drawable.error),
-                contentDescription = "Error icon"
-            )
-        },
-        text = {
-            Text(
-                text = loginErrorException,
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(
-                onClick = { onDismiss() }
-            ) {
-                Text("OK")
-            }
-        }
-    )
 }
 
 @Composable

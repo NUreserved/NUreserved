@@ -66,7 +66,7 @@ fun SignUpScreen(
     NUreservedTheme {
         // State variable to control the visibility of signup error dialog
         var showSignUpErrorDialog by remember { mutableStateOf(false) }
-        var signUpErrorException by remember { mutableStateOf("") }
+        var dialogMessage by remember { mutableStateOf("") }
 
         Scaffold(
             modifier = Modifier
@@ -77,7 +77,7 @@ fun SignUpScreen(
                 ErrorDialog(
                     title = "Sign up error",
                     onDismiss = { showSignUpErrorDialog = false },
-                    dialogMessage = signUpErrorException,
+                    dialogMessage = dialogMessage,
                 )
             }
 
@@ -137,7 +137,7 @@ fun SignUpScreen(
                                 password,
                                 confirmPassword,
                                 navController,
-                                signUpErrorException = { signUpErrorException = it },
+                                dialogMessage = { dialogMessage = it },
                                 showSignUpErrorDialog = { showSignUpErrorDialog = true }
                             )
 
@@ -270,7 +270,7 @@ private fun RegisterButton(
     password: String,
     confirmPassword: String,
     navController: NavController,
-    signUpErrorException: (String) -> Unit,
+    dialogMessage: (String) -> Unit,
     showSignUpErrorDialog: () -> Unit
 ) {
     val context = LocalContext.current
@@ -283,7 +283,7 @@ private fun RegisterButton(
             // regex
             val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
             if (!email.matches(EmailRegex)) {
-                signUpErrorException("Please use a valid NU Fairview email address to continue.")
+                dialogMessage("Please use a valid NU Fairview email address to continue.")
                 showSignUpErrorDialog()
                 return@Button
             }
@@ -299,16 +299,16 @@ private fun RegisterButton(
                                 navController.popBackStack()
 
                             } else {
-                                signUpErrorException("Sign up failed: ${task.exception?.message}")
+                                dialogMessage("Sign up failed: ${task.exception?.message}")
                                 showSignUpErrorDialog()
                             }
                         }
                 } else {
-                    signUpErrorException("Password does not match. Please ensure your passwords are exactly the same.")
+                    dialogMessage("Password does not match. Please ensure your passwords are exactly the same.")
                     showSignUpErrorDialog()
                 }
             } else {
-                signUpErrorException("Please fill in all the fields with your email and/or password.")
+                dialogMessage("Please fill in all the fields with your email and/or password.")
                 showSignUpErrorDialog()
             }
 
