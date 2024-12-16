@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,10 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -49,7 +49,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
+import com.it235.nureserved.composables.ErrorDialog
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
@@ -62,11 +64,22 @@ fun SignUpScreen(
     navController: NavController
 ){
     NUreservedTheme {
+        // State variable to control the visibility of signup error dialog
+        var showSignUpErrorDialog by remember { mutableStateOf(false) }
+        var dialogMessage by remember { mutableStateOf("") }
 
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
         ){ innerPadding ->
+            // Handles the visibility of logout dialog
+            if (showSignUpErrorDialog) {
+                ErrorDialog(
+                    title = "Sign up error",
+                    onDismiss = { showSignUpErrorDialog = false },
+                    dialogMessage = dialogMessage,
+                )
+            }
 
             Box(
                 modifier = Modifier
@@ -105,15 +118,28 @@ fun SignUpScreen(
                             AppTitle()
                             Spacer(modifier = Modifier.height(40.dp))
 
-                            EmailField()
-                            Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(labelValue = "Password")
-                            Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(labelValue = "Confirm Password")
 
+                            var email by remember { mutableStateOf("") }
+                            var password by remember { mutableStateOf("") }
+                            var confirmPassword by remember { mutableStateOf("") }
+
+                            EmailField(email) {email = it}
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            PasswordField(labelValue = "Password",password) {password = it}
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(labelValue = "Confirm Password", confirmPassword){confirmPassword = it}
+                            
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            RegisterButton()
+                            RegisterButton(
+                                email,
+                                password,
+                                confirmPassword,
+                                navController,
+                                dialogMessage = { dialogMessage = it },
+                                showSignUpErrorDialog = { showSignUpErrorDialog = true }
+                            )
 
                             Spacer(modifier = Modifier.height(15.dp))
 
@@ -155,14 +181,13 @@ private fun AppTitle() {
     )
 }
 
+//email field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField() {
-    var email by remember { mutableStateOf("") }
-
+private fun EmailField(value: String, onValueChange: (String) -> Unit) {
     TextField(
-        value = email,
-        onValueChange = { email = it },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         label = {
             Text(
@@ -190,15 +215,16 @@ private fun EmailField() {
     )
 }
 
+//password field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField(labelValue: String = "") {
-    var password by remember { mutableStateOf("") }
+
+private fun PasswordField(labelValue: String = "", value: String, onValueChange: (String) -> Unit) {
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
-        value = password,
-        onValueChange = { password = it },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         label = {
             Text(
@@ -213,13 +239,10 @@ private fun PasswordField(labelValue: String = "") {
         },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            val image: ImageVector =
-                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
-                    R.drawable.ic_password_visibility_on
-                )
+            val image = if (!passwordVisible) R.drawable.ic_password_visibility_off else R.drawable.ic_password_visibility_on
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
-                    imageVector = image,
+                    painter = painterResource(image),
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
                     tint = white3
                 )
@@ -240,10 +263,56 @@ private fun PasswordField(labelValue: String = "") {
     )
 }
 
+//register button
 @Composable
-private fun RegisterButton() {
+private fun RegisterButton(
+    email: String,
+    password: String,
+    confirmPassword: String,
+    navController: NavController,
+    dialogMessage: (String) -> Unit,
+    showSignUpErrorDialog: () -> Unit
+) {
+    val context = LocalContext.current
+    val auth = FirebaseAuth.getInstance()
+
     Button(
-        onClick = {},
+        onClick = {
+            //sign up system
+
+            // regex
+            val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
+            if (!email.matches(EmailRegex)) {
+                dialogMessage("Please use a valid NU Fairview email address to continue.")
+                showSignUpErrorDialog()
+                return@Button
+            }
+
+            // create user
+            if (email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()) {
+                if(confirmPassword == password){
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+
+                                Toast.makeText(context, "Sign up successful!", Toast.LENGTH_SHORT).show()
+                                navController.popBackStack()
+
+                            } else {
+                                dialogMessage("Sign up failed: ${task.exception?.message}")
+                                showSignUpErrorDialog()
+                            }
+                        }
+                } else {
+                    dialogMessage("Password does not match. Please ensure your passwords are exactly the same.")
+                    showSignUpErrorDialog()
+                }
+            } else {
+                dialogMessage("Please fill in all the fields with your email and/or password.")
+                showSignUpErrorDialog()
+            }
+
+        },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),

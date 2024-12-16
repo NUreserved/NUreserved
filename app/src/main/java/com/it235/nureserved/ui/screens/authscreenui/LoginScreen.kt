@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
@@ -49,8 +51,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.ErrorDialog
+import com.it235.nureserved.composables.SuccessDialog
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -58,11 +63,23 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 fun LoginScreen(
     navController: NavController
 ){
+    // State variable to control the visibility of login error dialog
+    var showLoginErrorDialog by remember { mutableStateOf(false) }
+    var dialogMessage by remember { mutableStateOf("") }
+
     NUreservedTheme {
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
         ){ innerPadding ->
+            // Handles the visibility of logout dialog
+            if (showLoginErrorDialog) {
+                ErrorDialog(
+                    title = "Log in error",
+                    onDismiss = { showLoginErrorDialog = false },
+                    dialogMessage = dialogMessage,
+                )
+            }
 
             Box(
                 modifier = Modifier
@@ -101,13 +118,22 @@ fun LoginScreen(
                             AppTitle()
                             Spacer(modifier = Modifier.height(40.dp))
 
-                            EmailField()
+                            var email by remember { mutableStateOf("") }
+                            var password by remember { mutableStateOf("") }
+
+                            EmailField(email) {email = it}
                             Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField()
+                            PasswordField(password) {password = it}
 
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            LoginButton(navController)
+                            LoginButton(
+                                email,
+                                password,
+                                navController,
+                                dialogMessage = { dialogMessage = it },
+                                showLoginErrorDialog = { showLoginErrorDialog = true },
+                            )
 
                             Spacer(modifier = Modifier.height(15.dp))
 
@@ -149,14 +175,15 @@ private fun AppTitle() {
     )
 }
 
+//email field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField() {
-    var email by remember { mutableStateOf("") }
+private fun EmailField(value: String, onValueChange: (String) -> Unit) {
+    //var email by remember { mutableStateOf("") }
 
     TextField(
-        value = email,
-        onValueChange = { email = it },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         label = {
             Text(
@@ -184,15 +211,16 @@ private fun EmailField() {
     )
 }
 
+//password field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField() {
-    var password by remember { mutableStateOf("") }
+private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
+    //var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
-        value = password,
-        onValueChange = { password = it },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         label = {
             Text(
@@ -234,13 +262,40 @@ private fun PasswordField() {
     )
 }
 
+//login
 @Composable
-private fun LoginButton(navController: NavController) {
+private fun LoginButton(
+    email: String,
+    password: String,
+    navController: NavController,
+    dialogMessage: (String) -> Unit,
+    showLoginErrorDialog: () -> Unit
+) {
+    val context = LocalContext.current
+    val auth = FirebaseAuth.getInstance()
+
     Button(
         onClick = {
-            navController.navigate(ScreenRoutes.Home.route) {
-                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+            //login system
+            if (email.isNotBlank() && password.isNotBlank()) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(context, "Log in successful", Toast.LENGTH_SHORT).show()
+
+                            navController.navigate(ScreenRoutes.Home.route) {
+                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                            }
+                        } else {
+                            dialogMessage("Login failed: ${task.exception?.message}")
+                            showLoginErrorDialog()
+                        }
+                    }
+            } else {
+                dialogMessage("Please fill in all the fields with username and password.")
+                showLoginErrorDialog()
             }
+
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -55,6 +56,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -64,9 +66,11 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.screens.ReservationConfirmationDialog
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -84,6 +88,8 @@ fun HomeScreen(navController: NavController) {
     var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
+    // State variable to control the visibility of logout confirmation dialog
+    var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
 
     BackHandler {
         if (selectedItem != 0) {
@@ -111,7 +117,8 @@ fun HomeScreen(navController: NavController) {
                 TopBar(
                     navController,
                     scrollBehavior = scrollBehavior,
-                    onFilterClick = { showText = !showText }
+                    onFilterClick = { showText = !showText },
+                    showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true}
                 )
             },
 
@@ -125,6 +132,15 @@ fun HomeScreen(navController: NavController) {
                 })
             }
         ){ innerPadding ->
+            // Handles the visibility of logout dialog
+            if (showLogoutConfirmationDialog) {
+                LogoutConfirmationDialog(
+                    navController = navController,
+                    showDialog = showLogoutConfirmationDialog,
+                    onDismiss = { showLogoutConfirmationDialog = false },
+                )
+            }
+
             when (selectedItem) {
                 0 -> HomeScreenContent(
                     innerPadding = innerPadding,
@@ -151,7 +167,8 @@ fun HomeScreen(navController: NavController) {
 fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    onFilterClick: () -> Unit) {
+    onFilterClick: () -> Unit,
+    showLogoutConfirmationDialog: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -266,7 +283,7 @@ fun TopBar(
                     )
                     DropdownMenuItem(
                         text = { Text("Logout") },
-                        onClick = { /* Handle settings click */ },
+                        onClick = { showLogoutConfirmationDialog() },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.logout),
@@ -369,6 +386,49 @@ fun HomeScreenContent(
             item { Spacer(modifier = Modifier.size(0.dp))}
         }
     }
+}
+
+@Composable
+private fun LogoutConfirmationDialog(
+    navController: NavController,
+    showDialog: Boolean,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Log out?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.logout),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to log out? You may need to log in again to access the features.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    FirebaseAuth.getInstance().signOut()
+                    navController.navigate(ScreenRoutes.Login.route) {
+                        popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                    }
+                }
+            ) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 @Composable
