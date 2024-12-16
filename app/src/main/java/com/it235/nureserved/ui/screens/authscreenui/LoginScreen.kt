@@ -221,9 +221,8 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             val image: ImageVector =
-                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
-                    R.drawable.ic_password_visibility_on
-                )
+                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off)
+                else ImageVector.vectorResource(R.drawable.ic_password_visibility_on)
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
                     imageVector = image,
