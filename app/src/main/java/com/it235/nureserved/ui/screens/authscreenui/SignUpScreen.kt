@@ -76,7 +76,17 @@ fun SignUpScreen(
 
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
+            snackbarHost = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 100.dp),
+                    contentAlignment = Alignment.BottomEnd
+                ){
+                    SnackbarHost(hostState = snackbarHostState)
+                }
+            }
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showSignUpErrorDialog) {
@@ -288,8 +298,12 @@ private fun RegisterButton(
             // regex
             val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
             if (!email.matches(EmailRegex)) {
-                dialogMessage("Please use a valid NU Fairview email address to continue.")
-                showSignUpErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please use a valid NU Fairview email address to continue.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
                 return@Button
             }
 
@@ -304,17 +318,29 @@ private fun RegisterButton(
                                 navController.popBackStack()
 
                             } else {
-                                dialogMessage("Sign up failed: ${task.exception?.message}")
-                                showSignUpErrorDialog()
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Sign up failed: ${task.exception?.message}",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
                             }
                         }
                 } else {
-                    dialogMessage("Password does not match. Please ensure your passwords are exactly the same.")
-                    showSignUpErrorDialog()
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Password does not match. Please ensure your passwords are exactly the same.",
+                            duration = SnackbarDuration.Short
+                        )
+                    }
                 }
             } else {
-                dialogMessage("Please fill in all the fields with your email and/or password.")
-                showSignUpErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please fill in all the fields with your email and/or password.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
 
         },

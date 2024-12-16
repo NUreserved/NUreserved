@@ -80,7 +80,17 @@ fun LoginScreen(
 
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
+            snackbarHost = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 100.dp),
+                    contentAlignment = Alignment.BottomEnd
+                ){
+                    SnackbarHost(hostState = snackbarHostState)
+                }
+            }
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showLoginErrorDialog) {
@@ -296,13 +306,21 @@ private fun LoginButton(
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
-                            dialogMessage("Login failed: ${task.exception?.message}")
-                            showLoginErrorDialog()
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Login failed: ${task.exception?.message}",
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
                         }
                     }
             } else {
-                dialogMessage("Please fill in all the fields with username and password.")
-                showLoginErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please fill in all the fields with username and password.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
         },
         modifier = Modifier
