@@ -56,6 +56,10 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white3
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
 fun LoginScreen(
