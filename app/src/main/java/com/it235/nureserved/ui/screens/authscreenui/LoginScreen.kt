@@ -74,11 +74,10 @@ import kotlinx.coroutines.launch
 fun LoginScreen(
     navController: NavController
 ){
-    // State variable to control the visibility of login error dialog
-    var showLoginErrorDialog by remember { mutableStateOf(false) }
-    var dialogMessage by remember { mutableStateOf("") }
-
     NUreservedTheme {
+        val scope = rememberCoroutineScope()
+        val snackbarHostState = remember { SnackbarHostState() }
+
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()

@@ -71,9 +71,8 @@ fun SignUpScreen(
     navController: NavController
 ){
     NUreservedTheme {
-        // State variable to control the visibility of signup error dialog
-        var showSignUpErrorDialog by remember { mutableStateOf(false) }
-        var dialogMessage by remember { mutableStateOf("") }
+        val scope = rememberCoroutineScope()
+        val snackbarHostState = remember { SnackbarHostState() }
 
         Scaffold(
             modifier = Modifier
