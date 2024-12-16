@@ -91,8 +91,6 @@ fun HomeScreen(navController: NavController) {
     // State variable to control the visibility of logout confirmation dialog
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
 
-    var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
-
     BackHandler {
         if (selectedItem != 0) {
             selectedItem = previousSelectedItem

@@ -130,9 +130,7 @@ fun LoginScreen(
                             Spacer(modifier = Modifier.height(10.dp))
                             PasswordField(password) {password = it}
 
-                            EmailField(email) {email = it}
-                            Space("h", 10)
-                            PasswordField(password) {password = it}
+                            Space("h", 15)
 
                             LoginButton(
                                 email,
