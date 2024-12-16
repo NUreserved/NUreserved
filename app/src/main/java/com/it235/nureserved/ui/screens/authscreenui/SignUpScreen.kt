@@ -172,7 +172,7 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        label = {
+        placeholder = {
             Text(
                 color = white3,
                 text = "Email",
@@ -209,7 +209,7 @@ private fun PasswordField(labelValue: String = "", value: String, onValueChange:
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        label = {
+        placeholder = {
             Text(
                 color = white3,
                 text = labelValue,
