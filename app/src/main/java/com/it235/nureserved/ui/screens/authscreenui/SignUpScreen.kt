@@ -152,8 +152,8 @@ fun SignUpScreen(
                                 password,
                                 confirmPassword,
                                 navController,
-                                dialogMessage = { dialogMessage = it },
-                                showSignUpErrorDialog = { showSignUpErrorDialog = true }
+                                scope,
+                                snackbarHostState
                             )
 
                             Space("h", 15)

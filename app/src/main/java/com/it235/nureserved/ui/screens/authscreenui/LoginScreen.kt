@@ -151,8 +151,8 @@ fun LoginScreen(
                                 email,
                                 password,
                                 navController,
-                                dialogMessage = { dialogMessage = it },
-                                showLoginErrorDialog = { showLoginErrorDialog = true },
+                                scope,
+                                snackbarHostState
                             )
 
                             Space("h", 15)
