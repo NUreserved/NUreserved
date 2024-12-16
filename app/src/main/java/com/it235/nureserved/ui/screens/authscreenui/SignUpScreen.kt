@@ -287,6 +287,9 @@ private fun RegisterButton(
         onClick = {
             //sign up system
 
+            // Dismiss the currently shown Snackbar, if any
+            snackbarHostState.currentSnackbarData?.dismiss()
+
             // regex
             val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
             if (!email.matches(EmailRegex)) {

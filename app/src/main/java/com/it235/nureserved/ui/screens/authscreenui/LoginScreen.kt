@@ -287,6 +287,9 @@ private fun LoginButton(
 
     Button(
         onClick = {
+            // Dismiss the currently shown Snackbar, if any
+            snackbarHostState.currentSnackbarData?.dismiss()
+
             //login system
             if (email.isNotBlank() && password.isNotBlank()) {
                 auth.signInWithEmailAndPassword(email, password)
