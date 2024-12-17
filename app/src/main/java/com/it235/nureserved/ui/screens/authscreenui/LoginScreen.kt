@@ -56,8 +56,13 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.ErrorDialog
 import com.it235.nureserved.composables.SuccessDialog
+import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white3
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
 fun LoginScreen(
@@ -114,9 +119,9 @@ fun LoginScreen(
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
                             Logo()
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Space("h", 20)
                             AppTitle()
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
 
                             var email by remember { mutableStateOf("") }
                             var password by remember { mutableStateOf("") }
@@ -125,7 +130,7 @@ fun LoginScreen(
                             Spacer(modifier = Modifier.height(10.dp))
                             PasswordField(password) {password = it}
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Space("h", 15)
 
                             LoginButton(
                                 email,
@@ -135,10 +140,10 @@ fun LoginScreen(
                                 showLoginErrorDialog = { showLoginErrorDialog = true },
                             )
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Space("h", 15)
 
                             NoAccountNote(navController)
-                            Spacer(modifier = Modifier.height(40.dp))
+                            Space("h", 40)
                             LoginNote()
                         }
 
@@ -185,9 +190,9 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        label = {
+        placeholder = {
             Text(
-                color = Color(0xFFF8F5F5),
+                color = white3,
                 text = "Email",
                 style = TextStyle(
                     fontFamily = poppinsFamily,
@@ -197,10 +202,10 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
             )
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -222,9 +227,9 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        label = {
+        placeholder = {
             Text(
-                color = Color(0xFFF8F5F5),
+                color = white3,
                 text = "Password",
                 style = TextStyle(
                     fontFamily = poppinsFamily,
@@ -236,22 +241,21 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             val image: ImageVector =
-                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off) else ImageVector.vectorResource(
-                    R.drawable.ic_password_visibility_on
-                )
+                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off)
+                else ImageVector.vectorResource(R.drawable.ic_password_visibility_on)
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
                     imageVector = image,
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
-                    tint = Color(0xFFF8F5F5)
+                    tint = white3
                 )
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFAFAFAF),
-            focusedTextColor = Color(0xFFF8F5F5),
-            unfocusedTextColor = Color(0xFFF8F5F5),
-            cursorColor = Color(0xFFF8F5F5),
+            containerColor = white4,
+            focusedTextColor = white3,
+            unfocusedTextColor = white3,
+            cursorColor = white3,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
         ),
@@ -295,14 +299,13 @@ private fun LoginButton(
                 dialogMessage("Please fill in all the fields with username and password.")
                 showLoginErrorDialog()
             }
-
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF35408E),
-            contentColor = Color(0xFFF8F5F5)
+            containerColor = brandColorBlue,
+            contentColor = white3
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
@@ -324,7 +327,7 @@ fun NoAccountNote(navController: NavController) {
         append("No account yet? ")
         // Add a clickable annotation for the "Register" part
         pushStringAnnotation(tag = "Register", annotation = "Register")
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = brandColorBlue)) {
             append("Register")
         }
         pop()
@@ -345,7 +348,7 @@ fun NoAccountNote(navController: NavController) {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center
     )
@@ -362,7 +365,7 @@ private fun LoginNote() {
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.Normal,
-            color = Color(0xFF0F0F0F)
+            color = textColor1
         ),
         textAlign = TextAlign.Center,
     )
