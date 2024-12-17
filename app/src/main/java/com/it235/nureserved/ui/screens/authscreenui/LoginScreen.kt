@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
@@ -295,9 +296,11 @@ private fun LoginButton(
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
         onClick = {
+            keyboardController?.hide()
             // Dismiss the currently shown Snackbar, if any
             snackbarHostState.currentSnackbarData?.dismiss()
 

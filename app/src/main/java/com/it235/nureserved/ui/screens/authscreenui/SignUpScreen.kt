@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -292,10 +293,12 @@ private fun RegisterButton(
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
         onClick = {
             //sign up system
+            keyboardController?.hide()
 
             // Dismiss the currently shown Snackbar, if any
             snackbarHostState.currentSnackbarData?.dismiss()
