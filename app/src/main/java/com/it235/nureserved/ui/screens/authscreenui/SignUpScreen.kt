@@ -84,7 +84,7 @@ fun SignUpScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()),
+                        .padding(bottom = 100.dp),
                     contentAlignment = Alignment.BottomEnd
                 ){
                     SnackbarHost(
