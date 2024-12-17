@@ -320,7 +320,7 @@ private fun LoginButton(
             } else {
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields with username and password.",
+                        message = "Please fill in all the fields with email and password.",
                         duration = SnackbarDuration.Short
                     )
                 }
