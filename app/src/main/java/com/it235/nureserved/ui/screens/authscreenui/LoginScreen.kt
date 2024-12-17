@@ -85,8 +85,7 @@ fun LoginScreen(
             snackbarHost = {
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = 100.dp),
+                        .fillMaxSize(),
                     contentAlignment = Alignment.BottomEnd,
                 ){
                     SnackbarHost(
