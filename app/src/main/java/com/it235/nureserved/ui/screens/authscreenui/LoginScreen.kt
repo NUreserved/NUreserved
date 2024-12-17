@@ -67,6 +67,7 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
@@ -95,7 +96,8 @@ fun LoginScreen(
                     ){data ->
                         Snackbar(
                             snackbarData = data,
-                            containerColor = indicatorColorRed
+                            containerColor = indicatorColorRed,
+                            contentColor = white
                         )
                     }
                 }
