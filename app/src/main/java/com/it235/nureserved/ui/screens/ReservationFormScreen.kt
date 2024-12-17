@@ -220,20 +220,46 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         }
     )
 
-    if(showDialog){
-        val context = LocalContext.current
-        val calendar = Calendar.getInstance()
+    if(showDialog){        val currentTime = Calendar.getInstance()
 
-        TimePickerDialog(
-            context,
-            {_, hourOfDay, minute ->
-                selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+        val timePickerState = rememberTimePickerState(
+            initialHour =  currentTime.get(Calendar.HOUR_OF_DAY),
+            initialMinute = currentTime.get(Calendar.MINUTE),
+            is24Hour = true
+        )
+
+        val toggleIcon = if(showDial){
+            Icons.Filled.DateRange
+        } else{
+            ImageVector.vectorResource(R.drawable.ic_access_time)
+        }
+
+        AdvanceTimePickerDialog(
+            onDismiss = { showDialog = false },
+            onConfirm = {
+                selectedTime = "${timePickerState.hour}:${timePickerState.minute}"
                 showDialog = false
             },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            true
-        ).show()
+            toggle = {
+                IconButton(onClick = { showDial = !showDial}){
+                    Icon(
+                        imageVector = toggleIcon,
+                        contentDescription = null
+                    )
+                }
+            },
+        ) {
+            if(showDial){
+                TimePicker(
+                    state = timePickerState
+                )
+            } else{
+                TimeInput(
+                    state = timePickerState
+                )
+            }
+        }
+
     }
 }
 
