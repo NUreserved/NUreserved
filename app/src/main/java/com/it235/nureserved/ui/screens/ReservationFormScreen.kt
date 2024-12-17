@@ -326,7 +326,7 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
             Icon(
                 imageVector = Icons.Default.DateRange,
                 contentDescription = "Select Date",
-                modifier = Modifier.clickable{datePickerDialog.show()}
+                modifier = Modifier.clickable{ showModal = !showModal}
             )
         },
         modifier = modifier.fillMaxWidth()
