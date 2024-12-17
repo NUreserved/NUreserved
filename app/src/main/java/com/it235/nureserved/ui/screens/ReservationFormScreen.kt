@@ -267,22 +267,40 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
 @Composable
 fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
     var selectedDate by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val calendar = Calendar.getInstance()
+    var showModal by remember { mutableStateOf(false)}
 
-    val datePickerDialog = android.app.DatePickerDialog(
-        context,
-        { _, year, month, dayOfMonth ->
-            selectedDate = "$dayOfMonth/${month + 1}/$year"
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    )
+    @Composable
+    fun DatePickerModal(
+        onDateSelected: (Long?) -> Unit,
+        onDismiss: () -> Unit,
+    ){
+        val datePickerState = rememberDatePickerState()
+
+        DatePickerDialog(
+            onDismissRequest = onDismiss,
+            confirmButton = {
+                TextButton(onClick = {
+                    onDateSelected(
+                        datePickerState.selectedDateMillis
+                    )
+                    onDismiss()
+                }){
+                    Text ( text = "Ok" )
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismiss){
+                    Text( text = "Cancel")
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
 
     OutlinedTextField(
-        value = selectedDate,
-        onValueChange = { selectedDate = it},
+        value = selectedDate ?: "",
+        onValueChange = { },
         readOnly = true,
         label = {
           Text (
@@ -313,6 +331,24 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
         },
         modifier = modifier.fillMaxWidth()
     )
+
+    if(showModal){
+        DatePickerModal(
+            onDateSelected = {
+                try {
+                    val date = Date(it!!)
+                    val formattedDate =
+                        SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
+                    selectedDate = formattedDate
+                    showModal = false
+                }
+                catch(e: Exception){
+                    //add snackbar for error message
+                }
+            },
+            onDismiss = { showModal = false}
+        )
+    }
 }
 
 @Composable
