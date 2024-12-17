@@ -1,6 +1,5 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +20,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -28,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
@@ -54,37 +59,47 @@ import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.ErrorDialog
-import com.it235.nureserved.composables.SuccessDialog
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
     navController: NavController
 ){
-    // State variable to control the visibility of login error dialog
-    var showLoginErrorDialog by remember { mutableStateOf(false) }
-    var dialogMessage by remember { mutableStateOf("") }
-
     NUreservedTheme {
+        val scope = rememberCoroutineScope()
+        val snackbarHostState = remember { SnackbarHostState() }
+
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-        ){ innerPadding ->
-            // Handles the visibility of logout dialog
-            if (showLoginErrorDialog) {
-                ErrorDialog(
-                    title = "Log in error",
-                    onDismiss = { showLoginErrorDialog = false },
-                    dialogMessage = dialogMessage,
-                )
+                .fillMaxSize(),
+            snackbarHost = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomEnd,
+                ){
+                    SnackbarHost(
+                        hostState = snackbarHostState,
+                    ){data ->
+                        Snackbar(
+                            snackbarData = data,
+                            containerColor = indicatorColorRed,
+                            contentColor = white
+                        )
+                    }
+                }
             }
+        ){ innerPadding ->
 
             Box(
                 modifier = Modifier
@@ -136,8 +151,8 @@ fun LoginScreen(
                                 email,
                                 password,
                                 navController,
-                                dialogMessage = { dialogMessage = it },
-                                showLoginErrorDialog = { showLoginErrorDialog = true },
+                                scope,
+                                snackbarHostState
                             )
 
                             Space("h", 15)
@@ -272,32 +287,43 @@ private fun LoginButton(
     email: String,
     password: String,
     navController: NavController,
-    dialogMessage: (String) -> Unit,
-    showLoginErrorDialog: () -> Unit
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
         onClick = {
+            keyboardController?.hide()
+            // Dismiss the currently shown Snackbar, if any
+            snackbarHostState.currentSnackbarData?.dismiss()
+
             //login system
             if (email.isNotBlank() && password.isNotBlank()) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "Log in successful", Toast.LENGTH_SHORT).show()
-
                             navController.navigate(ScreenRoutes.Home.route) {
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
-                            dialogMessage("Login failed: ${task.exception?.message}")
-                            showLoginErrorDialog()
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Login failed: ${task.exception?.message}",
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
                         }
                     }
             } else {
-                dialogMessage("Please fill in all the fields with username and password.")
-                showLoginErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please fill in all the fields with email and password.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
         },
         modifier = Modifier

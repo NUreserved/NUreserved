@@ -1,15 +1,12 @@
 package com.it235.nureserved.ui.screens.authscreenui
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +18,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -28,12 +29,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -51,36 +54,47 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
-import com.it235.nureserved.composables.ErrorDialog
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignUpScreen(
     navController: NavController
 ){
     NUreservedTheme {
-        // State variable to control the visibility of signup error dialog
-        var showSignUpErrorDialog by remember { mutableStateOf(false) }
-        var dialogMessage by remember { mutableStateOf("") }
+        val scope = rememberCoroutineScope()
+        val snackbarHostState = remember { SnackbarHostState() }
 
         Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-        ){ innerPadding ->
-            // Handles the visibility of logout dialog
-            if (showSignUpErrorDialog) {
-                ErrorDialog(
-                    title = "Sign up error",
-                    onDismiss = { showSignUpErrorDialog = false },
-                    dialogMessage = dialogMessage,
-                )
+                .fillMaxSize(),
+            snackbarHost = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomEnd
+                ){
+                    SnackbarHost(
+                        hostState = snackbarHostState
+                    ){data ->
+                        Snackbar(
+                            snackbarData = data,
+                            containerColor = indicatorColorRed,
+                            contentColor = white
+                        )
+                    }
+                }
             }
+        ){ innerPadding ->
 
             Box(
                 modifier = Modifier
@@ -137,8 +151,8 @@ fun SignUpScreen(
                                 password,
                                 confirmPassword,
                                 navController,
-                                dialogMessage = { dialogMessage = it },
-                                showSignUpErrorDialog = { showSignUpErrorDialog = true }
+                                scope,
+                                snackbarHostState
                             )
 
                             Space("h", 15)
@@ -270,21 +284,30 @@ private fun RegisterButton(
     password: String,
     confirmPassword: String,
     navController: NavController,
-    dialogMessage: (String) -> Unit,
-    showSignUpErrorDialog: () -> Unit
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
         onClick = {
             //sign up system
+            keyboardController?.hide()
+
+            // Dismiss the currently shown Snackbar, if any
+            snackbarHostState.currentSnackbarData?.dismiss()
 
             // regex
             val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
             if (!email.matches(EmailRegex)) {
-                dialogMessage("Please use a valid NU Fairview email address to continue.")
-                showSignUpErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please use a valid NU Fairview email address to continue.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
                 return@Button
             }
 
@@ -294,22 +317,32 @@ private fun RegisterButton(
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-
-                                Toast.makeText(context, "Sign up successful!", Toast.LENGTH_SHORT).show()
                                 navController.popBackStack()
 
                             } else {
-                                dialogMessage("Sign up failed: ${task.exception?.message}")
-                                showSignUpErrorDialog()
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Sign up failed: ${task.exception?.message}",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
                             }
                         }
                 } else {
-                    dialogMessage("Password does not match. Please ensure your passwords are exactly the same.")
-                    showSignUpErrorDialog()
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Password does not match. Please ensure your passwords are exactly the same.",
+                            duration = SnackbarDuration.Short
+                        )
+                    }
                 }
             } else {
-                dialogMessage("Please fill in all the fields with your email and/or password.")
-                showSignUpErrorDialog()
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please fill in all the fields with your email and/or password.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
 
         },
