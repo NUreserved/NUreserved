@@ -88,8 +88,8 @@ fun LoginScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()),
-                    contentAlignment = Alignment.BottomEnd
+                        .padding(bottom = 100.dp),
+                    contentAlignment = Alignment.BottomEnd,
                 ){
                     SnackbarHost(
                         hostState = snackbarHostState,
