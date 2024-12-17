@@ -391,6 +391,7 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
             .fillMaxWidth(),
         value = inputValue,
         singleLine = true,
+        shape = RoundedCornerShape(10.dp),
         onValueChange = { inputValue = it },
         label = {
             Text(
