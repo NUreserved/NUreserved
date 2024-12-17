@@ -462,7 +462,7 @@ fun RoomReservationForm(
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp))
+                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp))
                         }
 
                         Space("h", 20)
@@ -528,7 +528,7 @@ fun RoomReservationForm(
                     val dateAndTimePickersLabels = listOf<@Composable () -> Unit>(
                         {
                             Text(
-                                text = "Date/s of the Activity",
+                                text = "Date/s of the Activity:",
                                 style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold,
@@ -578,7 +578,7 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 Text(
-                    text = "Venue",
+                    text = "Venue:",
                     style = LocalTextStyle.current.copy(
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
