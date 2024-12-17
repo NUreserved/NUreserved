@@ -69,8 +69,13 @@ import coil.size.Scale
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.data.rooms.Room
+import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
+import com.it235.nureserved.data.rooms.fifthFloorRooms
+import com.it235.nureserved.data.rooms.fourthFloorRooms
+import com.it235.nureserved.data.rooms.secondFloorRooms
+import com.it235.nureserved.data.rooms.thirdFloorRooms
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.ReservationConfirmationDialog
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -380,9 +385,10 @@ fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
-            item { Floor("2nd Floor", secondFloorList, navController) }
-            item { Floor("3rd Floor", thirdFloorList, navController) }
-            item { Floor("4th Floor", fourthFloorList, navController) }
+            item { Floor("2nd Floor", secondFloorRooms, navController) }
+            item { Floor("3rd Floor", thirdFloorRooms, navController) }
+            item { Floor("4th Floor", fourthFloorRooms, navController) }
+            item { Floor("5th Floor", fifthFloorRooms, navController) }
             item { Spacer(modifier = Modifier.size(0.dp))}
         }
     }
@@ -487,7 +493,11 @@ fun DatePickerModal(
 }
 
 @Composable
-fun Floor(floorName: String, floorList: List<Pair<String, String>>, navController: NavController) {
+fun Floor(
+    floorName: String,
+    roomList: List<Room>,
+    navController: NavController
+) {
     Text(
         text = floorName,
         modifier = Modifier
@@ -503,17 +513,17 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>, navControlle
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
-        items(floorList) { roomNameAndStatus ->
-            Card(roomNameAndStatus, navController)
+        items(roomList) { room ->
+            Card(room, navController)
         }
     }
 }
 
 @Composable
-fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) {
+fun Card(room: Room, navController: NavController) {
     val imagePainter = // Set the size to match the modifier dimensions
         rememberAsyncImagePainter(
-            ImageRequest.Builder(LocalContext.current).data(data = R.drawable.sample_lab_room)
+            ImageRequest.Builder(LocalContext.current).data(data = room.imageResId)
                 .apply(block = fun ImageRequest.Builder.() {
                     size(240, 120) // Set the size to match the modifier dimensions
                     scale(Scale.FILL)
@@ -523,7 +533,7 @@ fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) 
 
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (roomNameAndStatus.second == "Unavailable") Color(0xFFdb5e5f) else Color(0xFF49844b),
+            containerColor = if (areAllTimeSlotsUnavailable(room)) Color(0xFFdb5e5f) else Color(0xFF49844b),
         ),
         modifier = Modifier
             .width(240.dp)
@@ -541,7 +551,7 @@ fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) 
                 contentScale = ContentScale.Crop // Scales the image to fill the entire content area
             )
             Text(
-                text = roomNameAndStatus.first,
+                text = room.name,
                 modifier = Modifier
                     .padding(top = 8.dp, bottom = 8.dp, start = 24.dp, end = 24.dp),
                 color = Color(0xFFFEFEFE),
