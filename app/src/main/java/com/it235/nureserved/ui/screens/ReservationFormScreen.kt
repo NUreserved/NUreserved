@@ -186,6 +186,9 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var selectedTime by remember { mutableStateOf("00:00") }
     var showDialog by remember { mutableStateOf(false) }
 
+    // Determines whether the time picker is dial or input
+    var showDial by remember { mutableStateOf(true) }
+
     OutlinedTextField(
         modifier = modifier,
         value = selectedTime,
