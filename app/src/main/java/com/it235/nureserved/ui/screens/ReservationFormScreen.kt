@@ -2,11 +2,14 @@ package com.it235.nureserved.ui.screens
 
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
+import android.widget.TimePicker
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,8 +25,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -31,10 +38,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimeInput
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +62,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.ScreenRoutes
@@ -58,6 +72,14 @@ import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.white
+import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import com.it235.nureserved.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,9 +109,85 @@ fun InputFieldAndLabel(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+fun TimePickerDialog(
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit,
+    content: @Composable () -> Unit
+){
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }){
+                Text("Dismiss")
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = { onConfirm() }){
+                Text("Ok")
+            }
+        },
+        text = { content() }
+    )
+}
+
+@Composable
+fun AdvanceTimePickerDialog(
+    title: String = "Select Time",
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit,
+    toggle: @Composable () -> Unit = {},
+    content: @Composable () -> Unit
+){
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        Surface(
+            shape = MaterialTheme.shapes.extraLarge,
+            tonalElevation = 6.dp,
+            modifier = Modifier
+                .width(IntrinsicSize.Min)
+                .height(IntrinsicSize.Min)
+                .background(
+                    shape = MaterialTheme.shapes.extraLarge,
+                    color = MaterialTheme.colorScheme.surface
+                )
+        ){
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp),
+                    text = title,
+                    style = MaterialTheme.typography.labelMedium
+                )
+                content()
+                Row(
+                    modifier = Modifier
+                        .height(40.dp)
+                        .fillMaxWidth()
+                ){
+                    toggle()
+                    Spacer(modifier = Modifier.weight(1f))
+                    TextButton(onClick = onDismiss) { Text ( text = "Cancel") }
+                    TextButton(onClick = onConfirm) { Text ( text = "Confirm") }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     var selectedTime by remember { mutableStateOf("00:00") }
     var showDialog by remember { mutableStateOf(false) }
+
+    // Determines whether the time picker is dial or input
+    var showDial by remember { mutableStateOf(true) }
 
     OutlinedTextField(
         modifier = modifier,
@@ -122,20 +220,46 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         }
     )
 
-    if(showDialog){
-        val context = LocalContext.current
-        val calendar = Calendar.getInstance()
+    if(showDialog){        val currentTime = Calendar.getInstance()
 
-        TimePickerDialog(
-            context,
-            {_, hourOfDay, minute ->
-                selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+        val timePickerState = rememberTimePickerState(
+            initialHour =  currentTime.get(Calendar.HOUR_OF_DAY),
+            initialMinute = currentTime.get(Calendar.MINUTE),
+            is24Hour = true
+        )
+
+        val toggleIcon = if(showDial){
+            Icons.Filled.DateRange
+        } else{
+            ImageVector.vectorResource(R.drawable.ic_access_time)
+        }
+
+        AdvanceTimePickerDialog(
+            onDismiss = { showDialog = false },
+            onConfirm = {
+                selectedTime = "${timePickerState.hour}:${timePickerState.minute}"
                 showDialog = false
             },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            true
-        ).show()
+            toggle = {
+                IconButton(onClick = { showDial = !showDial}){
+                    Icon(
+                        imageVector = toggleIcon,
+                        contentDescription = null
+                    )
+                }
+            },
+        ) {
+            if(showDial){
+                TimePicker(
+                    state = timePickerState
+                )
+            } else{
+                TimeInput(
+                    state = timePickerState
+                )
+            }
+        }
+
     }
 }
 
@@ -143,22 +267,40 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
 @Composable
 fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
     var selectedDate by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val calendar = Calendar.getInstance()
+    var showModal by remember { mutableStateOf(false)}
 
-    val datePickerDialog = android.app.DatePickerDialog(
-        context,
-        { _, year, month, dayOfMonth ->
-            selectedDate = "$dayOfMonth/${month + 1}/$year"
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    )
+    @Composable
+    fun DatePickerModal(
+        onDateSelected: (Long?) -> Unit,
+        onDismiss: () -> Unit,
+    ){
+        val datePickerState = rememberDatePickerState()
+
+        DatePickerDialog(
+            onDismissRequest = onDismiss,
+            confirmButton = {
+                TextButton(onClick = {
+                    onDateSelected(
+                        datePickerState.selectedDateMillis
+                    )
+                    onDismiss()
+                }){
+                    Text ( text = "Ok" )
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismiss){
+                    Text( text = "Cancel")
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
 
     OutlinedTextField(
-        value = selectedDate,
-        onValueChange = { selectedDate = it},
+        value = selectedDate ?: "",
+        onValueChange = { },
         readOnly = true,
         label = {
           Text (
@@ -184,11 +326,29 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
             Icon(
                 imageVector = Icons.Default.DateRange,
                 contentDescription = "Select Date",
-                modifier = Modifier.clickable{datePickerDialog.show()}
+                modifier = Modifier.clickable{ showModal = !showModal}
             )
         },
         modifier = modifier.fillMaxWidth()
     )
+
+    if(showModal){
+        DatePickerModal(
+            onDateSelected = {
+                try {
+                    val date = Date(it!!)
+                    val formattedDate =
+                        SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
+                    selectedDate = formattedDate
+                    showModal = false
+                }
+                catch(e: Exception){
+                    //add snackbar for error message
+                }
+            },
+            onDismiss = { showModal = false}
+        )
+    }
 }
 
 @Composable
@@ -231,6 +391,7 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
             .fillMaxWidth(),
         value = inputValue,
         singleLine = true,
+        shape = RoundedCornerShape(10.dp),
         onValueChange = { inputValue = it },
         label = {
             Text(
@@ -301,7 +462,7 @@ fun RoomReservationForm(
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled", modifier = Modifier.width(5.dp))
+                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp))
                         }
 
                         Space("h", 20)
@@ -367,7 +528,7 @@ fun RoomReservationForm(
                     val dateAndTimePickersLabels = listOf<@Composable () -> Unit>(
                         {
                             Text(
-                                text = "Date/s of the Activity",
+                                text = "Date/s of the Activity:",
                                 style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold,
@@ -417,7 +578,7 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 Text(
-                    text = "Venue",
+                    text = "Venue:",
                     style = LocalTextStyle.current.copy(
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
