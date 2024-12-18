@@ -2,82 +2,6 @@ package com.it235.nureserved.data.rooms
 
 import com.it235.nureserved.R
 
-val dayOne = listOf(
-    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
-    TimeSlotAvailability(TimeSlot.NINE_AM, false),
-    TimeSlotAvailability(TimeSlot.TEN_AM, true),
-    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
-    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-    TimeSlotAvailability(TimeSlot.ONE_PM, true),
-    TimeSlotAvailability(TimeSlot.TWO_PM, false),
-    TimeSlotAvailability(TimeSlot.THREE_PM, true),
-    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
-    TimeSlotAvailability(TimeSlot.SIX_PM, true),
-    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
-    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
-    TimeSlotAvailability(TimeSlot.NINE_PM, true),
-    TimeSlotAvailability(TimeSlot.TEN_PM, true)
-)
-
-val dayTwo = listOf(
-    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-    TimeSlotAvailability(TimeSlot.NINE_AM, true),
-    TimeSlotAvailability(TimeSlot.TEN_AM, true),
-    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
-    TimeSlotAvailability(TimeSlot.ONE_PM, false),
-    TimeSlotAvailability(TimeSlot.TWO_PM, false),
-    TimeSlotAvailability(TimeSlot.THREE_PM, false),
-    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
-    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-    TimeSlotAvailability(TimeSlot.SIX_PM, true),
-    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
-    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
-    TimeSlotAvailability(TimeSlot.NINE_PM, true),
-    TimeSlotAvailability(TimeSlot.TEN_PM, true)
-)
-
-val dayThree = listOf(
-    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
-    TimeSlotAvailability(TimeSlot.NINE_AM, false),
-    TimeSlotAvailability(TimeSlot.TEN_AM, false),
-    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
-    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-    TimeSlotAvailability(TimeSlot.ONE_PM, true),
-    TimeSlotAvailability(TimeSlot.TWO_PM, true),
-    TimeSlotAvailability(TimeSlot.THREE_PM, true),
-    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
-    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
-    TimeSlotAvailability(TimeSlot.SIX_PM, true),
-    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
-    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
-    TimeSlotAvailability(TimeSlot.NINE_PM, true),
-    TimeSlotAvailability(TimeSlot.TEN_PM, true)
-)
-
-val dayFourWithFalseValues = listOf(
-    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-    TimeSlotAvailability(TimeSlot.NINE_AM, false),
-    TimeSlotAvailability(TimeSlot.TEN_AM, false),
-    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-    TimeSlotAvailability(TimeSlot.ONE_PM, false),
-    TimeSlotAvailability(TimeSlot.TWO_PM, false),
-    TimeSlotAvailability(TimeSlot.THREE_PM, false),
-    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-    TimeSlotAvailability(TimeSlot.SIX_PM, false),
-    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-    TimeSlotAvailability(TimeSlot.NINE_PM, false),
-    TimeSlotAvailability(TimeSlot.TEN_PM, false)
-)
-
 val roomList = listOf(
     Room(
         id = 1,
@@ -88,15 +12,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayFourWithFalseValues
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -109,15 +84,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             )
         )
     ),
@@ -130,15 +156,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -151,15 +228,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -172,15 +300,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -193,15 +372,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -214,15 +444,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -235,15 +516,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -256,15 +588,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -277,15 +660,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -298,15 +732,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -319,15 +804,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -340,15 +876,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -361,15 +948,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -382,15 +1020,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, false)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -403,15 +1092,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -424,15 +1164,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -445,15 +1236,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -466,15 +1308,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     ),
@@ -487,15 +1380,66 @@ val roomList = listOf(
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
-                timeSlots = dayOne
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 2",
-                timeSlots = dayTwo
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             ),
             DaySchedule(
                 day = "Dec 3",
-                timeSlots = dayThree
+                timeSlots = listOf(
+                    TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
+                    TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                    TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                    TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                    TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                    TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                    TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                    TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                    TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                    TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                    TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                    TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                    TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                    TimeSlotAvailability(TimeSlot.TEN_PM, true)
+                )
             )
         )
     )
