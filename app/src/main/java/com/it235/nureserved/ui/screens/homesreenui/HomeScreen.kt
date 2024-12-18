@@ -39,7 +39,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -71,7 +70,6 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RoomReservationFAB
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.ReservationConfirmationDialog
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -376,7 +374,7 @@ fun HomeScreenContent(
             item { Floor("2nd Floor", secondFloorList, navController) }
             item { Floor("3rd Floor", thirdFloorList, navController) }
             item { Floor("4th Floor", fourthFloorList, navController) }
-            item { Spacer(modifier = Modifier.size(0.dp))}
+            item { Spacer(modifier = Modifier.size(72.dp))}
         }
     }
 }
