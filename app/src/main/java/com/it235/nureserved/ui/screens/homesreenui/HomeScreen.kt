@@ -84,8 +84,6 @@ fun HomeScreen(navController: NavController) {
     var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
-    // State variable to control the navigation
-    var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of logout confirmation dialog
@@ -99,16 +97,6 @@ fun HomeScreen(navController: NavController) {
             selectedItem = previousSelectedItem
         } else {
             navController.popBackStack()
-        }
-    }
-
-    // Add a listener to reset the selected item when navigating back from RoomReservationForm
-    LaunchedEffect(navController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.route == ScreenRoutes.RoomReservationForm.route) {
-                selectedItem = 0
-                hasNavigated = false
-            }
         }
     }
 
@@ -158,12 +146,6 @@ fun HomeScreen(navController: NavController) {
                     )
                 }
                 1 -> {
-                    if (!hasNavigated) {
-                        hasNavigated = true
-                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
-                    }
-                }
-                2 -> {
                     showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
@@ -316,16 +298,14 @@ fun NavigationBar(
     selectedItem: Int,
     onItemSelected: (Int) -> Unit
 ) {
-    val items = listOf("Home", "Reserve", "Reservations")
+    val items = listOf("Home", "Reservations")
     val selectedIcons = listOf(
         painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
-        painterResource(id = R.drawable.edit_24dp_e8eaed_fill1),
         painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill1)
     )
     val unselectedIcons =
         listOf(
             painterResource(id = R.drawable.home_24dp_e8eaed_fill0),
-            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
             painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill0)
         )
 
