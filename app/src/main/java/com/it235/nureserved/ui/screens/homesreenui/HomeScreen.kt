@@ -70,6 +70,10 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RoomReservationFAB
 import com.it235.nureserved.composables.Space
+import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.data.rooms.Room
+import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
+import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -343,24 +347,6 @@ fun HomeScreenContent(
         )
     }
 
-    val secondFloorList = listOf(
-        "Room 201" to "Available",
-        "Room 202" to "Unavailable",
-        "Room 203" to "Available",
-    )
-
-    val thirdFloorList = listOf(
-        "Room 301" to "Unavailable",
-        "Room 302" to "Available",
-        "Room 303" to "Unavailable",
-    )
-
-    val fourthFloorList = listOf(
-        "Room 401" to "Available",
-        "Room 402" to "Available",
-        "Room 403" to "Unavailable",
-    )
-
     Column(
         modifier = Modifier
             .padding(innerPadding)
@@ -372,9 +358,10 @@ fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
-            item { Floor("2nd Floor", secondFloorList, navController) }
-            item { Floor("3rd Floor", thirdFloorList, navController) }
-            item { Floor("4th Floor", fourthFloorList, navController) }
+            item { Floor(FloorLocation.SECOND_FLOOR, roomList, navController) }
+            item { Floor(FloorLocation.THIRD_FLOOR, roomList, navController) }
+            item { Floor(FloorLocation.FOURTH_FLOOR, roomList, navController) }
+            item { Floor(FloorLocation.FIFTH_FLOOR, roomList, navController) }
             item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
@@ -479,9 +466,13 @@ fun DatePickerModal(
 }
 
 @Composable
-fun Floor(floorName: String, floorList: List<Pair<String, String>>, navController: NavController) {
+fun Floor(
+    floorName: FloorLocation,
+    roomList: List<Room>,
+    navController: NavController
+) {
     Text(
-        text = floorName,
+        text = floorName.value,
         modifier = Modifier
             .padding(start = 16.dp),
         style = TextStyle(
@@ -497,19 +488,19 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>, navControlle
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
-        items(floorList) { roomNameAndStatus ->
-            Card(roomNameAndStatus, navController)
+        items(roomList.filter { it.location == floorName }) { room ->
+            Card(room, navController)
         }
     }
 }
 
 @Composable
-fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) {
+fun Card(room: Room, navController: NavController) {
     val imagePainter = // Set the size to match the modifier dimensions
         rememberAsyncImagePainter(
-            ImageRequest.Builder(LocalContext.current).data(data = R.drawable.sample_lab_room)
+            ImageRequest.Builder(LocalContext.current).data(data = room.imageResId ?: R.drawable.resource_default)
                 .apply(block = fun ImageRequest.Builder.() {
-                    size(240, 120) // Set the size to match the modifier dimensions
+                    size(720, 360) // Set the size to match the modifier dimensions
                     scale(Scale.FILL)
                 }).build()
         )
@@ -517,11 +508,11 @@ fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) 
 
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (roomNameAndStatus.second == "Unavailable") Color(0xFFdb5e5f) else Color(0xFF49844b),
+            containerColor = if (areAllTimeSlotsUnavailable(room)) Color(0xFFdb5e5f) else Color(0xFF49844b),
         ),
         modifier = Modifier
             .width(240.dp)
-            .clickable { navController.navigate(ScreenRoutes.RoomDetails.route) }
+            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}") }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -535,7 +526,7 @@ fun Card(roomNameAndStatus: Pair<String, String>, navController: NavController) 
                 contentScale = ContentScale.Crop // Scales the image to fill the entire content area
             )
             Text(
-                text = roomNameAndStatus.first,
+                text = room.name,
                 modifier = Modifier
                     .padding(top = 8.dp, bottom = 8.dp, start = 24.dp, end = 24.dp),
                 color = Color(0xFFFEFEFE),

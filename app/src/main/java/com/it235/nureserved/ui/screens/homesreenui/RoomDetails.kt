@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.homesreenui.roomdetails
+package com.it235.nureserved.ui.screens.homesreenui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,12 +10,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -40,15 +41,21 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RoomReservationFAB
+import com.it235.nureserved.data.rooms.DaySchedule
+import com.it235.nureserved.data.rooms.Room
+import com.it235.nureserved.data.rooms.TimeSlot
+import com.it235.nureserved.data.rooms.getRoomById
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomDetails(navController: NavController) {
+fun RoomDetails(
+    navController: NavController,
+    roomId: String?
+) {
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -59,7 +66,7 @@ fun RoomDetails(navController: NavController) {
             },
             floatingActionButton = { RoomReservationFAB(navController) }
         ) { innerPadding ->
-            RoomDetailsContent(innerPadding)
+            RoomDetailsContent(innerPadding, roomId)
         }
     }
 }
@@ -96,38 +103,59 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 
 
 @Composable
-fun RoomDetailsContent(innerPaddingValues: PaddingValues) {
+fun RoomDetailsContent(
+    innerPaddingValues: PaddingValues,
+    roomId: String?) {
+
+    val room = roomId?.toIntOrNull()?.let { getRoomById(it) }
+
     LazyColumn(
         modifier = Modifier
             .padding(innerPaddingValues)
     ) {
         item {
-            RoomImage()
+            RoomImage(room)
             Spacer(modifier = Modifier.size(16.dp))
-            RoomDetails()
+            RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
-            ScheduleGrid(sampleSchedule)
+            ScheduleGrid(room?.roomAvailabilitySchedule)
             Spacer(modifier = Modifier.size(88.dp))
         }
     }
 }
 
 @Composable
-private fun RoomImage() {
-    Image(
-        painter = painterResource(id = R.drawable.sample_lab_room),
-        contentDescription = "Room Image",
+private fun RoomImage(
+    room: Room?
+) {
+    room?.imageResId?.let {
+        Image(
+            painter = painterResource(id = it),
+            contentDescription = "Room Image",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .padding(16.dp)
+                .clip(RoundedCornerShape(16.dp)),
+            contentScale = ContentScale.Crop
+        )
+    } ?: Image(
+        painter = painterResource(id = R.drawable.resource_default),
+        contentDescription = "Default Room Image",
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(16.dp)),
+        contentScale = ContentScale.Crop
     )
 }
 
 @Composable
-private fun RoomDetails() {
+private fun RoomDetails(
+    room: Room?
+) {
     Text(
-        text = "Room 312",
+        text = room?.name ?: "Room Name Unavailable",
         fontFamily = poppinsFamily,
         style = TextStyle(
             fontWeight = FontWeight.Bold,
@@ -152,7 +180,7 @@ private fun RoomDetails() {
             )
         )
         Text(
-            text = "3rd Floor",
+            text = room?.location?.value ?: "N/A",
             fontFamily = poppinsFamily,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
@@ -178,7 +206,7 @@ private fun RoomDetails() {
             )
         )
         Text(
-            text = "Classroom",
+            text = room?.type?.value ?: "N/A",
             fontFamily = poppinsFamily,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
@@ -190,7 +218,8 @@ private fun RoomDetails() {
 }
 
 @Composable
-fun ScheduleGrid(days: List<DaySchedule>) {
+fun ScheduleGrid(
+    days: List<DaySchedule>?) {
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -207,8 +236,8 @@ fun ScheduleGrid(days: List<DaySchedule>) {
 }
 
 @Composable
-private fun timeGrid(days: List<DaySchedule>) {
-    days.forEach { day ->
+private fun timeGrid(days: List<DaySchedule>?) {
+    days?.forEach { day ->
         Row() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -241,12 +270,12 @@ private fun timeIndicator() {
         horizontalAlignment = Alignment.End
     ) {
         Spacer(modifier = Modifier.size(20.dp))
-        timeSlots.forEachIndexed { index, timeSlot ->
+        TimeSlot.entries.forEachIndexed { index, timeSlot ->
             Text(
-                text = timeSlot
+                text = timeSlot.displayName
             )
             // Add spacing between time slots except for the last one
-            if (index < timeSlots.size - 1) {
+            if (index < TimeSlot.entries.size - 1) {
                 Spacer(modifier = Modifier.size(16.dp)) // Add spacing here
             }
         }
@@ -286,5 +315,5 @@ private fun dateNavigator() {
 @Composable
 fun RoomDetailsPreview() {
     val navController = rememberNavController()
-    RoomDetails(navController)
+    RoomDetails(navController, "1")
 }
