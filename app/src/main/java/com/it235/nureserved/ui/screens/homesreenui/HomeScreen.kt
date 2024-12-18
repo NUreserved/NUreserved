@@ -69,6 +69,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.RoomReservationFAB
+import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -368,13 +369,13 @@ fun HomeScreenContent(
             ReservationDatePickerChip(onShowDatePickerChange)
         }
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
             item { Floor("2nd Floor", secondFloorList, navController) }
             item { Floor("3rd Floor", thirdFloorList, navController) }
             item { Floor("4th Floor", fourthFloorList, navController) }
-            item { Spacer(modifier = Modifier.size(72.dp))}
+            item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
 }
@@ -489,6 +490,8 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>, navControlle
             fontSize = 20.sp
         )
     )
+
+    Space("h", 8)
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
