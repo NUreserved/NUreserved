@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.homesreenui.roomdetails
+package com.it235.nureserved.ui.screens.homesreenui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
