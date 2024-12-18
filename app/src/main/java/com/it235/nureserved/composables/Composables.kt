@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
@@ -23,7 +24,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.ui.theme.brandColorBlue
 
 @Composable
@@ -128,5 +131,22 @@ fun ErrorDialog(
                 contentDescription = "Error icon"
             )
         }
+    )
+}
+
+@Composable
+fun RoomReservationFAB(
+    navController: NavController
+) {
+    ExtendedFloatingActionButton(
+        text = {
+            Text("Reserve")
+        },
+        icon = {
+            Icon(
+                painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
+                contentDescription = "Reserve icon")
+        },
+        onClick = { navController.navigate(ScreenRoutes.RoomReservationForm.route) }
     )
 }
