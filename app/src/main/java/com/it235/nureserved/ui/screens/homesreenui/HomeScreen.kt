@@ -90,6 +90,9 @@ fun HomeScreen(navController: NavController) {
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of logout confirmation dialog
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
+    // State variable to control the visibility of filter icon when the current
+    // tab is in the home screen
+    var showFilterButton by rememberSaveable { mutableStateOf(true) }
 
     BackHandler {
         if (selectedItem != 0) {
@@ -118,7 +121,8 @@ fun HomeScreen(navController: NavController) {
                     navController,
                     scrollBehavior = scrollBehavior,
                     onFilterClick = { showText = !showText },
-                    showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true}
+                    showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true},
+                    showFilterButton = showFilterButton
                 )
             },
 
@@ -142,13 +146,17 @@ fun HomeScreen(navController: NavController) {
             }
 
             when (selectedItem) {
-                0 -> HomeScreenContent(
-                    innerPadding = innerPadding,
-                    navController = navController,
-                    showText = showText,
-                    onShowDatePickerChange = { showDatePicker = it },
-                    showDatePicker = showDatePicker
-                )
+                0 -> {
+                    showFilterButton = true
+
+                    HomeScreenContent(
+                        innerPadding = innerPadding,
+                        navController = navController,
+                        showText = showText,
+                        onShowDatePickerChange = { showDatePicker = it },
+                        showDatePicker = showDatePicker
+                    )
+                }
                 1 -> {
                     if (!hasNavigated) {
                         hasNavigated = true
@@ -156,6 +164,7 @@ fun HomeScreen(navController: NavController) {
                     }
                 }
                 2 -> {
+                    showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
             }
@@ -168,7 +177,8 @@ fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
     onFilterClick: () -> Unit,
-    showLogoutConfirmationDialog: () -> Unit) {
+    showLogoutConfirmationDialog: () -> Unit,
+    showFilterButton: Boolean) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -186,12 +196,14 @@ fun TopBar(
             )
         },
         actions = {
-            IconButton(onClick = onFilterClick) {
-                Icon(
-                    painter = painterResource(id = R.drawable.filter_alt),
-                    contentDescription = "Filter icon to filter content based on chosen criteria"
-                )
-            };
+            if (showFilterButton) {
+                IconButton(onClick = onFilterClick) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.filter_alt),
+                        contentDescription = "Filter icon to filter content based on chosen criteria"
+                    )
+                };
+            }
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
