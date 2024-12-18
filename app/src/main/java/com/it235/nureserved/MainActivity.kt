@@ -13,9 +13,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.ui.screens.RoomReservationForm
 import com.it235.nureserved.ui.screens.RoomUsageRules
@@ -71,7 +73,13 @@ private fun Main() {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
                 composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
-                composable(ScreenRoutes.RoomDetails.route) { RoomDetails(navController) }
+                composable(
+                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
+                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val roomId = backStackEntry.arguments?.getString("roomId")
+                    RoomDetails(navController, roomId)
+                }
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
