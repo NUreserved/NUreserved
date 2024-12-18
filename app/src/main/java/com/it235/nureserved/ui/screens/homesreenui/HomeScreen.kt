@@ -69,6 +69,7 @@ import coil.size.Scale
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.RoomReservationFAB
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.screens.ReservationConfirmationDialog
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
@@ -113,7 +114,6 @@ fun HomeScreen(navController: NavController) {
                     showFilterButton = showFilterButton
                 )
             },
-
             bottomBar = {
                 NavigationBar(
                     navController,
@@ -122,7 +122,8 @@ fun HomeScreen(navController: NavController) {
                         previousSelectedItem = selectedItem
                         selectedItem = it
                 })
-            }
+            },
+            floatingActionButton = { RoomReservationFAB(navController) }
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showLogoutConfirmationDialog) {

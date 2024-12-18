@@ -41,6 +41,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.RoomReservationFAB
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -56,19 +57,7 @@ fun RoomDetails(navController: NavController) {
             topBar = {
                 RDTopBar(scrollBehavior, navController)
             },
-            floatingActionButton = {
-                ExtendedFloatingActionButton(
-                    text = {
-                        Text("Reserve")
-                   },
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
-                            contentDescription = "Reserve icon")
-                   },
-                    onClick = { navController.navigate(ScreenRoutes.RoomReservationForm.route) }
-                )
-            }
+            floatingActionButton = { RoomReservationFAB(navController) }
         ) { innerPadding ->
             RoomDetailsContent(innerPadding)
         }
