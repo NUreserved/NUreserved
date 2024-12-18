@@ -349,24 +349,6 @@ fun HomeScreenContent(
         )
     }
 
-    val secondFloorList = listOf(
-        "Room 201" to "Available",
-        "Room 202" to "Unavailable",
-        "Room 203" to "Available",
-    )
-
-    val thirdFloorList = listOf(
-        "Room 301" to "Unavailable",
-        "Room 302" to "Available",
-        "Room 303" to "Unavailable",
-    )
-
-    val fourthFloorList = listOf(
-        "Room 401" to "Available",
-        "Room 402" to "Available",
-        "Room 403" to "Unavailable",
-    )
-
     Column(
         modifier = Modifier
             .padding(innerPadding)
