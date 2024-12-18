@@ -39,7 +39,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -69,6 +68,8 @@ import coil.size.Scale
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.RoomReservationFAB
+import com.it235.nureserved.composables.Space
 import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.fifthFloorRooms
@@ -89,28 +90,19 @@ fun HomeScreen(navController: NavController) {
     var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
-    // State variable to control the navigation
-    var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of logout confirmation dialog
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
+    // State variable to control the visibility of filter icon when the current
+    // tab is in the home screen
+    var showFilterButton by rememberSaveable { mutableStateOf(true) }
 
     BackHandler {
         if (selectedItem != 0) {
             selectedItem = previousSelectedItem
         } else {
             navController.popBackStack()
-        }
-    }
-
-    // Add a listener to reset the selected item when navigating back from RoomReservationForm
-    LaunchedEffect(navController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.route == ScreenRoutes.RoomReservationForm.route) {
-                selectedItem = 0
-                hasNavigated = false
-            }
         }
     }
 
@@ -123,10 +115,10 @@ fun HomeScreen(navController: NavController) {
                     navController,
                     scrollBehavior = scrollBehavior,
                     onFilterClick = { showText = !showText },
-                    showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true}
+                    showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true},
+                    showFilterButton = showFilterButton
                 )
             },
-
             bottomBar = {
                 NavigationBar(
                     navController,
@@ -135,7 +127,8 @@ fun HomeScreen(navController: NavController) {
                         previousSelectedItem = selectedItem
                         selectedItem = it
                 })
-            }
+            },
+            floatingActionButton = { RoomReservationFAB(navController) }
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showLogoutConfirmationDialog) {
@@ -147,20 +140,19 @@ fun HomeScreen(navController: NavController) {
             }
 
             when (selectedItem) {
-                0 -> HomeScreenContent(
-                    innerPadding = innerPadding,
-                    navController = navController,
-                    showText = showText,
-                    onShowDatePickerChange = { showDatePicker = it },
-                    showDatePicker = showDatePicker
-                )
-                1 -> {
-                    if (!hasNavigated) {
-                        hasNavigated = true
-                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
-                    }
+                0 -> {
+                    showFilterButton = true
+
+                    HomeScreenContent(
+                        innerPadding = innerPadding,
+                        navController = navController,
+                        showText = showText,
+                        onShowDatePickerChange = { showDatePicker = it },
+                        showDatePicker = showDatePicker
+                    )
                 }
-                2 -> {
+                1 -> {
+                    showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
             }
@@ -173,7 +165,8 @@ fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
     onFilterClick: () -> Unit,
-    showLogoutConfirmationDialog: () -> Unit) {
+    showLogoutConfirmationDialog: () -> Unit,
+    showFilterButton: Boolean) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -191,12 +184,14 @@ fun TopBar(
             )
         },
         actions = {
-            IconButton(onClick = onFilterClick) {
-                Icon(
-                    painter = painterResource(id = R.drawable.filter_alt),
-                    contentDescription = "Filter icon to filter content based on chosen criteria"
-                )
-            };
+            if (showFilterButton) {
+                IconButton(onClick = onFilterClick) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.filter_alt),
+                        contentDescription = "Filter icon to filter content based on chosen criteria"
+                    )
+                };
+            }
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
@@ -309,16 +304,14 @@ fun NavigationBar(
     selectedItem: Int,
     onItemSelected: (Int) -> Unit
 ) {
-    val items = listOf("Home", "Reserve", "Reservations")
+    val items = listOf("Home", "Reservations")
     val selectedIcons = listOf(
         painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
-        painterResource(id = R.drawable.edit_24dp_e8eaed_fill1),
         painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill1)
     )
     val unselectedIcons =
         listOf(
             painterResource(id = R.drawable.home_24dp_e8eaed_fill0),
-            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
             painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill0)
         )
 
@@ -382,14 +375,14 @@ fun HomeScreenContent(
             ReservationDatePickerChip(onShowDatePickerChange)
         }
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
             item { Floor("2nd Floor", secondFloorRooms, navController) }
             item { Floor("3rd Floor", thirdFloorRooms, navController) }
             item { Floor("4th Floor", fourthFloorRooms, navController) }
             item { Floor("5th Floor", fifthFloorRooms, navController) }
-            item { Spacer(modifier = Modifier.size(0.dp))}
+            item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
 }
@@ -508,6 +501,8 @@ fun Floor(
             fontSize = 20.sp
         )
     )
+
+    Space("h", 8)
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
