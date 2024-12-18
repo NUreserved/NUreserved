@@ -39,7 +39,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -69,8 +68,9 @@ import coil.size.Scale
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.RoomReservationFAB
+import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.ReservationConfirmationDialog
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
@@ -84,8 +84,6 @@ fun HomeScreen(navController: NavController) {
     var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
-    // State variable to control the navigation
-    var hasNavigated by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of logout confirmation dialog
@@ -102,16 +100,6 @@ fun HomeScreen(navController: NavController) {
         }
     }
 
-    // Add a listener to reset the selected item when navigating back from RoomReservationForm
-    LaunchedEffect(navController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.route == ScreenRoutes.RoomReservationForm.route) {
-                selectedItem = 0
-                hasNavigated = false
-            }
-        }
-    }
-
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -125,7 +113,6 @@ fun HomeScreen(navController: NavController) {
                     showFilterButton = showFilterButton
                 )
             },
-
             bottomBar = {
                 NavigationBar(
                     navController,
@@ -134,7 +121,8 @@ fun HomeScreen(navController: NavController) {
                         previousSelectedItem = selectedItem
                         selectedItem = it
                 })
-            }
+            },
+            floatingActionButton = { RoomReservationFAB(navController) }
         ){ innerPadding ->
             // Handles the visibility of logout dialog
             if (showLogoutConfirmationDialog) {
@@ -158,12 +146,6 @@ fun HomeScreen(navController: NavController) {
                     )
                 }
                 1 -> {
-                    if (!hasNavigated) {
-                        hasNavigated = true
-                        navController.navigate(ScreenRoutes.RoomReservationForm.route)
-                    }
-                }
-                2 -> {
                     showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
@@ -316,16 +298,14 @@ fun NavigationBar(
     selectedItem: Int,
     onItemSelected: (Int) -> Unit
 ) {
-    val items = listOf("Home", "Reserve", "Reservations")
+    val items = listOf("Home", "Reservations")
     val selectedIcons = listOf(
         painterResource(id = R.drawable.home_24dp_e8eaed_fill1),
-        painterResource(id = R.drawable.edit_24dp_e8eaed_fill1),
         painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill1)
     )
     val unselectedIcons =
         listOf(
             painterResource(id = R.drawable.home_24dp_e8eaed_fill0),
-            painterResource(id = R.drawable.edit_24dp_e8eaed_fill0),
             painterResource(id = R.drawable.auto_stories_24dp_e8eaed_fill0)
         )
 
@@ -389,13 +369,13 @@ fun HomeScreenContent(
             ReservationDatePickerChip(onShowDatePickerChange)
         }
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
             item { Floor("2nd Floor", secondFloorList, navController) }
             item { Floor("3rd Floor", thirdFloorList, navController) }
             item { Floor("4th Floor", fourthFloorList, navController) }
-            item { Spacer(modifier = Modifier.size(0.dp))}
+            item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
 }
@@ -510,6 +490,8 @@ fun Floor(floorName: String, floorList: List<Pair<String, String>>, navControlle
             fontSize = 20.sp
         )
     )
+
+    Space("h", 8)
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
