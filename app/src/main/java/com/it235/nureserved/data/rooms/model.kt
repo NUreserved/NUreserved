@@ -4,7 +4,7 @@ package com.it235.nureserved.data.rooms
 data class Room(
     val id: Int,
     val name: String,
-    val location: String,
+    val location: FloorLocation,
     val type: RoomType,
     val imageResId: Int?,
     var roomAvailabilitySchedule: List<DaySchedule>
@@ -15,8 +15,19 @@ fun areAllTimeSlotsUnavailable(room: Room): Boolean {
     return room.roomAvailabilitySchedule[0].timeSlots.all { !it.isAvailable }
 }
 
-enum class RoomType {
-    LABORATORY, CLASSROOM
+fun getRoomById(id: Int): Room? {
+    return roomList.find { it.id == id }
+}
+
+enum class RoomType(val value: String) {
+    LABORATORY("Laboratory"), CLASSROOM("Classroom")
+}
+
+enum class FloorLocation(val value: String) {
+    SECOND_FLOOR("2nd Floor"),
+    THIRD_FLOOR("3rd Floor"),
+    FOURTH_FLOOR("4th Floor"),
+    FIFTH_FLOOR("5th Floor")
 }
 
 data class DaySchedule(

@@ -78,11 +78,11 @@ val dayFourWithFalseValues = listOf(
     TimeSlotAvailability(TimeSlot.TEN_PM, false)
 )
 
-val secondFloorRooms = listOf(
+val roomList = listOf(
     Room(
         id = 1,
         name = "202",
-        location = "2nd Floor",
+        location = FloorLocation.SECOND_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = R.drawable.room_202,
         roomAvailabilitySchedule = listOf(
@@ -103,7 +103,7 @@ val secondFloorRooms = listOf(
     Room(
         id = 2,
         name = "203",
-        location = "2nd Floor",
+        location = FloorLocation.SECOND_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -124,7 +124,7 @@ val secondFloorRooms = listOf(
     Room(
         id = 3,
         name = "204",
-        location = "2nd Floor",
+        location = FloorLocation.SECOND_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -145,7 +145,7 @@ val secondFloorRooms = listOf(
     Room(
         id = 4,
         name = "205",
-        location = "2nd Floor",
+        location = FloorLocation.SECOND_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = R.drawable.room_205,
         roomAvailabilitySchedule = listOf(
@@ -166,7 +166,7 @@ val secondFloorRooms = listOf(
     Room(
         id = 5,
         name = "233",
-        location = "2nd Floor",
+        location = FloorLocation.SECOND_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -183,14 +183,11 @@ val secondFloorRooms = listOf(
                 timeSlots = dayThree
             )
         )
-    )
-)
-
-val thirdFloorRooms = listOf(
+    ),
     Room(
         id = 6,
         name = "302",
-        location = "3rd Floor",
+        location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -211,7 +208,7 @@ val thirdFloorRooms = listOf(
     Room(
         id = 7,
         name = "303",
-        location = "3rd Floor",
+        location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = R.drawable.room_303,
         roomAvailabilitySchedule = listOf(
@@ -232,7 +229,7 @@ val thirdFloorRooms = listOf(
     Room(
         id = 8,
         name = "304",
-        location = "3rd Floor",
+        location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -253,7 +250,7 @@ val thirdFloorRooms = listOf(
     Room(
         id = 9,
         name = "305",
-        location = "3rd Floor",
+        location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -274,7 +271,7 @@ val thirdFloorRooms = listOf(
     Room(
         id = 10,
         name = "306",
-        location = "3rd Floor",
+        location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -291,14 +288,11 @@ val thirdFloorRooms = listOf(
                 timeSlots = dayThree
             )
         )
-    )
-)
-
-val fourthFloorRooms = listOf(
+    ),
     Room(
         id = 11,
         name = "402",
-        location = "4th Floor",
+        location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -319,7 +313,7 @@ val fourthFloorRooms = listOf(
     Room(
         id = 12,
         name = "407",
-        location = "4th Floor",
+        location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -340,7 +334,7 @@ val fourthFloorRooms = listOf(
     Room(
         id = 13,
         name = "409",
-        location = "4th Floor",
+        location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -361,7 +355,7 @@ val fourthFloorRooms = listOf(
     Room(
         id = 14,
         name = "413",
-        location = "4th Floor",
+        location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -382,7 +376,7 @@ val fourthFloorRooms = listOf(
     Room(
         id = 15,
         name = "418",
-        location = "4th Floor",
+        location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -399,14 +393,11 @@ val fourthFloorRooms = listOf(
                 timeSlots = dayThree
             )
         )
-    )
-)
-
-val fifthFloorRooms = listOf(
+    ),
     Room(
         id = 16,
         name = "502",
-        location = "5th Floor",
+        location = FloorLocation.FIFTH_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -427,7 +418,7 @@ val fifthFloorRooms = listOf(
     Room(
         id = 17,
         name = "504",
-        location = "5th Floor",
+        location = FloorLocation.FIFTH_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -448,7 +439,7 @@ val fifthFloorRooms = listOf(
     Room(
         id = 18,
         name = "506",
-        location = "5th Floor",
+        location = FloorLocation.FIFTH_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = R.drawable.room_506,
         roomAvailabilitySchedule = listOf(
@@ -469,7 +460,7 @@ val fifthFloorRooms = listOf(
     Room(
         id = 19,
         name = "508",
-        location = "5th Floor",
+        location = FloorLocation.FIFTH_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = R.drawable.room_508,
         roomAvailabilitySchedule = listOf(
@@ -490,7 +481,7 @@ val fifthFloorRooms = listOf(
     Room(
         id = 20,
         name = "509",
-        location = "5th Floor",
+        location = FloorLocation.FIFTH_FLOOR,
         type = RoomType.CLASSROOM,
         imageResId = null,
         roomAvailabilitySchedule = listOf(
@@ -507,5 +498,5 @@ val fifthFloorRooms = listOf(
                 timeSlots = dayThree
             )
         )
-    ),
+    )
 )
