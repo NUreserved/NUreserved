@@ -95,7 +95,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -116,7 +116,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -137,7 +137,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -158,7 +158,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -179,7 +179,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -200,7 +200,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -221,7 +221,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -242,7 +242,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -263,7 +263,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -284,7 +284,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -305,7 +305,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -326,7 +326,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -347,7 +347,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -368,7 +368,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -389,7 +389,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -410,7 +410,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -431,7 +431,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -452,7 +452,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -473,7 +473,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
@@ -494,7 +494,7 @@ val roomList = listOf(
                 timeSlots = dayTwo
             ),
             DaySchedule(
-                day = "Day 3",
+                day = "Dec 3",
                 timeSlots = dayThree
             )
         )
