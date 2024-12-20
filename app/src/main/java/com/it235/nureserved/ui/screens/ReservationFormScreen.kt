@@ -772,7 +772,73 @@ fun RoomReservationForm(
                     Space("w", 10)
 
                     Button(
-                        onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
+                        onClick = {
+                            // Dismiss the currently shown Snackbar, if any
+//                            snackbarHostState.currentSnackbarData?.dismiss()
+//
+//                            scope.launch {
+//                                snackbarHostState.showSnackbar(
+//                                    message = "Date Filled input is empty",
+//                                    duration = SnackbarDuration.Short
+//                                )
+//                            }
+
+                            if(name_org_dept_clg.value.isEmpty()){
+                                name_org_border_color.value = Color(0xFFFF0000)
+                                name_org_show_error.value = true
+                                name_org_error_msg.value = "Please fill out this field"
+                            }
+
+                            else{
+                                name_org_border_color.value = Color(0xFF00FF00)
+                                name_org_show_error.value = false
+                                name_org_error_msg.value = ""
+                            }
+
+                            if(selected_date.value.isEmpty()){
+                                selected_date_border_color.value = Color(0xFFFF0000)
+                                selected_date_show_error.value = true
+                                selected_date_error_msg.value = "Please fill out this field"
+                            }
+
+                            else{
+                                selected_date_border_color.value = Color(0xFF00FF00)
+                                selected_date_show_error.value = false
+                                selected_date_error_msg.value = ""
+                            }
+
+                            if(given_name.value.isEmpty()){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Given name input is empty",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            }
+
+                            else if(middle_name.value.isEmpty()){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Middle name input is empty",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            }
+
+                            else if(surname.value.isEmpty()){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Surname input is empty",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            }
+
+                            else{
+
+                            }
+//                            navController.navigate(ScreenRoutes.RoomUsageRules.route)
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF35408E),
                             contentColor = Color(0xFFFEFEFE)
