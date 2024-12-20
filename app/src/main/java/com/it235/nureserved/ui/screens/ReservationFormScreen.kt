@@ -613,7 +613,7 @@ fun RoomReservationForm(
 
                 Column(){
                     InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable(labelValue = "Email of your Adviser/Program Chair/Dean/Teacher")
+                        OutlineTextFieldComposable(labelValue = "Email of Immediate Head (Adviser/Coordinator/Supervisor)")
                     }
                 }
 
