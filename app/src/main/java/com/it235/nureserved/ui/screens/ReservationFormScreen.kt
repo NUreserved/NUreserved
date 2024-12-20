@@ -117,8 +117,10 @@ fun InputFieldAndLabel(
     Spacer(modifier = modifier)
 
     when{
-        inputType == null && inputLabel == "Date Filled" -> DatePickerTextField()
-        inputType == null -> OutlineTextFieldComposable()
+        inputType == null && inputLabel == "Date Filled:" -> DatePickerTextField(value = value, showErrorMessage = showErrorMessage,
+            colorValue = colorValue, errorMessage = errorMessage)
+        inputType == null -> OutlineTextFieldComposable(value = value, colorValue = colorValue, errorMessage = errorMessage,
+            showErrorMessage = showErrorMessage)
         else -> inputType()
     }
 
