@@ -448,8 +448,15 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
 
     OutlinedTextField(
         modifier = modifier
-            .fillMaxWidth(),
-        value = inputValue,
+            .fillMaxWidth()
+            .onFocusEvent {
+                if(it.isFocused){
+                    if(showErrorMessage.value){
+                        value.value = ""
+                    }
+                }
+            },
+        value = value.value,
         singleLine = true,
         placeholder = {
             CustomPlaceholder(
