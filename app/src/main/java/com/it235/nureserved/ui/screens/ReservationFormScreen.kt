@@ -289,6 +289,19 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
     var showModal by remember { mutableStateOf(false)}
 
     @Composable
+    fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
+        if (showError) {
+            Text(
+                text = errorText,
+                color = Color.Red,
+                fontSize = 13.sp
+            ) // Display error message
+        } else {
+            Text(text = text) // Display normal placeholder
+        }
+    }
+
+    @Composable
     fun DatePickerModal(
         onDateSelected: (Long?) -> Unit,
         onDismiss: () -> Unit,
