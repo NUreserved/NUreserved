@@ -98,7 +98,12 @@ import java.util.Locale
 fun InputFieldAndLabel(
     inputWidth: Modifier = Modifier,
     inputLabel: String, modifier: Modifier,
-    inputType: @Composable (() -> Unit)? = null){
+    showErrorMessage: MutableState<Boolean> = remember { mutableStateOf(false) },
+    errorMessage: MutableState<String> = remember { mutableStateOf("") },
+    value: MutableState<String> = remember { mutableStateOf("") },
+    colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFFBDBDBD)) },
+    inputType: @Composable (() -> Unit)? = null,
+){
 
     Text(
         modifier = inputWidth,
