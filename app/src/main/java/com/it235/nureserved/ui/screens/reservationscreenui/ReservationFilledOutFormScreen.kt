@@ -62,6 +62,11 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                     text = "Request approved",
                     style = MaterialTheme.typography.titleLarge,
                 )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#247142164",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                )
             }
 
             Spacer(modifier = Modifier.height(32.dp))
