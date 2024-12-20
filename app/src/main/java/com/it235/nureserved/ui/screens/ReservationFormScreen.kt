@@ -414,8 +414,11 @@ fun FilterChipComposable(
 }
 
 @Composable
-fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = ""){
-    var inputValue by remember { mutableStateOf("") }
+fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = "",
+                               value: MutableState<String> = remember { mutableStateOf("") },
+                               showErrorMessage: MutableState<Boolean> = remember { mutableStateOf(false) },
+                               colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFFBDBDBD)) },
+                               errorMessage: MutableState<String> = remember { mutableStateOf("")}){
 
 
     OutlinedTextField(
