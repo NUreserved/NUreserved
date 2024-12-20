@@ -475,6 +475,54 @@ fun RoomReservationForm(
                 .padding(innerPadding)
         ){
 
+
+            var name_org_dept_clg = remember { mutableStateOf("") }
+            var title_of_activity = remember { mutableStateOf("") }
+
+            var selected_date = remember { mutableStateOf("") }
+            var selected_date_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var selected_date_error_msg = remember { mutableStateOf("") }
+            var selected_date_show_error = remember { mutableStateOf(false) }
+
+            var given_name = remember { mutableStateOf("") }
+            var middle_name = remember { mutableStateOf("") }
+            var surname = remember { mutableStateOf("") }
+
+            var name_org_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var title_act_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+
+            var name_org_error_msg = remember { mutableStateOf("") }
+            var title_act_error_msg = remember { mutableStateOf("") }
+
+            var name_org_show_error = remember { mutableStateOf(false) }
+            var title_act_show_error = remember { mutableStateOf(false) }
+
+            var input_state = listOf<MutableState<String>>(
+                name_org_dept_clg,
+                title_of_activity
+            )
+
+            var input_state_color = listOf<MutableState<Color>>(
+                name_org_border_color,
+                title_act_border_color
+            )
+
+            var input_state_error_msg = listOf<MutableState<String>>(
+                name_org_error_msg,
+                title_act_error_msg
+            )
+
+            var input_state_show_error = listOf<MutableState<Boolean>>(
+                name_org_show_error,
+                title_act_show_error
+            )
+
+            var names_input_state = listOf<MutableState<String>>(
+                given_name,
+                middle_name,
+                surname
+            )
+
             RowHeader("ROOM RESERVATIONS FORM")
 
             Column(
