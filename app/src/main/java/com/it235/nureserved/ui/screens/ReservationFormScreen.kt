@@ -354,15 +354,23 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
 @Composable
 fun FilterChipComposable(
     roomNumber: String,
-    isSelected: Boolean,
-    onRoomSelected: (String) -> Unit
-){
+    selectedRooms: List<String>,
+    onRoomSelected: (String) -> Unit,
+    onRoomDeselected: (String) -> Unit
+) {
+    val isSelected = selectedRooms.contains(roomNumber)
 
     FilterChip(
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = LocalTextStyle.current.color
         ),
-        onClick = { onRoomSelected(roomNumber) },
+        onClick = {
+            if (isSelected) {
+                onRoomDeselected(roomNumber)
+            } else {
+                onRoomSelected(roomNumber)
+            }
+        },
         label = {
             Text(text = roomNumber)
         },
@@ -432,6 +440,8 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
 fun RoomReservationForm(
     navController: NavController
 ){
+    var selectedRooms by remember { mutableStateOf(listOf<String>()) }
+
     Scaffold{ innerPadding ->
         Column(
             modifier = Modifier
@@ -591,8 +601,6 @@ fun RoomReservationForm(
                     modifier = Modifier
                         .fillMaxWidth(),
                 ){
-                    var selectedRoom by remember { mutableStateOf<String?>(null) }
-
                     FlowRow(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -602,8 +610,9 @@ fun RoomReservationForm(
                         rooms.forEach { room ->
                             FilterChipComposable(
                                 roomNumber = room,
-                                isSelected = selectedRoom == room,
-                                onRoomSelected = { selectedRoom = it }
+                                selectedRooms = selectedRooms,
+                                onRoomSelected = { selectedRooms = selectedRooms + it },
+                                onRoomDeselected = { selectedRooms = selectedRooms - it }
                             )
                         }
                     }
