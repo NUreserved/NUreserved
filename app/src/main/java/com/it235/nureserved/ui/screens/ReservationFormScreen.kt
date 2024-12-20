@@ -433,6 +433,18 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
                                colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFFBDBDBD)) },
                                errorMessage: MutableState<String> = remember { mutableStateOf("")}){
 
+    @Composable
+    fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
+        if (showError) {
+            Text(
+                text = errorText,
+                color = Color.Red,
+                fontSize = 13.sp
+            ) // Display error message
+        } else {
+            Text(text = text) // Display normal placeholder
+        }
+    }
 
     OutlinedTextField(
         modifier = modifier
