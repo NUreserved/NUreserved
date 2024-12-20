@@ -1,5 +1,6 @@
 package com.it235.nureserved.ui.screens.reservationscreenui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +43,7 @@ import com.it235.nureserved.ui.theme.textColor4
 fun ReservationFilledOutFormScreen(navController: NavController) {
     // Clipboard manager to handle copy functionality
     val clipboardManager = LocalClipboardManager.current
+    val context = LocalContext.current
 
     Column (
         modifier = Modifier
@@ -74,6 +77,7 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                     color = if (isSystemInDarkTheme()) textColor4 else textColor3,
                     modifier = Modifier.clickable {
                         clipboardManager.setText(AnnotatedString("#247142164"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                     }
                 )
             }
