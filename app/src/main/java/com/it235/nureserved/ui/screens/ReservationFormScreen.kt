@@ -100,7 +100,7 @@ fun InputFieldAndLabel(
     Spacer(modifier = modifier)
 
     when{
-        inputType == null && inputLabel == "Date Filled" -> DatePickerTextField()
+        inputType == null && inputLabel == "Date Filled:" -> DatePickerTextField()
         inputType == null -> OutlineTextFieldComposable()
         else -> inputType()
     }
