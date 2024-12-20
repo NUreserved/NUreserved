@@ -350,6 +350,12 @@ fun DatePickerTextField(
               )
           )
         },
+        placeholder = {
+            CustomPlaceholder(
+                showError = showErrorMessage.value,
+                errorText = errorMessage.value
+            )
+        },
         textStyle = LocalTextStyle.current.copy(
             fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
@@ -433,6 +439,12 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
             .fillMaxWidth(),
         value = inputValue,
         singleLine = true,
+        placeholder = {
+            CustomPlaceholder(
+                showError = showErrorMessage.value,
+                errorText = errorMessage.value
+            )
+        },
         shape = RoundedCornerShape(10.dp),
         onValueChange = { value.value = it },
         label = {
