@@ -239,7 +239,8 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         }
     )
 
-    if(showDialog){        val currentTime = Calendar.getInstance()
+    if(showDialog){
+        val currentTime = Calendar.getInstance()
 
         val timePickerState = rememberTimePickerState(
             initialHour =  currentTime.get(Calendar.HOUR_OF_DAY),
@@ -284,8 +285,14 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
-    var selectedDate by remember { mutableStateOf("") }
+fun DatePickerTextField(
+    modifier: Modifier = Modifier,
+    labelValue: String = "",
+    showErrorMessage: MutableState<Boolean> = remember { mutableStateOf(false) },
+    errorMessage: MutableState<String> = remember { mutableStateOf("") },
+    colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFFBDBDBD)) },
+    value: MutableState<String> = remember { mutableStateOf("") }){
+//    var selectedDate by remember { mutableStateOf("") }
     var showModal by remember { mutableStateOf(false)}
 
     @Composable
@@ -331,7 +338,7 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
     }
 
     OutlinedTextField(
-        value = selectedDate ?: "",
+        value = value.value ?: "",
         onValueChange = { },
         readOnly = true,
         label = {
@@ -349,7 +356,7 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
         ),
         shape = RoundedCornerShape(10.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = LocalTextStyle.current.color,
+            unfocusedBorderColor = colorValue.value,
             focusedBorderColor = LocalTextStyle.current.color,
             focusedTextColor = LocalTextStyle.current.color,
             cursorColor = LocalTextStyle.current.color,
@@ -371,7 +378,7 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
                     val date = Date(it!!)
                     val formattedDate =
                         SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
-                    selectedDate = formattedDate
+                    value.value = formattedDate
                     showModal = false
                 }
                 catch(e: Exception){
@@ -427,7 +434,7 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
         value = inputValue,
         singleLine = true,
         shape = RoundedCornerShape(10.dp),
-        onValueChange = { inputValue = it },
+        onValueChange = { value.value = it },
         label = {
             Text(
                 text = labelValue,
@@ -443,7 +450,7 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = LocalTextStyle.current.color,
+            unfocusedBorderColor = colorValue.value,
             focusedBorderColor = LocalTextStyle.current.color,
             focusedTextColor = LocalTextStyle.current.color,
             cursorColor = LocalTextStyle.current.color,
@@ -467,7 +474,29 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
 fun RoomReservationForm(
     navController: NavController
 ){
-    Scaffold{ innerPadding ->
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
+        snackbarHost = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 100.dp),
+                contentAlignment = Alignment.BottomEnd,
+            ){
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                ){data ->
+                    Snackbar(
+                        snackbarData = data,
+                        containerColor = indicatorColorRed,
+                        contentColor = white
+                    )
+                }
+            }
+        }
+    ){ innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -538,14 +567,17 @@ fun RoomReservationForm(
 
                 inputLabels.forEachIndexed{ index, inputLabel ->
                     Column(){
-                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp))
+                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp),
+                        value = input_state[index], colorValue = input_state_color[index], errorMessage = input_state_error_msg[index],
+                            showErrorMessage = input_state_show_error[index])
                     }
 
                     if(index != inputLabels.lastIndex) {
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp))
+                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp), value = selected_date, colorValue = selected_date_border_color,
+                                errorMessage = selected_date_error_msg, showErrorMessage = selected_date_show_error)
                         }
 
                         Space("h", 20)
@@ -571,7 +603,7 @@ fun RoomReservationForm(
                                     verticalAlignment = Alignment.CenterVertically
                                 ){
                                     InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                                        OutlineTextFieldComposable(modifier = Modifier.weight(6f))
+                                        OutlineTextFieldComposable(modifier = Modifier.weight(6f), value = names_input_state[index])
                                     }
                                 }
 
@@ -646,9 +678,9 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
-                    }
+//                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
+//                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
+//                    }
                 }
 
                 Space("h", 20)
@@ -695,9 +727,9 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 Column(){
-                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable(labelValue = "Email of your Adviser/Program Chair/Dean/Teacher")
-                    }
+//                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
+//                        OutlineTextFieldComposable(labelValue = "Email of your Adviser/Program Chair/Dean/Teacher")
+//                    }
                 }
 
                 Space("h", 20)
