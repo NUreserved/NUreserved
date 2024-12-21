@@ -193,8 +193,15 @@ fun AdvanceTimePickerDialog(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
-    var selectedTime by remember { mutableStateOf("00:00") }
+fun TimePicker(
+    modifier: Modifier = Modifier,
+    labelValue: String,
+    showErrorMessage: MutableState<Boolean> = remember { mutableStateOf(false) },
+    errorMessage: MutableState<String> = remember { mutableStateOf("") },
+    colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFFBDBDBD)) },
+    value: MutableState<String> = remember { mutableStateOf("") }
+){
+//    var selectedTime by remember { mutableStateOf("00:00") }
     var showDialog by remember { mutableStateOf(false) }
 
     // Determines whether the time picker is dial or input
@@ -215,13 +222,14 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
 
     OutlinedTextField(
         modifier = modifier,
-        value = selectedTime,
-        onValueChange = { selectedTime = it },
+        value = value.value,
+        onValueChange = { value.value = it },
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
         label = {
             Text(
-                text = labelValue
+                text = labelValue,
+                fontSize = 13.sp,
             )
         },
         textStyle = LocalTextStyle.current.copy(
@@ -229,7 +237,7 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
             fontWeight = FontWeight.Normal,
         ),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = LocalTextStyle.current.color,
+            unfocusedBorderColor = colorValue.value,
             focusedBorderColor = LocalTextStyle.current.color,
             focusedTextColor = LocalTextStyle.current.color,
             cursorColor = LocalTextStyle.current.color,
@@ -262,7 +270,7 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
         AdvanceTimePickerDialog(
             onDismiss = { showDialog = false },
             onConfirm = {
-                selectedTime = "${timePickerState.hour}:${timePickerState.minute}"
+                value.value = "${timePickerState.hour}:${timePickerState.minute}"
                 showDialog = false
             },
             toggle = {
@@ -787,9 +795,23 @@ fun RoomReservationForm(
                             )
                         },
                         {
-                            TimePicker(labelValue = "From", modifier = Modifier.weight(1f))
+                            TimePicker(
+                                labelValue = "From",
+                                modifier = Modifier.weight(1f),
+                                value = timeActivityFrom,
+                                showErrorMessage = timeActivityFromShowError,
+                                colorValue = timeActivityFromBorderColor,
+                                errorMessage = timeActivityFromErrorMsg
+                            )
                             Space("w", 10)
-                            TimePicker(labelValue = "To", modifier = Modifier.weight(1f))
+                            TimePicker(
+                                labelValue = "To",
+                                modifier = Modifier.weight(1f),
+                                value = timeActivityTo,
+                                showErrorMessage = timeActivityToShowError,
+                                colorValue = timeActivityToBorderColor,
+                                errorMessage = timeActivityToErrorMsg
+                            )
                         }
                     )
 
@@ -1089,7 +1111,7 @@ fun RoomReservationForm(
 
                             if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value && middleNameValid.value &&
                                         surnameValid.value && positionValid.value && titleOfActivityValid.value &&
-                                        dateActivityFromValid.value && dateActivityToValid.value))
+                                        dateActivityFromValid.value && dateActivityToValid.value && timeActivityFromValid.value && timeActivityToValid.value))
                             {
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
