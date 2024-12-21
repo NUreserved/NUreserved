@@ -440,14 +440,14 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
 
     OutlinedTextField(
         modifier = modifier
-            .fillMaxWidth()
-            .onFocusEvent {
-                if(it.isFocused){
-                    if(showErrorMessage.value){
-                        value.value = ""
-                    }
-                }
-            },
+            .fillMaxWidth(),
+//            .onFocusEvent {
+//                if(it.isFocused){
+//                    if(showErrorMessage.value){
+//                        value.value = ""
+//                    }
+//                }
+//            },
         value = value.value,
         singleLine = true,
         placeholder = {
@@ -575,8 +575,8 @@ fun RoomReservationForm(
             var title_act_show_error = remember { mutableStateOf(false) }
 
             var input_state = listOf<MutableState<String>>(
-                name_org_dept_clg,
-                title_of_activity
+                nameOrgDeptClg,
+                titleOfActivity
             )
 
             var input_state_color = listOf<MutableState<Color>>(
@@ -651,7 +651,12 @@ fun RoomReservationForm(
                                     verticalAlignment = Alignment.CenterVertically
                                 ){
                                     InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                                        OutlineTextFieldComposable(modifier = Modifier.weight(6f), value = names_input_state[index])
+                                        OutlineTextFieldComposable(
+                                            modifier = Modifier.weight(6f),
+                                            value = name_state[index],
+                                            showErrorMessage = name_show_error[index],
+                                            colorValue = name_state_color[index],
+                                            errorMessage = name_error_message[index])
                                     }
                                 }
 
