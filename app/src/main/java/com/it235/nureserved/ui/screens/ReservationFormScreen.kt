@@ -1127,6 +1127,44 @@ fun RoomReservationForm(
                                 )
                             }
 
+                            if(timeActivityFrom.value.isEmpty()){
+                                setError(
+                                    timeActivityFromErrorMsg,
+                                    timeActivityFromShowError,
+                                    timeActivityFromBorderColor,
+                                    "Empty Field",
+                                    timeActivityFromValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    timeActivityFromErrorMsg,
+                                    timeActivityFromShowError,
+                                    timeActivityFromBorderColor,
+                                    timeActivityFromValid
+                                )
+                            }
+
+                            if(timeActivityTo.value.isEmpty()){
+                                setError(
+                                    timeActivityToErrorMsg,
+                                    timeActivityToShowError,
+                                    timeActivityToBorderColor,
+                                    "Empty Field",
+                                    timeActivityToValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    timeActivityToErrorMsg,
+                                    timeActivityToShowError,
+                                    timeActivityToBorderColor,
+                                    timeActivityToValid
+                                )
+                            }
+
                             if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value && middleNameValid.value &&
                                         surnameValid.value && positionValid.value && titleOfActivityValid.value &&
                                         dateActivityFromValid.value && dateActivityToValid.value && timeActivityFromValid.value && timeActivityToValid.value))
