@@ -917,7 +917,6 @@ fun RoomReservationForm(
                     modifier = Modifier
                         .fillMaxWidth(),
                 ){
-                    var selectedRoom by remember { mutableStateOf<String?>(null) }
 
                     FlowRow(
                         modifier = Modifier
