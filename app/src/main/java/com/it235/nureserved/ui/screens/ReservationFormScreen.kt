@@ -588,6 +588,9 @@ fun RoomReservationForm(
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ){
+            var selectedRooms by remember { mutableStateOf(listOf<String>()) }
+
+            var showSuccessDialog = remember { mutableStateOf(false) }
 
             var nameOrgDeptClgValid = remember { mutableStateOf(false) }
             var dateFilledValid = remember { mutableStateOf(false) }
@@ -600,6 +603,7 @@ fun RoomReservationForm(
             var dateActivityToValid = remember { mutableStateOf(false) }
             var timeActivityFromValid = remember { mutableStateOf(false) }
             var timeActivityToValid = remember { mutableStateOf(false) }
+            var venueValid = remember { mutableStateOf(false) }
 
             var timeActivityFrom = remember { mutableStateOf("") }
             var timeActivityFromBorderColor = remember { mutableStateOf(Color(0xFF000000)) }
