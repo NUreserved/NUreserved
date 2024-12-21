@@ -232,6 +232,12 @@ fun TimePicker(
                 fontSize = 13.sp,
             )
         },
+        placeholder = {
+            CustomPlaceholder(
+                showError = showErrorMessage.value,
+                errorText = errorMessage.value
+            )
+        },
         textStyle = LocalTextStyle.current.copy(
             fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
