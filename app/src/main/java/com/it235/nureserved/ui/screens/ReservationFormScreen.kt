@@ -553,9 +553,7 @@ fun RoomReservationForm(
         ){
 
             var nameOrgDeptClgValid = remember { mutableStateOf(false) }
-            var titleOfActivityValid = remember { mutableStateOf(false) }
             var dateFilledValid = remember { mutableStateOf(false) }
-            var selectedDateValid = remember { mutableStateOf(false) }
             var givenNameValid = remember { mutableStateOf(false) }
             var middleNameValid = remember { mutableStateOf(false) }
             var surnameValid = remember { mutableStateOf(false) }
