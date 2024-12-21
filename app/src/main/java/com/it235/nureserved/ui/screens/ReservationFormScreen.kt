@@ -894,9 +894,15 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 RowLayout(){
-//                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
-//                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
-//                    }
+                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
+                        OutlineTextFieldComposable(
+                            keyboardType = KeyboardType.Number,
+                            value = attendees,
+                            showErrorMessage = attendeesShowError,
+                            colorValue = attendeesBorderColor,
+                            errorMessage = attendeesErrorMsg
+                        )
+                    }
                 }
 
                 Space("h", 20)
@@ -943,9 +949,15 @@ fun RoomReservationForm(
                 Space("h", 20)
 
                 Column(){
-//                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
-//                        OutlineTextFieldComposable(labelValue = "Email of your Adviser/Program Chair/Dean/Teacher")
-//                    }
+                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
+                        OutlineTextFieldComposable(
+                            labelValue = "Email of your Adviser/Program Chair/Dean/Teacher",
+                            value = email,
+                            showErrorMessage = emailShowError,
+                            colorValue = emailBorderColor,
+                            errorMessage = emailErrorMsg
+                        )
+                    }
                 }
 
                 Space("h", 20)
@@ -1093,6 +1105,25 @@ fun RoomReservationForm(
                                 )
                             }
 
+                            if(attendees.value.isEmpty()){
+                                setError(
+                                    attendeesErrorMsg,
+                                    attendeesShowError,
+                                    attendeesBorderColor,
+                                    "Empty field",
+                                    attendeesValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    attendeesErrorMsg,
+                                    attendeesShowError,
+                                    attendeesBorderColor,
+                                    attendeesValid
+                                )
+                            }
+
                             if(titleOfActivity.value.isEmpty()){
                                 setError(
                                     title_act_error_msg,
@@ -1188,9 +1219,29 @@ fun RoomReservationForm(
                                 )
                             }
 
+                            if(email.value.isEmpty()){
+                                setError(
+                                    emailErrorMsg,
+                                    emailShowError,
+                                    emailBorderColor,
+                                    "Please fill out this field",
+                                    emailValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    emailErrorMsg,
+                                    emailShowError,
+                                    emailBorderColor,
+                                    emailValid
+                                )
+                            }
+
                             if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value && middleNameValid.value &&
                                         surnameValid.value && positionValid.value && titleOfActivityValid.value &&
-                                        dateActivityFromValid.value && dateActivityToValid.value && timeActivityFromValid.value && timeActivityToValid.value))
+                                        dateActivityFromValid.value && dateActivityToValid.value && timeActivityFromValid.value && timeActivityToValid.value &&
+                                        attendeesValid.value && emailValid.value))
                             {
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
