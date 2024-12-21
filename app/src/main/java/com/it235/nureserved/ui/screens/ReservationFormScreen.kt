@@ -420,15 +420,23 @@ fun DatePickerTextField(
 @Composable
 fun FilterChipComposable(
     roomNumber: String,
-    isSelected: Boolean,
-    onRoomSelected: (String) -> Unit
+    selectedRooms: List<String>,
+    onRoomSelected: (String) -> Unit,
+    onRoomDeselected: (String) -> Unit,
 ){
+    val isSelected = selectedRooms.contains(roomNumber)
 
     FilterChip(
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = LocalTextStyle.current.color
         ),
-        onClick = { onRoomSelected(roomNumber) },
+        onClick = {
+            if(isSelected){
+                onRoomDeselected(roomNumber)
+            } else{
+                onRoomSelected(roomNumber)
+            }
+        },
         label = {
             Text(text = roomNumber)
         },
@@ -912,8 +920,9 @@ fun RoomReservationForm(
                         rooms.forEach { room ->
                             FilterChipComposable(
                                 roomNumber = room,
-                                isSelected = selectedRoom == room,
-                                onRoomSelected = { selectedRoom = it }
+                                selectedRooms = selectedRooms,
+                                onRoomSelected = { selectedRooms = selectedRooms + it },
+                                onRoomDeselected = { selectedRooms = selectedRooms - it },
                             )
                         }
                     }
