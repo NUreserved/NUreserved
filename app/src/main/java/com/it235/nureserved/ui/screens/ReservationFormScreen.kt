@@ -1004,14 +1004,92 @@ fun RoomReservationForm(
                                 )
                             }
 
-                            if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value &&
-                                middleNameValid.value && surnameValid.value)){
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Something went wrong",
-                                        duration = SnackbarDuration.Short
-                                    )
-                                }
+                            if(position.value.isEmpty()){
+                                setError(
+                                    position_error_msg,
+                                    position_show_error,
+                                    position_border_color,
+                                    "Please fill out this field",
+                                    positionValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    position_error_msg,
+                                    position_show_error,
+                                    position_border_color,
+                                    positionValid
+                                )
+                            }
+
+                            if(titleOfActivity.value.isEmpty()){
+                                setError(
+                                    title_act_error_msg,
+                                    title_act_show_error,
+                                    title_act_border_color,
+                                    "Please fill out this field",
+                                    titleOfActivityValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    title_act_error_msg,
+                                    title_act_show_error,
+                                    title_act_border_color,
+                                    titleOfActivityValid
+                                )
+                            }
+
+                            if(dateActivityFrom.value.isEmpty()){
+                                setError(
+                                    dateActivityFromErrorMsg,
+                                    dateActivityFromShowError,
+                                    dateActivityFromBorderColor,
+                                    "Empty Field",
+                                    dateActivityFromValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    dateActivityFromErrorMsg,
+                                    dateActivityFromShowError,
+                                    dateActivityFromBorderColor,
+                                    dateActivityFromValid
+                                )
+                            }
+
+                            if(dateActivityTo.value.isEmpty()){
+                                setError(
+                                    dateActivityToErrorMsg,
+                                    dateActivityToShowError,
+                                    dateActivityToBorderColor,
+                                    "Empty Field",
+                                    dateActivityToValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    dateActivityToErrorMsg,
+                                    dateActivityToShowError,
+                                    dateActivityToBorderColor,
+                                    dateActivityToValid
+                                )
+                            }
+
+                            if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value && middleNameValid.value &&
+                                        surnameValid.value && positionValid.value && titleOfActivityValid.value &&
+                                        dateActivityFromValid.value && dateActivityToValid.value))
+                            {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            message = "Something went wrong",
+                                            duration = SnackbarDuration.Short
+                                        )
+                                    }
                             }
 //                            navController.navigate(ScreenRoutes.RoomUsageRules.route)
                         },
