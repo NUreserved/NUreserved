@@ -704,6 +704,10 @@ fun RoomReservationForm(
                 title_act_show_error
             )
 
+            if (showSuccessDialog.value) {
+                SuccessAlertDialog(showSuccessDialog, navController)
+            }
+
             RowHeader("ROOM RESERVATIONS FORM")
 
             Column(
@@ -1215,6 +1219,32 @@ fun RoomReservationForm(
 
         }
     }
+}
+
+@Composable
+fun SuccessAlertDialog(showSuccessDialog: MutableState<Boolean>, navController: NavController){
+    AlertDialog(
+        onDismissRequest = {
+            showSuccessDialog.value = false
+            navController.navigate(ScreenRoutes.RoomUsageRules.route)
+                           },
+        title = { Text("Congratulations!") },
+        text = { Text("All input fields are valid") },
+        confirmButton = {
+            Button(onClick = {
+                showSuccessDialog.value = false
+                navController.navigate(ScreenRoutes.RoomUsageRules.route)
+            }) {
+                Text("OK")
+            }
+        },
+        icon = {
+            Icon(
+                imageVector = Icons.Filled.CheckCircle,
+                contentDescription = "Success"
+            )
+        }
+    )
 }
 
 @Preview(showBackground = true, heightDp = 3000)
