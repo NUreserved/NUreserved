@@ -1190,7 +1190,7 @@ fun RoomReservationForm(
                             {
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
-                                            message = "Something went wrong",
+                                            message = "Make sure your inputs are correct",
                                             duration = SnackbarDuration.Short
                                         )
                                     }
