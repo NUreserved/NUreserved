@@ -674,17 +674,28 @@ fun RoomReservationForm(
 
                 inputLabels.forEachIndexed{ index, inputLabel ->
                     Column(){
-                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp),
-                        value = input_state[index], colorValue = input_state_color[index], errorMessage = input_state_error_msg[index],
-                            showErrorMessage = input_state_show_error[index])
+                        InputFieldAndLabel(
+                            inputLabel = inputLabel,
+                            modifier = Modifier.height(5.dp),
+                            value = input_state[index],
+                            colorValue = input_state_color[index],
+                            errorMessage = input_state_error_msg[index],
+                            showErrorMessage = input_state_show_error[index]
+                        )
                     }
 
                     if(index != inputLabels.lastIndex) {
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp), value = selected_date, colorValue = selected_date_border_color,
-                                errorMessage = selected_date_error_msg, showErrorMessage = selected_date_show_error)
+                            InputFieldAndLabel(
+                                inputLabel = "Date Filled:",
+                                modifier = Modifier.width(5.dp),
+                                value = selected_date,
+                                colorValue = selected_date_border_color,
+                                errorMessage = selected_date_error_msg,
+                                showErrorMessage = selected_date_show_error
+                            )
                         }
 
                         Space("h", 20)
@@ -709,7 +720,11 @@ fun RoomReservationForm(
                                         .fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically
                                 ){
-                                    InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
+                                    InputFieldAndLabel(
+                                        inputLabel = nameLabel,
+                                        modifier = Modifier.width(0.dp),
+                                        inputWidth = Modifier.weight(3f)
+                                    ){
                                         OutlineTextFieldComposable(
                                             modifier = Modifier.weight(6f),
                                             value = name_state[index],
@@ -725,7 +740,14 @@ fun RoomReservationForm(
                         Space("h", 20)
 
                         RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp))
+                            InputFieldAndLabel(
+                                inputLabel = "Position:",
+                                modifier = Modifier.width(5.dp),
+                                showErrorMessage = position_show_error,
+                                errorMessage = position_error_msg,
+                                value = position,
+                                colorValue = position_border_color
+                            )
                         }
 
                         Space("h", 20)
@@ -741,9 +763,23 @@ fun RoomReservationForm(
 
                     val dateAndTimePickers = listOf<@Composable () -> Unit>(
                         {
-                            DatePickerTextField(labelValue = "From", modifier = Modifier.weight(1f))
+                            DatePickerTextField(
+                                labelValue = "From",
+                                modifier = Modifier.weight(1f),
+                                value = dateActivityFrom,
+                                showErrorMessage = dateActivityFromShowError,
+                                colorValue = dateActivityFromBorderColor,
+                                errorMessage = dateActivityFromErrorMsg
+                            )
                             Space("w", 10)
-                            DatePickerTextField(labelValue = "To", modifier = Modifier.weight(1f))
+                            DatePickerTextField(
+                                labelValue = "To",
+                                modifier = Modifier.weight(1f),
+                                value = dateActivityTo,
+                                showErrorMessage = dateActivityToShowError,
+                                colorValue = dateActivityToBorderColor,
+                                errorMessage = dateActivityToErrorMsg
+                            )
                         },
                         {
                             TimePicker(labelValue = "From", modifier = Modifier.weight(1f))
