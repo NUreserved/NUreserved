@@ -856,59 +856,109 @@ fun RoomReservationForm(
                         onClick = {
                             snackbarHostState.currentSnackbarData?.dismiss()
 
-                            if(name_org_dept_clg.value.isEmpty()){
-                                name_org_border_color.value = Color(0xFFFF0000)
-                                name_org_show_error.value = true
-                                name_org_error_msg.value = "Please fill out this field"
+                            if(nameOrgDeptClg.value.isEmpty()){
+                                setError(
+                                    name_org_error_msg,
+                                    name_org_show_error,
+                                    name_org_border_color,
+                                    "Please fill out this field",
+                                    nameOrgDeptClgValid,
+                                )
                             }
 
                             else{
-                                name_org_border_color.value = Color(0xFF00FF00)
-                                name_org_show_error.value = false
-                                name_org_error_msg.value = ""
+                                setSuccess(
+                                    name_org_error_msg,
+                                    name_org_show_error,
+                                    name_org_border_color,
+                                    nameOrgDeptClgValid,
+                                )
                             }
 
                             if(selected_date.value.isEmpty()){
-                                selected_date_border_color.value = Color(0xFFFF0000)
-                                selected_date_show_error.value = true
-                                selected_date_error_msg.value = "Please fill out this field"
+                                setError(
+                                    selected_date_error_msg,
+                                    selected_date_show_error,
+                                    selected_date_border_color,
+                                    "Please fill out this field",
+                                    dateFilledValid
+                                )
                             }
 
                             else{
-                                selected_date_border_color.value = Color(0xFF00FF00)
-                                selected_date_show_error.value = false
-                                selected_date_error_msg.value = ""
+                                setSuccess(
+                                    selected_date_error_msg,
+                                    selected_date_show_error,
+                                    selected_date_border_color,
+                                    dateFilledValid
+                                )
                             }
 
                             if(given_name.value.isEmpty()){
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Given name input is empty",
-                                        duration = SnackbarDuration.Short
-                                    )
-                                }
-                            }
-
-                            else if(middle_name.value.isEmpty()){
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Middle name input is empty",
-                                        duration = SnackbarDuration.Short
-                                    )
-                                }
-                            }
-
-                            else if(surname.value.isEmpty()){
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Surname input is empty",
-                                        duration = SnackbarDuration.Short
-                                    )
-                                }
+                                setError(
+                                    given_name_error_msg,
+                                    given_name_show_error,
+                                    given_name_border_color,
+                                    "Please fill out this field",
+                                    givenNameValid
+                                )
                             }
 
                             else{
+                                setSuccess(
+                                    given_name_error_msg,
+                                    given_name_show_error,
+                                    given_name_border_color,
+                                    givenNameValid
+                                )
+                            }
 
+                            if(middle_name.value.isEmpty()){
+                                setError(
+                                    middle_name_error_msg,
+                                    middle_name_show_error,
+                                    middle_name_border_color,
+                                    "Please fill out this field",
+                                    middleNameValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    middle_name_error_msg,
+                                    middle_name_show_error,
+                                    middle_name_border_color,
+                                    middleNameValid
+                                )
+                            }
+
+                            if(surname.value.isEmpty()){
+                                setError(
+                                    surname_error_msg,
+                                    surname_show_error,
+                                    surname_border_color,
+                                    "Please fill out this field",
+                                    surnameValid
+                                )
+                            }
+
+                            else{
+                                setSuccess(
+                                    surname_error_msg,
+                                    surname_show_error,
+                                    surname_border_color,
+                                    surnameValid
+                                )
+                            }
+
+                            if(!(nameOrgDeptClgValid.value && dateFilledValid.value && givenNameValid.value &&
+                                middleNameValid.value && surnameValid.value)){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Something went wrong",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
                             }
 //                            navController.navigate(ScreenRoutes.RoomUsageRules.route)
                         },
