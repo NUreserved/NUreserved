@@ -651,12 +651,6 @@ fun RoomReservationForm(
                 title_act_show_error
             )
 
-            var names_input_state = listOf<MutableState<String>>(
-                given_name,
-                middle_name,
-                surname
-            )
-
             RowHeader("ROOM RESERVATIONS FORM")
 
             Column(
