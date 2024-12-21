@@ -559,6 +559,25 @@ fun RoomReservationForm(
             var givenNameValid = remember { mutableStateOf(false) }
             var middleNameValid = remember { mutableStateOf(false) }
             var surnameValid = remember { mutableStateOf(false) }
+            var positionValid = remember { mutableStateOf(false) }
+            var titleOfActivityValid = remember { mutableStateOf(false) }
+            var dateActivityFromValid = remember { mutableStateOf(false) }
+            var dateActivityToValid = remember { mutableStateOf(false) }
+
+            var dateActivityFrom = remember { mutableStateOf("") }
+            var dateActivityFromBorderColor = remember { mutableStateOf(Color(0xFF000000)) }
+            var dateActivityFromErrorMsg = remember { mutableStateOf("") }
+            var dateActivityFromShowError = remember { mutableStateOf(false) }
+
+            var dateActivityTo = remember { mutableStateOf("") }
+            var dateActivityToBorderColor = remember { mutableStateOf(Color(0xFF000000)) }
+            var dateActivityToErrorMsg = remember { mutableStateOf("") }
+            var dateActivityToShowError = remember { mutableStateOf(false) }
+
+            var position = remember { mutableStateOf("") }
+            var position_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var position_error_msg = remember { mutableStateOf("") }
+            var position_show_error = remember { mutableStateOf(false) }
 
             var selected_date = remember { mutableStateOf("") }
             var selected_date_border_color = remember { mutableStateOf(Color(0xFF000000)) }
