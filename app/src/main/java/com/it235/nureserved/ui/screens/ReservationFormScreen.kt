@@ -1195,7 +1195,20 @@ fun RoomReservationForm(
                                         )
                                     }
                             }
-//                            navController.navigate(ScreenRoutes.RoomUsageRules.route)
+
+                            else if(selectedRooms.isEmpty()){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Choose at least 1 venue",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            }
+
+                            else{
+                                showSuccessDialog.value = true
+                            }
+
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF35408E),
