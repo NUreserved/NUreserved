@@ -492,6 +492,31 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
     }
 }
 
+fun setError(
+    inputErrorMsg: MutableState<String>,
+    showError: MutableState<Boolean>,
+    borderColor: MutableState<Color>,
+    errorMessage: String,
+    isValidInput: MutableState<Boolean>,
+){
+    borderColor.value = Color(0xFFFF0000)
+    showError.value = true
+    inputErrorMsg.value = errorMessage
+    isValidInput.value = false
+}
+
+fun setSuccess(
+    inputErrorMsg: MutableState<String>,
+    showError: MutableState<Boolean>,
+    borderColor: MutableState<Color>,
+    isValidInput: MutableState<Boolean>
+){
+    borderColor.value = Color(0xFF000000)
+    showError.value = true
+    inputErrorMsg.value = ""
+    isValidInput.value = true
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RoomReservationForm(
