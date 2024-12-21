@@ -583,6 +583,7 @@ fun RoomReservationForm(
             var nameOrgDeptClg = remember { mutableStateOf("") }
             var name_org_border_color = remember { mutableStateOf(Color(0xFF000000)) }
             var name_org_error_msg = remember { mutableStateOf("") }
+            var name_org_show_error = remember { mutableStateOf(false) }
 
             var titleOfActivity = remember { mutableStateOf("") }
             var title_act_border_color = remember { mutableStateOf(Color(0xFF000000)) }
@@ -853,15 +854,7 @@ fun RoomReservationForm(
 
                     Button(
                         onClick = {
-                            // Dismiss the currently shown Snackbar, if any
-//                            snackbarHostState.currentSnackbarData?.dismiss()
-//
-//                            scope.launch {
-//                                snackbarHostState.showSnackbar(
-//                                    message = "Date Filled input is empty",
-//                                    duration = SnackbarDuration.Short
-//                                )
-//                            }
+                            snackbarHostState.currentSnackbarData?.dismiss()
 
                             if(name_org_dept_clg.value.isEmpty()){
                                 name_org_border_color.value = Color(0xFFFF0000)
