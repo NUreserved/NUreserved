@@ -552,9 +552,13 @@ fun RoomReservationForm(
                 .padding(innerPadding)
         ){
 
-
-            var name_org_dept_clg = remember { mutableStateOf("") }
-            var title_of_activity = remember { mutableStateOf("") }
+            var nameOrgDeptClgValid = remember { mutableStateOf(false) }
+            var titleOfActivityValid = remember { mutableStateOf(false) }
+            var dateFilledValid = remember { mutableStateOf(false) }
+            var selectedDateValid = remember { mutableStateOf(false) }
+            var givenNameValid = remember { mutableStateOf(false) }
+            var middleNameValid = remember { mutableStateOf(false) }
+            var surnameValid = remember { mutableStateOf(false) }
 
             var selected_date = remember { mutableStateOf("") }
             var selected_date_border_color = remember { mutableStateOf(Color(0xFF000000)) }
@@ -562,17 +566,52 @@ fun RoomReservationForm(
             var selected_date_show_error = remember { mutableStateOf(false) }
 
             var given_name = remember { mutableStateOf("") }
+            var given_name_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var given_name_error_msg = remember { mutableStateOf("") }
+            var given_name_show_error = remember { mutableStateOf(false) }
+
             var middle_name = remember { mutableStateOf("") }
+            var middle_name_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var middle_name_error_msg = remember { mutableStateOf("") }
+            var middle_name_show_error = remember { mutableStateOf(false) }
+
             var surname = remember { mutableStateOf("") }
+            var surname_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var surname_error_msg = remember { mutableStateOf("") }
+            var surname_show_error = remember { mutableStateOf(false) }
 
+            var nameOrgDeptClg = remember { mutableStateOf("") }
             var name_org_border_color = remember { mutableStateOf(Color(0xFF000000)) }
-            var title_act_border_color = remember { mutableStateOf(Color(0xFF000000)) }
-
             var name_org_error_msg = remember { mutableStateOf("") }
-            var title_act_error_msg = remember { mutableStateOf("") }
 
-            var name_org_show_error = remember { mutableStateOf(false) }
+            var titleOfActivity = remember { mutableStateOf("") }
+            var title_act_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var title_act_error_msg = remember { mutableStateOf("") }
             var title_act_show_error = remember { mutableStateOf(false) }
+
+            var name_state = listOf<MutableState<String>>(
+                given_name,
+                middle_name,
+                surname,
+            )
+
+            var name_state_color = listOf<MutableState<Color>>(
+                given_name_border_color,
+                middle_name_border_color,
+                surname_border_color,
+            )
+
+            var name_error_message = listOf<MutableState<String>>(
+                given_name_error_msg,
+                middle_name_error_msg,
+                surname_error_msg,
+            )
+
+            var name_show_error = listOf<MutableState<Boolean>>(
+                given_name_show_error,
+                middle_name_show_error,
+                surname_show_error,
+            )
 
             var input_state = listOf<MutableState<String>>(
                 nameOrgDeptClg,
