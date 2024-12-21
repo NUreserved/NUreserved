@@ -200,6 +200,19 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
     // Determines whether the time picker is dial or input
     var showDial by remember { mutableStateOf(true) }
 
+    @Composable
+    fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
+        if (showError) {
+            Text(
+                text = errorText,
+                color = Color.Red,
+                fontSize = 13.sp
+            ) // Display error message
+        } else {
+            Text(text = text) // Display normal placeholder
+        }
+    }
+
     OutlinedTextField(
         modifier = modifier,
         value = selectedTime,
