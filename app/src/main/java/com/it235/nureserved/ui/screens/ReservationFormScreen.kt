@@ -1036,6 +1036,16 @@ fun RoomReservationForm(
                                 )
                             }
 
+                            else if(nameOrgDeptClg.value.any { it.isDigit() }){
+                                setError(
+                                    name_org_error_msg,
+                                    name_org_show_error,
+                                    name_org_border_color,
+                                    "Digit is not allowed",
+                                    nameOrgDeptClgValid,
+                                )
+                            }
+
                             else{
                                 setSuccess(
                                     name_org_error_msg,
@@ -1131,6 +1141,16 @@ fun RoomReservationForm(
                                 )
                             }
 
+                            else if(position.value.any { it.isDigit() }){
+                                setError(
+                                    position_error_msg,
+                                    position_show_error,
+                                    positionBorderColor,
+                                    "Digit is not allowed",
+                                    positionValid
+                                )
+                            }
+
                             else{
                                 setSuccess(
                                     position_error_msg,
@@ -1166,6 +1186,16 @@ fun RoomReservationForm(
                                     title_act_show_error,
                                     title_act_border_color,
                                     "Please fill out this field",
+                                    titleOfActivityValid
+                                )
+                            }
+
+                            else if(titleOfActivity.value.any { it.isDigit() }){
+                                setError(
+                                    title_act_error_msg,
+                                    title_act_show_error,
+                                    title_act_border_color,
+                                    "Digit is not allowed",
                                     titleOfActivityValid
                                 )
                             }
