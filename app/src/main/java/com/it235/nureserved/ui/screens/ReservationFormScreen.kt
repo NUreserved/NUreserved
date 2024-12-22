@@ -225,9 +225,16 @@ fun TimePicker(
     }
 
     OutlinedTextField(
-        modifier = modifier,
-        value = value.value,
-        onValueChange = { value.value = it },
+        modifier = modifier
+        .onFocusEvent { focusState ->
+            if(focusState.isFocused && showErrorMessage.value){
+                showErrorMessage.value = false
+            }
+        },
+        value = if(showErrorMessage.value) errorMessage.value else value.value,
+//        value = value.value,
+//        onValueChange = { value.value = it },
+        onValueChange = { },
         shape = RoundedCornerShape(10.dp),
         readOnly = true,
         label = {
@@ -361,7 +368,15 @@ fun DatePickerTextField(
     }
 
     OutlinedTextField(
-        value = value.value ?: "",
+        modifier = modifier
+            .fillMaxWidth()
+            .onFocusEvent { focusState ->
+                if(focusState.isFocused && showErrorMessage.value){
+                    showErrorMessage.value = false
+                }
+            },
+        value = if(showErrorMessage.value) errorMessage.value else value.value,
+//        value = value.value ?: "",
         onValueChange = { },
         readOnly = true,
         label = {
@@ -479,8 +494,13 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
 
     OutlinedTextField(
         modifier = modifier
-            .fillMaxWidth(),
-        value = value.value,
+            .fillMaxWidth()
+            .onFocusEvent { focusState ->
+                if(focusState.isFocused && showErrorMessage.value){
+                    showErrorMessage.value = false
+                }
+            },
+        value = if(showErrorMessage.value) errorMessage.value else value.value,
         singleLine = true,
         placeholder = {
             CustomPlaceholder(
