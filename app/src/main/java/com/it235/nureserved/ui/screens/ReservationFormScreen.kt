@@ -573,7 +573,7 @@ fun setSuccess(
 ){
     borderColor.value = Color(0xFF000000)
     showError.value = true
-    inputErrorMsg.value = ""
+    inputErrorMsg.value = value.value
     isValidInput.value = true
 }
 
@@ -661,7 +661,7 @@ fun RoomReservationForm(
             var dateActivityToShowError = remember { mutableStateOf(false) }
 
             var position = remember { mutableStateOf("") }
-            var position_border_color = remember { mutableStateOf(Color(0xFF000000)) }
+            var positionBorderColor = remember { mutableStateOf(Color(0xFF000000)) }
             var position_error_msg = remember { mutableStateOf("") }
             var position_show_error = remember { mutableStateOf(false) }
 
@@ -670,17 +670,17 @@ fun RoomReservationForm(
             var selected_date_error_msg = remember { mutableStateOf("") }
             var selected_date_show_error = remember { mutableStateOf(false) }
 
-            var given_name = remember { mutableStateOf("") }
+            var given_name = remember { mutableStateOf("Juan") }
             var given_name_border_color = remember { mutableStateOf(Color(0xFF000000)) }
             var given_name_error_msg = remember { mutableStateOf("") }
             var given_name_show_error = remember { mutableStateOf(false) }
 
-            var middle_name = remember { mutableStateOf("") }
+            var middle_name = remember { mutableStateOf("Mendoza") }
             var middle_name_border_color = remember { mutableStateOf(Color(0xFF000000)) }
             var middle_name_error_msg = remember { mutableStateOf("") }
             var middle_name_show_error = remember { mutableStateOf(false) }
 
-            var surname = remember { mutableStateOf("") }
+            var surname = remember { mutableStateOf("Dela Cruz") }
             var surname_border_color = remember { mutableStateOf(Color(0xFF000000)) }
             var surname_error_msg = remember { mutableStateOf("") }
             var surname_show_error = remember { mutableStateOf(false) }
@@ -814,7 +814,6 @@ fun RoomReservationForm(
                                             value = name_state[index],
                                             showErrorMessage = name_show_error[index],
                                             colorValue = name_state_color[index],
-                                            errorMessage = name_error_message[index])
                                             errorMessage = name_error_message[index],
                                             readOnly = true,
                                         )
@@ -833,7 +832,7 @@ fun RoomReservationForm(
                                 showErrorMessage = position_show_error,
                                 errorMessage = position_error_msg,
                                 value = position,
-                                colorValue = position_border_color
+                                colorValue = positionBorderColor
                             )
                         }
 
@@ -1123,7 +1122,7 @@ fun RoomReservationForm(
                                 setError(
                                     position_error_msg,
                                     position_show_error,
-                                    position_border_color,
+                                    positionBorderColor,
                                     "Please fill out this field",
                                     positionValid
                                 )
@@ -1133,8 +1132,9 @@ fun RoomReservationForm(
                                 setSuccess(
                                     position_error_msg,
                                     position_show_error,
-                                    position_border_color,
-                                    positionValid
+                                    positionBorderColor,
+                                    positionValid,
+                                    position
                                 )
                             }
 
