@@ -289,6 +289,7 @@ fun TimePicker(
             onConfirm = {
                 value.value = "${timePickerState.hour}:${timePickerState.minute}"
                 showDialog = false
+                showErrorMessage.value = false
             },
             toggle = {
                 IconButton(onClick = { showDial = !showDial}){
@@ -424,6 +425,7 @@ fun DatePickerTextField(
                         SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
                     value.value = formattedDate
                     showModal = false
+                    showErrorMessage.value = false
                 }
                 catch(e: Exception){
                     //add snackbar for error message
@@ -477,7 +479,8 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
                                value: MutableState<String> = remember { mutableStateOf("") },
                                showErrorMessage: MutableState<Boolean> = remember { mutableStateOf(false) },
                                colorValue: MutableState<Color> = remember { mutableStateOf(Color(0xFF000000)) },
-                               errorMessage: MutableState<String> = remember { mutableStateOf("")}){
+                               errorMessage: MutableState<String> = remember { mutableStateOf("")},
+                               readOnly: Boolean = false){
 
     @Composable
     fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
@@ -509,7 +512,11 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
             )
         },
         shape = RoundedCornerShape(10.dp),
-        onValueChange = { value.value = it },
+        readOnly = readOnly,
+        onValueChange = {
+            value.value = it
+            showErrorMessage.value = false
+                        },
         label = {
             Text(
                 text = labelValue,
@@ -561,7 +568,8 @@ fun setSuccess(
     inputErrorMsg: MutableState<String>,
     showError: MutableState<Boolean>,
     borderColor: MutableState<Color>,
-    isValidInput: MutableState<Boolean>
+    isValidInput: MutableState<Boolean>,
+    value: MutableState<String>
 ){
     borderColor.value = Color(0xFF000000)
     showError.value = true
@@ -807,6 +815,9 @@ fun RoomReservationForm(
                                             showErrorMessage = name_show_error[index],
                                             colorValue = name_state_color[index],
                                             errorMessage = name_error_message[index])
+                                            errorMessage = name_error_message[index],
+                                            readOnly = true,
+                                        )
                                     }
                                 }
 
