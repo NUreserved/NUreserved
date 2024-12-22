@@ -1052,6 +1052,7 @@ fun RoomReservationForm(
                                     name_org_show_error,
                                     name_org_border_color,
                                     nameOrgDeptClgValid,
+                                    nameOrgDeptClg,
                                 )
                             }
 
@@ -1070,7 +1071,8 @@ fun RoomReservationForm(
                                     selected_date_error_msg,
                                     selected_date_show_error,
                                     selected_date_border_color,
-                                    dateFilledValid
+                                    dateFilledValid,
+                                    selected_date,
                                 )
                             }
 
@@ -1089,7 +1091,8 @@ fun RoomReservationForm(
                                     given_name_error_msg,
                                     given_name_show_error,
                                     given_name_border_color,
-                                    givenNameValid
+                                    givenNameValid,
+                                    given_name,
                                 )
                             }
 
@@ -1108,7 +1111,8 @@ fun RoomReservationForm(
                                     middle_name_error_msg,
                                     middle_name_show_error,
                                     middle_name_border_color,
-                                    middleNameValid
+                                    middleNameValid,
+                                    middle_name,
                                 )
                             }
 
@@ -1127,7 +1131,8 @@ fun RoomReservationForm(
                                     surname_error_msg,
                                     surname_show_error,
                                     surname_border_color,
-                                    surnameValid
+                                    surnameValid,
+                                    surname,
                                 )
                             }
 
@@ -1176,7 +1181,8 @@ fun RoomReservationForm(
                                     attendeesErrorMsg,
                                     attendeesShowError,
                                     attendeesBorderColor,
-                                    attendeesValid
+                                    attendeesValid,
+                                    attendees
                                 )
                             }
 
@@ -1205,7 +1211,8 @@ fun RoomReservationForm(
                                     title_act_error_msg,
                                     title_act_show_error,
                                     title_act_border_color,
-                                    titleOfActivityValid
+                                    titleOfActivityValid,
+                                    titleOfActivity,
                                 )
                             }
 
@@ -1224,7 +1231,8 @@ fun RoomReservationForm(
                                     dateActivityFromErrorMsg,
                                     dateActivityFromShowError,
                                     dateActivityFromBorderColor,
-                                    dateActivityFromValid
+                                    dateActivityFromValid,
+                                    dateActivityFrom,
                                 )
                             }
 
@@ -1243,7 +1251,8 @@ fun RoomReservationForm(
                                     dateActivityToErrorMsg,
                                     dateActivityToShowError,
                                     dateActivityToBorderColor,
-                                    dateActivityToValid
+                                    dateActivityToValid,
+                                    dateActivityTo,
                                 )
                             }
 
@@ -1262,7 +1271,8 @@ fun RoomReservationForm(
                                     timeActivityFromErrorMsg,
                                     timeActivityFromShowError,
                                     timeActivityFromBorderColor,
-                                    timeActivityFromValid
+                                    timeActivityFromValid,
+                                    timeActivityFrom,
                                 )
                             }
 
@@ -1281,7 +1291,8 @@ fun RoomReservationForm(
                                     timeActivityToErrorMsg,
                                     timeActivityToShowError,
                                     timeActivityToBorderColor,
-                                    timeActivityToValid
+                                    timeActivityToValid,
+                                    timeActivityTo,
                                 )
                             }
 
@@ -1300,7 +1311,8 @@ fun RoomReservationForm(
                                     emailErrorMsg,
                                     emailShowError,
                                     emailBorderColor,
-                                    emailValid
+                                    emailValid,
+                                    email,
                                 )
                             }
 
