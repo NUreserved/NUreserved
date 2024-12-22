@@ -389,12 +389,12 @@ fun DatePickerTextField(
               )
           )
         },
-        placeholder = {
-            CustomPlaceholder(
-                showError = showErrorMessage.value,
-                errorText = errorMessage.value
-            )
-        },
+//        placeholder = {
+//            CustomPlaceholder(
+//                showError = showErrorMessage.value,
+//                errorText = errorMessage.value
+//            )
+//        },
         textStyle = LocalTextStyle.current.copy(
             fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
@@ -413,7 +413,6 @@ fun DatePickerTextField(
                 modifier = Modifier.clickable{ showModal = !showModal}
             )
         },
-        modifier = modifier.fillMaxWidth()
     )
 
     if(showModal){
@@ -482,18 +481,18 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
                                errorMessage: MutableState<String> = remember { mutableStateOf("")},
                                readOnly: Boolean = false){
 
-    @Composable
-    fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
-        if (showError) {
-            Text(
-                text = errorText,
-                color = Color.Red,
-                fontSize = 13.sp
-            ) // Display error message
-        } else {
-            Text(text = text) // Display normal placeholder
-        }
-    }
+//    @Composable
+//    fun CustomPlaceholder(text: String = "", showError: Boolean, errorText: String) {
+//        if (showError) {
+//            Text(
+//                text = errorText,
+//                color = Color.Red,
+//                fontSize = 13.sp
+//            ) // Display error message
+//        } else {
+//            Text(text = text) // Display normal placeholder
+//        }
+//    }
 
     OutlinedTextField(
         modifier = modifier
@@ -505,12 +504,12 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
             },
         value = if(showErrorMessage.value) errorMessage.value else value.value,
         singleLine = true,
-        placeholder = {
-            CustomPlaceholder(
-                showError = showErrorMessage.value,
-                errorText = errorMessage.value
-            )
-        },
+//        placeholder = {
+//            CustomPlaceholder(
+//                showError = showErrorMessage.value,
+//                errorText = errorMessage.value
+//            )
+//        },
         shape = RoundedCornerShape(10.dp),
         readOnly = readOnly,
         onValueChange = {
@@ -528,7 +527,7 @@ fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: Keyb
         },
         textStyle = TextStyle(
             fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
+//            fontWeight = FontWeight.Medium,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
@@ -1022,6 +1021,7 @@ fun RoomReservationForm(
                     Button(
                         onClick = {
                             snackbarHostState.currentSnackbarData?.dismiss()
+//                            snackbarHostState.currentSnackbarData?.dismiss()
 
                             if(nameOrgDeptClg.value.isEmpty()){
                                 setError(
