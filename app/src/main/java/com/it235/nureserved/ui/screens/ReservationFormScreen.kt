@@ -612,6 +612,8 @@ fun RoomReservationForm(
         ){
             var selectedRooms by remember { mutableStateOf(listOf<String>()) }
 
+            val focusManager = LocalFocusManager.current
+
             var showSuccessDialog = remember { mutableStateOf(false) }
 
             var nameOrgDeptClgValid = remember { mutableStateOf(false) }
@@ -1020,8 +1022,9 @@ fun RoomReservationForm(
 
                     Button(
                         onClick = {
-                            snackbarHostState.currentSnackbarData?.dismiss()
 //                            snackbarHostState.currentSnackbarData?.dismiss()
+
+                            focusManager.clearFocus()
 
                             if(nameOrgDeptClg.value.isEmpty()){
                                 setError(
