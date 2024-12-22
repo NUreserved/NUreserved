@@ -89,7 +89,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputFieldAndLabel(
     inputWidth: Modifier = Modifier,
