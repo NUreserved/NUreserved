@@ -191,7 +191,6 @@ private fun AppTitle() {
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
-            fontStyle = FontStyle.Italic
         )
     )
 }
