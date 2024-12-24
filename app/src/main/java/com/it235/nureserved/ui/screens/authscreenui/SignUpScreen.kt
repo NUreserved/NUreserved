@@ -196,6 +196,8 @@ private fun Logo() {
 @Composable
 private fun AppTitle() {
     Text(
+        modifier = Modifier
+            .padding(top = 40.dp),
         color = Color(0xFF333333),
         text = "Create an account",
         style = TextStyle(
