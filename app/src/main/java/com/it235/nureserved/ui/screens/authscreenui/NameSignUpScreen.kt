@@ -15,6 +15,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +49,8 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun NameSignUpScreen(
@@ -152,7 +156,7 @@ fun NameSignUpScreen(
                         Space("h", 10)
                         NameField("Last Name", lastname) { lastname = it }
                         Space("h", 15)
-                        NextButton(navController)
+                        NextButton(navController, firstname, middlename, lastname, scope, snackbarHostState)
 
                     }
                 }
@@ -196,12 +200,33 @@ private fun NameField(inputType: String, value: String, onValueChange: (String) 
 }
 
 @Composable
-private fun NextButton(navController: NavController){
+private fun NextButton(
+    navController: NavController,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState
+){
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Button(
         onClick = {
-            navController.navigate(ScreenRoutes.ProgramStudentNumberSignUp.route){
-                navController.popBackStack()
-            } },
+            keyboardController?.hide()
+            snackbarHostState.currentSnackbarData?.dismiss()
+
+            if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
+                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
+            }
+            else{
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Please fill in all the fields.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
+            }
+        },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = 30.dp)
             .fillMaxWidth(),

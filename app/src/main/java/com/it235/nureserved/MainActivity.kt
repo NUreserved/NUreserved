@@ -73,9 +73,41 @@ private fun Main() {
                 startDestination = if (isLoggedIn) ScreenRoutes.Home.route else ScreenRoutes.Login.route
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
-                composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
+                //added code to pass data from the different signup screens
+                composable(
+                    route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{program}/{studentNumber}",
+                    arguments = listOf(
+                        navArgument("firstName") { type = NavType.StringType},
+                        navArgument("middleName") { type = NavType.StringType},
+                        navArgument("lastName") { type = NavType.StringType},
+                        navArgument("program") { type = NavType.StringType},
+                        navArgument("studentNumber") { type = NavType.StringType}
+                    )
+                ) { backStackEntry ->
+                    val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
+                    val middleName = backStackEntry.arguments?.getString("middleName") ?: ""
+                    val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+                    val program = backStackEntry.arguments?.getString("program") ?: ""
+                    val studentNumber = backStackEntry.arguments?.getString("studentNumber") ?: ""
+
+                    SignUpScreen(navController = navController, firstName = firstName, middleName = middleName, lastName = lastName, program = program, studentNumber = studentNumber)
+                }
                 composable(ScreenRoutes.NameSignUp.route) { NameSignUpScreen(navController) }
-                composable(ScreenRoutes.ProgramStudentNumberSignUp.route) { ProgramStudentNumberSignUpScreen(navController) }
+                //added code to pass data from the different signup screens
+                composable(
+                    route = "${ScreenRoutes.ProgramStudentNumberSignUp.route}/{firstName}/{middleName}/{lastName}",
+                    arguments = listOf(
+                        navArgument("firstName") { type = NavType.StringType},
+                        navArgument("middleName") { type = NavType.StringType},
+                        navArgument("lastName") { type = NavType.StringType}
+                    )
+                ) { backStackEntry ->
+                    val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
+                    val middleName = backStackEntry.arguments?.getString("middleName") ?: ""
+                    val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+
+                    ProgramStudentNumberSignUpScreen(navController = navController, firstName = firstName, middleName = middleName, lastName = lastName)
+                }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
                     route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
