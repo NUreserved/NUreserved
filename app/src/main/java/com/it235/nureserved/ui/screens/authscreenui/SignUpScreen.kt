@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -65,10 +66,17 @@ import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import com.google.firebase.firestore.FirebaseFirestore
+import com.it235.nureserved.ScreenRoutes
 
 @Composable
 fun SignUpScreen(
-    navController: NavController
+    navController: NavController,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    program: String,
+    studentNumber: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -128,8 +136,7 @@ fun SignUpScreen(
                                 .fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
-                            Logo()
-                            Space("h", 20)
+
                             AppTitle()
                             Space("h", 40)
 
@@ -150,6 +157,11 @@ fun SignUpScreen(
                                 email,
                                 password,
                                 confirmPassword,
+                                firstName,
+                                middleName,
+                                lastName,
+                                program,
+                                studentNumber,
                                 navController,
                                 scope,
                                 snackbarHostState
@@ -184,13 +196,14 @@ private fun Logo() {
 @Composable
 private fun AppTitle() {
     Text(
-        color = brandColorBlue,
-        text = "NUreserved",
+        modifier = Modifier
+            .padding(top = 40.dp),
+        color = Color(0xFF333333),
+        text = "Create an account",
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
-            fontStyle = FontStyle.Italic
         )
     )
 }
@@ -283,12 +296,18 @@ private fun RegisterButton(
     email: String,
     password: String,
     confirmPassword: String,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    program: String,
+    studentNumber: String,
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val db = FirebaseFirestore.getInstance()//the database
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
@@ -317,7 +336,32 @@ private fun RegisterButton(
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                navController.popBackStack()
+                                //hashmap of the data
+                                val user = hashMapOf(
+                                    "first name" to firstName,
+                                    "middle name" to middleName,
+                                    "last name" to lastName,
+                                    "program" to program,
+                                    "student number" to studentNumber,
+                                    "email" to email
+                                )
+                                //add data to database
+                                db.collection("user")
+                                    .document(studentNumber)
+                                    .set(user)
+                                    .addOnCompleteListener {e ->
+                                        if(e.isSuccessful){
+                                            navController.navigate(ScreenRoutes.Home.route)
+                                        }
+                                        else{
+                                            scope.launch {
+                                                snackbarHostState.showSnackbar(
+                                                    message = "Sign up failed: ${e.exception?.message}",
+                                                    duration = SnackbarDuration.Short
+                                                )
+                                            }
+                                        }
+                                    }
 
                             } else {
                                 scope.launch {
@@ -387,7 +431,7 @@ fun AccountExistNote(navController: NavController) {
                 // Navigate back to the login screen when "Login" is clicked
                 annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.popBackStack()
+                        navController.navigate(ScreenRoutes.Login.route)
                     }
             },
         text = annotatedText,
@@ -406,7 +450,7 @@ private fun RegisterNote() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-        text = "Login with your Office 365 account to use and benefit from the service" +
+        text = "Sign Up with your Office 365 account to use and benefit from the service" +
                 " we offer",
         style = TextStyle(
             fontFamily = poppinsFamily,
@@ -416,10 +460,10 @@ private fun RegisterNote() {
         textAlign = TextAlign.Center,
     )
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewSignUpScreen(){
-    val navController = rememberNavController()
-    SignUpScreen(navController = navController)
-}
+//tbh di ako sure kung important to, icomment ko muna para di magerror
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewSignUpScreen(){
+//    val navController = rememberNavController()
+//    SignUpScreen(navController = navController)
+//}

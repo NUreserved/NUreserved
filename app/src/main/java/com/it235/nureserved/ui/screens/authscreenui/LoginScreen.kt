@@ -367,7 +367,7 @@ fun NoAccountNote(navController: NavController) {
                 // Navigate to the SignUpScreen when "Register" is clicked
                 annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(ScreenRoutes.SignUp.route)
+                        navController.navigate(ScreenRoutes.NameSignUp.route)
                     }
             },
         text = annotatedText,
