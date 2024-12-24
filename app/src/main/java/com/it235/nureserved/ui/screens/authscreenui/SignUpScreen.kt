@@ -136,8 +136,7 @@ fun SignUpScreen(
                                 .fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
-                            Logo()
-                            Space("h", 20)
+
                             AppTitle()
                             Space("h", 40)
 
