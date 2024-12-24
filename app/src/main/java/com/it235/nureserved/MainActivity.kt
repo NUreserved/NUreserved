@@ -24,6 +24,8 @@ import com.it235.nureserved.ui.screens.RoomUsageRules
 import com.it235.nureserved.ui.screens.SplashScreen
 import com.it235.nureserved.ui.screens.TermsAndConditionsScreen
 import com.it235.nureserved.ui.screens.authscreenui.LoginScreen
+import com.it235.nureserved.ui.screens.authscreenui.NameSignUpScreen
+import com.it235.nureserved.ui.screens.authscreenui.ProgramStudentNumberSignUpScreen
 import com.it235.nureserved.ui.screens.authscreenui.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
 import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
