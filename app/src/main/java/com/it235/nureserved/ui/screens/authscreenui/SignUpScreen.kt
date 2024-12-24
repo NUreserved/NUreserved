@@ -185,8 +185,8 @@ private fun Logo() {
 @Composable
 private fun AppTitle() {
     Text(
-        color = brandColorBlue,
-        text = "NUreserved",
+        color = Color(0xFF333333),
+        text = "Create an account",
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
