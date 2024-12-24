@@ -119,7 +119,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,
-                                    fontSize = 32.sp,
+                                    fontSize = 25.sp,
                                 )
                             )
                         }
