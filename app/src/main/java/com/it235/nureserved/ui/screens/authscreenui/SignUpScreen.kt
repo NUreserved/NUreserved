@@ -406,7 +406,7 @@ private fun RegisterNote() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-        text = "Login with your Office 365 account to use and benefit from the service" +
+        text = "Sign Up with your Office 365 account to use and benefit from the service" +
                 " we offer",
         style = TextStyle(
             fontFamily = poppinsFamily,
