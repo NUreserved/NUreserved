@@ -140,7 +140,7 @@ fun NameSignUpScreen(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
                                 color = Color(0xFF333333),
-                                text = "What's your name",
+                                text = "What's your name?",
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,

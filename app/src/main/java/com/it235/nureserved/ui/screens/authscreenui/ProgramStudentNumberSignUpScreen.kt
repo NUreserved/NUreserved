@@ -142,7 +142,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
                                 color = Color(0xFF333333),
-                                text = "What's your program",
+                                text = "What's your program?",
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,
@@ -162,7 +162,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
                                 color = Color(0xFF333333),
-                                text = "What's your student number",
+                                text = "What's your student number?",
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,
