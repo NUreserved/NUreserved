@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -167,8 +168,16 @@ fun ProgramStudentNumberSignUpScreen(
                         InputField(
                             "Student Number",
                             student_number,
-                            { Text ( text = "Example: 2024-123456")}
-                            ) { student_number = it }
+                            {
+                                Text (
+                                    text = "Example: 2024-123456",
+                                    style = TextStyle(
+                                        fontFamily = poppinsFamily,
+                                        fontStyle = FontStyle.Italic,
+                                    )
+                                )
+                            }
+                        ) { student_number = it }
                         Space("h", 10)
 
                         NextButton(navController)
