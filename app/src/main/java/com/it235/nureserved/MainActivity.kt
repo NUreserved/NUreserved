@@ -74,6 +74,8 @@ private fun Main() {
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
                 composable(ScreenRoutes.SignUp.route) { SignUpScreen(navController) }
+                composable(ScreenRoutes.NameSignUp.route) { NameSignUpScreen(navController) }
+                composable(ScreenRoutes.ProgramStudentNumberSignUp.route) { ProgramStudentNumberSignUpScreen(navController) }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
                     route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
