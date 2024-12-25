@@ -122,57 +122,31 @@ fun ProgramStudentNumberSignUpScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ){
-                            Text(
-                                color = Color(0xFF333333),
-                                text = "Create an account",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 25.sp,
-                                )
-                            )
-                        }
+                            text = "Create an account",
+                            fontSize = 25.sp,
+                            TextAlign.Center,
+                        )
 
 
                         Space("h", 30)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your program?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your program?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 15)
                         InputField("Program", program) { program = it}
                         Space("h", 10)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your student number?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your student number?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 10)
                         InputField(

@@ -117,31 +117,24 @@ fun NameSignUpScreen(
                         var middlename by remember { mutableStateOf("") }
                         var lastname by remember { mutableStateOf("") }
 
-                        Column(
+                        SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ){
-                            SignUpText(
-                                text = "Create an account",
-                                fontSize = 25.sp,
-                            )
-                        }
+                            text = "Create an account",
+                            fontSize = 25.sp,
+                            TextAlign.Center,
+                        )
 
 
                         Space("h", 30)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            SignUpText(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                text = "What's your name?",
-                                fontSize = 20.sp,
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your name?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 15)
                         NameField("First Name", firstname) { firstname = it}
