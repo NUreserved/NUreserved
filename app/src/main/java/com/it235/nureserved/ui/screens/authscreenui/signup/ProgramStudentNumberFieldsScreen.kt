@@ -119,23 +119,6 @@ fun ProgramStudentNumberSignUpScreen(
                         var program by remember { mutableStateOf("") }
                         var student_number by remember { mutableStateOf("") }
 
-//                        Column(
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .padding(top = 30.dp),
-//                            horizontalAlignment = Alignment.CenterHorizontally
-//                        ){
-//                            Text(
-//                                color = Color(0xFF333333),
-//                                text = "Create an account",
-//                                style = TextStyle(
-//                                    fontFamily = poppinsFamily,
-//                                    fontWeight = FontWeight.SemiBold,
-//                                    fontSize = 25.sp,
-//                                )
-//                            )
-//                        }
-
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
