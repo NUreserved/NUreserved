@@ -105,11 +105,13 @@ fun SignUpText(
     modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit,
+    textAlign: TextAlign? = null,
 ){
     Text(
         modifier = modifier,
         color = darkGray,
         text = text,
+        textAlign = textAlign,
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
