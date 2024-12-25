@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -44,6 +45,7 @@ import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
