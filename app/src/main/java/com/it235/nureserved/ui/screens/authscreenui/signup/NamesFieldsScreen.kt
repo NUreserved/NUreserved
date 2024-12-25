@@ -166,17 +166,7 @@ private fun NameField(label: String, value: String, onValueChange: (String) -> U
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = label,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(label) },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,

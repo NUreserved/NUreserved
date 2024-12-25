@@ -213,17 +213,7 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = "Email",
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle("Email") },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -250,17 +240,7 @@ private fun PasswordField(labelValue: String = "", value: String, onValueChange:
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = labelValue,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(labelValue) },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             val image = if (!passwordVisible) R.drawable.ic_password_visibility_off else R.drawable.ic_password_visibility_on

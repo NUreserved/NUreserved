@@ -210,17 +210,7 @@ private fun InputField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = inputType,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(inputType) },
         supportingText = { supportingText() },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
