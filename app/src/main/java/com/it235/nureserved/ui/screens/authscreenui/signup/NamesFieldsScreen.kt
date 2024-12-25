@@ -120,14 +120,9 @@ fun NameSignUpScreen(
                                 .padding(top = 30.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ){
-                            Text(
-                                color = Color(0xFF333333),
+                            SignUpText(
                                 text = "Create an account",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 25.sp,
-                                )
+                                fontSize = 25.sp,
                             )
                         }
 
@@ -137,16 +132,11 @@ fun NameSignUpScreen(
                         Column(
                             modifier = Modifier.fillMaxWidth(),
                         ){
-                            Text(
+                            SignUpText(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
-                                color = Color(0xFF333333),
                                 text = "What's your name?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
+                                fontSize = 20.sp,
                             )
                         }
 
