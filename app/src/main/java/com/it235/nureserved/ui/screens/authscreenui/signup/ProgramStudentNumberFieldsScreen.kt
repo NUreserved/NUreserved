@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,8 +53,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun NameSignUpScreen(
-    navController: NavController
+fun ProgramStudentNumberSignUpScreen(
+    navController: NavController,
+    firstName: String,
+    middleName: String,
+    lastName: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -109,9 +112,8 @@ fun NameSignUpScreen(
                             containerColor = Color(0xFFFFFFFF)
                         )
                     ){
-                        var firstname by remember { mutableStateOf("") }
-                        var middlename by remember { mutableStateOf("") }
-                        var lastname by remember { mutableStateOf("") }
+                        var program by remember { mutableStateOf("") }
+                        var student_number by remember { mutableStateOf("") }
 
                         Column(
                             modifier = Modifier
@@ -140,7 +142,7 @@ fun NameSignUpScreen(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
                                 color = Color(0xFF333333),
-                                text = "What's your name?",
+                                text = "What's your program?",
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,
@@ -150,13 +152,42 @@ fun NameSignUpScreen(
                         }
 
                         Space("h", 15)
-                        NameField("First Name", firstname) { firstname = it}
+                        InputField("Program", program) { program = it}
                         Space("h", 10)
-                        NameField("Middle Name", middlename) { middlename = it }
+
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                        ){
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 20.dp),
+                                color = Color(0xFF333333),
+                                text = "What's your student number?",
+                                style = TextStyle(
+                                    fontFamily = poppinsFamily,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 20.sp,
+                                )
+                            )
+                        }
+
                         Space("h", 10)
-                        NameField("Last Name", lastname) { lastname = it }
-                        Space("h", 15)
-                        NextButton(navController, firstname, middlename, lastname, scope, snackbarHostState)
+                        InputField(
+                            "Student Number",
+                            student_number,
+                            {
+                                Text (
+                                    text = "Example: 2024-123456",
+                                    style = TextStyle(
+                                        fontFamily = poppinsFamily,
+                                        fontStyle = FontStyle.Italic,
+                                    )
+                                )
+                            }
+                        ) { student_number = it }
+                        Space("h", 10)
+
+                        NextButton(navController, firstName, middleName, lastName, program, student_number, scope, snackbarHostState)
 
                     }
                 }
@@ -168,7 +199,12 @@ fun NameSignUpScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(inputType: String, value: String, onValueChange: (String) -> Unit) {
+private fun InputField(
+    inputType: String,
+    value: String,
+    supportingText: @Composable () -> Unit = {},
+    onValueChange: (String) -> Unit,
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -184,6 +220,7 @@ private fun NameField(inputType: String, value: String, onValueChange: (String) 
                 )
             )
         },
+        supportingText = { supportingText() },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -205,6 +242,8 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    program: String,
+    studentNumber: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState
 ){
@@ -216,7 +255,7 @@ private fun NextButton(
             snackbarHostState.currentSnackbarData?.dismiss()
 
             if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
+                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
             else{
                 scope.launch {

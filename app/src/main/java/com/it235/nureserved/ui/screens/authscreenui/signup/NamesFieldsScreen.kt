@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +34,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,11 +52,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProgramStudentNumberSignUpScreen(
-    navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String
+fun NameSignUpScreen(
+    navController: NavController
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -112,8 +108,9 @@ fun ProgramStudentNumberSignUpScreen(
                             containerColor = Color(0xFFFFFFFF)
                         )
                     ){
-                        var program by remember { mutableStateOf("") }
-                        var student_number by remember { mutableStateOf("") }
+                        var firstname by remember { mutableStateOf("") }
+                        var middlename by remember { mutableStateOf("") }
+                        var lastname by remember { mutableStateOf("") }
 
                         Column(
                             modifier = Modifier
@@ -142,7 +139,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 modifier = Modifier
                                     .padding(start = 20.dp),
                                 color = Color(0xFF333333),
-                                text = "What's your program?",
+                                text = "What's your name?",
                                 style = TextStyle(
                                     fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.SemiBold,
@@ -152,42 +149,13 @@ fun ProgramStudentNumberSignUpScreen(
                         }
 
                         Space("h", 15)
-                        InputField("Program", program) { program = it}
+                        NameField("First Name", firstname) { firstname = it}
                         Space("h", 10)
-
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your student number?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
-
+                        NameField("Middle Name", middlename) { middlename = it }
                         Space("h", 10)
-                        InputField(
-                            "Student Number",
-                            student_number,
-                            {
-                                Text (
-                                    text = "Example: 2024-123456",
-                                    style = TextStyle(
-                                        fontFamily = poppinsFamily,
-                                        fontStyle = FontStyle.Italic,
-                                    )
-                                )
-                            }
-                        ) { student_number = it }
-                        Space("h", 10)
-
-                        NextButton(navController, firstName, middleName, lastName, program, student_number, scope, snackbarHostState)
+                        NameField("Last Name", lastname) { lastname = it }
+                        Space("h", 15)
+                        NextButton(navController, firstname, middlename, lastname, scope, snackbarHostState)
 
                     }
                 }
@@ -199,12 +167,7 @@ fun ProgramStudentNumberSignUpScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun InputField(
-    inputType: String,
-    value: String,
-    supportingText: @Composable () -> Unit = {},
-    onValueChange: (String) -> Unit,
-) {
+private fun NameField(inputType: String, value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -220,7 +183,6 @@ private fun InputField(
                 )
             )
         },
-        supportingText = { supportingText() },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -242,8 +204,6 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
-    program: String,
-    studentNumber: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState
 ){
@@ -255,7 +215,7 @@ private fun NextButton(
             snackbarHostState.currentSnackbarData?.dismiss()
 
             if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
-                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
+                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
             }
             else{
                 scope.launch {
