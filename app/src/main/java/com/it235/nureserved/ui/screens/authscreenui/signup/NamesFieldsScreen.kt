@@ -52,6 +52,7 @@ import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import com.it235.nureserved.composables.SignUpText
 
 @Composable
 fun NameSignUpScreen(
