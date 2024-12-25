@@ -98,6 +98,24 @@ private fun CustomDialog(
 }
 
 @Composable
+fun SignUpText(
+    modifier: Modifier = Modifier,
+    text: String,
+    fontSize: TextUnit,
+){
+    Text(
+        modifier = modifier,
+        color = darkGray,
+        text = text,
+        style = TextStyle(
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = fontSize,
+        )
+    )
+}
+
+@Composable
 fun SuccessDialog(
     title: String,
     onDismiss: () -> Unit,
