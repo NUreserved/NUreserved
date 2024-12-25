@@ -118,6 +118,19 @@ fun SignUpText(
     )
 }
 
+@Composable
+fun AuthInputPlaceholderTextStyle(label: String){
+    Text(
+        color = white3,
+        text = label,
+        style = TextStyle(
+            fontFamily = poppinsFamily,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+        )
+    )
+}
+
 /* end of SignUp Screens Composable */
 
 @Composable
