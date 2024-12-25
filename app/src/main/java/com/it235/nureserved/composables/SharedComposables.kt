@@ -97,6 +97,8 @@ private fun CustomDialog(
     )
 }
 
+/* SignUp Screens Composable */
+
 @Composable
 fun SignUpText(
     modifier: Modifier = Modifier,
@@ -114,6 +116,8 @@ fun SignUpText(
         )
     )
 }
+
+/* end of SignUp Screens Composable */
 
 @Composable
 fun SuccessDialog(
