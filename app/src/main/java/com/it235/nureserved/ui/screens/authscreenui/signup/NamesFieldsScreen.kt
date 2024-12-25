@@ -168,6 +168,24 @@ fun NameSignUpScreen(
 }
 
 @Composable
+fun SignUpText(
+    modifier: Modifier = Modifier,
+    text: String,
+    fontSize: TextUnit,
+){
+    Text(
+        modifier = modifier,
+        color = darkGray,
+        text = text,
+        style = TextStyle(
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = fontSize,
+        )
+    )
+}
+
+@Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun NameField(inputType: String, value: String, onValueChange: (String) -> Unit) {
     TextField(
