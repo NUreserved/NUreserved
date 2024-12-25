@@ -178,7 +178,7 @@ fun ProgramStudentNumberSignUpScreen(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun InputField(
-    inputType: String,
+    label: String,
     value: String,
     supportingText: @Composable () -> Unit = {},
     onValueChange: (String) -> Unit,
@@ -187,7 +187,7 @@ private fun InputField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = { AuthInputPlaceholderTextStyle(inputType) },
+        placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = { supportingText() },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
