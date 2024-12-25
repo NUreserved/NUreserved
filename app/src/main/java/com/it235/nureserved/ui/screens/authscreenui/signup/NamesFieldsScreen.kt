@@ -160,7 +160,7 @@ fun NameSignUpScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(inputType: String, value: String, onValueChange: (String) -> Unit) {
+private fun NameField(label: String, value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -168,7 +168,7 @@ private fun NameField(inputType: String, value: String, onValueChange: (String) 
         placeholder = {
             Text(
                 color = white3,
-                text = inputType,
+                text = label,
                 style = TextStyle(
                     fontFamily = poppinsFamily,
                     fontSize = 18.sp,
