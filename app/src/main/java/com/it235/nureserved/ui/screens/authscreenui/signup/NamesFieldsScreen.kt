@@ -178,7 +178,7 @@ private fun NameField(label: String, value: String, onValueChange: (String) -> U
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp)
+            .padding(horizontal = 20.dp)
     )
 }
 
