@@ -126,7 +126,7 @@ fun ProgramStudentNumberSignUpScreen(
                             containerColor = white
                         )
                     ){
-                        var program by remember { mutableStateOf("") }
+
                         var studentNumber by remember { mutableStateOf("") }
 
                         val options = listOf(
