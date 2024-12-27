@@ -129,6 +129,24 @@ fun ProgramStudentNumberSignUpScreen(
                         var program by remember { mutableStateOf("") }
                         var studentNumber by remember { mutableStateOf("") }
 
+                        val options = listOf(
+                            "Program",
+                            "Option 1",
+                            "Option 2",
+                            "Option 3",
+                            "Option 4",
+                            "Option 5",
+                            "Option 6",
+                            "Option 7",
+                            "Option 8",
+                            "Option 9",
+                            "Option 10",
+                            "Option 11",
+                            "Option 12",
+                        )
+
+                        var program by remember { mutableStateOf(options[0]) }
+
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
