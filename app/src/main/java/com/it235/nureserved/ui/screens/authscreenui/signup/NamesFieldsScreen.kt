@@ -181,11 +181,39 @@ fun NameSignUpScreen(
                     }
                 }
 
-                    }
-                }
-
             }
         }
+    }
+}
+
+fun validateName(name: String) : String{
+    var nameSymbolPattern = Regex("\\W")
+    var nameDigitPattern = Regex("\\d")
+    var nameSpacePattern = Regex("\\s")
+
+    return when {
+        name.isBlank() -> "This field cannot be empty."
+        name.length <= 1 -> "Name should be more than 1 character."
+        nameSpacePattern.containsMatchIn(name) -> {
+            when{
+                name.startsWith(" ") -> "Name should not start with a space."
+                name.endsWith(" ") -> "Name should not end with a space."
+                else -> {
+                    //ensure that subnames separated by space adheres to the minimum character length
+                    //ensure that subnames separated by space does not contain symbols or digits
+                    val subNames = name.split(" ")
+                    subNames.forEach { el ->
+                        if(el.length == 1) return "Name separated by space should not contain single letter words."
+                        else if(nameSymbolPattern.containsMatchIn(el)) return "Name should not contain any special characters."
+                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
+                    }
+                    ""
+                }
+            }
+        }
+        nameSymbolPattern.containsMatchIn(name) -> "Name should not contain any special characters."
+        nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
+        else -> ""
     }
 }
 
