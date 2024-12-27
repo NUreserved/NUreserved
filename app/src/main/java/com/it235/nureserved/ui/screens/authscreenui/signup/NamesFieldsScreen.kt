@@ -150,13 +150,36 @@ fun NameSignUpScreen(
                         )
 
                         Space("h", 15)
-                        NameField("First Name", firstname) { firstname = it}
+                        NameField("First Name", firstname, fnameShowSupportText, isValidFname) {
+                            firstname = it
+                            fnameShowSupportText = true
+                        }
                         Space("h", 10)
-                        NameField("Middle Name", middlename) { middlename = it }
+                        NameField("Middle Name", middlename, mnameShowSupportText, isValidMname) {
+                            middlename = it
+                            mnameShowSupportText = true
+                        }
                         Space("h", 10)
-                        NameField("Last Name", lastname) { lastname = it }
+                        NameField("Last Name", lastname, lnameShowSupportText, isValidLname) {
+                            lastname = it
+                            lnameShowSupportText = true
+
+                        }
                         Space("h", 15)
-                        NextButton(navController, firstname, middlename, lastname, scope, snackbarHostState)
+                        NextButton(
+                            navController,
+                            firstname,
+                            middlename,
+                            lastname,
+                            scope,
+                            snackbarHostState,
+                            isValidFname,
+                            isValidMname,
+                            isValidLname,
+                        )
+
+                    }
+                }
 
                     }
                 }
@@ -224,13 +247,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
+            if(isValidFname.value && isValidMname.value && isValidLname.value){
                 navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
             }
             else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields.",
+                        message = "Make sure your inputs are correct",
                         duration = SnackbarDuration.Short
                     )
                 }
