@@ -347,6 +347,7 @@ private fun LoginButton(
 
             //login system
             if (email.isNotBlank() && password.isNotBlank()) {
+                loading.value = true
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -354,6 +355,7 @@ private fun LoginButton(
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
+                            loading.value = false
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     message = "Login failed: ${task.exception?.message}",
@@ -363,6 +365,7 @@ private fun LoginButton(
                         }
                     }
             } else {
+                loading.value = false
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Please fill in all the fields with email and password.",

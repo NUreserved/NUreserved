@@ -346,6 +346,7 @@ private fun RegisterButton(
             // create user
             if (email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()) {
                 if(confirmPassword == password){
+                    loading.value = true
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -367,6 +368,7 @@ private fun RegisterButton(
                                             navController.navigate(ScreenRoutes.Home.route)
                                         }
                                         else{
+                                            loading.value = false
                                             scope.launch {
                                                 snackbarHostState.showSnackbar(
                                                     message = "Sign up failed: ${e.exception?.message}",
@@ -377,6 +379,7 @@ private fun RegisterButton(
                                     }
 
                             } else {
+                                loading.value = false
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
                                         message = "Sign up failed: ${task.exception?.message}",
