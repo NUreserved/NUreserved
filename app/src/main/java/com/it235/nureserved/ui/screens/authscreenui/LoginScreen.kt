@@ -90,6 +90,14 @@ fun LoginScreen(
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
 
+        var loading = remember { mutableStateOf(false) }
+
+        var currentRotation by remember { mutableStateOf(0f) }
+        val rotationAnimation = animateFloatAsState(
+            targetValue = currentRotation,
+            animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
+        )
+
         Scaffold(
             modifier = Modifier
                 .fillMaxSize(),
