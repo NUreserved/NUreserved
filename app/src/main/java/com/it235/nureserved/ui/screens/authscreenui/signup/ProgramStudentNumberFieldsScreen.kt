@@ -131,17 +131,17 @@ fun ProgramStudentNumberSignUpScreen(
 
                         val options = listOf(
                             "Program",
-                            "BSIT",
-                            "BSCpE",
-                            "BSCE",
-                            "BSPSY",
-                            "BSHM",
-                            "BSTM",
+                            "ABCOMM",
                             "BS Accountancy",
                             "BS Architecture",
-                            "ABCOMM",
                             "BSBA-FM",
                             "BSBA-MM",
+                            "BSCpE",
+                            "BSCE",
+                            "BSHM",
+                            "BSIT",
+                            "BSPSY",
+                            "BSTM",
                         )
 
                         var program by remember { mutableStateOf(options[0]) }
