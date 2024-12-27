@@ -112,10 +112,9 @@ fun SignUpText(
         color = darkGray,
         text = text,
         textAlign = textAlign,
-        style = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = fontSize,
+        style = LocalTextStyle.current.copy(
+            fontWeight = FontWeight.Bold,
+            fontSize = fontSize
         )
     )
 }

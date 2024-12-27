@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
@@ -125,7 +126,7 @@ fun LoginScreen(
                         modifier = Modifier
                             .fillMaxWidth(0.9f),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFFFFFFFF)
+                            containerColor = white
                         )
                     ){
                         Column(
@@ -337,10 +338,9 @@ private fun LoginButton(
     ) {
         Text(
             text = "Log in",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
+            style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.Bold,
             )
         )
     }
@@ -371,9 +371,10 @@ fun NoAccountNote(navController: NavController) {
                     }
             },
         text = annotatedText,
-        style = TextStyle(
-            fontFamily = poppinsFamily,
+        style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
             color = textColor1
         ),
         textAlign = TextAlign.Center
@@ -388,9 +389,10 @@ private fun LoginNote() {
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
         text = "Login with your Office 365 account to use and benefit from the service" +
                 " we offer",
-        style = TextStyle(
-            fontFamily = poppinsFamily,
+        style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
             color = textColor1
         ),
         textAlign = TextAlign.Center,

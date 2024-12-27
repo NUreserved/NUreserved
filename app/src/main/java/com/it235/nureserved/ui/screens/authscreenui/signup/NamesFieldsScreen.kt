@@ -13,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
@@ -110,7 +111,7 @@ fun NameSignUpScreen(
                         modifier = Modifier
                             .fillMaxWidth(0.9f),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFFFFFFFF)
+                            containerColor = white
                         )
                     ){
                         var firstname by remember { mutableStateOf("") }
@@ -122,7 +123,7 @@ fun NameSignUpScreen(
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
                             text = "Create an account",
-                            fontSize = 25.sp,
+                            fontSize = 24.sp,
                             TextAlign.Center,
                         )
 
@@ -133,7 +134,7 @@ fun NameSignUpScreen(
                             modifier = Modifier
                                 .padding(start = 20.dp),
                             text = "What's your name?",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                         )
 
                         Space("h", 15)
@@ -172,7 +173,7 @@ private fun NameField(label: String, value: String, onValueChange: (String) -> U
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 20.dp),
     )
 }
 
@@ -215,10 +216,9 @@ private fun NextButton(
     ) {
         Text(
             text = "Next",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
+            style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.Bold,
             )
         )
     }

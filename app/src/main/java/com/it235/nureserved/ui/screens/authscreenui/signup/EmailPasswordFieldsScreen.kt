@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -18,6 +17,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
@@ -36,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -127,7 +126,7 @@ fun SignUpScreen(
                         modifier = Modifier
                             .fillMaxWidth(0.9f),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFFFFFFFF)
+                            containerColor = white
                         )
                     ){
                         Column(
@@ -179,17 +178,6 @@ fun SignUpScreen(
             }
         }
     }
-}
-
-@Composable
-private fun Logo() {
-    Image(
-        modifier = Modifier
-            .width(90.dp)
-            .padding(top = 40.dp),
-        painter = painterResource(R.drawable.logo),
-        contentDescription = null,
-    )
 }
 
 @Composable
@@ -285,7 +273,6 @@ private fun RegisterButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
 ) {
-    val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
     val db = FirebaseFirestore.getInstance()//the database
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -299,8 +286,8 @@ private fun RegisterButton(
             snackbarHostState.currentSnackbarData?.dismiss()
 
             // regex
-            val EmailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
-            if (!email.matches(EmailRegex)) {
+            val emailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
+            if (!email.matches(emailRegex)) {
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Please use a valid NU Fairview email address to continue.",
@@ -381,10 +368,9 @@ private fun RegisterButton(
     ) {
         Text(
             text = "Sign up",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
+            style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.Bold,
             )
         )
     }
@@ -415,9 +401,10 @@ fun AccountExistNote(navController: NavController) {
                     }
             },
         text = annotatedText,
-        style = TextStyle(
-            fontFamily = poppinsFamily,
+        style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
             color = textColor1
         ),
         textAlign = TextAlign.Center
@@ -432,9 +419,10 @@ private fun RegisterNote() {
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
         text = "Sign Up with your Office 365 account to use and benefit from the service" +
                 " we offer",
-        style = TextStyle(
-            fontFamily = poppinsFamily,
+        style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
             color = textColor1
         ),
         textAlign = TextAlign.Center,

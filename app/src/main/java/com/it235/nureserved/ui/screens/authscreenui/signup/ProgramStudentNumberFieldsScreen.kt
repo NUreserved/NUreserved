@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
@@ -34,7 +34,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,7 +45,6 @@ import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.composables.SignUpText
 import com.it235.nureserved.composables.Space
-import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -113,18 +111,18 @@ fun ProgramStudentNumberSignUpScreen(
                         modifier = Modifier
                             .fillMaxWidth(0.9f),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFFFFFFFF)
+                            containerColor = white
                         )
                     ){
                         var program by remember { mutableStateOf("") }
-                        var student_number by remember { mutableStateOf("") }
+                        var studentNumber by remember { mutableStateOf("") }
 
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
                             text = "Create an account",
-                            fontSize = 25.sp,
+                            fontSize = 24.sp,
                             TextAlign.Center,
                         )
 
@@ -135,7 +133,7 @@ fun ProgramStudentNumberSignUpScreen(
                             modifier = Modifier
                                 .padding(start = 20.dp),
                             text = "What's your program?",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                         )
 
                         Space("h", 15)
@@ -146,26 +144,25 @@ fun ProgramStudentNumberSignUpScreen(
                             modifier = Modifier
                                 .padding(start = 20.dp),
                             text = "What's your student number?",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                         )
 
                         Space("h", 10)
                         InputField(
                             "Student Number",
-                            student_number,
+                            studentNumber,
                             {
                                 Text (
                                     text = "Example: 2024-123456",
-                                    style = TextStyle(
-                                        fontFamily = poppinsFamily,
-                                        fontStyle = FontStyle.Italic,
+                                    style = LocalTextStyle.current.copy(
+                                        fontStyle = FontStyle.Italic
                                     )
                                 )
                             }
-                        ) { student_number = it }
+                        ) { studentNumber = it }
                         Space("h", 10)
 
-                        NextButton(navController, firstName, middleName, lastName, program, student_number, scope, snackbarHostState)
+                        NextButton(navController, firstName, middleName, lastName, program, studentNumber, scope, snackbarHostState)
 
                     }
                 }
@@ -245,10 +242,9 @@ private fun NextButton(
     ) {
         Text(
             text = "Next",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
+            style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.Bold,
             )
         )
     }
