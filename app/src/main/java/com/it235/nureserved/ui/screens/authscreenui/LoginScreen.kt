@@ -171,7 +171,8 @@ fun LoginScreen(
                                 password,
                                 navController,
                                 scope,
-                                snackbarHostState
+                                snackbarHostState,
+                                loading,
                             )
 
                             Space("h", 15)
@@ -308,6 +309,7 @@ private fun LoginButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
+    loading: MutableState<Boolean>,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()

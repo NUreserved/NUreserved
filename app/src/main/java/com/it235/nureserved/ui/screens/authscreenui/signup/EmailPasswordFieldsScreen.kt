@@ -182,7 +182,8 @@ fun SignUpScreen(
                                 studentNumber,
                                 navController,
                                 scope,
-                                snackbarHostState
+                                snackbarHostState,
+                                loading
                             )
 
                             Space("h", 15)
@@ -292,6 +293,7 @@ private fun RegisterButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
+    loading: MutableState<Boolean>,
 ) {
     val auth = FirebaseAuth.getInstance()
     val db = FirebaseFirestore.getInstance()//the database
