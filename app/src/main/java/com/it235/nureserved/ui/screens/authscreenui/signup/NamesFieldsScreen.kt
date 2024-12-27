@@ -179,6 +179,17 @@ private fun NameField(
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
+        supportingText = {
+            if(showSupportText){
+                val validationResult = validateName(value)
+                Text(
+                    text = validationResult,
+                    color = indicatorColorRed,
+                )
+
+                if (validationResult == "") isValidInput.value = true else isValidInput.value = false
+            }
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
