@@ -168,7 +168,12 @@ fun NameSignUpScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(label: String, value: String, onValueChange: (String) -> Unit) {
+private fun NameField(
+    label: String,
+    value: String,
+    showSupportText: Boolean,
+    isValidInput: MutableState<Boolean>,
+    onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
