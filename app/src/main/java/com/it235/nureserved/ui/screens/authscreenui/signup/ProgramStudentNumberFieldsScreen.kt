@@ -174,7 +174,12 @@ fun ProgramStudentNumberSignUpScreen(
                         DropdownTextField(
                             options = options,
                             selectedOption = program,
-                            onOptionSelected = { program = it },
+                            showProgramSupportTxt,
+                            isValidProgram,
+                            onOptionSelected = {
+                                program = it
+                                showProgramSupportTxt = true
+                            },
                         )
                         Space("h", 10)
 
@@ -196,11 +201,27 @@ fun ProgramStudentNumberSignUpScreen(
                                         fontStyle = FontStyle.Italic
                                     )
                                 )
-                            }
-                        ) { studentNumber = it }
+                            },
+                            showStudNumberSupportTxt,
+                            isValidStudNumber,
+                        ) {
+                            studentNumber = it
+                            showStudNumberSupportTxt = true
+                        }
                         Space("h", 10)
 
-                        NextButton(navController, firstName, middleName, lastName, program, studentNumber, scope, snackbarHostState)
+                        NextButton(
+                            navController,
+                            firstName,
+                            middleName,
+                            lastName,
+                            program,
+                            studentNumber,
+                            scope,
+                            snackbarHostState,
+                            isValidStudNumber,
+                            isValidProgram,
+                        )
 
                     }
                 }
@@ -332,13 +353,7 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(
-                firstName.isNotBlank() &&
-                middleName.isNotBlank() &&
-                lastName.isNotBlank() &&
-                studentNumber.isNotBlank() &&
-                program != "Program"
-                ){
+            if(isValidStudNumber.value && isValidProgram.value){
                 navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
             else{
