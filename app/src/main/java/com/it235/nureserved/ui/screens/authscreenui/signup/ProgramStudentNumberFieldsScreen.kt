@@ -322,7 +322,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
+            if(
+                firstName.isNotBlank() &&
+                middleName.isNotBlank() &&
+                lastName.isNotBlank() &&
+                studentNumber.isNotBlank() &&
+                program != "Program"
+                ){
                 navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
             else{
