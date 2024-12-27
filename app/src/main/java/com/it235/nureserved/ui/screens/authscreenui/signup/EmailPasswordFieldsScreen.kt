@@ -446,7 +446,9 @@ fun AccountExistNote(navController: NavController) {
                 // Navigate back to the login screen when "Login" is clicked
                 annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(ScreenRoutes.Login.route)
+                        navController.navigate(ScreenRoutes.Login.route) {
+                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                        }
                     }
             },
         text = annotatedText,
