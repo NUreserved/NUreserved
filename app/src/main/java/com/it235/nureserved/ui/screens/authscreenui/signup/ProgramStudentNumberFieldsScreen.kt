@@ -215,6 +215,8 @@ fun ProgramStudentNumberSignUpScreen(
 fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
+    showSupportText: Boolean,
+    isValid: MutableState<Boolean>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -285,6 +287,8 @@ private fun InputField(
     label: String,
     value: String,
     supportingText: @Composable () -> Unit = {},
+    showSupportText: Boolean,
+    isValid: MutableState<Boolean>,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
@@ -317,7 +321,9 @@ private fun NextButton(
     program: String,
     studentNumber: String,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    isValidStudNumber: MutableState<Boolean>,
+    isValidProgram: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
