@@ -196,6 +196,30 @@ fun SignUpScreen(
                     }
                 }
 
+                if(loading.value){
+                    LaunchedEffect(key1 = Unit) {
+                        while (true) {
+                            currentRotation += 360f
+                            delay(500) // Adjust delay to match animation duration
+                        }
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .background(textColor1.copy(alpha = 0.1f))
+                            .fillMaxSize()
+                            .graphicsLayer {
+                                rotationZ = rotationAnimation.value
+                            },
+                        contentAlignment = Alignment.Center
+                    ){
+                        CircularProgressIndicator(
+                            strokeWidth = 3.dp,
+                            strokeCap = StrokeCap.Round
+                        )
+                    }
+                }
+
             }
         }
     }
