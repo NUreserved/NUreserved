@@ -129,6 +129,8 @@ fun ProgramStudentNumberSignUpScreen(
                     ){
 
                         var studentNumber by remember { mutableStateOf("") }
+                        var showStudNumberSupportTxt by remember { mutableStateOf(false) }
+                        var isValidStudNumber = remember { mutableStateOf(false) }
 
                         val options = listOf(
                             "Program",
@@ -146,6 +148,8 @@ fun ProgramStudentNumberSignUpScreen(
                         )
 
                         var program by remember { mutableStateOf(options[0]) }
+                        var showProgramSupportTxt by remember { mutableStateOf(false) }
+                        var isValidProgram = remember { mutableStateOf(false) }
 
                         SignUpText(
                             modifier = Modifier
