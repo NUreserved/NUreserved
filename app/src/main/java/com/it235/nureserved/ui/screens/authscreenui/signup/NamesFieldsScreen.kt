@@ -116,8 +116,19 @@ fun NameSignUpScreen(
                         )
                     ){
                         var firstname by remember { mutableStateOf("") }
+                        var isValidFname = remember { mutableStateOf(false) }
+                        var fnameShowSupportText by remember { mutableStateOf(false) }
+
                         var middlename by remember { mutableStateOf("") }
+                        var isValidMname = remember { mutableStateOf(false) }
+                        var mnameShowSupportText by remember { mutableStateOf(false) }
+
                         var lastname by remember { mutableStateOf("") }
+                        var isValidLname = remember { mutableStateOf(false) }
+                        var lnameShowSupportText by remember { mutableStateOf(false) }
+
+
+
 
                         SignUpText(
                             modifier = Modifier
