@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,21 +35,26 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
+import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import com.it235.nureserved.composables.SignUpText
 
 @Composable
 fun NameSignUpScreen(
@@ -113,41 +117,24 @@ fun NameSignUpScreen(
                         var middlename by remember { mutableStateOf("") }
                         var lastname by remember { mutableStateOf("") }
 
-                        Column(
+                        SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ){
-                            Text(
-                                color = Color(0xFF333333),
-                                text = "Create an account",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 25.sp,
-                                )
-                            )
-                        }
+                            text = "Create an account",
+                            fontSize = 25.sp,
+                            TextAlign.Center,
+                        )
 
 
                         Space("h", 30)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your name?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your name?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 15)
                         NameField("First Name", firstname) { firstname = it}
@@ -168,22 +155,12 @@ fun NameSignUpScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(inputType: String, value: String, onValueChange: (String) -> Unit) {
+private fun NameField(label: String, value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = inputType,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(label) },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -195,7 +172,7 @@ private fun NameField(inputType: String, value: String, onValueChange: (String) 
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp)
+            .padding(horizontal = 20.dp)
     )
 }
 

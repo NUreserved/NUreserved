@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -26,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,17 +42,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.composables.Space
@@ -68,6 +66,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 
 @Composable
 fun SignUpScreen(
@@ -216,17 +215,8 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = "Email",
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle("Email") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -253,17 +243,7 @@ private fun PasswordField(labelValue: String = "", value: String, onValueChange:
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = labelValue,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(labelValue) },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             val image = if (!passwordVisible) R.drawable.ic_password_visibility_off else R.drawable.ic_password_visibility_on

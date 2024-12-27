@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -36,11 +37,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
+import com.it235.nureserved.composables.SignUpText
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -115,61 +119,35 @@ fun ProgramStudentNumberSignUpScreen(
                         var program by remember { mutableStateOf("") }
                         var student_number by remember { mutableStateOf("") }
 
-                        Column(
+                        SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ){
-                            Text(
-                                color = Color(0xFF333333),
-                                text = "Create an account",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 25.sp,
-                                )
-                            )
-                        }
+                            text = "Create an account",
+                            fontSize = 25.sp,
+                            TextAlign.Center,
+                        )
 
 
                         Space("h", 30)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your program?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your program?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 15)
                         InputField("Program", program) { program = it}
                         Space("h", 10)
 
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                        ){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 20.dp),
-                                color = Color(0xFF333333),
-                                text = "What's your student number?",
-                                style = TextStyle(
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 20.sp,
-                                )
-                            )
-                        }
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your student number?",
+                            fontSize = 20.sp,
+                        )
 
                         Space("h", 10)
                         InputField(
@@ -200,7 +178,7 @@ fun ProgramStudentNumberSignUpScreen(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun InputField(
-    inputType: String,
+    label: String,
     value: String,
     supportingText: @Composable () -> Unit = {},
     onValueChange: (String) -> Unit,
@@ -209,17 +187,7 @@ private fun InputField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = inputType,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
-        },
+        placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = { supportingText() },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
