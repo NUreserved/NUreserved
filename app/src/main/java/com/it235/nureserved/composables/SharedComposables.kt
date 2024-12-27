@@ -98,7 +98,7 @@ private fun CustomDialog(
     )
 }
 
-/* SignUp Screens Composable */
+/* Sign-up screen composables */
 
 @Composable
 fun SignUpText(
@@ -133,7 +133,7 @@ fun AuthInputPlaceholderTextStyle(label: String){
     )
 }
 
-/* end of SignUp Screens Composable */
+/* End of sign-Up screens composables */
 
 @Composable
 fun SuccessDialog(

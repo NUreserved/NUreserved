@@ -440,10 +440,3 @@ private fun RegisterNote() {
         textAlign = TextAlign.Center,
     )
 }
-//tbh di ako sure kung important to, icomment ko muna para di magerror
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewSignUpScreen(){
-//    val navController = rememberNavController()
-//    SignUpScreen(navController = navController)
-//}
