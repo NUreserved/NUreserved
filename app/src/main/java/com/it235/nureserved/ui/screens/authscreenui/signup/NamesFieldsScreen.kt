@@ -212,7 +212,10 @@ private fun NextButton(
     middleName: String,
     lastName: String,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    isValidFname: MutableState<Boolean>,
+    isValidMname: MutableState<Boolean>,
+    isValidLname: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
