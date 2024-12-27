@@ -195,7 +195,7 @@ fun LoginScreen(
 
                     Box(
                         modifier = Modifier
-                            .background(textColor1.copy(alpha = 0.1f))
+                            .background(textColor1.copy(alpha = 0.6f))
                             .fillMaxSize()
                             .graphicsLayer {
                                 rotationZ = rotationAnimation.value
