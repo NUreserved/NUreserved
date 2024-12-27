@@ -167,7 +167,11 @@ fun ProgramStudentNumberSignUpScreen(
                         )
 
                         Space("h", 15)
-                        InputField("Program", program) { program = it}
+                        DropdownTextField(
+                            options = options,
+                            selectedOption = program,
+                            onOptionSelected = { program = it },
+                        )
                         Space("h", 10)
 
                         SignUpText(
@@ -197,6 +201,75 @@ fun ProgramStudentNumberSignUpScreen(
                     }
                 }
 
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropdownTextField(
+    options: List<String>,
+    selectedOption: String,
+    onOptionSelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    ExposedDropdownMenuBox(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp),
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+
+        TextField(
+            value = selectedOption,
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    painter = if(!expanded) painterResource(R.drawable.baseline_arrow_drop_down_24) else painterResource(R.drawable.baseline_arrow_drop_up_24),
+                    contentDescription = "Dropdown arrow",
+                    tint = white3
+                )
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = white4,
+                focusedTextColor = white3,
+                unfocusedTextColor = white3,
+                cursorColor = white3,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .menuAnchor()
+        )
+
+        ExposedDropdownMenu(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(white4)
+                .heightIn(max = 200.dp)
+                .verticalScroll(rememberScrollState()),
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { selectionOption ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = selectionOption,
+                            color = white3,
+                        )
+                    },
+                    onClick = {
+                        onOptionSelected(selectionOption)
+                        expanded = false
+                    }
+                )
             }
         }
     }
