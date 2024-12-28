@@ -159,8 +159,18 @@ fun SignUpScreen(
                             Space("h", 40)
 
                             var email by remember { mutableStateOf("") }
+                            var isValidEmail = remember { mutableStateOf(false) }
+                            var isEmailValueChange by remember { mutableStateOf(false) }
+
                             var password by remember { mutableStateOf("") }
+                            var isPasswordValueChange by remember { mutableStateOf(false) }
+                            var isPasswordVisible by remember { mutableStateOf(false) }
+                            var isValidPassword = remember { mutableStateOf(false) }
+
                             var confirmPassword by remember { mutableStateOf("") }
+                            var isValidConfirmPassword = remember { mutableStateOf(false) }
+                            var isConfirmPasswordValueChange by remember { mutableStateOf(false) }
+                            var isConfirmPasswordVisible by remember { mutableStateOf(false) }
 
                             EmailField(email) {email = it}
                             Space("h", 10)
