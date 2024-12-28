@@ -35,28 +35,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
+import com.it235.nureserved.composables.SignUpText
 import com.it235.nureserved.composables.Space
-import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
-import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.it235.nureserved.composables.SignUpText
 
 @Composable
 fun NameSignUpScreen(

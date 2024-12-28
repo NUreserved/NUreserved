@@ -41,7 +41,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
@@ -61,7 +60,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -72,11 +74,8 @@ import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import com.google.firebase.firestore.FirebaseFirestore
-import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 fun isValidPassword(password: String) : String{
     val passwordSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
