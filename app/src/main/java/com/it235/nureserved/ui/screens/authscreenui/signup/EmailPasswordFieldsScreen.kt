@@ -78,6 +78,22 @@ import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import kotlinx.coroutines.delay
 
+fun isValidPassword(password: String) : String{
+    val passwordSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
+    val passwordUppercasePattern = Regex("[A-Z]")
+    val passwordLowercasePattern = Regex("[a-z]")
+    val passwordDigitPattern = Regex("[0-9]")
+
+    return when {
+        password.count() <= 7 -> "Password must be at least 8 characters long"
+        !passwordSymbolPattern.containsMatchIn(password) -> "Password must contain at least one of the following symbols: !@#\$%^&*()"
+        !passwordUppercasePattern.containsMatchIn(password) -> "Password must contain at least one uppercase letter"
+        !passwordLowercasePattern.containsMatchIn(password) -> "Password must contain at least one lowercase letter"
+        !passwordDigitPattern.containsMatchIn(password) -> "Password must contain at least one digit"
+        else -> ""
+    }
+}
+
 @Composable
 fun SignUpScreen(
     navController: NavController,
