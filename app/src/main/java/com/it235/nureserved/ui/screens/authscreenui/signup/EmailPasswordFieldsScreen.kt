@@ -298,7 +298,11 @@ private fun AppTitle() {
 //email field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField(value: String, onValueChange: (String) -> Unit) {
+private fun EmailField(
+    value: String,
+    isValueChange: Boolean,
+    isValid: MutableState<Boolean>,
+    onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -351,7 +355,13 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 
-private fun PasswordField(labelValue: String = "", value: String, onValueChange: (String) -> Unit) {
+private fun PasswordField(
+    labelValue: String = "",
+    value: String,
+    isValueChange: Boolean,
+    isValidPassword: MutableState<Boolean>,
+    password: String? = null,
+    onValueChange: (String) -> Unit,) {
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
@@ -445,6 +455,9 @@ private fun RegisterButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     loading: MutableState<Boolean>,
+    isValidEmail: MutableState<Boolean>,
+    isValidPassword: MutableState<Boolean>,
+    isValidConfirmPassword: MutableState<Boolean>,
 ) {
     val auth = FirebaseAuth.getInstance()
     val db = FirebaseFirestore.getInstance()//the database
