@@ -154,18 +154,18 @@ fun NameSignUpScreen(
                             firstname = it
                             fnameShowSupportText = true
                         }
-                        Space("h", 10)
+                        Space("h", 5)
                         NameField("Middle Name", middlename, mnameShowSupportText, isValidMname) {
                             middlename = it
                             mnameShowSupportText = true
                         }
-                        Space("h", 10)
+                        Space("h", 5)
                         NameField("Last Name", lastname, lnameShowSupportText, isValidLname) {
                             lastname = it
                             lnameShowSupportText = true
 
                         }
-                        Space("h", 15)
+                        Space("h", 5)
                         NextButton(
                             navController,
                             firstname,
