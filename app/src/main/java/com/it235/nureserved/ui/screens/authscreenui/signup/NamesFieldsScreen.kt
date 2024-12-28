@@ -127,9 +127,6 @@ fun NameSignUpScreen(
                         var isValidLname = remember { mutableStateOf(false) }
                         var lnameShowSupportText by remember { mutableStateOf(false) }
 
-
-
-
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -138,7 +135,6 @@ fun NameSignUpScreen(
                             fontSize = 24.sp,
                             TextAlign.Center,
                         )
-
 
                         Space("h", 30)
 
