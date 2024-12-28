@@ -181,7 +181,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 showProgramSupportTxt = true
                             },
                         )
-                        Space("h", 10)
+                        Space("h", 5)
 
                         SignUpText(
                             modifier = Modifier
@@ -208,7 +208,7 @@ fun ProgramStudentNumberSignUpScreen(
                             studentNumber = it
                             showStudNumberSupportTxt = true
                         }
-                        Space("h", 10)
+                        Space("h", 5)
 
                         NextButton(
                             navController,
