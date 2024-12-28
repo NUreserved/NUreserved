@@ -286,6 +286,33 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
+        supportingText = {
+            val nationalUniversityEmailPattern = Regex("^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$")
+
+            if(isValueChange){
+                if(value == ""){
+                    isValid.value = false
+                    Text(
+                        text = "Please fill out this field",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else if(!value.matches(nationalUniversityEmailPattern)){
+                    isValid.value = false
+                    Text(
+                        text = "Please use a valid NU Fairview email address to continue.",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else{
+                    isValid.value = true
+                    Text( text = "" )
+                }
+
+            }
+        },
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle("Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -315,6 +342,51 @@ private fun PasswordField(labelValue: String = "", value: String, onValueChange:
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
+        supportingText = {
+            if(isValueChange && labelValue == "Password"){
+                val validationResult = isValidPassword(value)
+
+                if(validationResult != ""){
+                    isValidPassword.value = false
+                    Text(
+                        color = indicatorColorRed,
+                        text = validationResult
+                    )
+                }
+
+                else{
+                    isValidPassword.value = true
+                    Text(
+                        text = validationResult
+                    )
+                }
+            }
+
+            else if(isValueChange && labelValue == "Confirm Password"){
+                if(value == ""){
+                    isValidPassword.value = false
+                    Text(
+                        color = indicatorColorRed,
+                        text = "Please fill in this field"
+                    )
+                }
+
+                else if(value != password){
+                    isValidPassword.value = false
+                    Text(
+                        color = indicatorColorRed,
+                        text = "Password does not match"
+                    )
+                }
+
+                else{
+                    isValidPassword.value = true
+                    Text(
+                        text = ""
+                    )
+                }
+            }
+        },
         placeholder = { AuthInputPlaceholderTextStyle(labelValue) },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
