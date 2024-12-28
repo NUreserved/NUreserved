@@ -172,14 +172,40 @@ fun SignUpScreen(
                             var isConfirmPasswordValueChange by remember { mutableStateOf(false) }
                             var isConfirmPasswordVisible by remember { mutableStateOf(false) }
 
-                            EmailField(email) {email = it}
-                            Space("h", 10)
+                            EmailField(
+                                email,
+                                isEmailValueChange,
+                                isValidEmail,
+                            ) {
+                                email = it
+                                isEmailValueChange = true
+                            }
+                            Space("h", 5)
 
-                            PasswordField(labelValue = "Password",password) {password = it}
-                            Space("h", 10)
-                            PasswordField(labelValue = "Confirm Password", confirmPassword){confirmPassword = it}
+                            PasswordField(
+                                labelValue = "Password",
+                                password,
+                                isPasswordValueChange,
+                                isValidPassword
+                            ) {
+                                password = it
+                                isPasswordValueChange = true
+                            }
 
-                            Space("h", 15)
+                            Space("h", 5)
+
+                            PasswordField(
+                                labelValue = "Confirm Password",
+                                confirmPassword,
+                                isConfirmPasswordValueChange,
+                                isValidConfirmPassword,
+                                password,
+                            ){
+                                confirmPassword = it
+                                isConfirmPasswordValueChange = true
+                            }
+
+                            Space("h", 5)
 
                             RegisterButton(
                                 email,
@@ -193,7 +219,10 @@ fun SignUpScreen(
                                 navController,
                                 scope,
                                 snackbarHostState,
-                                loading
+                                loading,
+                                isValidEmail,
+                                isValidPassword,
+                                isValidConfirmPassword,
                             )
 
                             Space("h", 15)
@@ -341,75 +370,57 @@ private fun RegisterButton(
             // Dismiss the currently shown Snackbar, if any
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            // regex
-            val emailRegex = "^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$".toRegex()
-            if (!email.matches(emailRegex)) {
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = "Please use a valid NU Fairview email address to continue.",
-                        duration = SnackbarDuration.Short
-                    )
-                }
-                return@Button
-            }
-
             // create user
-            if (email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()) {
-                if(confirmPassword == password){
-                    loading.value = true
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                //hashmap of the data
-                                val user = hashMapOf(
-                                    "first name" to firstName,
-                                    "middle name" to middleName,
-                                    "last name" to lastName,
-                                    "program" to program,
-                                    "student number" to studentNumber,
-                                    "email" to email
-                                )
-                                //add data to database
-                                db.collection("user")
-                                    .document(studentNumber)
-                                    .set(user)
-                                    .addOnCompleteListener {e ->
-                                        if(e.isSuccessful){
-                                            navController.navigate(ScreenRoutes.Home.route)
-                                        }
-                                        else{
-                                            loading.value = false
-                                            scope.launch {
-                                                snackbarHostState.showSnackbar(
-                                                    message = "Sign up failed: ${e.exception?.message}",
-                                                    duration = SnackbarDuration.Short
-                                                )
-                                            }
+            if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
+                loading.value = true
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            //hashmap of the data
+                            val user = hashMapOf(
+                                "first name" to firstName,
+                                "middle name" to middleName,
+                                "last name" to lastName,
+                                "program" to program,
+                                "student number" to studentNumber,
+                                "email" to email
+                            )
+                            //add data to database
+                            db.collection("user")
+                                .document(studentNumber)
+                                .set(user)
+                                .addOnCompleteListener {e ->
+                                    if(e.isSuccessful){
+                                        navController.navigate(ScreenRoutes.Home.route)
+                                    }
+                                    else{
+                                        loading.value = false
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar(
+                                                message = "Sign up failed: ${e.exception?.message}",
+                                                duration = SnackbarDuration.Short
+                                            )
                                         }
                                     }
-
-                            } else {
-                                loading.value = false
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Sign up failed: ${task.exception?.message}",
-                                        duration = SnackbarDuration.Short
-                                    )
                                 }
+
+                        } else {
+                            loading.value = false
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Sign up failed: ${task.exception?.message}",
+                                    duration = SnackbarDuration.Short
+                                )
                             }
                         }
-                } else {
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            message = "Password does not match. Please ensure your passwords are exactly the same.",
-                            duration = SnackbarDuration.Short
-                        )
                     }
-                }
-            } else {
+
+            }
+
+            else {
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields with your email and/or password.",
+                        message = "Make sure your inputs are correct",
                         duration = SnackbarDuration.Short
                     )
                 }
