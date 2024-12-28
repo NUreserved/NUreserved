@@ -395,7 +395,7 @@ private fun NextButton(
             else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields.",
+                        message = "Make sure your inputs are valid.",
                         duration = SnackbarDuration.Short
                     )
                 }
