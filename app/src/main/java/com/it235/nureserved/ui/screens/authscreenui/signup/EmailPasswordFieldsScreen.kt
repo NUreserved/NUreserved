@@ -310,25 +310,28 @@ private fun EmailField(
             val nationalUniversityEmailPattern = Regex("^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$")
 
             if(isValueChange){
-                if(value == ""){
-                    isValid.value = false
-                    Text(
-                        text = "Please fill out this field",
-                        color = indicatorColorRed,
-                    )
-                }
 
-                else if(!value.matches(nationalUniversityEmailPattern)){
-                    isValid.value = false
-                    Text(
-                        text = "Please use a valid NU Fairview email address to continue.",
-                        color = indicatorColorRed,
-                    )
-                }
+                when {
+                    value == "" -> {
+                        isValid.value = false
+                        Text(
+                            text = "Please fill out this field",
+                            color = indicatorColorRed
+                        )
+                    }
 
-                else{
-                    isValid.value = true
-                    Text( text = "" )
+                    !value.matches(nationalUniversityEmailPattern) -> {
+                        isValid.value = false
+                        Text(
+                            text = "Please use a valid NU Fairview email address to continue.",
+                            color = indicatorColorRed
+                        )
+                    }
+
+                    else -> {
+                        isValid.value = true
+                        Text( text = "" )
+                    }
                 }
 
             }
@@ -372,19 +375,21 @@ private fun PasswordField(
             if(isValueChange && labelValue == "Password"){
                 val validationResult = isValidPassword(value)
 
-                if(validationResult != ""){
-                    isValidPassword.value = false
-                    Text(
-                        color = indicatorColorRed,
-                        text = validationResult
-                    )
-                }
+                when {
+                    validationResult != "" -> {
+                        isValidPassword.value = false
+                        Text(
+                            color = indicatorColorRed,
+                            text = validationResult
+                        )
+                    }
 
-                else{
-                    isValidPassword.value = true
-                    Text(
-                        text = validationResult
-                    )
+                    else -> {
+                        isValidPassword.value = true
+                        Text(
+                            text = validationResult
+                        )
+                    }
                 }
             }
 
