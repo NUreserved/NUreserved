@@ -333,15 +333,18 @@ private fun InputField(
             if (showSupportText) {
                 if(!studentNumberPattern.containsMatchIn(value)){
                     isValid.value = false
-                    Text(
-                        text = "Please enter a valid student number format",
-                        color = indicatorColorRed
-                    )
+                    Column () {
+                        Text(
+                            text = "Please enter a valid student number format",
+                            color = indicatorColorRed
+                        )
+                        supportingText()
+                    }
                 }
 
                 else{
                     isValid.value = true
-                    Text( text = "" )
+                    supportingText()
                 }
             }
 
