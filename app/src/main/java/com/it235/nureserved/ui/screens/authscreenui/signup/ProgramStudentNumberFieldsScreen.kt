@@ -2,7 +2,6 @@ package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -22,9 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -35,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -128,6 +124,8 @@ fun ProgramStudentNumberSignUpScreen(
                     ){
 
                         var studentNumber by remember { mutableStateOf("") }
+                        var showStudNumberSupportTxt by remember { mutableStateOf(false) }
+                        var isValidStudNumber = remember { mutableStateOf(false) }
 
                         val options = listOf(
                             "Program",
@@ -145,6 +143,8 @@ fun ProgramStudentNumberSignUpScreen(
                         )
 
                         var program by remember { mutableStateOf(options[0]) }
+                        var showProgramSupportTxt by remember { mutableStateOf(false) }
+                        var isValidProgram = remember { mutableStateOf(false) }
 
                         SignUpText(
                             modifier = Modifier
@@ -169,9 +169,14 @@ fun ProgramStudentNumberSignUpScreen(
                         DropdownTextField(
                             options = options,
                             selectedOption = program,
-                            onOptionSelected = { program = it },
+                            showProgramSupportTxt,
+                            isValidProgram,
+                            onOptionSelected = {
+                                program = it
+                                showProgramSupportTxt = true
+                            },
                         )
-                        Space("h", 10)
+                        Space("h", 5)
 
                         SignUpText(
                             modifier = Modifier
@@ -191,11 +196,27 @@ fun ProgramStudentNumberSignUpScreen(
                                         fontStyle = FontStyle.Italic
                                     )
                                 )
-                            }
-                        ) { studentNumber = it }
-                        Space("h", 10)
+                            },
+                            showStudNumberSupportTxt,
+                            isValidStudNumber,
+                        ) {
+                            studentNumber = it
+                            showStudNumberSupportTxt = true
+                        }
+                        Space("h", 5)
 
-                        NextButton(navController, firstName, middleName, lastName, program, studentNumber, scope, snackbarHostState)
+                        NextButton(
+                            navController,
+                            firstName,
+                            middleName,
+                            lastName,
+                            program,
+                            studentNumber,
+                            scope,
+                            snackbarHostState,
+                            isValidStudNumber,
+                            isValidProgram,
+                        )
 
                     }
                 }
@@ -210,6 +231,8 @@ fun ProgramStudentNumberSignUpScreen(
 fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
+    showSupportText: Boolean,
+    isValid: MutableState<Boolean>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -232,6 +255,21 @@ fun DropdownTextField(
                     contentDescription = "Dropdown arrow",
                     tint = white3
                 )
+            },
+            supportingText = {
+                if(showSupportText){
+                    if(selectedOption == "Program"){
+                        isValid.value = false
+                        Text(
+                            text = "Please select a program.",
+                            color = indicatorColorRed
+                        )
+                    }
+                    else {
+                        isValid.value = true
+                        Text( text = "" )
+                    }
+                }
             },
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = white4,
@@ -280,6 +318,8 @@ private fun InputField(
     label: String,
     value: String,
     supportingText: @Composable () -> Unit = {},
+    showSupportText: Boolean,
+    isValid: MutableState<Boolean>,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
@@ -287,7 +327,31 @@ private fun InputField(
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
-        supportingText = { supportingText() },
+        supportingText = {
+            val studentNumberPattern = Regex("^\\d{4}-\\d{6}$")
+
+            if (showSupportText) {
+                if(!studentNumberPattern.containsMatchIn(value)){
+                    isValid.value = false
+                    Column () {
+                        Text(
+                            text = "Please enter a valid student number format",
+                            color = indicatorColorRed
+                        )
+                        supportingText()
+                    }
+                }
+
+                else{
+                    isValid.value = true
+                    supportingText()
+                }
+            }
+
+            else{
+                supportingText()
+            }
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -312,7 +376,9 @@ private fun NextButton(
     program: String,
     studentNumber: String,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    isValidStudNumber: MutableState<Boolean>,
+    isValidProgram: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -321,19 +387,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(
-                firstName.isNotBlank() &&
-                middleName.isNotBlank() &&
-                lastName.isNotBlank() &&
-                studentNumber.isNotBlank() &&
-                program != "Program"
-                ){
+            if(isValidStudNumber.value && isValidProgram.value){
                 navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
             else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields.",
+                        message = "Make sure your inputs are valid.",
                         duration = SnackbarDuration.Short
                     )
                 }

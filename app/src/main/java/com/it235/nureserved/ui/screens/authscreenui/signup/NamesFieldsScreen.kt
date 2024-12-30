@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,28 +35,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
+import com.it235.nureserved.composables.SignUpText
 import com.it235.nureserved.composables.Space
-import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
-import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.it235.nureserved.composables.SignUpText
 
 @Composable
 fun NameSignUpScreen(
@@ -115,8 +112,16 @@ fun NameSignUpScreen(
                         )
                     ){
                         var firstname by remember { mutableStateOf("") }
+                        var isValidFname = remember { mutableStateOf(false) }
+                        var fnameShowSupportText by remember { mutableStateOf(false) }
+
                         var middlename by remember { mutableStateOf("") }
+                        var isValidMname = remember { mutableStateOf(false) }
+                        var mnameShowSupportText by remember { mutableStateOf(false) }
+
                         var lastname by remember { mutableStateOf("") }
+                        var isValidLname = remember { mutableStateOf(false) }
+                        var lnameShowSupportText by remember { mutableStateOf(false) }
 
                         SignUpText(
                             modifier = Modifier
@@ -126,7 +131,6 @@ fun NameSignUpScreen(
                             fontSize = 24.sp,
                             TextAlign.Center,
                         )
-
 
                         Space("h", 30)
 
@@ -138,13 +142,33 @@ fun NameSignUpScreen(
                         )
 
                         Space("h", 15)
-                        NameField("First Name", firstname) { firstname = it}
-                        Space("h", 10)
-                        NameField("Middle Name", middlename) { middlename = it }
-                        Space("h", 10)
-                        NameField("Last Name", lastname) { lastname = it }
-                        Space("h", 15)
-                        NextButton(navController, firstname, middlename, lastname, scope, snackbarHostState)
+                        NameField("First Name", firstname, fnameShowSupportText, isValidFname) {
+                            firstname = it
+                            fnameShowSupportText = true
+                        }
+                        Space("h", 5)
+                        NameField("Middle Name", middlename, mnameShowSupportText, isValidMname) {
+                            middlename = it
+                            mnameShowSupportText = true
+                        }
+                        Space("h", 5)
+                        NameField("Last Name", lastname, lnameShowSupportText, isValidLname) {
+                            lastname = it
+                            lnameShowSupportText = true
+
+                        }
+                        Space("h", 5)
+                        NextButton(
+                            navController,
+                            firstname,
+                            middlename,
+                            lastname,
+                            scope,
+                            snackbarHostState,
+                            isValidFname,
+                            isValidMname,
+                            isValidLname,
+                        )
 
                     }
                 }
@@ -154,14 +178,61 @@ fun NameSignUpScreen(
     }
 }
 
+fun validateName(name: String) : String{
+    val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
+    var nameDigitPattern = Regex("\\d")
+    var nameSpacePattern = Regex("\\s")
+
+    return when {
+        name.isEmpty() -> "This field cannot be empty."
+        name.length <= 1 -> "Name should be more than 1 character."
+        nameSpacePattern.containsMatchIn(name) -> {
+            when{
+                name.startsWith(" ") -> "Name should not start with a space."
+                name.endsWith(" ") -> "Name should not end with a space."
+                else -> {
+                    //ensure that subnames separated by space adheres to the minimum character length
+                    //ensure that subnames separated by space does not contain symbols or digits
+                    val subNames = name.split(" ")
+                    subNames.forEach { el ->
+                        if(el.length == 1) return "Name separated by space should not contain single letter words."
+                        else if(nameSymbolPattern.containsMatchIn(el)) return "Name should not contain any special characters."
+                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
+                    }
+                    ""
+                }
+            }
+        }
+        nameSymbolPattern.containsMatchIn(name) -> "Name should not contain any special characters."
+        nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
+        else -> ""
+    }
+}
+
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(label: String, value: String, onValueChange: (String) -> Unit) {
+private fun NameField(
+    label: String,
+    value: String,
+    showSupportText: Boolean,
+    isValidInput: MutableState<Boolean>,
+    onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
+        supportingText = {
+            if(showSupportText){
+                val validationResult = validateName(value)
+                Text(
+                    text = validationResult,
+                    color = indicatorColorRed,
+                )
+
+                if (validationResult == "") isValidInput.value = true else isValidInput.value = false
+            }
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -184,7 +255,10 @@ private fun NextButton(
     middleName: String,
     lastName: String,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    isValidFname: MutableState<Boolean>,
+    isValidMname: MutableState<Boolean>,
+    isValidLname: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -193,13 +267,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(firstName.isNotBlank() && middleName.isNotBlank() && lastName.isNotBlank()){
+            if(isValidFname.value && isValidMname.value && isValidLname.value){
                 navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
             }
             else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields.",
+                        message = "Make sure your inputs are correct",
                         duration = SnackbarDuration.Short
                     )
                 }
