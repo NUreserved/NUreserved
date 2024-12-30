@@ -124,7 +124,6 @@ fun ProgramStudentNumberSignUpScreen(
                     ){
 
                         var studentNumber by remember { mutableStateOf("") }
-                        var showStudNumberSupportTxt by remember { mutableStateOf(false) }
                         var isValidStudNumber = remember { mutableStateOf(false) }
 
                         val options = listOf(
@@ -197,11 +196,8 @@ fun ProgramStudentNumberSignUpScreen(
                                     )
                                 )
                             },
-                            showStudNumberSupportTxt,
-                            isValidStudNumber,
                         ) {
                             studentNumber = it
-                            showStudNumberSupportTxt = true
                         }
                         Space("h", 5)
 
@@ -318,8 +314,6 @@ private fun InputField(
     label: String,
     value: String,
     supportingText: @Composable () -> Unit = {},
-    showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
