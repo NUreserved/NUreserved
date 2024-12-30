@@ -354,32 +354,15 @@ private fun NextButton(
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    val studentNumberPattern = Regex("^\\d{4}-\\d{6}$")
-
     Button(
         onClick = {
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(!studentNumberPattern.containsMatchIn(studentNumber)){
-                isValidStudNumber.value = false
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = "Please enter a valid student number format",
-                        duration = SnackbarDuration.Short
-                    )
-                }
-            }
-
-            else{
-                isValidStudNumber.value = true
-            }
-
             if(isValidStudNumber.value && isValidProgram.value){
                 navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
-
-            else if(isValidStudNumber.value && !isValidProgram.value){
+            else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Make sure your inputs are valid.",
