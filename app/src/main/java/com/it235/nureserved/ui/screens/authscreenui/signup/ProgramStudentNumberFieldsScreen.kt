@@ -322,26 +322,7 @@ private fun InputField(
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = {
-            val studentNumberPattern = Regex("^\\d{4}-\\d{6}$")
-
-            if (showSupportText) {
-                if(!studentNumberPattern.containsMatchIn(value)){
-                    isValid.value = false
-                    Text(
-                        text = "Please enter a valid student number format",
-                        color = indicatorColorRed
-                    )
-                }
-
-                else{
-                    isValid.value = true
-                    Text( text = "" )
-                }
-            }
-
-            else{
-                supportingText()
-            }
+            supportingText()
         },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
