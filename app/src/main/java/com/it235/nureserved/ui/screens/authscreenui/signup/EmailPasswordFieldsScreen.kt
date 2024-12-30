@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.ui.screens.authscreenui.signup
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -9,13 +9,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -46,29 +44,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -82,9 +77,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+fun isValidPassword(password: String) : String{
+    val passwordSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
+    val passwordUppercasePattern = Regex("[A-Z]")
+    val passwordLowercasePattern = Regex("[a-z]")
+    val passwordDigitPattern = Regex("[0-9]")
+
+    return when {
+        password.count() <= 7 -> "Password must be at least 8 characters long"
+        !passwordSymbolPattern.containsMatchIn(password) -> "Password must contain at least one of the following symbols: !@#\$%^&*()"
+        !passwordUppercasePattern.containsMatchIn(password) -> "Password must contain at least one uppercase letter"
+        !passwordLowercasePattern.containsMatchIn(password) -> "Password must contain at least one lowercase letter"
+        !passwordDigitPattern.containsMatchIn(password) -> "Password must contain at least one digit"
+        else -> ""
+    }
+}
+
 @Composable
-fun LoginScreen(
-    navController: NavController
+fun SignUpScreen(
+    navController: NavController,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    program: String,
+    studentNumber: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -98,6 +114,7 @@ fun LoginScreen(
             animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
         )
 
+
         Scaffold(
             modifier = Modifier
                 .fillMaxSize(),
@@ -105,10 +122,10 @@ fun LoginScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize(),
-                    contentAlignment = Alignment.BottomEnd,
+                    contentAlignment = Alignment.BottomEnd
                 ){
                     SnackbarHost(
-                        hostState = snackbarHostState,
+                        hostState = snackbarHostState
                     ){data ->
                         Snackbar(
                             snackbarData = data,
@@ -129,7 +146,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     painter = painterResource(R.drawable.splash_background),
-                    contentDescription = "Background image",
+                    contentDescription = null,
                     contentScale = ContentScale.Crop,
                 )
 
@@ -152,34 +169,82 @@ fun LoginScreen(
                                 .fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
-                            Logo()
-                            Space("h", 20)
+
                             AppTitle()
                             Space("h", 40)
 
                             var email by remember { mutableStateOf("") }
+                            var isValidEmail = remember { mutableStateOf(false) }
+                            var isEmailValueChange by remember { mutableStateOf(false) }
+
                             var password by remember { mutableStateOf("") }
+                            var isPasswordValueChange by remember { mutableStateOf(false) }
+                            var isPasswordVisible by remember { mutableStateOf(false) }
+                            var isValidPassword = remember { mutableStateOf(false) }
 
-                            EmailField(email) {email = it}
-                            Spacer(modifier = Modifier.height(10.dp))
-                            PasswordField(password) {password = it}
+                            var confirmPassword by remember { mutableStateOf("") }
+                            var isValidConfirmPassword = remember { mutableStateOf(false) }
+                            var isConfirmPasswordValueChange by remember { mutableStateOf(false) }
+                            var isConfirmPasswordVisible by remember { mutableStateOf(false) }
 
-                            Space("h", 15)
+                            EmailField(
+                                email,
+                                isEmailValueChange,
+                                isValidEmail,
+                            ) {
+                                email = it
+                                isEmailValueChange = true
+                            }
+                            Space("h", 5)
 
-                            LoginButton(
+                            PasswordField(
+                                labelValue = "Password",
+                                password,
+                                isPasswordValueChange,
+                                isValidPassword
+                            ) {
+                                password = it
+                                isPasswordValueChange = true
+                            }
+
+                            Space("h", 5)
+
+                            PasswordField(
+                                labelValue = "Confirm Password",
+                                confirmPassword,
+                                isConfirmPasswordValueChange,
+                                isValidConfirmPassword,
+                                password,
+                            ){
+                                confirmPassword = it
+                                isConfirmPasswordValueChange = true
+                            }
+
+                            Space("h", 5)
+
+                            RegisterButton(
                                 email,
                                 password,
+                                confirmPassword,
+                                firstName,
+                                middleName,
+                                lastName,
+                                program,
+                                studentNumber,
                                 navController,
                                 scope,
                                 snackbarHostState,
                                 loading,
+                                isValidEmail,
+                                isValidPassword,
+                                isValidConfirmPassword,
                             )
 
                             Space("h", 15)
 
-                            NoAccountNote(navController)
+                            AccountExistNote(navController)
                             Space("h", 40)
-                            LoginNote()
+                            RegisterNote()
                         }
 
                     }
@@ -215,26 +280,16 @@ fun LoginScreen(
 }
 
 @Composable
-private fun Logo() {
-    Image(
-        modifier = Modifier
-            .width(90.dp)
-            .padding(top = 40.dp),
-        painter = painterResource(R.drawable.logo),
-        contentDescription = "App logo",
-    )
-}
-
-@Composable
 private fun AppTitle() {
     Text(
-        color = Color(0xFF35408e),
-        text = "NUreserved",
+        modifier = Modifier
+            .padding(top = 40.dp),
+        color = Color(0xFF333333),
+        text = "Create an account",
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
-            fontStyle = FontStyle.Italic
         )
     )
 }
@@ -242,24 +297,47 @@ private fun AppTitle() {
 //email field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField(value: String, onValueChange: (String) -> Unit) {
-    //var email by remember { mutableStateOf("") }
-
+private fun EmailField(
+    value: String,
+    isValueChange: Boolean,
+    isValid: MutableState<Boolean>,
+    onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = "Email",
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
+        supportingText = {
+            val nationalUniversityEmailPattern = Regex("^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$")
+
+            if(isValueChange){
+
+                when {
+                    value == "" -> {
+                        isValid.value = false
+                        Text(
+                            text = "Please fill out this field",
+                            color = indicatorColorRed
+                        )
+                    }
+
+                    !value.matches(nationalUniversityEmailPattern) -> {
+                        isValid.value = false
+                        Text(
+                            text = "Please use a valid NU Fairview email address to continue.",
+                            color = indicatorColorRed
+                        )
+                    }
+
+                    else -> {
+                        isValid.value = true
+                        Text( text = "" )
+                    }
+                }
+
+            }
         },
+        singleLine = true,
+        placeholder = { AuthInputPlaceholderTextStyle("Email") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white4,
             focusedTextColor = white3,
@@ -278,33 +356,74 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
 //password field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
-    //var password by remember { mutableStateOf("") }
+
+private fun PasswordField(
+    labelValue: String = "",
+    value: String,
+    isValueChange: Boolean,
+    isValidPassword: MutableState<Boolean>,
+    password: String? = null,
+    onValueChange: (String) -> Unit,) {
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        placeholder = {
-            Text(
-                color = white3,
-                text = "Password",
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            )
+        supportingText = {
+            if(isValueChange && labelValue == "Password"){
+                val validationResult = isValidPassword(value)
+
+                when {
+                    validationResult != "" -> {
+                        isValidPassword.value = false
+                        Text(
+                            color = indicatorColorRed,
+                            text = validationResult
+                        )
+                    }
+
+                    else -> {
+                        isValidPassword.value = true
+                        Text(
+                            text = validationResult
+                        )
+                    }
+                }
+            }
+
+            else if(isValueChange && labelValue == "Confirm Password"){
+                if(value == ""){
+                    isValidPassword.value = false
+                    Text(
+                        color = indicatorColorRed,
+                        text = "Please fill in this field"
+                    )
+                }
+
+                else if(value != password){
+                    isValidPassword.value = false
+                    Text(
+                        color = indicatorColorRed,
+                        text = "Password does not match"
+                    )
+                }
+
+                else{
+                    isValidPassword.value = true
+                    Text(
+                        text = ""
+                    )
+                }
+            }
         },
+        placeholder = { AuthInputPlaceholderTextStyle(labelValue) },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            val image: ImageVector =
-                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off)
-                else ImageVector.vectorResource(R.drawable.ic_password_visibility_on)
+            val image = if (!passwordVisible) R.drawable.ic_password_visibility_off else R.drawable.ic_password_visibility_on
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
-                    imageVector = image,
+                    painter = painterResource(image),
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
                     tint = white3
                 )
@@ -325,54 +444,93 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
     )
 }
 
-//login
+//register button
 @Composable
-private fun LoginButton(
+private fun RegisterButton(
     email: String,
     password: String,
+    confirmPassword: String,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    program: String,
+    studentNumber: String,
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     loading: MutableState<Boolean>,
+    isValidEmail: MutableState<Boolean>,
+    isValidPassword: MutableState<Boolean>,
+    isValidConfirmPassword: MutableState<Boolean>,
 ) {
-    val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
+    val db = FirebaseFirestore.getInstance()//the database
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
         onClick = {
+            //sign up system
             keyboardController?.hide()
+
             // Dismiss the currently shown Snackbar, if any
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            //login system
-            if (email.isNotBlank() && password.isNotBlank()) {
+            // create user
+            if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
                 loading.value = true
-                auth.signInWithEmailAndPassword(email, password)
+                auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            navController.navigate(ScreenRoutes.Home.route) {
-                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                            }
+                            //hashmap of the data
+                            val user = hashMapOf(
+                                "first name" to firstName,
+                                "middle name" to middleName,
+                                "last name" to lastName,
+                                "program" to program,
+                                "student number" to studentNumber,
+                                "email" to email
+                            )
+                            //add data to database
+                            db.collection("user")
+                                .document(studentNumber)
+                                .set(user)
+                                .addOnCompleteListener {e ->
+                                    if(e.isSuccessful){
+                                        navController.navigate(ScreenRoutes.Home.route)
+                                    }
+                                    else{
+                                        loading.value = false
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar(
+                                                message = "Sign up failed: ${e.exception?.message}",
+                                                duration = SnackbarDuration.Short
+                                            )
+                                        }
+                                    }
+                                }
+
                         } else {
                             loading.value = false
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "Login failed: ${task.exception?.message}",
+                                    message = "Sign up failed: ${task.exception?.message}",
                                     duration = SnackbarDuration.Short
                                 )
                             }
                         }
                     }
-            } else {
-                loading.value = false
+
+            }
+
+            else {
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Please fill in all the fields with email and password.",
+                        message = "Make sure your inputs are correct",
                         duration = SnackbarDuration.Short
                     )
                 }
             }
+
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
@@ -384,7 +542,7 @@ private fun LoginButton(
         shape = RoundedCornerShape(10.dp)
     ) {
         Text(
-            text = "Log in",
+            text = "Sign up",
             style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
@@ -394,14 +552,14 @@ private fun LoginButton(
 }
 
 @Composable
-fun NoAccountNote(navController: NavController) {
+fun AccountExistNote(navController: NavController) {
     // Create an annotated string for the "No account yet? Register" text
     val annotatedText = buildAnnotatedString {
-        append("No account yet? ")
+        append("Already have an account? ")
         // Add a clickable annotation for the "Register" part
-        pushStringAnnotation(tag = "Register", annotation = "Register")
+        pushStringAnnotation(tag = "Login", annotation = "Login")
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = brandColorBlue)) {
-            append("Register")
+            append("Login")
         }
         pop()
     }
@@ -411,10 +569,12 @@ fun NoAccountNote(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                // Navigate to the SignUpScreen when "Register" is clicked
-                annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
+                // Navigate back to the login screen when "Login" is clicked
+                annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(ScreenRoutes.NameSignUp.route)
+                        navController.navigate(ScreenRoutes.Login.route) {
+                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                        }
                     }
             },
         text = annotatedText,
@@ -429,12 +589,12 @@ fun NoAccountNote(navController: NavController) {
 }
 
 @Composable
-private fun LoginNote() {
+private fun RegisterNote() {
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-        text = "Login with your Office 365 account to use and benefit from the service" +
+        text = "Sign Up with your Office 365 account to use and benefit from the service" +
                 " we offer",
         style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
@@ -444,11 +604,4 @@ private fun LoginNote() {
         ),
         textAlign = TextAlign.Center,
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen(){
-    val navController = rememberNavController()
-    LoginScreen(navController = navController)
 }
