@@ -142,7 +142,7 @@ fun ProgramStudentNumberSignUpScreen(
                         )
 
                         var program by remember { mutableStateOf(options[0]) }
-                        var showProgramSupportTxt = remember { mutableStateOf(false) }
+                        var showProgramSupportTxt by remember { mutableStateOf(false) }
                         var isValidProgram = remember { mutableStateOf(false) }
 
                         SignUpText(
@@ -172,7 +172,7 @@ fun ProgramStudentNumberSignUpScreen(
                             isValidProgram,
                             onOptionSelected = {
                                 program = it
-                                showProgramSupportTxt.value = true
+                                showProgramSupportTxt = true
                             },
                         )
                         Space("h", 5)
@@ -212,7 +212,6 @@ fun ProgramStudentNumberSignUpScreen(
                             snackbarHostState,
                             isValidStudNumber,
                             isValidProgram,
-                            showProgramSupportTxt,
                         )
 
                     }
@@ -228,7 +227,7 @@ fun ProgramStudentNumberSignUpScreen(
 fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
-    showSupportText: MutableState<Boolean>,
+    showSupportText: Boolean,
     isValid: MutableState<Boolean>,
     onOptionSelected: (String) -> Unit
 ) {
@@ -254,7 +253,7 @@ fun DropdownTextField(
                 )
             },
             supportingText = {
-                if(showSupportText.value){
+                if(showSupportText){
                     if(selectedOption == "Program"){
                         isValid.value = false
                         Text(
@@ -352,7 +351,6 @@ private fun NextButton(
     snackbarHostState: SnackbarHostState,
     isValidStudNumber: MutableState<Boolean>,
     isValidProgram: MutableState<Boolean>,
-    showProgramSupportTxt: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -362,7 +360,6 @@ private fun NextButton(
         onClick = {
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
-            showProgramSupportTxt.value = true
 
             if(!studentNumberPattern.containsMatchIn(studentNumber)){
                 isValidStudNumber.value = false
