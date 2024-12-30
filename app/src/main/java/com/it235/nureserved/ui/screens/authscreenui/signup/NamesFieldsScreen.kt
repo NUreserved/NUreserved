@@ -184,7 +184,7 @@ fun validateName(name: String) : String{
     var nameSpacePattern = Regex("\\s")
 
     return when {
-        name.isBlank() -> "This field cannot be empty."
+        name.isEmpty() -> "This field cannot be empty."
         name.length <= 1 -> "Name should be more than 1 character."
         nameSpacePattern.containsMatchIn(name) -> {
             when{
