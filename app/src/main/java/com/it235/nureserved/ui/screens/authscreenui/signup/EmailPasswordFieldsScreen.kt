@@ -481,33 +481,39 @@ private fun RegisterButton(
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            //hashmap of the data
-                            val userData = hashMapOf(
-                                "firstName" to firstName,
-                                "middleName" to middleName,
-                                "lastName" to lastName,
-                                "program" to program,
-                                "studentNumber" to studentNumber,
-                                "email" to email
-                            )
-                            //add data to database
-                            db.collection("user")
-                                .document(studentNumber)
-                                .set(user)
-                                .addOnCompleteListener {e ->
-                                    if(e.isSuccessful){
-                                        navController.navigate(ScreenRoutes.Home.route)
-                                    }
-                                    else{
-                                        loading.value = false
-                                        scope.launch {
-                                            snackbarHostState.showSnackbar(
-                                                message = "Sign up failed: ${e.exception?.message}",
-                                                duration = SnackbarDuration.Short
-                                            )
+                            // Get the currently authenticated user and their unique ID
+                            val user = auth.currentUser
+                            val userId = user?.uid
+
+                            if (userId != null) {
+                                //hashmap of the data
+                                val userData = hashMapOf(
+                                    "firstName" to firstName,
+                                    "middleName" to middleName,
+                                    "lastName" to lastName,
+                                    "program" to program,
+                                    "studentNumber" to studentNumber,
+                                    "email" to email
+                                )
+                                //add data to database
+                                db.collection("user")
+                                    .document(userId)
+                                    .set(userData)
+                                    .addOnCompleteListener {e ->
+                                        if(e.isSuccessful){
+                                            navController.navigate(ScreenRoutes.Home.route)
+                                        }
+                                        else{
+                                            loading.value = false
+                                            scope.launch {
+                                                snackbarHostState.showSnackbar(
+                                                    message = "Sign up failed: ${e.exception?.message}",
+                                                    duration = SnackbarDuration.Short
+                                                )
+                                            }
                                         }
                                     }
-                                }
+                            }
 
                         } else {
                             loading.value = false
