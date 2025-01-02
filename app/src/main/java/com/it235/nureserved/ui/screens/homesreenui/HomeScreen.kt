@@ -163,6 +163,118 @@ fun TopBar(
 fun HomeScreenContent(
     innerPadding: PaddingValues,
 ) {
+    var user by remember { mutableStateOf<User?>(null) }
+    getUserData { fetchedUser ->
+        user = fetchedUser
+    }
+
+    Column (
+        modifier = Modifier
+            .padding(innerPadding)
+    ){
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        ) {
+            Space("h", 16)
+            HeadingComposable("Personal Information")
+            Space("h", 8)
+            TextContentComposable(
+                field = "First Name",
+                value = user?.firstName ?: "N/A"
+            )
+            TextContentComposable(
+                field = "Middle Name",
+                value = user?.middleName ?: "N/A"
+            )
+            TextContentComposable(
+                field = "Last Name",
+                value = user?.lastName ?: "N/A"
+            )
+            TextContentComposable(
+                field = "Email",
+                value = user?.email ?: "N/A"
+            )
+            Space("h", 16)
+        }
+
+        Space("h", 16)
+
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        ) {
+            Space("h", 16)
+            HeadingComposable("Academic Information")
+            Space("h", 8)
+            TextContentComposable(
+                field = "Program",
+                value = user?.program ?: "N/A"
+            )
+            TextContentComposable(
+                field = "Student Number",
+                value = user?.studentNumber ?: "N/A"
+            )
+            Space("h", 16)
+        }
+    }
+}
+
+@Composable
+private fun HeadingComposable(
+    value: String
+) {
+    Text(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp),
+        text = value.uppercase(),
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+    )
+}
+
+@Composable
+private fun TextContentComposable(
+    field: String,
+    value: String
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(0.5f).widthIn(max = 200.dp),
+            color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+            text = field,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+        Text(
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(end = 16.dp),
+            text = value,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+    }
 }
 
 @Composable
