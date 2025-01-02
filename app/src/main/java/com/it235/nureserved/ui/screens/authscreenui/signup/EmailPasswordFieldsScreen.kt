@@ -482,12 +482,12 @@ private fun RegisterButton(
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             //hashmap of the data
-                            val user = hashMapOf(
-                                "first name" to firstName,
-                                "middle name" to middleName,
-                                "last name" to lastName,
+                            val userData = hashMapOf(
+                                "firstName" to firstName,
+                                "middleName" to middleName,
+                                "lastName" to lastName,
                                 "program" to program,
-                                "student number" to studentNumber,
+                                "studentNumber" to studentNumber,
                                 "email" to email
                             )
                             //add data to database
