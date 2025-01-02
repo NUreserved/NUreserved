@@ -10,10 +10,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -164,8 +167,11 @@ fun HomeScreenContent(
     innerPadding: PaddingValues,
 ) {
     var user by remember { mutableStateOf<User?>(null) }
+    var loading by remember { mutableStateOf(true) }
+
     getUserData { fetchedUser ->
         user = fetchedUser
+        loading = false
     }
 
     Column (
@@ -183,22 +189,27 @@ fun HomeScreenContent(
             Space("h", 16)
             HeadingComposable("Personal Information")
             Space("h", 8)
-            TextContentComposable(
-                field = "First Name",
-                value = user?.firstName ?: "N/A"
-            )
-            TextContentComposable(
-                field = "Middle Name",
-                value = user?.middleName ?: "N/A"
-            )
-            TextContentComposable(
-                field = "Last Name",
-                value = user?.lastName ?: "N/A"
-            )
-            TextContentComposable(
-                field = "Email",
-                value = user?.email ?: "N/A"
-            )
+
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "First Name",
+                    value = user?.firstName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Middle Name",
+                    value = user?.middleName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Last Name",
+                    value = user?.lastName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Email",
+                    value = user?.email ?: "N/A"
+                )
+            }
             Space("h", 16)
         }
 
@@ -215,14 +226,18 @@ fun HomeScreenContent(
             Space("h", 16)
             HeadingComposable("Academic Information")
             Space("h", 8)
-            TextContentComposable(
-                field = "Program",
-                value = user?.program ?: "N/A"
-            )
-            TextContentComposable(
-                field = "Student Number",
-                value = user?.studentNumber ?: "N/A"
-            )
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "Program",
+                    value = user?.program ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Student Number",
+                    value = user?.studentNumber ?: "N/A"
+                )
+            }
             Space("h", 16)
         }
     }
@@ -275,6 +290,18 @@ private fun TextContentComposable(
             ),
         )
     }
+}
+
+@Composable
+fun IndeterminateCircularIndicator(
+) {
+    CircularProgressIndicator(
+        modifier = Modifier
+            .padding(top = 8.dp, start = 16.dp)
+            .width(32.dp),
+        color = MaterialTheme.colorScheme.secondary,
+        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+    )
 }
 
 @Composable
