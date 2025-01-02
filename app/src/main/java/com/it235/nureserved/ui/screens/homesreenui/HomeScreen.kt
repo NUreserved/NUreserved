@@ -75,7 +75,6 @@ import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

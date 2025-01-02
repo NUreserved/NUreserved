@@ -19,16 +19,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
-import com.it235.nureserved.ui.screens.RoomReservationForm
-import com.it235.nureserved.ui.screens.RoomUsageRules
 import com.it235.nureserved.ui.screens.SplashScreen
-import com.it235.nureserved.ui.screens.TermsAndConditionsScreen
 import com.it235.nureserved.ui.screens.authscreenui.LoginScreen
 import com.it235.nureserved.ui.screens.authscreenui.signup.NameSignUpScreen
 import com.it235.nureserved.ui.screens.authscreenui.signup.ProgramStudentNumberSignUpScreen
 import com.it235.nureserved.ui.screens.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
-import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -121,16 +117,16 @@ private fun Main() {
                         lastName = lastName)
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
-                composable(
-                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
-                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
-                ) { backStackEntry ->
-                    val roomId = backStackEntry.arguments?.getString("roomId")
-                    RoomDetails(navController, roomId)
-                }
-                composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
-                composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
-                composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
+//                composable(
+//                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
+//                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
+//                ) { backStackEntry ->
+//                    val roomId = backStackEntry.arguments?.getString("roomId")
+//                    RoomDetails(navController, roomId)
+//                }
+//                composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
+//                composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
+//                composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
             }
         }
     }
