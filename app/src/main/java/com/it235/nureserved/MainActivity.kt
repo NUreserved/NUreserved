@@ -154,6 +154,10 @@ private fun Main() {
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
+                composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
+                composable(ScreenRoutes.DigitalizingProcess.route) { DigitalizingProcessScreen(navController) }
+                composable(ScreenRoutes.AlwaysUptodate.route) { AlwaysUptodateScreen(navController) }
+                composable(ScreenRoutes.LetsReserveScreen.route) { LetsReserveScreen(navController) }
             }
         }
     }
