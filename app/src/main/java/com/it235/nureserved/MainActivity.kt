@@ -57,6 +57,11 @@ private fun Main() {
         val auth = FirebaseAuth.getInstance()
         val isLoggedIn = auth.currentUser != null
 
+        val sharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
+        //create hasSeenOnBoarding flag indicating whether the user has seen the onboarding screen
+        //if flag does not exist it will automatically create
+        val hasSeenOnBoarding = sharedPreferences.getBoolean("hasSeenOnBoarding", false)
+
         LaunchedEffect(Unit) {
             delay(1000)
             showSplash.value = false
@@ -77,7 +82,18 @@ private fun Main() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = if (isLoggedIn) ScreenRoutes.Home.route else ScreenRoutes.Login.route
+                startDestination = if (isLoggedIn){
+                    ScreenRoutes.Home.route
+                } else {
+                    if(!hasSeenOnBoarding){
+                        //edit the hasSeenOnBoarding flag to true, so the next time user opens the app, it will not show the onboarding screen
+                        sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
+                        ScreenRoutes.GetStarted.route
+                    }
+                    else{
+                        ScreenRoutes.Login.route
+                    }
+                }
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
 
