@@ -29,8 +29,15 @@ import com.it235.nureserved.ui.screens.authscreenui.signup.ProgramStudentNumberS
 import com.it235.nureserved.ui.screens.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
 import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
+import com.it235.nureserved.ui.screens.onboardingscreenui.AlwaysUptodateScreen
+import com.it235.nureserved.ui.screens.onboardingscreenui.DigitalizingProcessScreen
+import com.it235.nureserved.ui.screens.onboardingscreenui.GetStartedScreen
+import com.it235.nureserved.ui.screens.onboardingscreenui.LetsReserveScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +56,11 @@ private fun Main() {
         val showSplash = rememberSaveable { mutableStateOf(true) }
         val auth = FirebaseAuth.getInstance()
         val isLoggedIn = auth.currentUser != null
+
+        val sharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
+        //create hasSeenOnBoarding flag indicating whether the user has seen the onboarding screen
+        //if flag does not exist it will automatically create
+        val hasSeenOnBoarding = sharedPreferences.getBoolean("hasSeenOnBoarding", false)
 
         LaunchedEffect(Unit) {
             delay(1000)
@@ -70,7 +82,18 @@ private fun Main() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = if (isLoggedIn) ScreenRoutes.Home.route else ScreenRoutes.Login.route
+                startDestination = if (isLoggedIn){
+                    ScreenRoutes.Home.route
+                } else {
+                    if(!hasSeenOnBoarding){
+                        //edit the hasSeenOnBoarding flag to true, so the next time user opens the app, it will not show the onboarding screen
+                        sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
+                        ScreenRoutes.GetStarted.route
+                    }
+                    else{
+                        ScreenRoutes.Login.route
+                    }
+                }
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
 
@@ -131,6 +154,10 @@ private fun Main() {
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
+                composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
+                composable(ScreenRoutes.DigitalizingProcess.route) { DigitalizingProcessScreen(navController) }
+                composable(ScreenRoutes.AlwaysUptodate.route) { AlwaysUptodateScreen(navController) }
+                composable(ScreenRoutes.LetsReserveScreen.route) { LetsReserveScreen(navController) }
             }
         }
     }
