@@ -94,7 +94,7 @@ fun AlwaysUptodateScreen(navController: NavController){
             Text(
                 modifier = Modifier
                     .height(80.dp),
-                text =  "We are digitalizing the process to make it easier for you to reserve a room.",
+                text =  "Get the latest updates on room availability and reservation status.",
                 textAlign = TextAlign.Center,
             )
 
