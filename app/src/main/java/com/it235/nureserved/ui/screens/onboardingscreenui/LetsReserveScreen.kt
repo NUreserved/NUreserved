@@ -61,7 +61,7 @@ fun LetsReserveScreen(navController: NavController){
             Spacer(modifier = Modifier.height(80.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.standing_2),
+                painter = painterResource(id = R.drawable.standing_4),
                 contentDescription = null,
             )
 
