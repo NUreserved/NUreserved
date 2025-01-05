@@ -43,90 +43,16 @@ import com.it235.nureserved.ui.theme.white3
 
 @Composable
 fun GetStartedScreen(navController: NavController){
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-    ){ innerPadding ->
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ){
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(130.dp),
-                lineHeight = 35.sp,
-                text = "Welcome to NUreserve!",
-                textAlign = TextAlign.Center,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            Spacer(modifier = Modifier.height(80.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.standing_1),
-                contentDescription = null,
-            )
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                for(i in 0..3){
-                    Image(
-                        painter = if(i == 0) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
-                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
-                        contentDescription = null,
-                    )
-
-                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                modifier = Modifier
-                    .height(80.dp),
-                text =  "NUreserved is an app that enables room reservation for students and faculty members of National University.",
-                textAlign = TextAlign.Center,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                Button(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.DigitalizingProcess.route)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = brandColorBlue,
-                        contentColor = white3
-                    )
-                ){
-                    Text( text = "GET STARTED")
-                }
-            }
-
-        }
-
-    }
+    OnboardingScreen(
+        navController = navController,
+        title = "Welcome to NUreserved!",
+        image = R.drawable.waving_flat_character,
+        circleFilledIndex = 0,
+        description = "NUreserved is an app that enables room reservation for students and faculty members of National University.",
+        buttonText = "Get Started",
+        route = listOf(ScreenRoutes.DigitalizingProcess.route),
+        isTwoButton = false,
+    )
 }
 
 @Preview(

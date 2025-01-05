@@ -32,91 +32,14 @@ import com.it235.nureserved.ui.theme.white3
 
 @Composable
 fun LetsReserveScreen(navController: NavController){
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-    ){ innerPadding ->
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ){
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(130.dp),
-                lineHeight = 35.sp,
-                text = "Let's Reserve!",
-                textAlign = TextAlign.Center,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            Spacer(modifier = Modifier.height(80.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.standing_4),
-                contentDescription = null,
-            )
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                for(i in 0..3){
-                    Image(
-                        painter = if(i == 3) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
-                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
-                        contentDescription = null,
-                    )
-
-                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                modifier = Modifier
-                    .height(80.dp),
-                text = "Reserve your spot now!",
-                textAlign = TextAlign.Center,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                Button(
-                    onClick = {
-
-                        navController.navigate(ScreenRoutes.Login.route) {
-                            popUpTo(0) { inclusive = true }
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = brandColorBlue,
-                        contentColor = white3
-                    )
-                ){
-                    Text( text = "LET'S GO")
-                }
-            }
-
-        }
-
-    }
+    OnboardingScreen(
+        navController = navController,
+        title = "Let's Reserve!",
+        image = R.drawable.running_flat_character,
+        circleFilledIndex = 3,
+        description = "What are you waiting for? Reserve a room now and enjoy the convenience of NUreserved!",
+        buttonText = "LET'S GO",
+        route = listOf(ScreenRoutes.Login.route),
+        isTwoButton = false,
+    )
 }

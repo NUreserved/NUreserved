@@ -37,107 +37,15 @@ import com.it235.nureserved.ui.theme.white3
 
 @Composable
 fun DigitalizingProcessScreen(navController: NavController){
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-    ){ innerPadding ->
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ){
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(130.dp),
-                text = "Digitalizing the Process",
-                lineHeight = 35.sp,
-                textAlign = TextAlign.Center,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            Spacer(modifier = Modifier.height(80.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.standing_3),
-                contentDescription = null,
-            )
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                for(i in 0..3){
-                    Image(
-                        painter = if(i == 1) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
-                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
-                        contentDescription = null,
-                    )
-
-                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                modifier = Modifier
-                    .height(80.dp),
-                text =  "We are digitalizing the process to make it easier for you to reserve a room.",
-                textAlign = TextAlign.Center,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                OutlinedButton(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.GetStarted.route)
-                    },
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = brandColorBlue
-                    ),
-                    border = BorderStroke(
-                        width = 1.dp,
-                        color = brandColorBlue,
-                    ),
-                ){
-                    Text( text = "PREV")
-                }
-
-                Spacer(modifier = Modifier.width(30.dp))
-
-                Button(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.AlwaysUptodate.route)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = brandColorBlue,
-                        contentColor = white3
-                    )
-                ){
-                    Text( text = "NEXT")
-                }
-            }
-
-        }
-
-    }
+    OnboardingScreen(
+        navController = navController,
+        title = "Digitalizing Process",
+        image = R.drawable.reservation_flat_character,
+        circleFilledIndex = 1,
+        description = "By just using your device, you can reserve rooms in a quick and digitalized process.",
+        route = listOf(ScreenRoutes.GetStarted.route, ScreenRoutes.AlwaysUptodate.route),
+        isTwoButton = true,
+    )
 }
 
 @Preview(

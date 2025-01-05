@@ -37,107 +37,15 @@ import com.it235.nureserved.ui.theme.white3
 
 @Composable
 fun AlwaysUptodateScreen(navController: NavController){
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-    ){ innerPadding ->
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ){
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(130.dp),
-                text = "Be always up-to-date",
-                lineHeight = 35.sp,
-                textAlign = TextAlign.Center,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            Spacer(modifier = Modifier.height(80.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.standing_2),
-                contentDescription = null,
-            )
-
-            Spacer(modifier = Modifier.height(70.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                for(i in 0..3){
-                    Image(
-                        painter = if(i == 2) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
-                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
-                        contentDescription = null,
-                    )
-
-                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                modifier = Modifier
-                    .height(80.dp),
-                text =  "Get the latest updates on room availability and reservation status.",
-                textAlign = TextAlign.Center,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                OutlinedButton(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.DigitalizingProcess.route)
-                    },
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = brandColorBlue
-                    ),
-                    border = BorderStroke(
-                        width = 1.dp,
-                        color = brandColorBlue,
-                    ),
-                ){
-                    Text( text = "PREV")
-                }
-
-                Spacer(modifier = Modifier.width(30.dp))
-
-                Button(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.LetsReserveScreen.route)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = brandColorBlue,
-                        contentColor = white3
-                    )
-                ){
-                    Text( text = "NEXT")
-                }
-            }
-
-        }
-
-    }
+    OnboardingScreen(
+        navController = navController,
+        title = "Be always up-to-date",
+        image = R.drawable.hand_with_watch_flat_character,
+        circleFilledIndex = 2,
+        description = "Get the latest updates on room availability and reservation status",
+        route = listOf(ScreenRoutes.DigitalizingProcess.route, ScreenRoutes.LetsReserveScreen.route),
+        isTwoButton = true,
+    )
 }
 
 @Preview(
