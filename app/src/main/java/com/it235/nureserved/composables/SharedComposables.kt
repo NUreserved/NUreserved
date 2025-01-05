@@ -109,6 +109,178 @@ private fun CustomDialog(
     )
 }
 
+/* Onboarding screens composables */
+
+@Composable
+fun OnboardingScreen(
+    navController: NavController,
+    title: String,
+    @DrawableRes image: Int,
+    circleFilledIndex: Int,
+    description: String,
+    buttonText: String = "",
+    route: List<String>,
+    isTwoButton: Boolean,
+){
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(white)
+    ){ innerPadding ->
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
+
+            Space("h", 40)
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+            ){
+                TextButton(
+                    onClick = {
+                        navController.navigate(ScreenRoutes.Login.route){
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
+                ) {
+                    Text(
+                        text = "SKIP",
+                        color = if(isSystemInDarkTheme()) white else brandColorBlue
+                    )
+                }
+            }
+
+            Space("h", 30)
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                lineHeight = 35.sp,
+                text = title,
+                textAlign = TextAlign.Center,
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(350.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ){
+                Image(
+                    painter = painterResource(id = image),
+                    contentDescription = null,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ){
+                for(i in 0..3){
+                    Image(
+                        painter = if(i == circleFilledIndex) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
+                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
+                        contentDescription = null,
+                    )
+
+                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
+                }
+
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                modifier = Modifier
+                    .height(80.dp),
+                fontSize = 15.sp,
+                text =  description,
+                textAlign = TextAlign.Center,
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ){
+                if(isTwoButton){
+                    OutlinedButton(
+                        onClick = {
+                            navController.navigate(route[0])
+                        },
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = if(isSystemInDarkTheme()) white else brandColorBlue
+                        ),
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = brandColorBlue,
+                        ),
+                    ){
+                        Text( text = "PREV")
+                    }
+
+                    Spacer(modifier = Modifier.width(30.dp))
+
+                    Button(
+                        onClick = {
+                            navController.navigate(route[1])
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = brandColorBlue,
+                            contentColor = white3
+                        )
+                    ){
+                        Text( text = "NEXT")
+                    }
+                }
+
+                else{
+                    Button(
+                        onClick = {
+                            if(circleFilledIndex == 3) {
+                                navController.navigate(route[0]){
+                                    popUpTo(0) { inclusive = true }
+                                }
+                            }
+                            else{
+                                navController.navigate(route[0])
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = brandColorBlue,
+                            contentColor = white3
+                        )
+                    ){
+                        Text(
+                            text = buttonText,
+                            fontSize = 15.sp,
+                        )
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
+/* end of Onboarding screens composables */
+
 /* Sign-up screen composables */
 
 @Composable
