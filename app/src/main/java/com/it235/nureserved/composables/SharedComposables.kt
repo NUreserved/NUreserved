@@ -211,8 +211,6 @@ fun OnboardingScreen(
                 textAlign = TextAlign.Center,
             )
 
-            Spacer(modifier = Modifier.height(5.dp))
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
