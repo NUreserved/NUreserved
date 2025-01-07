@@ -32,16 +32,102 @@ import com.it235.nureserved.ui.theme.white3
 
 @Composable
 fun GetStartedScreen(navController: NavController){
-    OnboardingScreen(
-        navController = navController,
-        title = "Welcome to NUreserved!",
-        image = R.drawable.waving_flat_character,
-        circleFilledIndex = 0,
-        description = "NUreserved is an app that enables room reservation for students and faculty members of National University.",
-        buttonText = "Get Started",
-        route = listOf(ScreenRoutes.DigitalizingProcess.route),
-        isTwoButton = false,
-    )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        val pageState = rememberPagerState(pageCount = { 4 })
+
+        HorizontalPager(
+            modifier = Modifier
+                .wrapContentHeight(),
+            state = pageState,
+        ) { page ->
+            if(page == 0){
+                OnboardingScreen(
+                    navController = navController,
+                    title = "Welcome to NUreserved!",
+                    image = R.drawable.waving_flat_character,
+                    description = "NUreserved is an app that enables room reservation for students and faculty members of National University.",
+                )
+            }
+
+            else if(page == 1){
+                OnboardingScreen(
+                    navController = navController,
+                    title = "Digitalizing Process",
+                    image = R.drawable.reservation_flat_character,
+                    description = "By just using your device, you can reserve rooms in a quick and digitalized process.",
+                )
+            }
+
+            else if(page == 2){
+                OnboardingScreen(
+                    navController = navController,
+                    title = "Be always up-to-date",
+                    image = R.drawable.hand_with_watch_flat_character,
+                    description = "Get the latest updates on room availability and reservation status",
+                )
+            }
+
+            else if(page == 3){
+                OnboardingScreen(
+                    navController = navController,
+                    title = "Let's Reserve!",
+                    image = R.drawable.running_flat_character,
+                    description = "What are you waiting for? Reserve a room now and enjoy the convenience of NUreserved!",
+                )
+            }
+        }
+
+        if(pageState.currentPage != pageState.pageCount - 1){
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 90.dp),
+                horizontalArrangement = Arrangement.Center,
+            ){
+                repeat(pageState.pageCount) { iteration ->
+                    val color = if(pageState.currentPage == iteration) brandColorBlue else white2
+                    Box(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .clip(CircleShape)
+                            .background(color)
+                            .size(16.dp)
+                    )
+
+                }
+            }
+        }
+
+        else{
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 90.dp),
+                horizontalArrangement = Arrangement.Center,
+            ){
+                Button(
+                    onClick = {
+                        navController.navigate(ScreenRoutes.Login.route){ popUpTo(0) { inclusive = true } }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = brandColorBlue,
+                        contentColor = white3
+                    )
+                ){
+                    Text( text = "LET'S GO")
+                }
+            }
+        }
+
+    }
+
 }
 
 @Preview(
