@@ -501,7 +501,9 @@ private fun RegisterButton(
                                     .set(userData)
                                     .addOnCompleteListener {e ->
                                         if(e.isSuccessful){
-                                            navController.navigate(ScreenRoutes.Home.route)
+                                            navController.navigate(ScreenRoutes.Home.route) {
+                                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                            }
                                         }
                                         else{
                                             loading.value = false
