@@ -87,7 +87,7 @@ fun GetStartedScreen(navController: NavController){
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 90.dp),
+                    .padding(bottom = 110.dp),
                 horizontalArrangement = Arrangement.Center,
             ){
                 repeat(pageState.pageCount) { iteration ->
@@ -110,7 +110,7 @@ fun GetStartedScreen(navController: NavController){
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 90.dp),
+                    .padding(bottom = 110.dp),
                 horizontalArrangement = Arrangement.Center,
             ){
                 Button(
