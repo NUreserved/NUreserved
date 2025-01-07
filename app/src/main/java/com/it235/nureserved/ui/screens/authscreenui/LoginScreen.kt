@@ -101,9 +101,16 @@ fun LoginScreen(
             animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
         )
 
+        val focusManager = LocalFocusManager.current
+
         Scaffold(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        focusManager.clearFocus()
+                    })
+                },
             snackbarHost = {
                 Box(
                     modifier = Modifier

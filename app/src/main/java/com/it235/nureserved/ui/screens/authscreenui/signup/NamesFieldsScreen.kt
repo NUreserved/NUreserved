@@ -65,9 +65,16 @@ fun NameSignUpScreen(
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
 
+        val focusManager = LocalFocusManager.current
+
         Scaffold(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        focusManager.clearFocus()
+                    })
+                },
             snackbarHost = {
                 Box(
                     modifier = Modifier
