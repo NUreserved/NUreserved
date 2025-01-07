@@ -148,7 +148,7 @@ fun OnboardingScreen(
                 }
             }
 
-            Space("h", 30)
+            Space("h", 10)
 
             Text(
                 modifier = Modifier
