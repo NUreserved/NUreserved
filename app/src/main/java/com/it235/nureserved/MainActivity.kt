@@ -32,15 +32,9 @@ import com.it235.nureserved.ui.screens.authscreenui.signup.ProgramStudentNumberS
 import com.it235.nureserved.ui.screens.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
 import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
-import com.it235.nureserved.ui.screens.onboardingscreenui.AlwaysUptodateScreen
-import com.it235.nureserved.ui.screens.onboardingscreenui.DigitalizingProcessScreen
 import com.it235.nureserved.ui.screens.onboardingscreenui.GetStartedScreen
-import com.it235.nureserved.ui.screens.onboardingscreenui.LetsReserveScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
