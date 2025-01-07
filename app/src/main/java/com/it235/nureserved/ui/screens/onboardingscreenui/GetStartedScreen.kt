@@ -49,7 +49,7 @@ fun GetStartedScreen(navController: NavController){
                     navController = navController,
                     title = "Welcome to NUreserved!",
                     image = R.drawable.waving_flat_character,
-                    description = "NUreserved is an app that enables room reservation for students and faculty members of National University.",
+                    description = "Your room reservation companion at National University Fairview.",
                 )
             }
 
@@ -58,25 +58,25 @@ fun GetStartedScreen(navController: NavController){
                     navController = navController,
                     title = "Digitalizing Process",
                     image = R.drawable.reservation_flat_character,
-                    description = "By just using your device, you can reserve rooms in a quick and digitalized process.",
+                    description = "No need for manual reservations. With NUreserved, you can view available rooms in real-time.",
                 )
             }
 
             else if(page == 2){
                 OnboardingScreen(
                     navController = navController,
-                    title = "Be always up-to-date",
+                    title = "Simplify your Reservations",
                     image = R.drawable.hand_with_watch_flat_character,
-                    description = "Get the latest updates on room availability and reservation status",
+                    description = "Reserve lecture rooms with ease; manage and track your reservations on the go.",
                 )
             }
 
             else if(page == 3){
                 OnboardingScreen(
                     navController = navController,
-                    title = "Let's Reserve!",
+                    title = "What are NU waiting for?",
                     image = R.drawable.running_flat_character,
-                    description = "What are you waiting for? Reserve a room now and enjoy the convenience of NUreserved!",
+                    description = "Log in with your National University e-mail and start reserving today.",
                 )
             }
         }
