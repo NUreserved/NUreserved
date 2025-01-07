@@ -267,16 +267,12 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidFname.value && isValidMname.value && isValidLname.value){
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${firstName}/${middleName}/${lastName}")
-            }
-            else{
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = "Make sure your inputs are correct",
-                        duration = SnackbarDuration.Short
-                    )
-                }
+            val formattedFirstName = firstName.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedMiddleName = middleName.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
+
+            if (isValidFname.value && isValidMname.value && isValidLname.value) {
+                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
             }
         },
         modifier = Modifier
