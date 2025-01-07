@@ -441,8 +441,16 @@ fun RoomReservationForm(
     navController: NavController
 ){
     var selectedRooms by remember { mutableStateOf(listOf<String>()) }
+    val focusManager = LocalFocusManager.current
 
-    Scaffold{ innerPadding ->
+    Scaffold(
+        modifier = Modifier
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
+    ){ innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
