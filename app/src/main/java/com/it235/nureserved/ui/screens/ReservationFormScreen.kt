@@ -5,6 +5,7 @@ import android.icu.util.Calendar
 import android.widget.TimePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -75,6 +76,8 @@ import com.it235.nureserved.ui.theme.white
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.vectorResource
 import com.it235.nureserved.R
 import java.text.SimpleDateFormat
@@ -441,8 +444,16 @@ fun RoomReservationForm(
     navController: NavController
 ){
     var selectedRooms by remember { mutableStateOf(listOf<String>()) }
+    val focusManager = LocalFocusManager.current
 
-    Scaffold{ innerPadding ->
+    Scaffold(
+        modifier = Modifier
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
+    ){ innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
