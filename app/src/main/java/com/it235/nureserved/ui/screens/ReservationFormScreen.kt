@@ -557,6 +557,49 @@ fun RoomReservationForm(
     var selectedRooms by remember { mutableStateOf(listOf<String>()) }
     val focusManager = LocalFocusManager.current
 
+    val nameLabels = listOf("Given Name", "Middle Name", "Surname");
+
+    var nameOfOrgDeptColg = remember { mutableStateOf("") }
+    var position = remember { mutableStateOf("") }
+    var titleOfTheActivity = remember { mutableStateOf("") }
+
+    var dateFilled by remember { mutableStateOf("") }
+    var dateFilledShowModal = remember { mutableStateOf(false)}
+
+    var expectedNumberOfAttendees = remember { mutableStateOf("") }
+    var recommedingApproval = remember { mutableStateOf("") }
+
+    var fromDatesOfActivity by remember { mutableStateOf("") }
+    var fromDatesOfActivityShowModal = remember { mutableStateOf(false) }
+    var toDatesOfActivity by remember { mutableStateOf("") }
+    var toDatesOfActivityShowModal = remember { mutableStateOf(false) }
+
+    var givenName = remember { mutableStateOf("") }
+    var middleName = remember { mutableStateOf("") }
+    var lastName = remember { mutableStateOf("") }
+
+    val timeOptions = listOf(
+        "Select time",
+        "8 AM",
+        "9 AM",
+        "10 AM",
+        "11 AM",
+        "12 PM",
+        "1 PM",
+        "2 PM",
+        "3 PM",
+        "4 PM",
+        "5 PM",
+        "6 PM",
+        "7 PM",
+        "8 PM",
+        "9 PM",
+    )
+
+
+    var selectedFromTimeOption by remember { mutableStateOf(timeOptions[0]) }
+    var selectedToTimeOption by remember { mutableStateOf(timeOptions[0]) }
+
     Scaffold(
         modifier = Modifier
             .pointerInput(Unit) {
