@@ -610,8 +610,6 @@ fun RoomReservationForm(
     ){ innerPadding ->
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ){
             item {
@@ -715,18 +713,6 @@ fun RoomReservationForm(
                                     fontWeight = FontWeight.Bold,
                                 ),
                             )
-                        },
-                        {
-                            Text(
-                                text = "Time of the Activity",
-                                style = LocalTextStyle.current.copy(
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold,
-                                ),
-                            )
-                        },
-                    )
-
 
                             OutlineTextFieldComposable(
                                 modifier = Modifier.weight(5f),
