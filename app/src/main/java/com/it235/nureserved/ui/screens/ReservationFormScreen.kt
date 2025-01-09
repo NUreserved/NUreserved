@@ -608,105 +608,111 @@ fun RoomReservationForm(
                 })
             }
     ){ innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ){
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(brandColorBlue)
+                        .padding(start = 20.dp, top = 15.dp, bottom = 15.dp, end = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ){
+                    Image(
+                        modifier = Modifier.
+                        width(60.dp),
+                        painter = painterResource(R.drawable.logo),
+                        contentDescription = "NUreserved logo",
+                    )
 
-            RowHeader("ROOM RESERVATIONS FORM")
+                    Spacer(modifier = Modifier.width(10.dp))
 
-            Column(
-                modifier = Modifier
-                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
-            ){
-                val inputLabels = listOf(
-                    "Name of Organization/Department/College:",
-                    "Title of the Activity:"
-                );
-                
-                val nameLabels = listOf("Given Name", "Middle Name", "Surname");
+                    Text(
+                        text = "ROOM RESERVATIONS",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                        ),
+                    )
+                }
+            }
 
-                inputLabels.forEachIndexed{ index, inputLabel ->
-                    Column(){
-                        InputFieldAndLabel(inputLabel = inputLabel, modifier = Modifier.height(5.dp))
-                    }
+            item {
+                InputAndLabelLayout(
+                    inputName = "Name of Organization/Department/College:",
+                    inputValue = nameOfOrgDeptColg,
+                    dimension = "col",
+                )
+            }
 
-                    if(index != inputLabels.lastIndex) {
-                        Space("h", 20)
+            item {
+                Row(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ){
+                    Text(
+                        text = "Date Filled:",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                        ),
+                    )
 
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Date Filled:", modifier = Modifier.width(5.dp))
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    DatePickerTextField(
+                        selectedDate = dateFilled,
+                        showModal = dateFilledShowModal
+                    ){
+                        try {
+                            val date = Date(it!!)
+                            val formattedDate =
+                                SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
+                            dateFilled = formattedDate
+                            dateFilledShowModal.value = false
                         }
-
-                        Space("h", 20)
-
-                        Text(
-                            text = "Requested by:",
-                            style = LocalTextStyle.current.copy(
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold,
-                            ),
-                        )
-
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp),
-                        ){
-                            nameLabels.forEachIndexed{index, nameLabel ->
-
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ){
-                                    InputFieldAndLabel(inputLabel = nameLabel, modifier = Modifier.width(0.dp), inputWidth = Modifier.weight(3f)){
-                                        OutlineTextFieldComposable(modifier = Modifier.weight(6f))
-                                    }
-                                }
-
-                            }
+                        catch(e: Exception){
+                            //add snackbar for error message
                         }
-
-                        Space("h", 20)
-
-                        RowLayout(){
-                            InputFieldAndLabel(inputLabel = "Position:", modifier = Modifier.width(5.dp))
-                        }
-
-                        Space("h", 20)
                     }
                 }
 
-                Space("h", 20)
+                Space("h", 10)
+            }
 
-                Column (
+            item{
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp)
                 ){
-
-                    val dateAndTimePickers = listOf<@Composable () -> Unit>(
-                        {
-                            DatePickerTextField(labelValue = "From", modifier = Modifier.weight(1f))
-                            Space("w", 10)
-                            DatePickerTextField(labelValue = "To", modifier = Modifier.weight(1f))
-                        },
-                        {
-                            TimePicker(labelValue = "From", modifier = Modifier.weight(1f))
-                            Space("w", 10)
-                            TimePicker(labelValue = "To", modifier = Modifier.weight(1f))
-                        }
+                    Text(
+                        text = "Requested by:",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
 
-                    val dateAndTimePickersLabels = listOf<@Composable () -> Unit>(
-                        {
+                    nameLabels.forEachIndexed{index, nameLabel ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
                             Text(
-                                text = "Date/s of the Activity:",
+                                modifier = Modifier
+                                    .weight(3f)
+                                    .padding(start = 10.dp),
+                                text = nameLabel,
                                 style = LocalTextStyle.current.copy(
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold,
                                 ),
                             )
                         },
@@ -722,90 +728,226 @@ fun RoomReservationForm(
                     )
 
 
-                    dateAndTimePickers.forEachIndexed{index, dateAndTimePicker ->
-                        if (index == 1){
-                            Space("h", 10)
-                        }
-                        dateAndTimePickersLabels[index]()
-                        Space("h", 5)
-                        Row(modifier = Modifier.fillMaxWidth()){
-                            dateAndTimePicker()
+                            OutlineTextFieldComposable(
+                                modifier = Modifier.weight(5f),
+                                inputValue = when(index){
+                                    0 -> givenName
+                                    1 -> middleName
+                                    else -> lastName
+                                }
+                            ){
+                                when(index){
+                                    0 -> givenName.value = it
+                                    1 -> middleName.value = it
+                                    else -> lastName.value = it
+                                }
+                            }
+
                         }
                     }
 
                 }
+            }
 
-                Space("h", 20)
-
-                RowLayout(){
-                    InputFieldAndLabel(inputLabel = "Expected # of Attendees:", modifier = Modifier.width(5.dp)){
-                        OutlineTextFieldComposable(keyboardType = KeyboardType.Number)
-                    }
-                }
-
-                Space("h", 20)
-
-                HorizontalDivider(
-                    color = Color(0xFFEEEEEE),
-                    thickness = 2.dp,
+            item {
+                InputAndLabelLayout(
+                    inputName = "Position:",
+                    inputValue = position,
+                    dimension = "row",
                 )
+            }
 
-                Space("h", 20)
-
-                Text(
-                    text = "Venue:",
-                    style = LocalTextStyle.current.copy(
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                    ),
+            item {
+                InputAndLabelLayout(
+                    inputName = "Title of the Activity:",
+                    inputValue = titleOfTheActivity,
+                    dimension = "col",
                 )
+            }
 
-                Space("h", 10)
-
+            item {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp)
                 ){
-                    FlowRow(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
-                    ) {
-                        val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
-                        rooms.forEach { room ->
-                            FilterChipComposable(
-                                roomNumber = room,
-                                selectedRooms = selectedRooms,
-                                onRoomSelected = { selectedRooms = selectedRooms + it },
-                                onRoomDeselected = { selectedRooms = selectedRooms - it }
-                            )
+                    Text(
+                        text = "Date/s of the Activity:",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+
+                    Row {
+                        DatePickerTextField(
+                            modifier = Modifier
+                                .weight(1f),
+                            selectedDate = fromDatesOfActivity,
+                            showModal = fromDatesOfActivityShowModal,
+                            labelValue = "From",
+                        ){
+                            try {
+                                val date = Date(it!!)
+                                val formattedDate =
+                                    SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
+                                fromDatesOfActivity = formattedDate
+                                fromDatesOfActivityShowModal.value = false
+                            }
+                            catch(e: Exception){
+                                //add snackbar for error message
+                            }
+                        }
+
+                        Space("w", 5)
+
+                        DatePickerTextField(
+                            modifier = Modifier
+                                .weight(1f),
+                            selectedDate = toDatesOfActivity,
+                            showModal = toDatesOfActivityShowModal,
+                            labelValue = "To",
+                        ){
+                            try {
+                                val date = Date(it!!)
+                                val formattedDate =
+                                    SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
+                                toDatesOfActivity = formattedDate
+                                toDatesOfActivityShowModal.value = false
+                            }
+                            catch(e: Exception){
+                                //add snackbar for error message
+                            }
                         }
                     }
                 }
 
-                Space("h", 20)
+                Space("h", 10)
+            }
 
-                Column(){
-                    InputFieldAndLabel(inputLabel = "Recommending Approval:", modifier = Modifier.height(5.dp)){
-                        OutlineTextFieldComposable(labelValue = "Email of Immediate Head (Adviser/Coordinator/Supervisor)")
+            item {
+                Column(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+                ){
+                    Text(
+                        text = "Time of the Activity:",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+
+                    Row {
+                        DropdownTextField(
+                            modifier = Modifier
+                                .weight(1f),
+                            options = timeOptions,
+                            selectedOption = selectedFromTimeOption,
+                            label = "From",
+                            onOptionSelected = {
+                                selectedFromTimeOption = it
+                            },
+                        )
+
+                        Space("w", 5)
+
+                        DropdownTextField(
+                            modifier = Modifier
+                                .weight(1f),
+                            options = timeOptions,
+                            selectedOption = selectedToTimeOption,
+                            label = "To",
+                            onOptionSelected = {
+                                selectedToTimeOption = it
+                            },
+                        )
                     }
                 }
 
-                Space("h", 20)
+                Space("h", 10)
+            }
+
+            item {
+                InputAndLabelLayout(
+                    inputName = "Expected # of attendees:",
+                    inputValue = expectedNumberOfAttendees,
+                    dimension = "row",
+                    keyboardType = KeyboardType.Number,
+                )
+
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                    color = white2,
+                    thickness = 2.dp
+                )
+            }
+
+            item {
+                Column(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                ){
+                    Text(
+                        text = "Venue:",
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                        ),
+                    )
+
+                    Space("h", 10)
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    ){
+                        FlowRow(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                        ) {
+                            val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
+                            rooms.forEach { room ->
+                                FilterChipComposable(
+                                    roomNumber = room,
+                                    selectedRooms = selectedRooms,
+                                    onRoomSelected = { selectedRooms = selectedRooms + it },
+                                    onRoomDeselected = { selectedRooms = selectedRooms - it }
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Space("h", 10)
+            }
+
+            item {
+                InputAndLabelLayout(
+                    inputName = "Recommending Approval:",
+                    inputValue = recommedingApproval,
+                    dimension = "col",
+                    label = "Email of Immediate Head (Adviser/Coordinator/Supervisor)",
+                )
+            }
+
+            item {
+                Space("h", 10)
 
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.End,
                 ){
-
                     Button(
                         onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = darkGray,
                             contentColor = white
                         ),
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(10.dp),
                     ){
                         Text(
                             text = "Back",
@@ -820,11 +962,11 @@ fun RoomReservationForm(
 
                     Button(
                         onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF35408E),
-                            contentColor = Color(0xFFFEFEFE)
+                        colors =  ButtonDefaults.buttonColors(
+                            containerColor = brandColorBlue,
+                            contentColor = white,
                         ),
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(10.dp),
                     ){
                         Text(
                             text = "Next",
@@ -834,10 +976,10 @@ fun RoomReservationForm(
                             )
                         )
                     }
+
                 }
 
                 Space("h", 20)
-
             }
 
         }
