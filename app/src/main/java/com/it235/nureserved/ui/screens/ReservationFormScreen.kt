@@ -393,6 +393,162 @@ fun RowLayout(modifier: Modifier = Modifier, content: @Composable () -> Unit){
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropdownTextField(
+    modifier: Modifier = Modifier,
+    options: List<String>,
+    selectedOption: String,
+    label: String,
+//    showSupportText: Boolean,
+//    isValid: MutableState<Boolean>,
+    onOptionSelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    ExposedDropdownMenuBox(
+        modifier = modifier
+            .fillMaxWidth(),
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+
+        TextField(
+            value = selectedOption,
+            onValueChange = {},
+            readOnly = true,
+            label = {
+                Text( text = label )
+            },
+            trailingIcon = {
+                Icon(
+                    painter = if(!expanded) painterResource(R.drawable.arrow_drop_down_24dp_000000_fill0_wght400_grad0_opsz24) else painterResource(R.drawable.arrow_drop_up_24dp_000000_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Dropdown arrow",
+                )
+            },
+//            supportingText = {
+//                if(showSupportText){
+//                    if(selectedOption == "Program"){
+//                        isValid.value = false
+//                        Text(
+//                            text = "Please select a program.",
+//                            color = indicatorColorRed
+//                        )
+//                    }
+//                    else {
+//                        isValid.value = true
+//                        Text( text = "" )
+//                    }
+//                }
+//            },
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = LocalTextStyle.current.color,
+                focusedBorderColor = LocalTextStyle.current.color,
+                focusedTextColor = LocalTextStyle.current.color,
+                cursorColor = LocalTextStyle.current.color,
+            ),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .menuAnchor()
+        )
+
+        ExposedDropdownMenu(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 200.dp)
+                .background(white)
+                .border(
+                    width = 1.dp,
+                    color = textColor1,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .verticalScroll(rememberScrollState()),
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { selectionOption ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = selectionOption,
+                            color = textColor1,
+                        )
+                    },
+                    onClick = {
+                        onOptionSelected(selectionOption)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun InputAndLabelLayout(
+    label: String = "",
+    inputName: String,
+    inputValue: MutableState<String>,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    dimension: String,
+){
+    if(dimension == "col"){
+        Column(
+            modifier = Modifier
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+        ){
+            Text(
+                text = inputName,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            OutlineTextFieldComposable(
+                inputValue = inputValue,
+                keyboardType = keyboardType,
+                label = label,
+            ){
+                inputValue.value = it
+            }
+        }
+
+        Space("h", 10)
+    }
+
+    else{
+        Row(
+            modifier = Modifier
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ){
+            Text(
+                text = inputName,
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                ),
+            )
+
+            Spacer(modifier = Modifier.width(5.dp))
+
+            OutlineTextFieldComposable(
+                inputValue = inputValue,
+                keyboardType = keyboardType,
+            ){
+                inputValue.value = it
+            }
+        }
+
+        Space("h", 10)
+    }
+
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RoomReservationForm(
