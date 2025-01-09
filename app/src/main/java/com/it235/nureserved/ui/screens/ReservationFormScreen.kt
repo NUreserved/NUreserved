@@ -224,9 +224,14 @@ fun TimePicker(modifier: Modifier = Modifier, labelValue: String){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
-    var selectedDate by remember { mutableStateOf("") }
-    var showModal by remember { mutableStateOf(false)}
+fun DatePickerTextField(
+    modifier: Modifier = Modifier,
+    labelValue: String = "",
+    selectedDate: String,
+    showModal: MutableState<Boolean>,
+    onDateSelected: (Long?) -> Unit,
+)
+{
 
     @Composable
     fun DatePickerModal(
@@ -285,27 +290,16 @@ fun DatePickerTextField(modifier: Modifier = Modifier, labelValue: String = ""){
             Icon(
                 imageVector = Icons.Default.DateRange,
                 contentDescription = "Select Date",
-                modifier = Modifier.clickable{ showModal = !showModal}
+                modifier = Modifier.clickable{ showModal.value = !showModal.value}
             )
         },
         modifier = modifier.fillMaxWidth()
     )
 
-    if(showModal){
+    if(showModal.value){
         DatePickerModal(
-            onDateSelected = {
-                try {
-                    val date = Date(it!!)
-                    val formattedDate =
-                        SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
-                    selectedDate = formattedDate
-                    showModal = false
-                }
-                catch(e: Exception){
-                    //add snackbar for error message
-                }
-            },
-            onDismiss = { showModal = false}
+            onDateSelected = onDateSelected,
+            onDismiss = { showModal.value = false}
         )
     }
 }
