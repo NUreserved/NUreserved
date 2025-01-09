@@ -343,20 +343,25 @@ fun FilterChipComposable(
 }
 
 @Composable
-fun OutlineTextFieldComposable(modifier: Modifier = Modifier, keyboardType: KeyboardType = KeyboardType.Text, labelValue: String = ""){
-    var inputValue by remember { mutableStateOf("") }
-
+fun OutlineTextFieldComposable(
+    modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    label: String = "",
+    inputValue: MutableState<String>,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    onValueChange: (String) -> Unit,
+){
 
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth(),
-        value = inputValue,
+        value = inputValue.value,
         singleLine = true,
         shape = RoundedCornerShape(10.dp),
-        onValueChange = { inputValue = it },
+        onValueChange = onValueChange,
         label = {
             Text(
-                text = labelValue,
+                text = label,
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Normal,
