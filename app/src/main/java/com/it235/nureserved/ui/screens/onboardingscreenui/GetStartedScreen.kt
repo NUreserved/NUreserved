@@ -57,7 +57,7 @@ fun GetStartedScreen(navController: NavController){
                 OnboardingScreen(
                     navController = navController,
                     title = "Digitalizing Process",
-                    image = R.drawable.reservation_flat_character,
+                    image = R.drawable.digitalizing_process_flat_character,
                     description = "No need for manual reservations. With NUreserved, you can view available rooms in real-time.",
                 )
             }
@@ -66,7 +66,7 @@ fun GetStartedScreen(navController: NavController){
                 OnboardingScreen(
                     navController = navController,
                     title = "Simplify your Reservations",
-                    image = R.drawable.hand_with_watch_flat_character,
+                    image = R.drawable.simplify_your_reservation_flat_character,
                     description = "Reserve lecture rooms with ease; manage and track your reservations on the go.",
                 )
             }
