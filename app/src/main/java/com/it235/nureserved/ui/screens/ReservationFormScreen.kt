@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -73,9 +74,11 @@ import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
+import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
+import com.it235.nureserved.ui.theme.white5
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -306,7 +309,7 @@ fun DropdownTextField(
                 .menuAnchor()
                 .border(
                     width = 1.dp,
-                    color = textColor1,
+                    color = if (isSystemInDarkTheme()) darkGray2 else white5,
                     shape = RoundedCornerShape(10.dp)
                 )
         )
@@ -329,7 +332,7 @@ fun DropdownTextField(
                     text = {
                         Text(
                             text = selectionOption,
-                            color = textColor1,
+                            color = if (isSystemInDarkTheme()) darkGray2 else textColor1,
                             fontSize = 13.sp,
                         )
                     },
