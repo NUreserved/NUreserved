@@ -7,7 +7,9 @@ val white = Color(0xFFFEFEFE)
 val white2 = Color(0xFFEEEEEE)
 val white3 = Color(0xFFF8F5F5)
 val white4 = Color(0xFFAFAFAF)
+val white5 = Color(0xFF7D7882)
 val darkGray = Color(0xFF333333)
+val darkGray2 = Color(0xFF90909A)
 
 val backgroundColorWhite1 = white
 val backgroundColorWhite2 = white2
