@@ -403,7 +403,7 @@ fun ConfirmationDialog(
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
-        title = { Text(text = "All inputs looks good") },
+        title = { Text(text = "All inputs look good") },
         icon = {
             Icon(
                 imageVector = Icons.Filled.Done,
