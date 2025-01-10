@@ -395,7 +395,45 @@ fun InputAndLabelLayout(
 
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun ConfirmationDialog(
+    showDialog: Boolean,
+    onDismiss: () -> Unit,
+    showConfirmDialog: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "All inputs looks good") },
+        icon = {
+            Icon(
+                imageVector = Icons.Filled.Done,
+                contentDescription = null,
+            )
+        },
+        text = {
+            Text(
+                text = "Please double check all of your inputs before proceeding to avoid any inconvenience.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onDismiss(); showConfirmDialog() }
+            ) {
+                Text("Proceed")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Back")
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RoomReservationForm(
     navController: NavController
