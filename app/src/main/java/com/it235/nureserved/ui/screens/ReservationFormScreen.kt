@@ -486,6 +486,16 @@ fun RoomReservationForm(
     var selectedFromTimeOption by remember { mutableStateOf(timeOptions[0]) }
     var selectedToTimeOption by remember { mutableStateOf(timeOptions[0]) }
 
+    if(showAlertDialog){
+        ConfirmationDialog(
+            showDialog = showAlertDialog,
+            onDismiss = { showAlertDialog = false },
+            showConfirmDialog = {
+                navController.navigate(ScreenRoutes.RoomUsageRules.route)
+            },
+        )
+    }
+
     Scaffold(
         modifier = Modifier
             .pointerInput(Unit) {
@@ -833,7 +843,9 @@ fun RoomReservationForm(
                     Space("w", 10)
 
                     Button(
-                        onClick = { navController.navigate(ScreenRoutes.RoomUsageRules.route) },
+                        onClick = {
+                            showAlertDialog = true
+                        },
                         colors =  ButtonDefaults.buttonColors(
                             containerColor = brandColorBlue,
                             contentColor = white,
