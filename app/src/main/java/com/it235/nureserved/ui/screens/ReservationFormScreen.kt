@@ -247,8 +247,6 @@ fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
     label: String,
-//    showSupportText: Boolean,
-//    isValid: MutableState<Boolean>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -278,22 +276,6 @@ fun DropdownTextField(
                     contentDescription = "Dropdown arrow",
                 )
             },
-//            supportingText = {
-//                if(showSupportText){
-//                    if(selectedOption == "Program"){
-//                        isValid.value = false
-//                        Text(
-//                            text = "Please select a program.",
-//                            color = indicatorColorRed
-//                        )
-//                    }
-//                    else {
-//                        isValid.value = true
-//                        Text( text = "" )
-//                    }
-//                }
-//            },
-
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
