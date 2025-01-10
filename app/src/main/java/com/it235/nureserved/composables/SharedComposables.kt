@@ -1,9 +1,14 @@
 package com.it235.nureserved.composables
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,6 +18,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,6 +38,7 @@ import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 
 @Composable
@@ -97,6 +104,92 @@ private fun CustomDialog(
         }
     )
 }
+
+/* Onboarding screens composables */
+
+@Composable
+fun OnboardingScreen(
+    navController: NavController,
+    title: String,
+    @DrawableRes image: Int,
+    description: String,
+){
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(white)
+    ){ innerPadding ->
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
+
+            Space("h", 40)
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+            ){
+                TextButton(
+                    onClick = {
+                        navController.navigate(ScreenRoutes.Login.route){
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
+                ) {
+                    Text(
+                        text = "SKIP",
+                        color = if(isSystemInDarkTheme()) white else brandColorBlue
+                    )
+                }
+            }
+
+            Space("h", 10)
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                lineHeight = 35.sp,
+                text = title,
+                textAlign = TextAlign.Center,
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ){
+                Image(
+                    painter = painterResource(id = image),
+                    contentDescription = null,
+                )
+            }
+
+            Text(
+                modifier = Modifier
+                    .height(80.dp),
+                fontSize = 15.sp,
+                text =  description,
+                textAlign = TextAlign.Center,
+            )
+
+            Spacer(modifier = Modifier.height(160.dp))
+
+        }
+
+    }
+}
+
+/* end of Onboarding screens composables */
 
 /* Sign-up screen composables */
 
