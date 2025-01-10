@@ -330,6 +330,7 @@ fun DropdownTextField(
                         Text(
                             text = selectionOption,
                             color = textColor1,
+                            fontSize = 13.sp,
                         )
                     },
                     onClick = {
