@@ -1,7 +1,6 @@
 package com.it235.nureserved.composables
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -16,12 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -116,11 +112,7 @@ fun OnboardingScreen(
     navController: NavController,
     title: String,
     @DrawableRes image: Int,
-    circleFilledIndex: Int,
     description: String,
-    buttonText: String = "",
-    route: List<String>,
-    isTwoButton: Boolean,
 ){
     Scaffold(
         modifier = Modifier
@@ -156,7 +148,7 @@ fun OnboardingScreen(
                 }
             }
 
-            Space("h", 30)
+            Space("h", 10)
 
             Text(
                 modifier = Modifier
@@ -182,27 +174,6 @@ fun OnboardingScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                for(i in 0..3){
-                    Image(
-                        painter = if(i == circleFilledIndex) painterResource(id = R.drawable.circle_24dp_35408e_fill1_wght400_grad0_opsz24)
-                        else painterResource(id = R.drawable.circle_24dp_eeeeee_fill1_wght400_grad0_opsz24),
-                        contentDescription = null,
-                    )
-
-                    if(i != 3) Spacer(modifier = Modifier.width(20.dp))
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
             Text(
                 modifier = Modifier
                     .height(80.dp),
@@ -211,68 +182,7 @@ fun OnboardingScreen(
                 textAlign = TextAlign.Center,
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ){
-                if(isTwoButton){
-                    OutlinedButton(
-                        onClick = {
-                            navController.navigate(route[0])
-                        },
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = if(isSystemInDarkTheme()) white else brandColorBlue
-                        ),
-                        border = BorderStroke(
-                            width = 1.dp,
-                            color = brandColorBlue,
-                        ),
-                    ){
-                        Text( text = "PREV")
-                    }
-
-                    Spacer(modifier = Modifier.width(30.dp))
-
-                    Button(
-                        onClick = {
-                            navController.navigate(route[1])
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = brandColorBlue,
-                            contentColor = white3
-                        )
-                    ){
-                        Text( text = "NEXT")
-                    }
-                }
-
-                else{
-                    Button(
-                        onClick = {
-                            if(circleFilledIndex == 3) {
-                                navController.navigate(route[0]){
-                                    popUpTo(0) { inclusive = true }
-                                }
-                            }
-                            else{
-                                navController.navigate(route[0])
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = brandColorBlue,
-                            contentColor = white3
-                        )
-                    ){
-                        Text(
-                            text = buttonText,
-                            fontSize = 15.sp,
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(90.dp))
+            Spacer(modifier = Modifier.height(160.dp))
 
         }
 

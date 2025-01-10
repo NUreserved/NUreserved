@@ -1,5 +1,7 @@
 package com.it235.nureserved
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.NavType
@@ -29,15 +32,9 @@ import com.it235.nureserved.ui.screens.authscreenui.signup.ProgramStudentNumberS
 import com.it235.nureserved.ui.screens.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.ui.screens.homesreenui.HomeScreen
 import com.it235.nureserved.ui.screens.homesreenui.RoomDetails
-import com.it235.nureserved.ui.screens.onboardingscreenui.AlwaysUptodateScreen
-import com.it235.nureserved.ui.screens.onboardingscreenui.DigitalizingProcessScreen
 import com.it235.nureserved.ui.screens.onboardingscreenui.GetStartedScreen
-import com.it235.nureserved.ui.screens.onboardingscreenui.LetsReserveScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,9 +153,6 @@ private fun Main() {
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
                 composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
-                composable(ScreenRoutes.DigitalizingProcess.route) { DigitalizingProcessScreen(navController) }
-                composable(ScreenRoutes.AlwaysUptodate.route) { AlwaysUptodateScreen(navController) }
-                composable(ScreenRoutes.LetsReserveScreen.route) { LetsReserveScreen(navController) }
             }
         }
     }

@@ -14,7 +14,4 @@ sealed class ScreenRoutes(val route: String) {
     object TermsAndConditions : ScreenRoutes("terms_and_conditions")
     object ReservationFilledOutForm : ScreenRoutes("reservation_filled_out_form")
     object GetStarted : ScreenRoutes("get_started")
-    object DigitalizingProcess : ScreenRoutes("digitalizing_process")
-    object AlwaysUptodate: ScreenRoutes("always_uptodate")
-    object LetsReserveScreen : ScreenRoutes("lets_reserve_screen")
 }
