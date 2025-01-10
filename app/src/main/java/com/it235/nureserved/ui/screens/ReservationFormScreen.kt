@@ -300,21 +300,25 @@ fun DropdownTextField(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(10.dp),
+            shape = RoundedCornerShape(6.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .menuAnchor()
+                .border(
+                    width = 1.dp,
+                    color = textColor1,
+                    shape = RoundedCornerShape(10.dp)
+                )
         )
 
         ExposedDropdownMenu(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(max = 200.dp)
-                .background(white)
                 .border(
                     width = 1.dp,
                     color = textColor1,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(6.dp)
                 )
                 .verticalScroll(rememberScrollState()),
             expanded = expanded,
