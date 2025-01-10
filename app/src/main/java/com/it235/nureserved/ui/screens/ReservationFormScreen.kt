@@ -462,6 +462,8 @@ fun RoomReservationForm(
     var middleName = remember { mutableStateOf("") }
     var lastName = remember { mutableStateOf("") }
 
+    var showAlertDialog by remember { mutableStateOf(false) }
+
     val timeOptions = listOf(
         "Select time",
         "8 AM",
