@@ -263,6 +263,11 @@ fun DropdownTextField(
         TextField(
             value = selectedOption,
             onValueChange = {},
+            textStyle = TextStyle(
+                fontFamily = poppinsFamily,
+                fontWeight = FontWeight.Normal,
+                fontSize = 13.sp,
+            ),
             readOnly = true,
             label = {
                 Text( text = label )
