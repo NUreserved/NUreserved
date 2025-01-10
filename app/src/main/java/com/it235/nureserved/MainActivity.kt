@@ -83,14 +83,14 @@ private fun Main() {
                     ScreenRoutes.Home.route
                 } else {
                     ScreenRoutes.GetStarted.route
-//                    if(!hasSeenOnBoarding){
-//                        //edit the hasSeenOnBoarding flag to true, so the next time user opens the app, it will not show the onboarding screen
-//                        sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
-//                        ScreenRoutes.GetStarted.route
-//                    }
-//                    else{
-//                        ScreenRoutes.Login.route
-//                    }
+                    if(!hasSeenOnBoarding){
+                        //edit the hasSeenOnBoarding flag to true, so the next time user opens the app, it will not show the onboarding screen
+                        sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
+                        ScreenRoutes.GetStarted.route
+                    }
+                    else{
+                        ScreenRoutes.Login.route
+                    }
                 }
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
