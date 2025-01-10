@@ -293,11 +293,12 @@ fun DropdownTextField(
 //                    }
 //                }
 //            },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = LocalTextStyle.current.color,
-                focusedBorderColor = LocalTextStyle.current.color,
-                focusedTextColor = LocalTextStyle.current.color,
-                cursorColor = LocalTextStyle.current.color,
+
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent
             ),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
