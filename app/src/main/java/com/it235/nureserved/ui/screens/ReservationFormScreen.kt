@@ -860,18 +860,8 @@ fun RoomReservationForm(
 
                 Space("h", 10)
             }
-
+            
             item {
-                InputAndLabelLayout(
-                    inputName = "Recommending Approval:",
-                    inputValue = recommedingApproval,
-                    dimension = "col",
-                    label = "Email of Immediate Head (Adviser/Coordinator/Supervisor)",
-                )
-            }
-
-            item {
-                Space("h", 10)
 
                 Row(
                     modifier = Modifier
