@@ -810,7 +810,28 @@ fun RoomReservationForm(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
-                            val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
+                            val rooms = listOf(
+                                "202",
+                                "203",
+                                "204",
+                                "205",
+                                "233",
+                                "302",
+                                "303",
+                                "304",
+                                "305",
+                                "306",
+                                "402",
+                                "407",
+                                "409",
+                                "413",
+                                "418",
+                                "502",
+                                "504",
+                                "506",
+                                "508",
+                                "509",
+                            )
                             rooms.forEach { room ->
                                 FilterChipComposable(
                                     roomNumber = room,
