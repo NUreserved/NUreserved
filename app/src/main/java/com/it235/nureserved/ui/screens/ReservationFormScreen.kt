@@ -430,6 +430,30 @@ fun ConfirmationDialog(
     )
 }
 
+@Composable
+fun FilterChipsLabel(label: String){
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp),
+        text = label,
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.SemiBold,
+        ),
+    )
+}
+
+@Composable
+fun FilterChipsCategoryDivider(){
+    HorizontalDivider(
+        modifier = Modifier
+            .padding(vertical = 5.dp),
+        color = white2,
+        thickness = 2.dp
+    )
+}
+
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RoomReservationForm(
