@@ -846,6 +846,13 @@ fun RoomReservationForm(
                                     onRoomSelected = { selectedRooms = selectedRooms + it },
                                     onRoomDeselected = { selectedRooms = selectedRooms - it }
                                 )
+
+                                when(room){
+                                    "233" -> FilterChipsCategoryDivider()
+                                    "306" -> FilterChipsCategoryDivider()
+                                    "418" -> FilterChipsCategoryDivider()
+                                    "509" -> FilterChipsCategoryDivider()
+                                }
                             }
                         }
                     }
