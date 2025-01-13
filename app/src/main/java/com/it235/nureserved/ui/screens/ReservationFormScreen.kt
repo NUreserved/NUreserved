@@ -827,10 +827,8 @@ fun RoomReservationForm(
                                 "413",
                                 "418",
                                 "502",
-                                "504",
                                 "506",
                                 "508",
-                                "509",
                             )
                             rooms.forEach { room ->
                                 when(room){
