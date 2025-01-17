@@ -98,6 +98,7 @@ fun DatePickerTextField(
     modifier: Modifier = Modifier,
     labelValue: String = "",
     selectedDate: String,
+    showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     showModal: MutableState<Boolean>,
     onDateSelected: (Long?) -> Unit,
 )
@@ -219,6 +220,7 @@ fun OutlineTextFieldComposable(
     label: String = "",
     inputValue: MutableState<String>,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     onValueChange: (String) -> Unit,
 ){
 
@@ -344,6 +346,7 @@ fun InputAndLabelLayout(
     inputValue: MutableState<String>,
     keyboardType: KeyboardType = KeyboardType.Text,
     dimension: String,
+    showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
 ){
     if(dimension == "col"){
         Column(
