@@ -250,7 +250,7 @@ fun TopBar(
             };
             IconButton(onClick = { showProfilePopup = !showProfilePopup }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.account_circle),
+                    painter = painterResource(id = R.drawable.more_vert),
                     contentDescription = "Contains important settings"
                 )
                 DropdownMenu(
