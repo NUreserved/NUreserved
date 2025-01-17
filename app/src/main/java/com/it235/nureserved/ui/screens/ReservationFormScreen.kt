@@ -883,7 +883,7 @@ fun RoomReservationForm(
                             rooms.forEach { room ->
                                 when(room){
                                     "202" -> FilterChipsLabel(label = "2nd floor")
-                                    "302" -> FilterChipsLabel(label = "3rd floor")
+                                    "303" -> FilterChipsLabel(label = "3rd floor")
                                     "402" -> FilterChipsLabel(label = "4th floor")
                                     "502" -> FilterChipsLabel(label = "5th floor")
                                 }
@@ -896,10 +896,10 @@ fun RoomReservationForm(
                                 )
 
                                 when(room){
-                                    "233" -> FilterChipsCategoryDivider()
-                                    "306" -> FilterChipsCategoryDivider()
-                                    "418" -> FilterChipsCategoryDivider()
-                                    "509" -> FilterChipsCategoryDivider()
+                                    "227" -> FilterChipsCategoryDivider()
+                                    "327" -> FilterChipsCategoryDivider()
+                                    "425" -> FilterChipsCategoryDivider()
+                                    "508" -> FilterChipsCategoryDivider()
                                 }
                             }
                         }
