@@ -558,7 +558,24 @@ fun RoomReservationForm(
                 detectTapGestures(onTap = {
                     focusManager.clearFocus()
                 })
+            },
+        snackbarHost = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.BottomEnd,
+            ){
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                ){data ->
+                    Snackbar(
+                        snackbarData = data,
+                        containerColor = indicatorColorRed,
+                        contentColor = white
+                    )
+                }
             }
+        }
     ){ innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -923,7 +940,20 @@ fun RoomReservationForm(
 
                     Button(
                         onClick = {
-                            showAlertDialog = true
+//                            showAlertDialog = true
+
+                            // Dismiss the currently shown Snackbar, if any
+                            snackbarHostState.currentSnackbarData?.dismiss()
+
+                            if(nameOfOrgDeptColg.value.isEmpty()){
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "test snackbar",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            }
+
                         },
                         colors =  ButtonDefaults.buttonColors(
                             containerColor = brandColorBlue,
