@@ -1,11 +1,13 @@
 package com.it235.nureserved.ui.screens.homesreenui
 
+import User
 import android.content.Context
 import android.content.res.Resources.Theme
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -26,6 +29,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenu
@@ -33,6 +37,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.RadioButton
@@ -86,6 +91,9 @@ import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.textColor3
+import com.it235.nureserved.ui.theme.textColor4
+import getUserData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,6 +111,8 @@ fun HomeScreen(navController: NavController) {
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
     // State variable to control the visibility of theme settings dialog
     var showThemeSettingsDialog by remember { mutableStateOf(false) }
+    // State variable to control the visibility of profile dialog
+    var showProfileDialog by remember { mutableStateOf(false) }
 
     // State variable to control the visibility of filter icon when the current
     // tab is in the home screen
@@ -127,6 +137,7 @@ fun HomeScreen(navController: NavController) {
                     onFilterClick = { showText = !showText },
                     showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true},
                     showThemeSettingsDialog = { showThemeSettingsDialog = true},
+                    showProfileDialog = { showProfileDialog = true},
                     showFilterButton = showFilterButton
                 )
             },
@@ -153,6 +164,12 @@ fun HomeScreen(navController: NavController) {
             if (showThemeSettingsDialog) {
                 ThemeSettingsDialog(
                     onDismiss = { showThemeSettingsDialog = false }
+                )
+            }
+
+            if (showProfileDialog) {
+                ProfileDialog(
+                    onDismiss = { showProfileDialog = false}
                 )
             }
 
@@ -184,6 +201,7 @@ fun TopBar(
     onFilterClick: () -> Unit,
     showLogoutConfirmationDialog: () -> Unit,
     showThemeSettingsDialog: () -> Unit,
+    showProfileDialog: () -> Unit,
     showFilterButton: Boolean) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
@@ -277,6 +295,16 @@ fun TopBar(
                     expanded = showProfilePopup,
                     onDismissRequest = { showProfilePopup = false}
                 ) {
+                    DropdownMenuItem(
+                        text = { Text("Profile") },
+                        onClick = { showProfileDialog() },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.account_circle),
+                                contentDescription = "Profile icon"
+                            )
+                        }
+                    )
                     DropdownMenuItem(
                         text = { Text("Theme") },
                         onClick = { showThemeSettingsDialog() },
@@ -439,6 +467,135 @@ private fun ThemeSettingsDialog(
                 Text("Cancel")
             }
         }
+    )
+}
+
+@Composable
+private fun ProfileDialog(
+    onDismiss: () -> Unit
+) {
+    var user by remember { mutableStateOf<User?>(null) }
+    var loading by remember { mutableStateOf(true) }
+
+    getUserData { fetchedUser ->
+        user = fetchedUser
+        loading = false
+    }
+
+    Dialog(
+        onDismissRequest = { onDismiss() }
+    ) {
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+        ){
+            Space("h", 16)
+            HeadingComposable("Personal Information")
+            Space("h", 8)
+
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "First Name",
+                    value = user?.firstName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Middle Name",
+                    value = user?.middleName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Last Name",
+                    value = user?.lastName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Email",
+                    value = user?.email ?: "N/A"
+                )
+            }
+            Space("h", 16)
+
+
+            Space("h", 16)
+            HeadingComposable("Academic Information")
+            Space("h", 8)
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "Program",
+                    value = user?.program ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Student Number",
+                    value = user?.studentNumber ?: "N/A"
+                )
+            }
+            Space("h", 16)
+        }
+    }
+}
+
+@Composable
+private fun HeadingComposable(
+    value: String
+) {
+    Text(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp),
+        text = value.uppercase(),
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+    )
+}
+
+@Composable
+private fun TextContentComposable(
+    field: String,
+    value: String
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(0.5f).widthIn(max = 200.dp),
+            color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+            text = field,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+        Text(
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(end = 16.dp),
+            text = value,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+    }
+}
+
+@Composable
+fun IndeterminateCircularIndicator(
+) {
+    CircularProgressIndicator(
+        modifier = Modifier
+            .padding(top = 8.dp, start = 16.dp)
+            .width(32.dp),
+        color = MaterialTheme.colorScheme.secondary,
+        trackColor = MaterialTheme.colorScheme.surfaceVariant,
     )
 }
 
