@@ -882,10 +882,10 @@ fun RoomReservationForm(
                             )
                             rooms.forEach { room ->
                                 when(room){
-                                    "202" -> FilterChipsLabel(label = "2nd floor")
-                                    "303" -> FilterChipsLabel(label = "3rd floor")
-                                    "402" -> FilterChipsLabel(label = "4th floor")
-                                    "502" -> FilterChipsLabel(label = "5th floor")
+                                    "202" -> FilterChipsLabel(label = "2nd Floor")
+                                    "303" -> FilterChipsLabel(label = "3rd Floor")
+                                    "402" -> FilterChipsLabel(label = "4th Floor")
+                                    "502" -> FilterChipsLabel(label = "5th Floor")
                                 }
 
                                 FilterChipComposable(
