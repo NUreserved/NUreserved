@@ -71,6 +71,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
+import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -810,78 +811,9 @@ fun RoomReservationForm(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
-                            val rooms = listOf(
-                                "202",
-                                "203",
-                                "205",
-                                "206",
-                                "207",
-                                "208",
-                                "209",
-                                "215",
-                                "216",
-                                "217",
-                                "218",
-                                "220",
-                                "221",
-                                "222",
-                                "233",
-                                "224",
-                                "225",
-                                "226",
-                                "227",
-                                "303",
-                                "304",
-                                "305",
-                                "306",
-                                "307",
-                                "308",
-                                "309",
-                                "310",
-                                "311",
-                                "312",
-                                "313",
-                                "314",
-                                "315",
-                                "316",
-                                "317",
-                                "318",
-                                "319",
-                                "320",
-                                "321",
-                                "322",
-                                "323",
-                                "324",
-                                "325",
-                                "326",
-                                "327",
-                                "402",
-                                "404",
-                                "405",
-                                "406",
-                                "407",
-                                "408",
-                                "409",
-                                "412",
-                                "413",
-                                "414",
-                                "415",
-                                "416",
-                                "417",
-                                "418",
-                                "419",
-                                "420",
-                                "421",
-                                "422",
-                                "423",
-                                "424",
-                                "425",
-                                "504",
-                                "506",
-                                "508",
-                            )
-                            rooms.forEach { room ->
-                                when(room){
+
+                            roomList.forEach { room ->
+                                when(room.name){
                                     "202" -> FilterChipsLabel(label = "2nd Floor")
                                     "303" -> FilterChipsLabel(label = "3rd Floor")
                                     "402" -> FilterChipsLabel(label = "4th Floor")
@@ -889,13 +821,13 @@ fun RoomReservationForm(
                                 }
 
                                 FilterChipComposable(
-                                    roomNumber = room,
+                                    roomNumber = room.name,
                                     selectedRooms = selectedRooms,
                                     onRoomSelected = { selectedRooms = selectedRooms + it },
                                     onRoomDeselected = { selectedRooms = selectedRooms - it }
                                 )
 
-                                when(room){
+                                when(room.name){
                                     "227" -> FilterChipsCategoryDivider()
                                     "327" -> FilterChipsCategoryDivider()
                                     "425" -> FilterChipsCategoryDivider()
