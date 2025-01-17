@@ -384,6 +384,7 @@ fun InputAndLabelLayout(
                 inputValue = inputValue,
                 keyboardType = keyboardType,
                 label = label,
+                showSuppText = showSuppText,
             ){
                 inputValue.value = it
             }
@@ -614,6 +615,7 @@ fun RoomReservationForm(
                     inputName = "Name of Organization/Department/College:",
                     inputValue = nameOfOrgDeptColg,
                     dimension = "col",
+                    showSuppText = nameOfOrgShowSuppTxt,
                 )
             }
 
@@ -635,7 +637,8 @@ fun RoomReservationForm(
 
                     DatePickerTextField(
                         selectedDate = dateFilled,
-                        showModal = dateFilledShowModal
+                        showModal = dateFilledShowModal,
+                        showSuppText = dateFilledShowSuppTxt,
                     ){
                         try {
                             val date = Date(it!!)
