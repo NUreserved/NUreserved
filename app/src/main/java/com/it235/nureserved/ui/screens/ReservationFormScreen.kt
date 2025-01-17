@@ -115,6 +115,7 @@ fun DatePickerTextField(
             onDismissRequest = onDismiss,
             confirmButton = {
                 TextButton(onClick = {
+                    showSuppText.value = true
                     onDateSelected(
                         datePickerState.selectedDateMillis
                     )
