@@ -386,6 +386,7 @@ fun InputAndLabelLayout(
                 label = label,
                 showSuppText = showSuppText,
             ){
+                showSuppText.value = true
                 inputValue.value = it
             }
         }
