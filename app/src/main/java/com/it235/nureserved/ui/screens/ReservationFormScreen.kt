@@ -494,10 +494,13 @@ fun RoomReservationForm(
     val nameLabels = listOf("Given Name", "Middle Name", "Surname");
 
     var nameOfOrgDeptColg = remember { mutableStateOf("") }
+    var nameOfOrgShowSuppTxt = remember { mutableStateOf(false) }
+
     var position = remember { mutableStateOf("") }
     var titleOfTheActivity = remember { mutableStateOf("") }
 
     var dateFilled by remember { mutableStateOf("") }
+    var dateFilledShowSuppTxt = remember { mutableStateOf(false) }
     var dateFilledShowModal = remember { mutableStateOf(false)}
 
     var expectedNumberOfAttendees = remember { mutableStateOf("") }
@@ -513,6 +516,9 @@ fun RoomReservationForm(
     var lastName = remember { mutableStateOf("") }
 
     var showAlertDialog by remember { mutableStateOf(false) }
+
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val timeOptions = listOf(
         "Select time",
