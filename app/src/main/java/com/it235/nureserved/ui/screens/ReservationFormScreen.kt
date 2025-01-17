@@ -885,7 +885,7 @@ fun RoomReservationForm(
                                     "202" -> FilterChipsLabel(label = "2nd Floor")
                                     "303" -> FilterChipsLabel(label = "3rd Floor")
                                     "402" -> FilterChipsLabel(label = "4th Floor")
-                                    "502" -> FilterChipsLabel(label = "5th Floor")
+                                    "504" -> FilterChipsLabel(label = "5th Floor")
                                 }
 
                                 FilterChipComposable(
