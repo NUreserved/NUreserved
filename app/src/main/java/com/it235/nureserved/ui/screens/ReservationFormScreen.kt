@@ -828,7 +828,7 @@ fun RoomReservationForm(
                                 )
 
                                 when(room.name){
-                                    "227" -> FilterChipsCategoryDivider()
+                                    "233" -> FilterChipsCategoryDivider()
                                     "327" -> FilterChipsCategoryDivider()
                                     "425" -> FilterChipsCategoryDivider()
                                     "508" -> FilterChipsCategoryDivider()
