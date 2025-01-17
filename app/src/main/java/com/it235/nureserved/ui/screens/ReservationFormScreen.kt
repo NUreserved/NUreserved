@@ -146,6 +146,14 @@ fun DatePickerTextField(
               )
           )
         },
+        supportingText = {
+            if(showSuppText.value){
+                Text(
+                    text = "test date filled",
+                    color = indicatorColorRed,
+                )
+            }
+        },
         textStyle = LocalTextStyle.current.copy(
             fontSize = 13.sp,
             fontWeight = FontWeight.Normal,
@@ -231,6 +239,14 @@ fun OutlineTextFieldComposable(
         singleLine = true,
         shape = RoundedCornerShape(10.dp),
         onValueChange = onValueChange,
+        supportingText = {
+            if(showSuppText.value){
+                Text(
+                    text = "test",
+                    color = indicatorColorRed,
+                )
+            }
+        },
         label = {
             Text(
                 text = label,
