@@ -391,7 +391,7 @@ fun InputAndLabelLayout(
             }
         }
 
-        Space("h", 10)
+//        Space("h", 10)
     }
 
     else{
@@ -418,7 +418,7 @@ fun InputAndLabelLayout(
             }
         }
 
-        Space("h", 10)
+//        Space("h", 10)
     }
 
 }
