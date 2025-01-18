@@ -101,8 +101,6 @@ fun HomeScreen(navController: NavController) {
 
     // State variable to control the selected item
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
-    // State variable to control the visibility of text
-    var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
@@ -113,10 +111,6 @@ fun HomeScreen(navController: NavController) {
     var showThemeSettingsDialog by remember { mutableStateOf(false) }
     // State variable to control the visibility of profile dialog
     var showProfileDialog by remember { mutableStateOf(false) }
-
-    // State variable to control the visibility of filter icon when the current
-    // tab is in the home screen
-    var showFilterButton by rememberSaveable { mutableStateOf(true) }
 
     BackHandler {
         if (selectedItem != 0) {
@@ -134,11 +128,9 @@ fun HomeScreen(navController: NavController) {
                 TopBar(
                     navController,
                     scrollBehavior = scrollBehavior,
-                    onFilterClick = { showText = !showText },
                     showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true},
                     showThemeSettingsDialog = { showThemeSettingsDialog = true},
-                    showProfileDialog = { showProfileDialog = true},
-                    showFilterButton = showFilterButton
+                    showProfileDialog = { showProfileDialog = true}
                 )
             },
             bottomBar = {
@@ -175,18 +167,14 @@ fun HomeScreen(navController: NavController) {
 
             when (selectedItem) {
                 0 -> {
-                    showFilterButton = true
-
                     HomeScreenContent(
                         innerPadding = innerPadding,
                         navController = navController,
-                        showText = showText,
                         onShowDatePickerChange = { showDatePicker = it },
                         showDatePicker = showDatePicker
                     )
                 }
                 1 -> {
-                    showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
             }
@@ -198,11 +186,9 @@ fun HomeScreen(navController: NavController) {
 fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    onFilterClick: () -> Unit,
     showLogoutConfirmationDialog: () -> Unit,
     showThemeSettingsDialog: () -> Unit,
-    showProfileDialog: () -> Unit,
-    showFilterButton: Boolean) {
+    showProfileDialog: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -220,14 +206,6 @@ fun TopBar(
             )
         },
         actions = {
-            if (showFilterButton) {
-                IconButton(onClick = onFilterClick) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.filter_alt),
-                        contentDescription = "Filter icon to filter content based on chosen criteria"
-                    )
-                };
-            }
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
@@ -382,7 +360,6 @@ fun NavigationBar(
 fun HomeScreenContent(
     innerPadding: PaddingValues,
     navController: NavController,
-    showText: Boolean,
     onShowDatePickerChange: (Boolean) -> Unit,
     showDatePicker: Boolean
 ) {
@@ -399,9 +376,6 @@ fun HomeScreenContent(
         modifier = Modifier
             .padding(innerPadding)
     ) {
-        if (showText) {
-            ReservationDatePickerChip(onShowDatePickerChange)
-        }
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
@@ -640,33 +614,6 @@ private fun LogoutConfirmationDialog(
             }
         }
     )
-}
-
-@Composable
-private fun ReservationDatePickerChip(onShowDatePickerChange: (Boolean) -> Unit) {
-    Column(
-        modifier = Modifier
-            .padding(start = 16.dp, top = 16.dp)
-    ) {
-        Text(
-            text = "Show rooms available for reservation on",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
-                fontStyle = FontStyle.Italic,
-                fontSize = 16.sp
-            )
-        )
-        AssistChip(
-            onClick = { onShowDatePickerChange(true) },
-            label = { Text("Select date") },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.calendar_today),
-                    contentDescription = "Calendar icon"
-                )
-            },
-        )
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
