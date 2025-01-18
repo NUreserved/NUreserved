@@ -338,7 +338,7 @@ private fun InputField(
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = {
-            val studentNumberPattern = Regex("^\\d{4}-\\d{6}$")
+            val studentNumberPattern = Regex("^20(19|2[0-4])-\\d{6}$")
 
             if (showSupportText) {
                 if(!studentNumberPattern.containsMatchIn(value)){
