@@ -230,19 +230,19 @@ fun RoomReservationStatusScreen(
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
                         roomImage = R.drawable.sample_room,
-                        cardContainerColor = Color(0xFF49844b))
+                        cardContainerColor = darkGray)
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
                         roomImage = R.drawable.sample_room,
-                        cardContainerColor = Color(0xFF49844b))
+                        cardContainerColor = darkGray)
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
                         roomImage = R.drawable.sample_room,
-                        cardContainerColor = Color(0xFF49844b))
+                        cardContainerColor = darkGray)
                 }
             }
         }
