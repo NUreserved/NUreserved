@@ -71,6 +71,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
+import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -430,6 +431,30 @@ fun ConfirmationDialog(
     )
 }
 
+@Composable
+fun FilterChipsLabel(label: String){
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp),
+        text = label,
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.SemiBold,
+        ),
+    )
+}
+
+@Composable
+fun FilterChipsCategoryDivider(){
+    HorizontalDivider(
+        modifier = Modifier
+            .padding(vertical = 5.dp),
+        color = white2,
+        thickness = 2.dp
+    )
+}
+
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RoomReservationForm(
@@ -786,14 +811,28 @@ fun RoomReservationForm(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
-                            val rooms = listOf("Room 202", "Room 205", "Room 259", "Room 316", "Room 317", "Room 215")
-                            rooms.forEach { room ->
+
+                            roomList.forEach { room ->
+                                when(room.name){
+                                    "202" -> FilterChipsLabel(label = "2nd Floor")
+                                    "303" -> FilterChipsLabel(label = "3rd Floor")
+                                    "402" -> FilterChipsLabel(label = "4th Floor")
+                                    "504" -> FilterChipsLabel(label = "5th Floor")
+                                }
+
                                 FilterChipComposable(
-                                    roomNumber = room,
+                                    roomNumber = room.name,
                                     selectedRooms = selectedRooms,
                                     onRoomSelected = { selectedRooms = selectedRooms + it },
                                     onRoomDeselected = { selectedRooms = selectedRooms - it }
                                 )
+
+                                when(room.name){
+                                    "233" -> FilterChipsCategoryDivider()
+                                    "327" -> FilterChipsCategoryDivider()
+                                    "425" -> FilterChipsCategoryDivider()
+                                    "508" -> FilterChipsCategoryDivider()
+                                }
                             }
                         }
                     }
@@ -801,18 +840,8 @@ fun RoomReservationForm(
 
                 Space("h", 10)
             }
-
+            
             item {
-                InputAndLabelLayout(
-                    inputName = "Recommending Approval:",
-                    inputValue = recommedingApproval,
-                    dimension = "col",
-                    label = "Email of Immediate Head (Adviser/Coordinator/Supervisor)",
-                )
-            }
-
-            item {
-                Space("h", 10)
 
                 Row(
                     modifier = Modifier
