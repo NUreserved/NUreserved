@@ -91,7 +91,7 @@ val roomList = listOf(
         name = "203",
         location = FloorLocation.SECOND_FLOOR,
         type = RoomType.CLASSROOM,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.room_203,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -379,7 +379,7 @@ val roomList = listOf(
         name = "208",
         location = FloorLocation.SECOND_FLOOR,
         type = RoomType.CLASSROOM,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.room_208,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -1891,7 +1891,7 @@ val roomList = listOf(
         name = "310",
         location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.room_310,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -2323,7 +2323,7 @@ val roomList = listOf(
         name = "316",
         location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.room_316,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -2899,7 +2899,7 @@ val roomList = listOf(
         name = "324",
         location = FloorLocation.THIRD_FLOOR,
         type = RoomType.CLASSROOM,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.room_324,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -4265,7 +4265,7 @@ val roomList = listOf(
         name = "420",
         location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.sample_lab_room,
+        imageResId = R.drawable.room_420,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
