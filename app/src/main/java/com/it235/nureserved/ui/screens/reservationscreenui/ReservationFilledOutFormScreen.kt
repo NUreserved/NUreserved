@@ -200,40 +200,6 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                    ),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-
-                ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                HeadingComposable(value = "Recommending Approval")
-                Spacer(modifier = Modifier.height(8.dp))
-                TextContentComposable(
-                    field = "Name",
-                    value = "John Peter Doe"
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                TextContentComposable(
-                    field = "Relationship",
-                    value = "Adviser"
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                TextContentComposable(
-                    field = "Email",
-                    value = "johnpeterdoe@gmail.com"
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
