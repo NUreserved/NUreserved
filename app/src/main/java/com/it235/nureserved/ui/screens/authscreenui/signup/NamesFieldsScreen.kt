@@ -284,6 +284,15 @@ private fun NextButton(
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
                 navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
             }
+
+            else{
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Make sure your inputs are correct",
+                        duration = SnackbarDuration.Short
+                    )
+                }
+            }
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = 30.dp)
