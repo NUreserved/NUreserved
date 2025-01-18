@@ -1315,7 +1315,7 @@ val roomList = listOf(
         name = "233",
         location = FloorLocation.SECOND_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.sample_lab_room,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -3690,7 +3690,7 @@ val roomList = listOf(
         name = "412",
         location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.sample_lab_room,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -4409,7 +4409,7 @@ val roomList = listOf(
         name = "422",
         location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.sample_lab_room,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
@@ -4481,7 +4481,7 @@ val roomList = listOf(
         name = "423",
         location = FloorLocation.FOURTH_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.default_room_image,
+        imageResId = R.drawable.sample_lab_room,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
