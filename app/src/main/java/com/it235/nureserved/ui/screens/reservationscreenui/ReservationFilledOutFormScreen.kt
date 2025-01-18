@@ -127,7 +127,7 @@ fun ReservationFilledOutFormScreen(navController: NavController) {
 
                 ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                HeadingComposable(value = "Event Details")
+                HeadingComposable(value = "Reservation Details")
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Name of Organization/Department/College",
