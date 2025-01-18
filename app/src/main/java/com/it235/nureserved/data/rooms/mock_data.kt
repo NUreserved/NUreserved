@@ -1315,7 +1315,7 @@ val roomList = listOf(
         name = "233",
         location = FloorLocation.SECOND_FLOOR,
         type = RoomType.LABORATORY,
-        imageResId = R.drawable.sample_lab_room,
+        imageResId = R.drawable.sample_psyc_lab_room,
         roomAvailabilitySchedule = listOf(
             DaySchedule(
                 day = "Dec 1",
