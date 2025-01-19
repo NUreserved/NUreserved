@@ -667,7 +667,12 @@ fun RoomReservationForm(
 
 
     var selectedFromTimeOption by remember { mutableStateOf(timeOptions[0]) }
+    var selectedFromTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
+    var isValidFromTimeOption = remember { mutableStateOf(false) }
+
     var selectedToTimeOption by remember { mutableStateOf(timeOptions[0]) }
+    var selectedToTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
+    var isValidToTimeOption = remember { mutableStateOf(false) }
 
     if(showAlertDialog){
         ConfirmationDialog(
