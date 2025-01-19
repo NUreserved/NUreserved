@@ -421,11 +421,11 @@ fun DropdownTextField(
                     contentDescription = "Dropdown arrow",
                 )
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = LocalTextStyle.current.color,
+                focusedBorderColor = LocalTextStyle.current.color,
+                focusedTextColor = LocalTextStyle.current.color,
+                cursorColor = LocalTextStyle.current.color,
             ),
             shape = RoundedCornerShape(6.dp),
             modifier = Modifier
