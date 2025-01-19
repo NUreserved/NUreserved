@@ -328,7 +328,7 @@ fun DropdownTextField(
         onExpandedChange = { expanded = !expanded }
     ) {
 
-        TextField(
+        OutlinedTextField(
             value = selectedOption,
             onValueChange = {},
             textStyle = TextStyle(
