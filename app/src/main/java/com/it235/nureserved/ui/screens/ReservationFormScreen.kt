@@ -336,6 +336,81 @@ fun DropdownTextField(
                 fontWeight = FontWeight.Normal,
                 fontSize = 13.sp,
             ),
+            supportingText = {
+                if(showSuppText.value){
+
+                    if(selectedOption == "Select time"){
+                        isValid.value = false
+                        Text(
+                            text = "This field is required",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else if(firstOption.substring(firstOption.length -2, firstOption.length) == "AM" &&
+                        secondOption.substring(secondOption.length -2, secondOption.length) == "AM"){
+                        val firstTime = firstOption.split(" ")[0].toInt()
+                        val secondTime = secondOption.split(" ")[0].toInt()
+
+                        if(firstTime > secondTime){
+                            isValid.value = false
+                            Text(
+                                text = "Invalid time order",
+                                color = indicatorColorRed,
+                            )
+                        }
+
+                        else{
+                            isValid.value = true
+                        }
+                    }
+
+                    else if(firstOption.substring(firstOption.length -2, firstOption.length) == "PM" &&
+                        secondOption.substring(secondOption.length -2, secondOption.length) == "PM"){
+                        val firstTime = firstOption.split(" ")[0].toInt()
+                        val secondTime = secondOption.split(" ")[0].toInt()
+
+                        if(firstTime > secondTime){
+                            if(firstTime != 12){
+                                isValid.value = false
+                                Text(
+                                    text = "Invalid time order",
+                                    color = indicatorColorRed,
+                                )
+                            }
+                            else{
+                                isValid.value = true
+                            }
+                        }
+
+                        else if(secondTime == 12){
+                            isValid.value = false
+                            Text(
+                                text = "Invalid time order",
+                                color = indicatorColorRed,
+                            )
+                        }
+
+                        else{
+                            isValid.value = true
+                        }
+
+                    }
+
+                    else if(firstOption.substring(firstOption.length -2, firstOption.length) == "PM" &&
+                        secondOption.substring(secondOption.length -2, secondOption.length) == "AM"){
+                        isValid.value = false
+                        Text(
+                            text = "Invalid time order",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else{
+                        isValid.value = true
+                    }
+                }
+            },
             readOnly = true,
             label = {
                 Text( text = label )
