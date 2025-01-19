@@ -495,6 +495,7 @@ fun InputAndLabelLayout(
                 keyboardType = keyboardType,
                 label = label,
                 showSuppText = showSuppText,
+                isValidInput = isValidInput,
             ){
                 showSuppText.value = true
                 inputValue.value = it
@@ -523,7 +524,11 @@ fun InputAndLabelLayout(
             OutlineTextFieldComposable(
                 inputValue = inputValue,
                 keyboardType = keyboardType,
+                label = label,
+                showSuppText = showSuppText,
+                isValidInput = isValidInput,
             ){
+                showSuppText.value = true
                 inputValue.value = it
             }
         }
@@ -727,6 +732,7 @@ fun RoomReservationForm(
                     inputValue = nameOfOrgDeptColg,
                     dimension = "col",
                     showSuppText = nameOfOrgShowSuppTxt,
+                    isValidInput = isNameOfOrgValid,
                 )
             }
 
@@ -823,6 +829,8 @@ fun RoomReservationForm(
                     inputName = "Position:",
                     inputValue = position,
                     dimension = "row",
+                    showSuppText = positionShowSuppTxt,
+                    isValidInput = isPositionValid,
                 )
             }
 
@@ -831,6 +839,8 @@ fun RoomReservationForm(
                     inputName = "Title of the Activity:",
                     inputValue = titleOfTheActivity,
                     dimension = "col",
+                    showSuppText = titleOfTheActivityShowSuppTxt,
+                    isValidInput = isTitleOfTheActivityValid,
                 )
             }
 
@@ -851,16 +861,19 @@ fun RoomReservationForm(
                         DatePickerTextField(
                             modifier = Modifier
                                 .weight(1f),
-                            selectedDate = fromDatesOfActivity,
+                            selectedDate = if(!isFromDatesOfActivitySelected) "" else  SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(fromDatesOfActivity),
                             showModal = fromDatesOfActivityShowModal,
                             labelValue = "From",
+                            fromDate = fromDatesOfActivity,
+                            toDate = toDatesOfActivity,
+                            showSuppText = fromDatesOfActivityShowSuppTxt,
+                            isValid = isValidFromDatesOfActivity,
                         ){
                             try {
                                 val date = Date(it!!)
-                                val formattedDate =
-                                    SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
-                                fromDatesOfActivity = formattedDate
+                                fromDatesOfActivity = date
                                 fromDatesOfActivityShowModal.value = false
+                                isFromDatesOfActivitySelected = true
                             }
                             catch(e: Exception){
                                 //add snackbar for error message
@@ -872,16 +885,19 @@ fun RoomReservationForm(
                         DatePickerTextField(
                             modifier = Modifier
                                 .weight(1f),
-                            selectedDate = toDatesOfActivity,
+                            selectedDate = if(!istoDatesOfActivitySelected) "" else  SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(toDatesOfActivity),
                             showModal = toDatesOfActivityShowModal,
                             labelValue = "To",
+                            fromDate = fromDatesOfActivity,
+                            toDate = toDatesOfActivity,
+                            showSuppText = toDatesOfActivityShowSuppTxt,
+                            isValid = isValidToDatesOfActivity,
                         ){
                             try {
                                 val date = Date(it!!)
-                                val formattedDate =
-                                    SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
-                                toDatesOfActivity = formattedDate
+                                toDatesOfActivity = date
                                 toDatesOfActivityShowModal.value = false
+                                istoDatesOfActivitySelected = true
                             }
                             catch(e: Exception){
                                 //add snackbar for error message
@@ -912,9 +928,14 @@ fun RoomReservationForm(
                                 .weight(1f),
                             options = timeOptions,
                             selectedOption = selectedFromTimeOption,
+                            firstOption = selectedFromTimeOption,
+                            secondOption = selectedToTimeOption,
                             label = "From",
+                            showSuppText = selectedFromTimeOptionShowSuppTxt,
+                            isValid = isValidFromTimeOption,
                             onOptionSelected = {
                                 selectedFromTimeOption = it
+                                selectedFromTimeOptionShowSuppTxt.value = true
                             },
                         )
 
@@ -925,9 +946,14 @@ fun RoomReservationForm(
                                 .weight(1f),
                             options = timeOptions,
                             selectedOption = selectedToTimeOption,
+                            firstOption = selectedFromTimeOption,
+                            secondOption = selectedToTimeOption,
                             label = "To",
+                            showSuppText = selectedToTimeOptionShowSuppTxt,
+                            isValid = isValidToTimeOption,
                             onOptionSelected = {
                                 selectedToTimeOption = it
+                                selectedToTimeOptionShowSuppTxt.value = true
                             },
                         )
                     }
@@ -942,6 +968,8 @@ fun RoomReservationForm(
                     inputValue = expectedNumberOfAttendees,
                     dimension = "row",
                     keyboardType = KeyboardType.Number,
+                    showSuppText = expectedNumberOfAttendeesShowSuppTxt,
+                    isValidInput = isExpectedNumberOfAttendeesValid,
                 )
 
                 HorizontalDivider(
