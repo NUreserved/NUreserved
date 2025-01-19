@@ -610,27 +610,37 @@ fun RoomReservationForm(
 
     val nameLabels = listOf("Given Name", "Middle Name", "Surname");
 
-    var nameOfOrgDeptColg = remember { mutableStateOf("") }
-    var nameOfOrgShowSuppTxt = remember { mutableStateOf(false) }
+    val nameOfOrgDeptColg = remember { mutableStateOf("") }
+    val nameOfOrgShowSuppTxt = remember { mutableStateOf(false) }
+    val isNameOfOrgValid = remember { mutableStateOf(false) }
 
-    var position = remember { mutableStateOf("") }
-    var titleOfTheActivity = remember { mutableStateOf("") }
+    val position = remember { mutableStateOf("") }
+    val positionShowSuppTxt = remember { mutableStateOf(false) }
+    val isPositionValid = remember { mutableStateOf(false) }
 
-    var dateFilled by remember { mutableStateOf("") }
-    var dateFilledShowSuppTxt = remember { mutableStateOf(false) }
-    var dateFilledShowModal = remember { mutableStateOf(false)}
+    val titleOfTheActivity = remember { mutableStateOf("") }
+    val titleOfTheActivityShowSuppTxt = remember { mutableStateOf(false) }
+    val isTitleOfTheActivityValid = remember { mutableStateOf(false) }
 
-    var expectedNumberOfAttendees = remember { mutableStateOf("") }
-    var recommedingApproval = remember { mutableStateOf("") }
+    val expectedNumberOfAttendees = remember { mutableStateOf("") }
+    val expectedNumberOfAttendeesShowSuppTxt = remember { mutableStateOf(false) }
+    val isExpectedNumberOfAttendeesValid = remember { mutableStateOf(false) }
 
-    var fromDatesOfActivity by remember { mutableStateOf("") }
-    var fromDatesOfActivityShowModal = remember { mutableStateOf(false) }
-    var toDatesOfActivity by remember { mutableStateOf("") }
-    var toDatesOfActivityShowModal = remember { mutableStateOf(false) }
+    var fromDatesOfActivity by remember { mutableStateOf(Date()) }
+    var fromDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
+    var isValidFromDatesOfActivity = remember { mutableStateOf(false) }
+    var isFromDatesOfActivitySelected by remember { mutableStateOf(false) }
+    val fromDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
-    var givenName = remember { mutableStateOf("") }
-    var middleName = remember { mutableStateOf("") }
-    var lastName = remember { mutableStateOf("") }
+    var toDatesOfActivity by remember { mutableStateOf(Date()) }
+    var toDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
+    var isValidToDatesOfActivity = remember { mutableStateOf(false) }
+    var istoDatesOfActivitySelected by remember { mutableStateOf(false) }
+    val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
+
+    val givenName = remember { mutableStateOf("") }
+    val middleName = remember { mutableStateOf("") }
+    val lastName = remember { mutableStateOf("") }
 
     var showAlertDialog by remember { mutableStateOf(false) }
 
