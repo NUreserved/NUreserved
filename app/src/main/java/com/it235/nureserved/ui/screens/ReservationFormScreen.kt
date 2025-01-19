@@ -751,43 +751,6 @@ fun RoomReservationForm(
                 )
             }
 
-            item {
-                Row(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp, top = 10.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ){
-                    Text(
-                        text = "Date Filled:",
-                        style = LocalTextStyle.current.copy(
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.Bold,
-                        ),
-                    )
-
-                    Spacer(modifier = Modifier.width(5.dp))
-
-                    DatePickerTextField(
-                        selectedDate = dateFilled,
-                        showModal = dateFilledShowModal,
-                        showSuppText = dateFilledShowSuppTxt,
-                    ){
-                        try {
-                            val date = Date(it!!)
-                            val formattedDate =
-                                SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(date)
-                            dateFilled = formattedDate
-                            dateFilledShowModal.value = false
-                        }
-                        catch(e: Exception){
-                            //add snackbar for error message
-                        }
-                    }
-                }
-
-                Space("h", 10)
-            }
-
             item{
                 Column(
                     modifier = Modifier
