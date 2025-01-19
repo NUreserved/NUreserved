@@ -270,10 +270,17 @@ fun OutlineTextFieldComposable(
         onValueChange = onValueChange,
         supportingText = {
             if(showSuppText.value){
-                Text(
-                    text = "test",
-                    color = indicatorColorRed,
-                )
+                if(inputValue.value.isEmpty()){
+                    isValidInput.value = false
+                    Text(
+                        text = "This field is required",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else{
+                    isValidInput.value = true
+                }
             }
         },
         label = {
