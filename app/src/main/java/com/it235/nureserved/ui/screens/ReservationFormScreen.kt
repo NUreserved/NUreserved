@@ -152,10 +152,34 @@ fun DatePickerTextField(
         },
         supportingText = {
             if(showSuppText.value){
-                Text(
-                    text = "test date filled",
-                    color = indicatorColorRed,
-                )
+                if(selectedDate.isEmpty()){
+                    isValid.value = false
+                    Text(
+                        text = "This field is required",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else if(fromDate.compareTo(toDate) > 0){
+                    isValid.value = false
+                    Text(
+                        text = "From date should be less than to date",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else if(fromDate.compareTo(Date()) < 0){
+                    isValid.value = false
+                    Text(
+                        text = "From date should be greater than today",
+                        color = indicatorColorRed,
+                    )
+                }
+
+                else{
+                    isValid.value = true
+                }
+
             }
         },
         textStyle = LocalTextStyle.current.copy(
