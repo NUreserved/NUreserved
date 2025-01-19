@@ -431,11 +431,6 @@ fun DropdownTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .menuAnchor()
-                .border(
-                    width = 1.dp,
-                    color = if (isSystemInDarkTheme()) darkGray2 else white5,
-                    shape = RoundedCornerShape(10.dp)
-                )
         )
 
         ExposedDropdownMenu(
