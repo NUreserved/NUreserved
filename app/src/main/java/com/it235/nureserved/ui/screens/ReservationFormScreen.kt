@@ -1070,6 +1070,35 @@ fun RoomReservationForm(
                                 }
                             }
                         }
+
+                        if(venueShowSuppTxt){
+                            if(selectedRooms.isEmpty()){
+                                isVenueValid.value = false
+                                Text(
+                                    modifier = Modifier
+                                        .padding(start = 10.dp),
+                                    text = "This section is required",
+                                    fontSize = 13.sp,
+                                    color = indicatorColorRed,
+                                )
+                            }
+
+                            else if(selectedRooms.size >= 4){
+                                isVenueValid.value = false
+                                Text(
+                                    modifier = Modifier
+                                        .padding(start = 10.dp),
+                                    text = "Maximum number of venues is 3",
+                                    fontSize = 13.sp,
+                                    color = indicatorColorRed,
+                                )
+                            }
+
+                            else{
+                                isVenueValid.value = true
+                            }
+
+                        }
                     }
                 }
 
