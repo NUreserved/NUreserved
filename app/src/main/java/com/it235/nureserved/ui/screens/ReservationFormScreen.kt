@@ -163,21 +163,58 @@ fun DatePickerTextField(
                 else if(fromDate.compareTo(toDate) > 0){
                     isValid.value = false
                     Text(
-                        text = "From date should be less than to date",
+                        text = "Invalid order of date",
                         color = indicatorColorRed,
                     )
                 }
 
                 else if(fromDate.compareTo(Date()) < 0){
-                    isValid.value = false
-                    Text(
-                        text = "From date should be greater than today",
-                        color = indicatorColorRed,
-                    )
+
+                    if(fromDate.getDate() != Date().getDate() || fromDate.getMonth() != Date().getMonth() || fromDate.getYear() != Date().getYear()){
+                        isValid.value = false
+                        Text(
+                            text = "From date should be greater than or equal to today",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else{
+                        fromDate.setDate(fromDate.getDate() + 6)
+
+                        if(fromDate.compareTo(toDate) < 0){
+                            isValid.value = false
+                            Text(
+                                text = "The maximum number of days for reservation is 7 days",
+                                color = indicatorColorRed,
+                            )
+                        }
+
+                        else{
+                            isValid.value = true
+                        }
+
+                        fromDate.setDate(fromDate.getDate() - 6)
+                    }
+
                 }
 
                 else{
-                    isValid.value = true
+                    fromDate.setDate(fromDate.getDate() + 6)
+
+                    if(fromDate.compareTo(toDate) < 0){
+                        isValid.value = false
+                        Text(
+                            text = "The maximum number of days for reservation is 7",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else{
+                        isValid.value = true
+                    }
+
+                    fromDate.setDate(fromDate.getDate() - 6)
+                    
                 }
 
             }
