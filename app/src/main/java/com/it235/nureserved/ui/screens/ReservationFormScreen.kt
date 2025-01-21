@@ -295,7 +295,7 @@ fun OutlineTextFieldComposable(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
-    readOnly: Boolean = true,
+    readOnly: Boolean = false,
     onValueChange: (String) -> Unit,
 ){
 
