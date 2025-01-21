@@ -829,7 +829,8 @@ fun RoomReservationForm(
                                     0 -> givenName
                                     1 -> middleName
                                     else -> lastName
-                                }
+                                },
+                                readOnly = true,
                             ){
                                 when(index){
                                     0 -> givenName.value = it
