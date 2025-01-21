@@ -1134,18 +1134,33 @@ fun RoomReservationForm(
 
                     Button(
                         onClick = {
-//                            showAlertDialog = true
 
                             // Dismiss the currently shown Snackbar, if any
                             snackbarHostState.currentSnackbarData?.dismiss()
 
-                            if(nameOfOrgDeptColg.value.isEmpty()){
+                            if(!isNameOfOrgValid.value || !isPositionValid.value ||
+                                !isTitleOfTheActivityValid.value || !isExpectedNumberOfAttendeesValid.value || !isValidFromDatesOfActivity.value ||
+                                !isValidToDatesOfActivity.value || !isValidFromTimeOption.value || !isValidToTimeOption.value || !isVenueValid.value){
+                                nameOfOrgShowSuppTxt.value = true
+                                positionShowSuppTxt.value = true
+                                titleOfTheActivityShowSuppTxt.value = true
+                                expectedNumberOfAttendeesShowSuppTxt.value = true
+                                fromDatesOfActivityShowSuppTxt.value = true
+                                toDatesOfActivityShowSuppTxt.value = true
+                                selectedFromTimeOptionShowSuppTxt.value = true
+                                selectedToTimeOptionShowSuppTxt.value = true
+                                venueShowSuppTxt = true
+
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
-                                        message = "test snackbar",
+                                        message = "Make sure your inputs are correct",
                                         duration = SnackbarDuration.Short
                                     )
                                 }
+                            }
+
+                            else{
+                                showAlertDialog = true
                             }
 
                         },
