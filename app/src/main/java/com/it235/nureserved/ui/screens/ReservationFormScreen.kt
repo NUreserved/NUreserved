@@ -645,6 +645,9 @@ fun RoomReservationForm(
     var selectedRooms by remember { mutableStateOf(listOf<String>()) }
     val focusManager = LocalFocusManager.current
 
+    var venueShowSuppTxt by remember { mutableStateOf(false) }
+    val isVenueValid = remember { mutableStateOf(false) }
+
     val nameLabels = listOf("Given Name", "Middle Name", "Surname");
 
     val nameOfOrgDeptColg = remember { mutableStateOf("") }
