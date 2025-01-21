@@ -1053,8 +1053,13 @@ fun RoomReservationForm(
                                 FilterChipComposable(
                                     roomNumber = room,
                                     selectedRooms = selectedRooms,
-                                    onRoomSelected = { selectedRooms = selectedRooms + it },
-                                    onRoomDeselected = { selectedRooms = selectedRooms - it }
+                                    onRoomSelected = {
+                                        selectedRooms = selectedRooms + it
+                                        venueShowSuppTxt = true
+                                    },
+                                    onRoomDeselected = {
+                                        selectedRooms = selectedRooms - it
+                                    }
                                 )
 
                                 when(room){
