@@ -16,12 +16,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
+import com.it235.nureserved.screens.admin.home.AdminHomeScreen
+import com.it235.nureserved.screens.admin.home.AdminHomeViewModel
 import com.it235.nureserved.screens.user.RoomReservationForm
 import com.it235.nureserved.screens.user.RoomUsageRules
 import com.it235.nureserved.screens.core.SplashScreen
@@ -153,6 +156,9 @@ private fun Main() {
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
                 composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
+                composable(ScreenRoutes.AdminHome.route) {
+                    val viewModel: AdminHomeViewModel = viewModel()
+                    AdminHomeScreen(navController, viewModel) }
             }
         }
     }
