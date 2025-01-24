@@ -48,6 +48,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.screens.core.LogoutConfirmationDialog
+import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.brandColorGold
@@ -90,6 +92,20 @@ fun AdminHomeScreen(
             },
 
         ){ innerPadding ->
+            if (showThemeSettingsDialog) {
+                ThemeSettingsDialog(
+                    onDismiss = { viewModel.toggleThemeSettingsDialog() }
+                )
+            }
+
+            if (showLogoutConfirmationDialog) {
+                LogoutConfirmationDialog(
+                    navController = navController,
+                    onDismiss = { viewModel.toggleLogoutConfirmationDialog() },
+                    accountType = viewModel.accountType,
+                )
+            }
+
             when (selectedItem) {
                 0 -> { HomeScreenContent(innerPadding = innerPadding) }
                 1 -> { ReservationsScreenContent(innerPadding = innerPadding) }

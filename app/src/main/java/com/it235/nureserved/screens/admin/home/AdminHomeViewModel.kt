@@ -17,6 +17,9 @@ class AdminHomeViewModel : ViewModel() {
     private val _showLogoutConfirmationDialog = MutableStateFlow(false)
     val showLogoutConfirmationDialog: StateFlow<Boolean> = _showLogoutConfirmationDialog
 
+    private val _accountType = "admin"
+    val accountType: String = _accountType
+
 
     fun onItemSelected(index: Int) {
         _selectedItem.value = index
