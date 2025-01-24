@@ -3,6 +3,7 @@ package com.it235.nureserved
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.ui.screens.RoomReservationForm
 import com.it235.nureserved.ui.screens.RoomUsageRules
 import com.it235.nureserved.ui.screens.SplashScreen
@@ -93,6 +95,58 @@ private fun Main() {
                     }
                 }
             ) {
+                if (isLoggedIn) {
+                    // Get the current user's ID of their account
+                    val userId = auth.currentUser?.uid
+                    if (userId != null) {
+                        // Verify the ID token to see if the account is registered in the Authentication
+                        // module of Firebase. If not, this logs out the account and navigates
+                        // to the login screen. Otherwise, it will also check the Firestore Database
+                        // module to see if the account exists. If not, it will log out the account and
+                        // navigate to the login screen.
+                        Log.d("UserAuth", "User ID is not null.")
+                        auth.currentUser?.getIdToken(true)?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val db = FirebaseFirestore.getInstance()
+                                // Check if the user document exists in the Firestore
+                                db.collection("user").document(userId).get()
+                                    .addOnSuccessListener { document ->
+                                        if (!document.exists()) {
+                                            // Sign out the user if the document does not exist
+                                            auth.signOut()
+                                            navController.navigate(ScreenRoutes.Login.route) {
+                                                popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                                            }
+                                            Log.d("UserAuth", "User document does not exist. Signed out.")
+                                        }
+                                    }
+                                    .addOnFailureListener { e ->
+                                        // Sign out the user if there is an error fetching the document
+                                        auth.signOut()
+                                        navController.navigate(ScreenRoutes.Login.route) {
+                                            popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                                        }
+                                        Log.e("UserAuth", "Error fetching user document: ${e.message}")
+                                    }
+                            } else {
+                                // Sign out the user if the token is invalid
+                                auth.signOut()
+                                navController.navigate(ScreenRoutes.Login.route) {
+                                    popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                                }
+                                Log.e("UserAuth", "Invalid ID token.")
+                            }
+                        }
+                    } else {
+                        // Sign out the user if the user ID is null
+                        auth.signOut()
+                        navController.navigate(ScreenRoutes.Login.route) {
+                            popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                        }
+                        Log.d("UserAuth", "User ID is null. Signed out.")
+                    }
+                }
+
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
 
                 // Composable with navigation arguments which are needed in order to pass data
