@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui
+package com.it235.nureserved.screens.core.authscreenui
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
