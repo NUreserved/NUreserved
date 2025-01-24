@@ -53,9 +53,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.AuthInputPlaceholderTextStyle
-import com.it235.nureserved.composables.SignUpText
-import com.it235.nureserved.composables.Space
+import com.it235.nureserved.screens.core.AuthInputPlaceholderTextStyle
+import com.it235.nureserved.screens.core.SignUpText
+import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed

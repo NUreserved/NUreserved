@@ -1,4 +1,4 @@
-package com.it235.nureserved.composables
+package com.it235.nureserved.screens.core
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
