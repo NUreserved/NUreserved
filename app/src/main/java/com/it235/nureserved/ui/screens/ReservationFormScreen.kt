@@ -160,6 +160,14 @@ fun DatePickerTextField(
                     )
                 }
 
+                else if(fromDate.compareTo(toDate) == 0 && fromDate.getDay() == 0){
+                    isValid.value = false
+                    Text(
+                        text = "Cannot reserve on a Sunday",
+                        color = indicatorColorRed,
+                    )
+                }
+
                 else if(fromDate.compareTo(toDate) > 0){
                     isValid.value = false
                     Text(
