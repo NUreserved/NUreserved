@@ -368,9 +368,23 @@ private fun LoginButton(
                             }
                         } else {
                             loading.value = false
+
+                            val errorMessage = when(val exception = task.exception) {
+                                is FirebaseAuthInvalidCredentialsException -> "Invalid email or password. Please try again."
+                                is FirebaseAuthInvalidUserException -> {
+                                    if(exception.errorCode == "ERROR_USER_DISABLED"){
+                                        "Your account has been disabled. Please contact the administrator."
+                                    }
+                                    else{
+                                        ""
+                                    }
+                                }
+                                else -> ""
+                            }
+
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "Login failed: ${task.exception?.message}",
+                                    message = errorMessage,
                                     duration = SnackbarDuration.Short
                                 )
                             }
