@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.reservationscreenui
+package com.it235.nureserved.screens.user.reservationscreenui
 
 import android.widget.Toast
 import androidx.compose.foundation.background

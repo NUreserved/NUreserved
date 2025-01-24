@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui.signup
+package com.it235.nureserved.screens.core.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
