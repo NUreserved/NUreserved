@@ -196,6 +196,7 @@ fun validateName(name: String) : String{
     return when {
         name.isEmpty() -> "This field cannot be empty."
         name.length <= 1 -> "Name should be more than 1 character."
+        nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
         nameSpacePattern.containsMatchIn(name) -> {
             when{
                 name.startsWith(" ") -> "Name should not start with a space."
