@@ -186,6 +186,7 @@ fun DatePickerTextField(
                         )
                     }
 
+                    //The below condition is for selecting dates of the same month
                     else{
                         fromDate.setDate(fromDate.getDate() + 6)
 
@@ -206,6 +207,7 @@ fun DatePickerTextField(
 
                 }
 
+                //The below condition is for selecting dates of different months
                 else{
                     fromDate.setDate(fromDate.getDate() + 6)
 
