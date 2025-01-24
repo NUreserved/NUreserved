@@ -207,15 +207,57 @@ fun validateName(name: String) : String{
                     val subNames = name.split(" ")
                     subNames.forEach { el ->
                         if(el.length == 1) return "Name separated by space should not contain single letter words."
-                        else if(nameSymbolPattern.containsMatchIn(el)) return "Name should not contain any special characters."
+                        else if(nameSymbolPattern.containsMatchIn(el)){
+
+                            return if(el.contains("'")){
+                                when {
+                                    el.startsWith("'") -> "Names cannot start with apostrophe"
+                                    el.endsWith("'") -> "Names cannot ends with apostrophe"
+                                    else -> {
+                                        var errorMessage = ""
+
+                                        for(char in el){
+                                            if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
+                                                errorMessage = "Name should not contain any special characters."
+                                                break
+                                            }
+                                        }
+
+                                        errorMessage
+                                    }
+                                }
+                            } else{
+                                "Name should not contain any special characters."
+                            }
+                        }
                         else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
                     }
                     ""
                 }
             }
         }
-        nameSymbolPattern.containsMatchIn(name) -> "Name should not contain any special characters."
-        nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
+        nameSymbolPattern.containsMatchIn(name) -> when {
+            name.contains("'") -> {
+                when {
+                    name.startsWith("'") -> "Names cannot start with apostrophe"
+                    name.endsWith("'") -> "Names cannot ends with apostrophe"
+                    else -> {
+                        var errorMessage = ""
+
+                        for(char in name){
+                            if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
+                                errorMessage = "Name should not contain any special characters."
+                                break
+                            }
+                        }
+
+                        errorMessage
+                    }
+                }
+            }
+
+            else -> "Name should not contain any special characters."
+        }
         else -> ""
     }
 }
