@@ -95,7 +95,7 @@ fun LoginScreen(
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
 
-        var loading = remember { mutableStateOf(false) }
+        val loading = remember { mutableStateOf(false) }
 
         var currentRotation by remember { mutableStateOf(0f) }
         val rotationAnimation = animateFloatAsState(
