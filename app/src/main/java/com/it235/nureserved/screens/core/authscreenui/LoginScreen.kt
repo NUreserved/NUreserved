@@ -452,10 +452,10 @@ private fun LoginButton(
                                         "Your account has been disabled. Please contact the administrator."
                                     }
                                     else{
-                                        ""
+                                        "An unknown error occurred. Please try again."
                                     }
                                 }
-                                else -> ""
+                                else -> "An unknown error occurred. Please try again."
                             }
 
                             scope.launch {
