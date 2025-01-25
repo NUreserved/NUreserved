@@ -3,6 +3,7 @@ package com.it235.nureserved.screens.admin.home
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -48,6 +49,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -107,7 +110,7 @@ fun AdminHomeScreen(
             }
 
             when (selectedItem) {
-                0 -> { HomeScreenContent(innerPadding = innerPadding) }
+                0 -> { HomeScreenContent(innerPadding = innerPadding, navController) }
                 1 -> { ReservationsScreenContent(innerPadding = innerPadding) }
             }
         }
@@ -208,7 +211,8 @@ private fun NavigationBar(
 
 @Composable
 private fun HomeScreenContent(
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -220,10 +224,10 @@ private fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp)) }
-            item { FloorCard("2nd", 4) }
-            item { FloorCard("3rd", 2) }
-            item { FloorCard("4th", 5) }
-            item { FloorCard("5th", 0) }
+            item { FloorCard(FloorLocation.SECOND_FLOOR, 4, navController) }
+            item { FloorCard(FloorLocation.THIRD_FLOOR, 2, navController) }
+            item { FloorCard(FloorLocation.FOURTH_FLOOR, 5, navController) }
+            item { FloorCard(FloorLocation.FIFTH_FLOOR, 0, navController) }
             item { Spacer(modifier = Modifier.size(0.dp)) }
         }
     }
@@ -243,14 +247,18 @@ private fun ReservationsScreenContent(
 
 @Composable
 private fun FloorCard(
-    floorName: String,
-    numberOfReservations: Int
+    floorName: FloorLocation,
+    numberOfReservations: Int,
+    navController: NavController
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(180.dp)
             .clip(RoundedCornerShape(12.dp))
+            .clickable {
+                navController.navigate("${ScreenRoutes.FloorRooms.route}/${floorName}")
+            }
     ) {
         BackgroundImage()
 
@@ -260,13 +268,13 @@ private fun FloorCard(
                 .padding(16.dp)
         ) {
             Text(
-                text = floorName,
+                text = floorName.value.split(" ")[0],
                 fontSize = 36.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Floor",
+                text = floorName.value.split(" ")[1],
                 fontSize = 18.sp,
                 color = Color(0xFFFFC107) // Yellow color
             )

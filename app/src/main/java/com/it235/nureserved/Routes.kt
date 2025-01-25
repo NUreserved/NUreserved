@@ -16,4 +16,5 @@ sealed class ScreenRoutes(val route: String) {
     object GetStarted : ScreenRoutes("get_started")
 
     object AdminHome : ScreenRoutes("admin_home")
+    object FloorRooms : ScreenRoutes("floor_rooms")
 }

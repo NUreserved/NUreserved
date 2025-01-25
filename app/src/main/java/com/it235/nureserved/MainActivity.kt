@@ -23,6 +23,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
+import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
 import com.it235.nureserved.screens.admin.home.AdminHomeScreen
 import com.it235.nureserved.screens.admin.home.AdminHomeViewModel
 import com.it235.nureserved.screens.user.RoomReservationForm
@@ -159,6 +161,14 @@ private fun Main() {
                 composable(ScreenRoutes.AdminHome.route) {
                     val viewModel: AdminHomeViewModel = viewModel()
                     AdminHomeScreen(navController, viewModel) }
+                composable(
+                    route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
+                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
+                        FloorLocation::class.java) })
+                ) { backStackEntry ->
+                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
+                    FloorRoomsScreen(navController, floorName)
+                }
             }
         }
     }
