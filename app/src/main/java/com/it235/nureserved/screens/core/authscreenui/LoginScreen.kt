@@ -103,6 +103,30 @@ fun LoginScreen(
             animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
         )
 
+        val sharedPreferences = LocalContext.current.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
+        val currentTime = System.currentTimeMillis()
+
+        if(currentTime < sharedPreferences.getLong("block_time", 0)){
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+        }
+
+        else{
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+            sharedPreferences.edit().putLong("block_time", 0).apply()
+            sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+        }
+
+        val showLoginFailedAttemptMessage = remember {
+            mutableStateOf(sharedPreferences.getBoolean("show_login_failed_attempts_msg", false))
+        }
+
+        val isLoginEnabled = remember {
+            mutableStateOf(sharedPreferences.getBoolean("is_login_enabled", false))
+        }
+
         val focusManager = LocalFocusManager.current
 
         Scaffold(
