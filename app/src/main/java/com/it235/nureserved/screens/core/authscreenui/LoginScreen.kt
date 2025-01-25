@@ -80,10 +80,13 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import android.content.Context
+import android.content.SharedPreferences
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
 fun LoginScreen(
@@ -93,13 +96,37 @@ fun LoginScreen(
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
 
-        var loading = remember { mutableStateOf(false) }
+        val loading = remember { mutableStateOf(false) }
 
         var currentRotation by remember { mutableStateOf(0f) }
         val rotationAnimation = animateFloatAsState(
             targetValue = currentRotation,
             animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
         )
+
+        val sharedPreferences = LocalContext.current.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
+        val currentTime = System.currentTimeMillis()
+
+        if(currentTime < sharedPreferences.getLong("block_time", 0)){
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+        }
+
+        else{
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+            sharedPreferences.edit().putLong("block_time", 0).apply()
+            sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+        }
+
+        val showLoginFailedAttemptMessage = remember {
+            mutableStateOf(sharedPreferences.getBoolean("show_login_failed_attempts_msg", false))
+        }
+
+        val isLoginEnabled = remember {
+            mutableStateOf(sharedPreferences.getBoolean("is_login_enabled", false))
+        }
 
         val focusManager = LocalFocusManager.current
 
@@ -183,7 +210,53 @@ fun LoginScreen(
                                 scope,
                                 snackbarHostState,
                                 loading,
+                                showLoginFailedAttemptMessage,
+                                isLoginEnabled,
+                                sharedPreferences,
                             )
+
+                            Space("h", 10)
+
+                            if(showLoginFailedAttemptMessage.value){
+
+                                val currentTime = System.currentTimeMillis()
+                                var trigger by remember { mutableStateOf(0) }
+
+                                LaunchedEffect(key1 = trigger){
+                                    if(currentTime < sharedPreferences.getLong("block_time", 0)){
+                                        delay(1000)
+                                        trigger++
+                                        println(trigger)
+                                    }
+
+                                    else{
+                                        sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+                                        sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+                                        sharedPreferences.edit().putLong("block_time", 0).apply()
+                                        sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+
+                                        showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                                        isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+                                    }
+                                }
+
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 20.dp),
+                                    color = indicatorColorRed,
+                                    text = "Maximum login failed attempts are 3. Please try again after 3 minutes",
+                                    style = TextStyle(
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 14.sp,
+                                    ),
+                                    textAlign = TextAlign.Center
+                                )
+
+                                Space("h", 15)
+
+                            }
 
                             Space("h", 15)
 
@@ -271,7 +344,7 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
             )
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -321,7 +394,7 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -344,6 +417,9 @@ private fun LoginButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     loading: MutableState<Boolean>,
+    showLoginFailedAttemptMessage: MutableState<Boolean>,
+    isLoginEnabled: MutableState<Boolean>,
+    sharedPreferences: SharedPreferences,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
@@ -365,7 +441,6 @@ private fun LoginButton(
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
-                            loading.value = false
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     message = "Login failed: ${task.exception?.message}",
@@ -374,8 +449,16 @@ private fun LoginButton(
                             }
                         }
                     }
+                loading.value = false
+                val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+                sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
             } else {
                 loading.value = false
+
+                val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+
+                sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
+
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Please fill in all the fields with email and password.",
@@ -383,13 +466,25 @@ private fun LoginButton(
                     )
                 }
             }
+
+            if(sharedPreferences.getInt("failed_attempts", 0) == 3){
+                sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+                sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+                sharedPreferences.edit().putLong("block_time", System.currentTimeMillis() + 180000L).apply()
+
+                showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+            }
         },
+        enabled = isLoginEnabled.value,
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             containerColor = brandColorBlue,
-            contentColor = white3
+            contentColor = white3,
+            disabledContainerColor = white3, // Change this to your desired color
+            disabledContentColor = white4 // Change this to your desired color
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
