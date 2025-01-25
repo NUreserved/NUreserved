@@ -512,7 +512,7 @@ private fun RegisterButton(
                                     .addOnCompleteListener {e ->
                                         if(e.isSuccessful){
                                             navController.navigate(ScreenRoutes.Login.route) {
-                                                popUpTo(0) { inclusive = true }
+                                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                                             }
                                         }
                                         else{
