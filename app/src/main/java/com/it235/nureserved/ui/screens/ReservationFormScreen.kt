@@ -615,6 +615,7 @@ fun InputAndLabelLayout(
                 label = label,
                 showSuppText = showSuppText,
                 isValidInput = isValidInput,
+                selectedRooms = selectedRooms
             ){
                 showSuppText.value = true
                 inputValue.value = it
@@ -1039,6 +1040,7 @@ fun RoomReservationForm(
                     keyboardType = KeyboardType.Number,
                     showSuppText = expectedNumberOfAttendeesShowSuppTxt,
                     isValidInput = isExpectedNumberOfAttendeesValid,
+                    selectedRooms = selectedRooms,
                 )
 
                 HorizontalDivider(
