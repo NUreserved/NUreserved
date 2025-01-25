@@ -335,7 +335,31 @@ fun OutlineTextFieldComposable(
                     if(inputValue.value.isEmpty()){
                         isValidInput.value = false
                         Text(
-                            text = "This field is required expected attendees",
+                            text = "This field is required",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else if(selectedRooms.size == 1 && inputValue.value.toInt() > 40){
+                        isValidInput.value = false
+                        Text(
+                            text = "Maximum number of attendees is 40 for one venue",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else if(selectedRooms.size == 2 && inputValue.value.toInt() > 80){
+                        isValidInput.value = false
+                        Text(
+                            text = "Maximum number of attendees is 80 for two venue",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else if(selectedRooms.size == 3 && inputValue.value.toInt() > 120){
+                        isValidInput.value = false
+                        Text(
+                            text = "Maximum number of attendees is 120 for three venue",
                             color = indicatorColorRed,
                         )
                     }
