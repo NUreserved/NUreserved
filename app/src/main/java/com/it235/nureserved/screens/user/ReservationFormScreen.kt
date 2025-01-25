@@ -168,10 +168,12 @@ fun DatePickerTextField(
                 }
 
                 else if(fromDate.getDay() == 0){
-                    Text(
-                        text = "Cannot start on a Sunday",
-                        color = indicatorColorRed,
-                    )
+                    if(labelValue == "From"){
+                        Text(
+                            text = "Cannot start on a Sunday",
+                            color = indicatorColorRed,
+                        )
+                    }
                 }
 
                 else if(fromDate.compareTo(toDate) > 0){
@@ -186,10 +188,12 @@ fun DatePickerTextField(
 
                     if(fromDate.getDate() != Date().getDate() || fromDate.getMonth() != Date().getMonth() || fromDate.getYear() != Date().getYear()){
                         isValid.value = false
-                        Text(
-                            text = "From date should be greater than or equal to today",
-                            color = indicatorColorRed,
-                        )
+                        if(labelValue == "From"){
+                            Text(
+                                text = "From date should be greater than or equal to today",
+                                color = indicatorColorRed,
+                            )
+                        }
                     }
 
                     //The below condition is for selecting dates of the same month
