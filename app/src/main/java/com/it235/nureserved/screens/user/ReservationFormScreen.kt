@@ -194,12 +194,12 @@ fun DatePickerTextField(
 
                     //The below condition is for selecting dates of the same month
                     else{
-                        fromDate.setDate(fromDate.getDate() + 6)
+                        fromDate.setDate(fromDate.getDate() + 5)
 
                         if(fromDate.compareTo(toDate) < 0){
                             isValid.value = false
                             Text(
-                                text = "The maximum number of days for reservation is 7 days",
+                                text = "The maximum number of days for reservation is 6 days",
                                 color = indicatorColorRed,
                             )
                         }
@@ -208,19 +208,19 @@ fun DatePickerTextField(
                             isValid.value = true
                         }
 
-                        fromDate.setDate(fromDate.getDate() - 6)
+                        fromDate.setDate(fromDate.getDate() - 5)
                     }
 
                 }
 
                 //The below condition is for selecting dates of different months
                 else{
-                    fromDate.setDate(fromDate.getDate() + 6)
+                    fromDate.setDate(fromDate.getDate() + 5)
 
                     if(fromDate.compareTo(toDate) < 0){
                         isValid.value = false
                         Text(
-                            text = "The maximum number of days for reservation is 7",
+                            text = "The maximum number of days for reservation is 6",
                             color = indicatorColorRed,
                         )
                     }
@@ -229,7 +229,7 @@ fun DatePickerTextField(
                         isValid.value = true
                     }
 
-                    fromDate.setDate(fromDate.getDate() - 6)
+                    fromDate.setDate(fromDate.getDate() - 5)
 
                 }
 
