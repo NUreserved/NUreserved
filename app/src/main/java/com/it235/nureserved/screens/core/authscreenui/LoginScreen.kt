@@ -70,6 +70,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
@@ -441,9 +443,24 @@ private fun LoginButton(
                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                             }
                         } else {
+                            loading.value = false
+
+                            val errorMessage = when(val exception = task.exception) {
+                                is FirebaseAuthInvalidCredentialsException -> "Invalid email or password. Please try again."
+                                is FirebaseAuthInvalidUserException -> {
+                                    if(exception.errorCode == "ERROR_USER_DISABLED"){
+                                        "Your account has been disabled. Please contact the administrator."
+                                    }
+                                    else{
+                                        "An unknown error occurred. Please try again."
+                                    }
+                                }
+                                else -> "An unknown error occurred. Please try again."
+                            }
+
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "Login failed: ${task.exception?.message}",
+                                    message = errorMessage,
                                     duration = SnackbarDuration.Short
                                 )
                             }
@@ -483,8 +500,8 @@ private fun LoginButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = brandColorBlue,
             contentColor = white3,
-            disabledContainerColor = white3, // Change this to your desired color
-            disabledContentColor = white4 // Change this to your desired color
+            disabledContainerColor = white3,
+            disabledContentColor = white4
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
