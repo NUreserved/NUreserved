@@ -167,6 +167,13 @@ fun DatePickerTextField(
                     )
                 }
 
+                else if(fromDate.getDay() == 0){
+                    Text(
+                        text = "Cannot start on a Sunday",
+                        color = indicatorColorRed,
+                    )
+                }
+
                 else if(fromDate.compareTo(toDate) > 0){
                     isValid.value = false
                     Text(
