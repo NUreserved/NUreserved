@@ -450,6 +450,7 @@ private fun LoginButton(
                 isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
             }
         },
+        enabled = isLoginEnabled.value,
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
