@@ -718,14 +718,14 @@ fun RoomReservationForm(
     val isExpectedNumberOfAttendeesValid = remember { mutableStateOf(false) }
 
     var fromDatesOfActivity by remember { mutableStateOf(Date()) }
-    var fromDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
-    var isValidFromDatesOfActivity = remember { mutableStateOf(false) }
+    val fromDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
+    val isValidFromDatesOfActivity = remember { mutableStateOf(false) }
     var isFromDatesOfActivitySelected by remember { mutableStateOf(false) }
     val fromDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
     var toDatesOfActivity by remember { mutableStateOf(Date()) }
-    var toDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
-    var isValidToDatesOfActivity = remember { mutableStateOf(false) }
+    val toDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
+    val isValidToDatesOfActivity = remember { mutableStateOf(false) }
     var istoDatesOfActivitySelected by remember { mutableStateOf(false) }
     val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
@@ -758,12 +758,12 @@ fun RoomReservationForm(
 
 
     var selectedFromTimeOption by remember { mutableStateOf(timeOptions[0]) }
-    var selectedFromTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
-    var isValidFromTimeOption = remember { mutableStateOf(false) }
+    val selectedFromTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
+    val isValidFromTimeOption = remember { mutableStateOf(false) }
 
     var selectedToTimeOption by remember { mutableStateOf(timeOptions[0]) }
-    var selectedToTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
-    var isValidToTimeOption = remember { mutableStateOf(false) }
+    val selectedToTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
+    val isValidToTimeOption = remember { mutableStateOf(false) }
 
     if(showAlertDialog){
         ConfirmationDialog(
