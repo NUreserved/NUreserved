@@ -26,6 +26,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -52,15 +55,22 @@ import com.it235.nureserved.ui.theme.white3
 @Composable
 fun FloorRoomsScreen(
     navController: NavController,
-    floorName: FloorLocation
+    floorName: FloorLocation,
+    viewModel: FloorRoomsViewModel
 ) {
+    val rooms by viewModel.rooms.collectAsState()
+
+    LaunchedEffect(floorName) {
+        viewModel.loadRooms(floorName)
+    }
+
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold (
             topBar = { TopBar(scrollBehavior, navController) }
         ) { innerPadding ->
-            FloorRoomsScreenContent(floorName, roomList, innerPadding)
+            FloorRoomsScreenContent(floorName, rooms, innerPadding)
         }
 
     }
@@ -91,7 +101,7 @@ private fun FloorRoomsScreenContent(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(roomList.filter { it.location == floorName }) { room ->
+            items(roomList) { room ->
                 RoomCard(room)
             }
         }
