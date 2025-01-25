@@ -185,6 +185,9 @@ fun LoginScreen(
                                 scope,
                                 snackbarHostState,
                                 loading,
+                                showLoginFailedAttemptMessage,
+                                isLoginEnabled,
+                                sharedPreferences,
                             )
 
                             Space("h", 15)
@@ -346,6 +349,9 @@ private fun LoginButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     loading: MutableState<Boolean>,
+    showLoginFailedAttemptMessage: MutableState<Boolean>,
+    isLoginEnabled: MutableState<Boolean>,
+    sharedPreferences: SharedPreferences,
 ) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
