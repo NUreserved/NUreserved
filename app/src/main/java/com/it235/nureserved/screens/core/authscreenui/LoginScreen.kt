@@ -413,6 +413,11 @@ private fun LoginButton(
                             }
                         } else {
                             loading.value = false
+
+                            val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+
+                            sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
+
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     message = "Login failed: ${task.exception?.message}",
@@ -423,6 +428,11 @@ private fun LoginButton(
                     }
             } else {
                 loading.value = false
+
+                val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+
+                sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
+
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Please fill in all the fields with email and password.",
