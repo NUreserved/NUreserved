@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.widget.Toast
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -511,9 +512,10 @@ private fun RegisterButton(
                                     .set(userData)
                                     .addOnCompleteListener {e ->
                                         if(e.isSuccessful){
-                                            navController.navigate(ScreenRoutes.Home.route) {
+                                            navController.navigate(ScreenRoutes.Login.route) {
                                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                                             }
+                                            Toast.makeText(navController.context, "Account created successfully.", Toast.LENGTH_SHORT).show()
                                         }
                                         else{
                                             loading.value = false
