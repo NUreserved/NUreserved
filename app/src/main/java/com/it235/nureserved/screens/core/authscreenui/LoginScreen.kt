@@ -190,6 +190,45 @@ fun LoginScreen(
                                 sharedPreferences,
                             )
 
+                            Space("h", 10)
+
+                            if(showLoginFailedAttemptMessage.value){
+
+                                val currentTime = System.currentTimeMillis()
+                                var trigger by remember { mutableStateOf(0) }
+
+                                LaunchedEffect(key1 = trigger){
+                                    if(currentTime < sharedPreferences.getLong("block_time", 0)){
+                                        delay(1000)
+                                        trigger++
+                                        println(trigger)
+                                    }
+
+                                    else{
+                                        sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+                                        sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+                                        sharedPreferences.edit().putLong("block_time", 0).apply()
+                                        sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+
+                                        showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                                        isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+                                    }
+                                }
+
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 20.dp),
+                                    text = "Maximum login failed attempts are 3. Please try again after 3 minutes",
+                                    style = TextStyle(
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 14.sp,
+                                    ),
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+
                             Space("h", 15)
 
                             NoAccountNote(navController)
