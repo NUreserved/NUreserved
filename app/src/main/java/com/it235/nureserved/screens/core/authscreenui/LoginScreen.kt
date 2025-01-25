@@ -80,12 +80,13 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.content.Context
 import android.content.SharedPreferences
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
 fun LoginScreen(
@@ -243,6 +244,7 @@ fun LoginScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(horizontal = 20.dp),
+                                    color = indicatorColorRed,
                                     text = "Maximum login failed attempts are 3. Please try again after 3 minutes",
                                     style = TextStyle(
                                         fontFamily = poppinsFamily,
@@ -251,6 +253,9 @@ fun LoginScreen(
                                     ),
                                     textAlign = TextAlign.Center
                                 )
+
+                                Space("h", 15)
+
                             }
 
                             Space("h", 15)
@@ -339,7 +344,7 @@ private fun EmailField(value: String, onValueChange: (String) -> Unit) {
             )
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -389,7 +394,7 @@ private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -477,7 +482,9 @@ private fun LoginButton(
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             containerColor = brandColorBlue,
-            contentColor = white3
+            contentColor = white3,
+            disabledContainerColor = white3, // Change this to your desired color
+            disabledContentColor = white4 // Change this to your desired color
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
