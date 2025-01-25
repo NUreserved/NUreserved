@@ -32,19 +32,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import coil.size.Scale
 import com.it235.nureserved.R
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.Room
-import com.it235.nureserved.data.rooms.roomList
+import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.textColor1
@@ -136,14 +132,7 @@ private fun TopBar(
 private fun RoomCard(
     room: Room
 ) {
-    val image = // Set the size to match the modifier dimensions
-        rememberAsyncImagePainter(
-            ImageRequest.Builder(LocalContext.current).data(data = room.imageResId ?: R.drawable.resource_default)
-                .apply(block = fun ImageRequest.Builder.() {
-                    size(720, 360) // Set the size to match the modifier dimensions
-                    scale(Scale.FILL)
-                }).build()
-        )
+    val image = rescalePicture(imageResId = room.imageResId)
 
     Card (
         modifier = Modifier

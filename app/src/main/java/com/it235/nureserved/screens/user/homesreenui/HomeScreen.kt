@@ -85,6 +85,7 @@ import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
+import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
@@ -573,15 +574,7 @@ fun Floor(
 
 @Composable
 fun Card(room: Room, navController: NavController) {
-    val imagePainter = // Set the size to match the modifier dimensions
-        rememberAsyncImagePainter(
-            ImageRequest.Builder(LocalContext.current).data(data = room.imageResId ?: R.drawable.resource_default)
-                .apply(block = fun ImageRequest.Builder.() {
-                    size(720, 360) // Set the size to match the modifier dimensions
-                    scale(Scale.FILL)
-                }).build()
-        )
-
+    val imagePainter = rescalePicture(room.imageResId)
 
     Card(
         colors = CardDefaults.cardColors(
