@@ -50,8 +50,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -86,7 +84,6 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
-import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
