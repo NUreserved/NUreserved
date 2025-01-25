@@ -303,6 +303,7 @@ fun OutlineTextFieldComposable(
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
     readOnly: Boolean = false,
+    selectedRooms: List<String> = listOf(),
     onValueChange: (String) -> Unit,
 ){
 
@@ -537,6 +538,7 @@ fun InputAndLabelLayout(
     dimension: String,
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
+    selectedRooms: List<String> = listOf(),
 ){
     if(dimension == "col"){
         Column(
