@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -23,9 +24,11 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,6 +57,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -64,6 +68,7 @@ import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white4
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -290,6 +295,7 @@ private fun RegisterButton(
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
     val keyboardController = LocalSoftwareKeyboardController.current
+    var showDialog by remember { mutableStateOf(false) }
 
     Button(
         onClick = {
@@ -313,12 +319,25 @@ private fun RegisterButton(
 
             // create user
             if (email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()) {
-                if(confirmPassword == password){
+                if (confirmPassword == password) {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                navController.popBackStack()
 
+                                //send verification email
+                                val user = auth.currentUser
+                                user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
+                                    if (verificationTask.isSuccessful) {
+                                        showDialog = true
+                                    } else {
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar(
+                                                message = "Failed to send verification email: ${verificationTask.exception?.message}",
+                                                duration = SnackbarDuration.Short
+                                            )
+                                        }
+                                    }
+                                }
                             } else {
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
@@ -364,7 +383,17 @@ private fun RegisterButton(
             )
         )
     }
+
+    EmailVerificationDialog(
+        isDialogOpen = showDialog,
+        onDismissRequest = { showDialog = false },
+        onOkClicked = {
+            showDialog = false
+            navController.popBackStack()
+        }
+    )
 }
+
 
 @Composable
 fun AccountExistNote(navController: NavController) {
@@ -416,6 +445,37 @@ private fun RegisterNote() {
         textAlign = TextAlign.Center,
     )
 }
+
+//dialog for email verification
+@Composable
+fun EmailVerificationDialog(
+    isDialogOpen: Boolean,
+    onDismissRequest: () -> Unit,
+    onOkClicked: () -> Unit
+) {
+    if (isDialogOpen) {
+        AlertDialog(
+            onDismissRequest = onDismissRequest,
+            confirmButton = {
+                Button(
+                    onClick = onOkClicked
+                ) {
+                    Text(text = "OK")
+                }
+            },
+            title = {
+                Text(text = "Email Sent")
+            },
+            text = {
+                Text(
+                    text = "Verification email sent. Please check your email.",
+                    textAlign = TextAlign.Center
+                )
+            },
+        )
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
