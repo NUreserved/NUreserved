@@ -75,7 +75,7 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -349,7 +349,7 @@ private fun EmailField(
         placeholder = { AuthInputPlaceholderTextStyle("Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -440,7 +440,7 @@ private fun PasswordField(
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
