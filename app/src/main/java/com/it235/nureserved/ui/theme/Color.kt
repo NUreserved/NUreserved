@@ -6,22 +6,23 @@ import androidx.compose.ui.graphics.Color
 val white = Color(0xFFFEFEFE)
 val white2 = Color(0xFFEEEEEE)
 val white3 = Color(0xFFF8F5F5)
-val white4 = Color(0xFFAFAFAF)
-val white5 = Color(0xFF7D7882)
+val white4 = Color(0xFFD3D3D3)
+val white5 = Color(0xFFAFAFAF)
+val white6 = Color(0xFF7D7882)
 val darkGray = Color(0xFF333333)
 val darkGray2 = Color(0xFF90909A)
 
 val backgroundColorWhite1 = white
 val backgroundColorWhite2 = white2
 val backgroundColorWhite3 = white3
-val backgroundColorWhite4 = white4
+val backgroundColorWhite4 = white5
 val iconColor1 = Color(0xFF7B7A7A)
 val iconColor2 = darkGray
 val iconColor3 = white
 val textColor1 = Color(0xFF0F0F0F)
 val textColor2 = darkGray
 val textColor3 = Color(0xFF808080)
-val textColor4 = white4
+val textColor4 = white5
 
 // Branding colors
 val brandColorBlue = Color(0xFF35408e)

@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.reservationscreenui
+package com.it235.nureserved.screens.user.reservationscreenui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -50,14 +50,20 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.ui.theme.darkGray
 
 @Composable()
-fun StateCard(modifier: Modifier = Modifier, roomNumber: String, reservationStatus: String, @DrawableRes roomImage: Int, cardContainerColor: Long){
+fun StateCard(
+    modifier: Modifier = Modifier,
+    roomNumber: String, 
+    reservationStatus: String, 
+    @DrawableRes roomImage: Int,
+    cardContainerColor: Color){
     Card(
         modifier = modifier
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = Color(cardContainerColor),
+            containerColor = cardContainerColor,
             contentColor = Color(0xFFFEFEFE)
         )
     ){
@@ -177,16 +183,16 @@ fun RoomReservationStatusScreen(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Approved: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFF49844b
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = Color(0xFF49844b)
                     )
 
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Approved: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFF49844b
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = Color(0xFF49844b)
                     )
                 }
             }
@@ -201,14 +207,14 @@ fun RoomReservationStatusScreen(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFFd69c40)
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = Color(0xFFd69c40))
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFFd69c40)
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = Color(0xFFd69c40))
                 }
             }
 
@@ -223,20 +229,20 @@ fun RoomReservationStatusScreen(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFFd69c40)
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = darkGray)
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFF49844b)
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = darkGray)
                     StateCard(
                         modifier = Modifier.clickable(onClick = { showBottomSheet = true }),
                         roomNumber = "Room 307",
                         reservationStatus = "Submitted: 11:05 am, 11/30/24",
-                        roomImage = R.drawable.sample_room,
-                        cardContainerColor = 0xFFdb5e5f)
+                        roomImage = R.drawable.sample_lec_room,
+                        cardContainerColor = darkGray)
                 }
             }
         }

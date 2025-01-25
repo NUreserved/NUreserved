@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens
+package com.it235.nureserved.screens.core
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

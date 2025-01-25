@@ -1,12 +1,17 @@
-package com.it235.nureserved.ui.screens.homesreenui
+package com.it235.nureserved.screens.user.homesreenui
 
+import User
+import android.content.Context
+import android.content.res.Resources.Theme
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,13 +19,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenu
@@ -28,8 +37,10 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -39,12 +50,14 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -60,6 +73,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
@@ -75,8 +89,11 @@ import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
+import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
+import com.it235.nureserved.ui.theme.textColor3
+import com.it235.nureserved.ui.theme.textColor4
+import getUserData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,17 +101,16 @@ fun HomeScreen(navController: NavController) {
 
     // State variable to control the selected item
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
-    // State variable to control the visibility of text
-    var showText by rememberSaveable { mutableStateOf(false) }
     // State variable to control the visibility of the date picker
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
     // State variable to store the previous selected item
     var previousSelectedItem by rememberSaveable { mutableIntStateOf(0) }
     // State variable to control the visibility of logout confirmation dialog
     var showLogoutConfirmationDialog by remember { mutableStateOf(false) }
-    // State variable to control the visibility of filter icon when the current
-    // tab is in the home screen
-    var showFilterButton by rememberSaveable { mutableStateOf(true) }
+    // State variable to control the visibility of theme settings dialog
+    var showThemeSettingsDialog by remember { mutableStateOf(false) }
+    // State variable to control the visibility of profile dialog
+    var showProfileDialog by remember { mutableStateOf(false) }
 
     BackHandler {
         if (selectedItem != 0) {
@@ -112,9 +128,9 @@ fun HomeScreen(navController: NavController) {
                 TopBar(
                     navController,
                     scrollBehavior = scrollBehavior,
-                    onFilterClick = { showText = !showText },
                     showLogoutConfirmationDialog = { showLogoutConfirmationDialog = true},
-                    showFilterButton = showFilterButton
+                    showThemeSettingsDialog = { showThemeSettingsDialog = true},
+                    showProfileDialog = { showProfileDialog = true}
                 )
             },
             bottomBar = {
@@ -137,20 +153,28 @@ fun HomeScreen(navController: NavController) {
                 )
             }
 
+            if (showThemeSettingsDialog) {
+                ThemeSettingsDialog(
+                    onDismiss = { showThemeSettingsDialog = false }
+                )
+            }
+
+            if (showProfileDialog) {
+                ProfileDialog(
+                    onDismiss = { showProfileDialog = false}
+                )
+            }
+
             when (selectedItem) {
                 0 -> {
-                    showFilterButton = true
-
                     HomeScreenContent(
                         innerPadding = innerPadding,
                         navController = navController,
-                        showText = showText,
                         onShowDatePickerChange = { showDatePicker = it },
                         showDatePicker = showDatePicker
                     )
                 }
                 1 -> {
-                    showFilterButton = false
                     RoomReservationStatusScreen(navController, innerPadding)
                 }
             }
@@ -162,9 +186,9 @@ fun HomeScreen(navController: NavController) {
 fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    onFilterClick: () -> Unit,
     showLogoutConfirmationDialog: () -> Unit,
-    showFilterButton: Boolean) {
+    showThemeSettingsDialog: () -> Unit,
+    showProfileDialog: () -> Unit) {
 
     var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
@@ -182,14 +206,6 @@ fun TopBar(
             )
         },
         actions = {
-            if (showFilterButton) {
-                IconButton(onClick = onFilterClick) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.filter_alt),
-                        contentDescription = "Filter icon to filter content based on chosen criteria"
-                    )
-                };
-            }
             IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.notifications),
@@ -250,7 +266,7 @@ fun TopBar(
             };
             IconButton(onClick = { showProfilePopup = !showProfilePopup }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.account_circle),
+                    painter = painterResource(id = R.drawable.more_vert),
                     contentDescription = "Contains important settings"
                 )
                 DropdownMenu(
@@ -258,8 +274,18 @@ fun TopBar(
                     onDismissRequest = { showProfilePopup = false}
                 ) {
                     DropdownMenuItem(
+                        text = { Text("Profile") },
+                        onClick = { showProfileDialog() },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.account_circle),
+                                contentDescription = "Profile icon"
+                            )
+                        }
+                    )
+                    DropdownMenuItem(
                         text = { Text("Theme") },
-                        onClick = { /* Handle settings click */ },
+                        onClick = { showThemeSettingsDialog() },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.dark_mode),
@@ -334,7 +360,6 @@ fun NavigationBar(
 fun HomeScreenContent(
     innerPadding: PaddingValues,
     navController: NavController,
-    showText: Boolean,
     onShowDatePickerChange: (Boolean) -> Unit,
     showDatePicker: Boolean
 ) {
@@ -351,9 +376,6 @@ fun HomeScreenContent(
         modifier = Modifier
             .padding(innerPadding)
     ) {
-        if (showText) {
-            ReservationDatePickerChip(onShowDatePickerChange)
-        }
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
@@ -365,6 +387,190 @@ fun HomeScreenContent(
             item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ThemeSettingsDialog(
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    val currentTheme = 0
+    val themeOptions = listOf("Light theme", "Dark theme", "Use device theme")
+    val selectedOption = remember { mutableStateOf(themeOptions[currentTheme]) }
+
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Change app theme") },
+        text = {
+            Column {
+                themeOptions.forEachIndexed { index, theme ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                selectedOption.value = theme
+                            }
+                    ) {
+                        RadioButton(
+                            selected = selectedOption.value == theme,
+                            onClick = {
+                                selectedOption.value = theme
+                            }
+                        )
+                        Text(
+                            text = theme,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+private fun ProfileDialog(
+    onDismiss: () -> Unit
+) {
+    var user by remember { mutableStateOf<User?>(null) }
+    var loading by remember { mutableStateOf(true) }
+
+    getUserData { fetchedUser ->
+        user = fetchedUser
+        loading = false
+    }
+
+    Dialog(
+        onDismissRequest = { onDismiss() }
+    ) {
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+        ){
+            Space("h", 16)
+            HeadingComposable("Personal Information")
+            Space("h", 8)
+
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "First Name",
+                    value = user?.firstName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Middle Name",
+                    value = user?.middleName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Last Name",
+                    value = user?.lastName ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Email",
+                    value = user?.email ?: "N/A"
+                )
+            }
+            Space("h", 16)
+
+
+            Space("h", 16)
+            HeadingComposable("Academic Information")
+            Space("h", 8)
+            if (loading) {
+                IndeterminateCircularIndicator()
+            } else {
+                TextContentComposable(
+                    field = "Program",
+                    value = user?.program ?: "N/A"
+                )
+                TextContentComposable(
+                    field = "Student Number",
+                    value = user?.studentNumber ?: "N/A"
+                )
+            }
+            Space("h", 16)
+        }
+    }
+}
+
+@Composable
+private fun HeadingComposable(
+    value: String
+) {
+    Text(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp),
+        text = value.uppercase(),
+        style = LocalTextStyle.current.copy(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+    )
+}
+
+@Composable
+private fun TextContentComposable(
+    field: String,
+    value: String
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(0.5f).widthIn(max = 200.dp),
+            color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+            text = field,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+        Text(
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(end = 16.dp),
+            text = value,
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                lineHeight = 16.sp
+            ),
+        )
+    }
+}
+
+@Composable
+fun IndeterminateCircularIndicator(
+) {
+    CircularProgressIndicator(
+        modifier = Modifier
+            .padding(top = 8.dp, start = 16.dp)
+            .width(32.dp),
+        color = MaterialTheme.colorScheme.secondary,
+        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+    )
 }
 
 @Composable
@@ -408,33 +614,6 @@ private fun LogoutConfirmationDialog(
             }
         }
     )
-}
-
-@Composable
-private fun ReservationDatePickerChip(onShowDatePickerChange: (Boolean) -> Unit) {
-    Column(
-        modifier = Modifier
-            .padding(start = 16.dp, top = 16.dp)
-    ) {
-        Text(
-            text = "Show rooms available for reservation on",
-            style = TextStyle(
-                fontFamily = poppinsFamily,
-                fontStyle = FontStyle.Italic,
-                fontSize = 16.sp
-            )
-        )
-        AssistChip(
-            onClick = { onShowDatePickerChange(true) },
-            label = { Text("Select date") },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.calendar_today),
-                    contentDescription = "Calendar icon"
-                )
-            },
-        )
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

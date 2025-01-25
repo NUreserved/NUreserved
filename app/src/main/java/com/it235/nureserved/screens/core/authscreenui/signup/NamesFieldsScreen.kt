@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui.signup
+package com.it235.nureserved.screens.core.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -53,7 +53,7 @@ import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -244,7 +244,7 @@ private fun NameField(
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -283,6 +283,15 @@ private fun NextButton(
 
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
                 navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
+            }
+
+            else{
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Make sure your inputs are correct",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
         },
         modifier = Modifier

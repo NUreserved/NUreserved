@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.authscreenui.signup
+package com.it235.nureserved.screens.core.authscreenui.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -61,7 +61,7 @@ import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -282,7 +282,7 @@ fun DropdownTextField(
                 }
             },
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = white4,
+                containerColor = white5,
                 focusedTextColor = white3,
                 unfocusedTextColor = white3,
                 cursorColor = white3,
@@ -298,7 +298,7 @@ fun DropdownTextField(
         ExposedDropdownMenu(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(white4)
+                .background(white5)
                 .heightIn(max = 200.dp)
                 .verticalScroll(rememberScrollState()),
             expanded = expanded,
@@ -338,7 +338,7 @@ private fun InputField(
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = {
-            val studentNumberPattern = Regex("^\\d{4}-\\d{6}$")
+            val studentNumberPattern = Regex("^20(19|2[0-4])-\\d{6}$")
 
             if (showSupportText) {
                 if(!studentNumberPattern.containsMatchIn(value)){
@@ -363,7 +363,7 @@ private fun InputField(
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,

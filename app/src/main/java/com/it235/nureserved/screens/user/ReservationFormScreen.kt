@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens
+package com.it235.nureserved.screens.user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -76,6 +76,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
+import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -84,6 +85,7 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
+import com.it235.nureserved.ui.theme.white6
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -221,7 +223,7 @@ fun DatePickerTextField(
                     }
 
                     fromDate.setDate(fromDate.getDate() - 6)
-                    
+
                 }
 
             }
@@ -519,6 +521,11 @@ fun DropdownTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .menuAnchor()
+                .border(
+                    width = 1.dp,
+                    color = if (isSystemInDarkTheme()) darkGray2 else white6,
+                    shape = RoundedCornerShape(10.dp)
+                )
         )
 
         ExposedDropdownMenu(
@@ -1075,36 +1082,17 @@ fun RoomReservationForm(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
-                            val rooms = listOf(
-                                "202",
-                                "203",
-                                "204",
-                                "205",
-                                "233",
-                                "302",
-                                "303",
-                                "304",
-                                "305",
-                                "306",
-                                "402",
-                                "407",
-                                "409",
-                                "413",
-                                "418",
-                                "502",
-                                "506",
-                                "508",
-                            )
-                            rooms.forEach { room ->
-                                when(room){
-                                    "202" -> FilterChipsLabel(label = "2nd floor")
-                                    "302" -> FilterChipsLabel(label = "3rd floor")
-                                    "402" -> FilterChipsLabel(label = "4th floor")
-                                    "502" -> FilterChipsLabel(label = "5th floor")
+
+                            roomList.forEach { room ->
+                                when(room.name){
+                                    "202" -> FilterChipsLabel(label = "2nd Floor")
+                                    "303" -> FilterChipsLabel(label = "3rd Floor")
+                                    "402" -> FilterChipsLabel(label = "4th Floor")
+                                    "504" -> FilterChipsLabel(label = "5th Floor")
                                 }
 
                                 FilterChipComposable(
-                                    roomNumber = room,
+                                    roomNumber = room.name,
                                     selectedRooms = selectedRooms,
                                     onRoomSelected = {
                                         selectedRooms = selectedRooms + it
@@ -1115,7 +1103,7 @@ fun RoomReservationForm(
                                     }
                                 )
 
-                                when(room){
+                                when(room.name){
                                     "233" -> FilterChipsCategoryDivider()
                                     "306" -> FilterChipsCategoryDivider()
                                     "418" -> FilterChipsCategoryDivider()
@@ -1145,6 +1133,7 @@ fun RoomReservationForm(
                                     fontSize = 13.sp,
                                     color = indicatorColorRed,
                                 )
+
                             }
 
                             else{
@@ -1157,7 +1146,7 @@ fun RoomReservationForm(
 
                 Space("h", 10)
             }
-            
+
             item {
 
                 Row(
