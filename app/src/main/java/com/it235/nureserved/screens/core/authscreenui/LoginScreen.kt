@@ -440,6 +440,15 @@ private fun LoginButton(
                     )
                 }
             }
+
+            if(sharedPreferences.getInt("failed_attempts", 0) == 3){
+                sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+                sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+                sharedPreferences.edit().putLong("block_time", System.currentTimeMillis() + 180000L).apply()
+
+                showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+            }
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
