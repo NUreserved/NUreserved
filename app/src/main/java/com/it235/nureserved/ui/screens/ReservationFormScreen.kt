@@ -319,17 +319,34 @@ fun OutlineTextFieldComposable(
         onValueChange = onValueChange,
         supportingText = {
             if(showSuppText.value){
-                if(inputValue.value.isEmpty()){
-                    isValidInput.value = false
-                    Text(
-                        text = "This field is required",
-                        color = indicatorColorRed,
-                    )
+                if(keyboardType != KeyboardType.Number){
+                    if(inputValue.value.isEmpty()){
+                        isValidInput.value = false
+                        Text(
+                            text = "This field is required",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else{
+                        isValidInput.value = true
+                    }
                 }
 
                 else{
-                    isValidInput.value = true
+                    if(inputValue.value.isEmpty()){
+                        isValidInput.value = false
+                        Text(
+                            text = "This field is required expected attendees",
+                            color = indicatorColorRed,
+                        )
+                    }
+
+                    else{
+                        isValidInput.value = true
+                    }
                 }
+
             }
         },
         label = {
