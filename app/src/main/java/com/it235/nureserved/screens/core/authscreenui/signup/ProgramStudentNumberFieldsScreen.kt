@@ -1,19 +1,26 @@
-package com.it235.nureserved.ui.screens.authscreenui.signup
+package com.it235.nureserved.screens.core.authscreenui.signup
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -38,6 +45,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,13 +61,16 @@ import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun NameSignUpScreen(
-    navController: NavController
+fun ProgramStudentNumberSignUpScreen(
+    navController: NavController,
+    firstName: String,
+    middleName: String,
+    lastName: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -121,17 +132,29 @@ fun NameSignUpScreen(
                             containerColor = white
                         )
                     ){
-                        var firstname by remember { mutableStateOf("") }
-                        var isValidFname = remember { mutableStateOf(false) }
-                        var fnameShowSupportText by remember { mutableStateOf(false) }
 
-                        var middlename by remember { mutableStateOf("") }
-                        var isValidMname = remember { mutableStateOf(false) }
-                        var mnameShowSupportText by remember { mutableStateOf(false) }
+                        var studentNumber by remember { mutableStateOf("") }
+                        var showStudNumberSupportTxt by remember { mutableStateOf(false) }
+                        var isValidStudNumber = remember { mutableStateOf(false) }
 
-                        var lastname by remember { mutableStateOf("") }
-                        var isValidLname = remember { mutableStateOf(false) }
-                        var lnameShowSupportText by remember { mutableStateOf(false) }
+                        val options = listOf(
+                            "Program",
+                            "ABCOMM",
+                            "BS Accountancy",
+                            "BS Architecture",
+                            "BSBA-FM",
+                            "BSBA-MM",
+                            "BSCpE",
+                            "BSCE",
+                            "BSHM",
+                            "BSIT",
+                            "BSPSY",
+                            "BSTM",
+                        )
+
+                        var program by remember { mutableStateOf(options[0]) }
+                        var showProgramSupportTxt by remember { mutableStateOf(false) }
+                        var isValidProgram = remember { mutableStateOf(false) }
 
                         SignUpText(
                             modifier = Modifier
@@ -142,42 +165,67 @@ fun NameSignUpScreen(
                             TextAlign.Center,
                         )
 
+
                         Space("h", 30)
 
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "What's your name?",
+                            text = "What's your program?",
                             fontSize = 18.sp,
                         )
 
                         Space("h", 15)
-                        NameField("First Name", firstname, fnameShowSupportText, isValidFname) {
-                            firstname = it
-                            fnameShowSupportText = true
-                        }
+                        DropdownTextField(
+                            options = options,
+                            selectedOption = program,
+                            showProgramSupportTxt,
+                            isValidProgram,
+                            onOptionSelected = {
+                                program = it
+                                showProgramSupportTxt = true
+                            },
+                        )
                         Space("h", 5)
-                        NameField("Middle Name", middlename, mnameShowSupportText, isValidMname) {
-                            middlename = it
-                            mnameShowSupportText = true
-                        }
-                        Space("h", 5)
-                        NameField("Last Name", lastname, lnameShowSupportText, isValidLname) {
-                            lastname = it
-                            lnameShowSupportText = true
 
+                        SignUpText(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = "What's your student number?",
+                            fontSize = 18.sp,
+                        )
+
+                        Space("h", 10)
+                        InputField(
+                            "Student Number",
+                            studentNumber,
+                            {
+                                Text (
+                                    text = "Example: 2024-123456",
+                                    style = LocalTextStyle.current.copy(
+                                        fontStyle = FontStyle.Italic
+                                    )
+                                )
+                            },
+                            showStudNumberSupportTxt,
+                            isValidStudNumber,
+                        ) {
+                            studentNumber = it
+                            showStudNumberSupportTxt = true
                         }
                         Space("h", 5)
+
                         NextButton(
                             navController,
-                            firstname,
-                            middlename,
-                            lastname,
+                            firstName,
+                            middleName,
+                            lastName,
+                            program,
+                            studentNumber,
                             scope,
                             snackbarHostState,
-                            isValidFname,
-                            isValidMname,
-                            isValidLname,
+                            isValidStudNumber,
+                            isValidProgram,
                         )
 
                     }
@@ -188,106 +236,134 @@ fun NameSignUpScreen(
     }
 }
 
-fun validateName(name: String) : String{
-    val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
-    var nameDigitPattern = Regex("\\d")
-    var nameSpacePattern = Regex("\\s")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropdownTextField(
+    options: List<String>,
+    selectedOption: String,
+    showSupportText: Boolean,
+    isValid: MutableState<Boolean>,
+    onOptionSelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
 
-    return when {
-        name.isEmpty() -> "This field cannot be empty."
-        name.length <= 1 -> "Name should be more than 1 character."
-        nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
-        nameSpacePattern.containsMatchIn(name) -> {
-            when{
-                name.startsWith(" ") -> "Name should not start with a space."
-                name.endsWith(" ") -> "Name should not end with a space."
-                else -> {
-                    //ensure that subnames separated by space adheres to the minimum character length
-                    //ensure that subnames separated by space does not contain symbols or digits
-                    val subNames = name.split(" ")
-                    subNames.forEach { el ->
-                        if(el.length == 1) return "Name separated by space should not contain single letter words."
-                        else if(nameSymbolPattern.containsMatchIn(el)){
+    ExposedDropdownMenuBox(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp),
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
 
-                            return if(el.contains("'")){
-                                when {
-                                    el.startsWith("'") -> "Names cannot start with apostrophe"
-                                    el.endsWith("'") -> "Names cannot ends with apostrophe"
-                                    else -> {
-                                        var errorMessage = ""
-
-                                        for(char in el){
-                                            if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                                errorMessage = "Name should not contain any special characters."
-                                                break
-                                            }
-                                        }
-
-                                        errorMessage
-                                    }
-                                }
-                            } else{
-                                "Name should not contain any special characters."
-                            }
-                        }
-                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
+        TextField(
+            value = selectedOption,
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    painter = if(!expanded) painterResource(R.drawable.baseline_arrow_drop_down_24) else painterResource(R.drawable.baseline_arrow_drop_up_24),
+                    contentDescription = "Dropdown arrow",
+                    tint = white3
+                )
+            },
+            supportingText = {
+                if(showSupportText){
+                    if(selectedOption == "Program"){
+                        isValid.value = false
+                        Text(
+                            text = "Please select a program.",
+                            color = indicatorColorRed
+                        )
                     }
-                    ""
-                }
-            }
-        }
-        nameSymbolPattern.containsMatchIn(name) -> when {
-            name.contains("'") -> {
-                when {
-                    name.startsWith("'") -> "Names cannot start with apostrophe"
-                    name.endsWith("'") -> "Names cannot ends with apostrophe"
-                    else -> {
-                        var errorMessage = ""
-
-                        for(char in name){
-                            if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                errorMessage = "Name should not contain any special characters."
-                                break
-                            }
-                        }
-
-                        errorMessage
+                    else {
+                        isValid.value = true
+                        Text( text = "" )
                     }
                 }
-            }
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = white5,
+                focusedTextColor = white3,
+                unfocusedTextColor = white3,
+                cursorColor = white3,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .menuAnchor()
+        )
 
-            else -> "Name should not contain any special characters."
+        ExposedDropdownMenu(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(white5)
+                .heightIn(max = 200.dp)
+                .verticalScroll(rememberScrollState()),
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { selectionOption ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = selectionOption,
+                            color = white3,
+                        )
+                    },
+                    onClick = {
+                        onOptionSelected(selectionOption)
+                        expanded = false
+                    }
+                )
+            }
         }
-        else -> ""
     }
 }
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun NameField(
+private fun InputField(
     label: String,
     value: String,
+    supportingText: @Composable () -> Unit = {},
     showSupportText: Boolean,
-    isValidInput: MutableState<Boolean>,
-    onValueChange: (String) -> Unit) {
+    isValid: MutableState<Boolean>,
+    onValueChange: (String) -> Unit,
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
         supportingText = {
-            if(showSupportText){
-                val validationResult = validateName(value)
-                Text(
-                    text = validationResult,
-                    color = indicatorColorRed,
-                )
+            val studentNumberPattern = Regex("^20(19|2[0-4])-\\d{6}$")
 
-                if (validationResult == "") isValidInput.value = true else isValidInput.value = false
+            if (showSupportText) {
+                if(!studentNumberPattern.containsMatchIn(value)){
+                    isValid.value = false
+                    Column () {
+                        Text(
+                            text = "Please enter a valid student number format",
+                            color = indicatorColorRed
+                        )
+                        supportingText()
+                    }
+                }
+
+                else{
+                    isValid.value = true
+                    supportingText()
+                }
+            }
+
+            else{
+                supportingText()
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -297,7 +373,7 @@ private fun NameField(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(start = 20.dp, end = 20.dp)
     )
 }
 
@@ -307,11 +383,12 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    program: String,
+    studentNumber: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidFname: MutableState<Boolean>,
-    isValidMname: MutableState<Boolean>,
-    isValidLname: MutableState<Boolean>,
+    isValidStudNumber: MutableState<Boolean>,
+    isValidProgram: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -320,18 +397,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            val formattedFirstName = firstName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedMiddleName = middleName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
-
-            if (isValidFname.value && isValidMname.value && isValidLname.value) {
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
+            if(isValidStudNumber.value && isValidProgram.value){
+                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
             }
-
             else{
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Make sure your inputs are correct",
+                        message = "Make sure your inputs are valid.",
                         duration = SnackbarDuration.Short
                     )
                 }

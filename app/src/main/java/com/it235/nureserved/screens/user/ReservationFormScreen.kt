@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens
+package com.it235.nureserved.screens.user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -79,7 +79,7 @@ import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
-import com.it235.nureserved.ui.theme.white5
+import com.it235.nureserved.ui.theme.white6
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -292,7 +292,7 @@ fun DropdownTextField(
                 .menuAnchor()
                 .border(
                     width = 1.dp,
-                    color = if (isSystemInDarkTheme()) darkGray2 else white5,
+                    color = if (isSystemInDarkTheme()) darkGray2 else white6,
                     shape = RoundedCornerShape(10.dp)
                 )
         )

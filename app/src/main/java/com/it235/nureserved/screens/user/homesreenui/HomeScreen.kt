@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.homesreenui
+package com.it235.nureserved.screens.user.homesreenui
 
 import User
 import android.content.Context
@@ -89,7 +89,7 @@ import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.ui.screens.reservationscreenui.RoomReservationStatusScreen
+import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4

@@ -1,4 +1,4 @@
-package com.it235.nureserved.ui.screens.reservationscreenui
+package com.it235.nureserved.screens.user.reservationscreenui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
