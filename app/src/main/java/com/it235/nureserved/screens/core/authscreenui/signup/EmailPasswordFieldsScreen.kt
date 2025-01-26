@@ -457,120 +457,6 @@ private fun PasswordField(
 }
 
 //register button
-//@Composable
-//private fun RegisterButton(
-//    email: String,
-//    password: String,
-//    confirmPassword: String,
-//    firstName: String,
-//    middleName: String,
-//    lastName: String,
-//    program: String,
-//    studentNumber: String,
-//    navController: NavController,
-//    scope: CoroutineScope,
-//    snackbarHostState: SnackbarHostState,
-//    loading: MutableState<Boolean>,
-//    isValidEmail: MutableState<Boolean>,
-//    isValidPassword: MutableState<Boolean>,
-//    isValidConfirmPassword: MutableState<Boolean>,
-//) {
-//    val auth = FirebaseAuth.getInstance()
-//    val db = FirebaseFirestore.getInstance()//the database
-//    val keyboardController = LocalSoftwareKeyboardController.current
-//
-//    Button(
-//        onClick = {
-//            //sign up system
-//            keyboardController?.hide()
-//
-//            // Dismiss the currently shown Snackbar, if any
-//            snackbarHostState.currentSnackbarData?.dismiss()
-//
-//            // create user
-//            if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
-//                loading.value = true
-//                auth.createUserWithEmailAndPassword(email, password)
-//                    .addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            // Get the currently authenticated user and their unique ID
-//                            val user = auth.currentUser
-//                            val userId = user?.uid
-//
-//                            if (userId != null) {
-//                                //hashmap of the data
-//                                val userData = hashMapOf(
-//                                    "firstName" to firstName,
-//                                    "middleName" to middleName,
-//                                    "lastName" to lastName,
-//                                    "program" to program,
-//                                    "studentNumber" to studentNumber,
-//                                    "email" to email
-//                                )
-//                                //add data to database
-//                                db.collection("user")
-//                                    .document(userId)
-//                                    .set(userData)
-//                                    .addOnCompleteListener {e ->
-//                                        if(e.isSuccessful){
-//                                            navController.navigate(ScreenRoutes.Login.route) {
-//                                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-//                                            }
-//                                            Toast.makeText(navController.context, "Account created successfully.", Toast.LENGTH_SHORT).show()
-//                                        }
-//                                        else{
-//                                            loading.value = false
-//                                            scope.launch {
-//                                                snackbarHostState.showSnackbar(
-//                                                    message = "Sign up failed: ${e.exception?.message}",
-//                                                    duration = SnackbarDuration.Short
-//                                                )
-//                                            }
-//                                        }
-//                                    }
-//                            }
-//
-//                        } else {
-//                            loading.value = false
-//                            scope.launch {
-//                                snackbarHostState.showSnackbar(
-//                                    message = "Sign up failed: ${task.exception?.message}",
-//                                    duration = SnackbarDuration.Short
-//                                )
-//                            }
-//                        }
-//                    }
-//
-//            }
-//
-//            else {
-//                scope.launch {
-//                    snackbarHostState.showSnackbar(
-//                        message = "Make sure your inputs are correct",
-//                        duration = SnackbarDuration.Short
-//                    )
-//                }
-//            }
-//
-//        },
-//        modifier = Modifier
-//            .padding(start = 20.dp, end = 20.dp)
-//            .fillMaxWidth(),
-//        colors = ButtonDefaults.buttonColors(
-//            containerColor = brandColorBlue,
-//            contentColor = white3
-//        ),
-//        shape = RoundedCornerShape(10.dp)
-//    ) {
-//        Text(
-//            text = "Sign up",
-//            style = LocalTextStyle.current.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//            )
-//        )
-//    }
-//}
 @Composable
 private fun RegisterButton(
     email: String,
@@ -591,7 +477,6 @@ private fun RegisterButton(
 ) {
     val auth = FirebaseAuth.getInstance()
     val db = FirebaseFirestore.getInstance() // Database reference
-//    val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     var showDialog by remember { mutableStateOf(false) }
 
@@ -632,7 +517,7 @@ private fun RegisterButton(
                                                 .addOnCompleteListener { emailTask ->
                                                     if (emailTask.isSuccessful) {
                                                         loading.value = false
-                                                        // Show custom dialog box for email verification
+                                                        // dialog box for email verification
                                                         showDialog = true
                                                     } else {
                                                         loading.value = false
