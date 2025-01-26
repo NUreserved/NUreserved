@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.user
 
+import User
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -52,6 +53,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -83,9 +85,11 @@ import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white6
+import getUserData
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -313,6 +317,7 @@ fun OutlineTextFieldComposable(
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
     readOnly: Boolean = false,
     selectedRooms: List<String> = listOf(),
+    textStyle: TextStyle? = null,
     onValueChange: (String) -> Unit,
 ){
 
@@ -389,9 +394,8 @@ fun OutlineTextFieldComposable(
                 )
             )
         },
-        textStyle = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
+        textStyle = textStyle ?: LocalTextStyle.current.copy(
+            fontWeight = FontWeight.Normal,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
@@ -738,9 +742,37 @@ fun RoomReservationForm(
     var istoDatesOfActivitySelected by remember { mutableStateOf(false) }
     val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
-    val givenName = remember { mutableStateOf("") }
-    val middleName = remember { mutableStateOf("") }
-    val lastName = remember { mutableStateOf("") }
+    var user by remember { mutableStateOf<User?>(null) }
+    var loadingUserData by remember { mutableStateOf(true)}
+
+    LaunchedEffect(Unit) {
+        getUserData { fetchedUser ->
+            user = fetchedUser
+            loadingUserData = false
+        }
+    }
+
+    val givenName = remember(user) { mutableStateOf(
+        if (loadingUserData) {
+            "Fetching data..."
+        } else {
+            user?.firstName ?: "N/A"
+        }
+    ) }
+    val middleName = remember(user) { mutableStateOf(
+        if (loadingUserData) {
+            "Fetching data..."
+        } else {
+            user?.middleName ?: "N/A"
+        }
+    ) }
+    val lastName = remember(user) { mutableStateOf(
+        if (loadingUserData) {
+            "Fetching data..."
+        } else {
+            user?.lastName ?: "N/A"
+        }
+    ) }
 
     var showAlertDialog by remember { mutableStateOf(false) }
 
@@ -889,6 +921,15 @@ fun RoomReservationForm(
                                     else -> lastName
                                 },
                                 readOnly = true,
+                                textStyle = if (loadingUserData) {
+                                    LocalTextStyle.current.copy(
+                                        color = textColor4
+                                    )
+                                } else {
+                                    LocalTextStyle.current.copy(
+                                        color = textColor1
+                                    )
+                                }
                             ){
                                 when(index){
                                     0 -> givenName.value = it
