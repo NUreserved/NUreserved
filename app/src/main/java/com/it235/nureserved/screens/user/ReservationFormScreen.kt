@@ -78,6 +78,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.composables.Space
+import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
@@ -742,6 +743,8 @@ fun RoomReservationForm(
     var istoDatesOfActivitySelected by remember { mutableStateOf(false) }
     val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
+    var currentFloorLocation by remember { mutableStateOf<FloorLocation?>(null) }
+
     var user by remember { mutableStateOf<User?>(null) }
     var loadingUserData by remember { mutableStateOf(true)}
 
@@ -1126,12 +1129,13 @@ fun RoomReservationForm(
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
 
-                            roomList.forEach { room ->
-                                when(room.name){
-                                    "202" -> FilterChipsLabel(label = "2nd Floor")
-                                    "303" -> FilterChipsLabel(label = "3rd Floor")
-                                    "402" -> FilterChipsLabel(label = "4th Floor")
-                                    "504" -> FilterChipsLabel(label = "5th Floor")
+                            roomList.forEachIndexed {index, room ->
+                                if (currentFloorLocation == null) {
+                                    FilterChipsLabel(label = room.location.value)
+                                } else {
+                                    if (room.location != currentFloorLocation) {
+                                        FilterChipsLabel(label = room.location.value)
+                                    }
                                 }
 
                                 FilterChipComposable(
@@ -1146,12 +1150,11 @@ fun RoomReservationForm(
                                     }
                                 )
 
-                                when(room.name){
-                                    "233" -> FilterChipsCategoryDivider()
-                                    "306" -> FilterChipsCategoryDivider()
-                                    "418" -> FilterChipsCategoryDivider()
-                                    "509" -> FilterChipsCategoryDivider()
+                                if (index < roomList.size - 1 && room.location != roomList[index + 1].location) {
+                                    FilterChipsCategoryDivider()
                                 }
+
+                                currentFloorLocation = room.location
                             }
                         }
 
