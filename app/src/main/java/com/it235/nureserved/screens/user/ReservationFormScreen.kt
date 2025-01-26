@@ -77,7 +77,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.Space
+import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
