@@ -32,6 +32,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -61,9 +62,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.R
@@ -585,18 +589,20 @@ fun EmailVerificationDialog(showDialog: Boolean, navController: NavController) {
     if(showDialog){
         AlertDialog(
             onDismissRequest = {},
-            title = {
-                Text(
-                    text = "Verify Your Email"
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.mail_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Mail icon"
                 )
             },
+            title = { Text(text = "Verify your email") },
             text = {
                 Text(
                     text = "A verification email has been sent to your email address. Please verify your email before logging in.",
                 )
             },
             confirmButton = {
-                Button(
+                TextButton(
                     onClick = {
                         navController.navigate(ScreenRoutes.Login.route) {
                             popUpTo(ScreenRoutes.Login.route) { inclusive = true }
