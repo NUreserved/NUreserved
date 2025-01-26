@@ -86,6 +86,7 @@ import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.textColor2
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
@@ -926,11 +927,11 @@ fun RoomReservationForm(
                                 readOnly = true,
                                 textStyle = if (loadingUserData) {
                                     LocalTextStyle.current.copy(
-                                        color = textColor4
+                                        color = if (isSystemInDarkTheme()) white6 else textColor4
                                     )
                                 } else {
                                     LocalTextStyle.current.copy(
-                                        color = textColor1
+                                        color = if (isSystemInDarkTheme()) white2 else textColor1
                                     )
                                 }
                             ){
