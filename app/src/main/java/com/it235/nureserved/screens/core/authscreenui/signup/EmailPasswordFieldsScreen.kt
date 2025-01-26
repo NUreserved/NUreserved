@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -31,6 +32,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -60,9 +62,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.R
@@ -475,60 +480,70 @@ private fun RegisterButton(
     isValidConfirmPassword: MutableState<Boolean>,
 ) {
     val auth = FirebaseAuth.getInstance()
-    val db = FirebaseFirestore.getInstance()//the database
+    val db = FirebaseFirestore.getInstance() // Database reference
     val keyboardController = LocalSoftwareKeyboardController.current
+    var showDialog by remember { mutableStateOf(false) }
 
     Button(
         onClick = {
-            //sign up system
+            // Sign up system
             keyboardController?.hide()
+            snackbarHostState.currentSnackbarData?.dismiss() // Dismiss any current snackbar
 
-            // Dismiss the currently shown Snackbar, if any
-            snackbarHostState.currentSnackbarData?.dismiss()
-
-            // create user
             if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
                 loading.value = true
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            // Get the currently authenticated user and their unique ID
+
                             val user = auth.currentUser
                             val userId = user?.uid
 
                             if (userId != null) {
-                                //hashmap of the data
+
                                 val userData = hashMapOf(
                                     "firstName" to firstName,
                                     "middleName" to middleName,
                                     "lastName" to lastName,
                                     "program" to program,
                                     "studentNumber" to studentNumber,
-                                    "email" to email
+                                    "email" to email,
+                                    "isVerified" to false
                                 )
-                                //add data to database
-                                db.collection("user")
-                                    .document(userId)
+
+                                // Add data to Firestore
+                                db.collection("user").document(userId)
                                     .set(userData)
-                                    .addOnCompleteListener {e ->
-                                        if(e.isSuccessful){
-                                            navController.navigate(ScreenRoutes.Login.route) {
-                                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                                            }
-                                            Toast.makeText(navController.context, "Account created successfully.", Toast.LENGTH_SHORT).show()
-                                        }
-                                        else{
+                                    .addOnCompleteListener { dbTask ->
+                                        if (dbTask.isSuccessful) {
+                                            // Send verification email
+                                            user.sendEmailVerification()
+                                                .addOnCompleteListener { emailTask ->
+                                                    if (emailTask.isSuccessful) {
+                                                        loading.value = false
+                                                        // dialog box for email verification
+                                                        showDialog = true
+                                                    } else {
+                                                        loading.value = false
+                                                        scope.launch {
+                                                            snackbarHostState.showSnackbar(
+                                                                message = "Failed to send verification email: ${emailTask.exception?.message}",
+                                                                duration = SnackbarDuration.Short
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                        } else {
                                             loading.value = false
                                             scope.launch {
                                                 snackbarHostState.showSnackbar(
-                                                    message = "Sign up failed: ${e.exception?.message}",
+                                                    message = "Sign up failed: ${dbTask.exception?.message}",
                                                     duration = SnackbarDuration.Short
                                                 )
                                             }
                                         }
                                     }
                             }
-
                         } else {
                             loading.value = false
                             scope.launch {
@@ -539,10 +554,7 @@ private fun RegisterButton(
                             }
                         }
                     }
-
-            }
-
-            else {
+            } else {
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = "Make sure your inputs are correct",
@@ -550,7 +562,6 @@ private fun RegisterButton(
                     )
                 }
             }
-
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
@@ -567,6 +578,40 @@ private fun RegisterButton(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
+        )
+    }
+    EmailVerificationDialog(showDialog, navController)
+}
+
+//email dialog
+@Composable
+fun EmailVerificationDialog(showDialog: Boolean, navController: NavController) {
+    if(showDialog){
+        AlertDialog(
+            onDismissRequest = {},
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.mail_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Mail icon"
+                )
+            },
+            title = { Text(text = "Verify your email") },
+            text = {
+                Text(
+                    text = "A verification email has been sent to your email address. Please verify your email before logging in.",
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        navController.navigate(ScreenRoutes.Login.route) {
+                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                        }
+                    }
+                ) {
+                    Text("OK")
+                }
+            }
         )
     }
 }

@@ -439,9 +439,21 @@ private fun LoginButton(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            navController.navigate(ScreenRoutes.Home.route) {
-                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                            //check if verified
+                            val user = auth.currentUser
+                            if (user != null && user.isEmailVerified) {
+                                navController.navigate(ScreenRoutes.Home.route) {
+                                    popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                }
+                            } else {
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Please verify your email before logging in.",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
                             }
+
                         } else {
                             loading.value = false
 
