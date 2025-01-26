@@ -85,6 +85,7 @@ import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
+import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white6
@@ -316,6 +317,7 @@ fun OutlineTextFieldComposable(
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
     readOnly: Boolean = false,
     selectedRooms: List<String> = listOf(),
+    textStyle: TextStyle? = null,
     onValueChange: (String) -> Unit,
 ){
 
@@ -392,9 +394,8 @@ fun OutlineTextFieldComposable(
                 )
             )
         },
-        textStyle = TextStyle(
-            fontFamily = poppinsFamily,
-            fontWeight = FontWeight.Medium,
+        textStyle = textStyle ?: LocalTextStyle.current.copy(
+            fontWeight = FontWeight.Normal,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
@@ -920,6 +921,15 @@ fun RoomReservationForm(
                                     else -> lastName
                                 },
                                 readOnly = true,
+                                textStyle = if (loadingUserData) {
+                                    LocalTextStyle.current.copy(
+                                        color = textColor4
+                                    )
+                                } else {
+                                    LocalTextStyle.current.copy(
+                                        color = textColor1
+                                    )
+                                }
                             ){
                                 when(index){
                                     0 -> givenName.value = it
