@@ -205,16 +205,17 @@ fun validateName(name: String) : String{
                     //ensure that subnames separated by space adheres to the minimum character length
                     //ensure that subnames separated by space does not contain symbols or digits
                     val subNames = name.split(" ")
+                    var errorMessage = ""
+
                     subNames.forEach { el ->
-                        if(el.length == 1) return "Name separated by space should not contain single letter words."
+                        if(el.length == 1) errorMessage = "Name separated by space should not contain single letter words."
                         else if(nameSymbolPattern.containsMatchIn(el)){
 
-                            return if(el.contains("'")){
+                            if(el.contains("'")){
                                 when {
-                                    el.startsWith("'") -> "Names cannot start with apostrophe"
-                                    el.endsWith("'") -> "Names cannot ends with apostrophe"
+                                    el.startsWith("'") -> errorMessage = "Names cannot start with apostrophe"
+                                    el.endsWith("'") -> errorMessage = "Names cannot ends with apostrophe"
                                     else -> {
-                                        var errorMessage = ""
 
                                         for(char in el){
                                             if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
@@ -223,16 +224,16 @@ fun validateName(name: String) : String{
                                             }
                                         }
 
-                                        errorMessage
                                     }
                                 }
                             } else{
-                                "Name should not contain any special characters."
+                                errorMessage = "Name should not contain any special characters."
                             }
                         }
-                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
+                        else if(nameDigitPattern.containsMatchIn(el)) errorMessage = "Name should not contain any numbers."
                     }
-                    ""
+
+                    errorMessage
                 }
             }
         }
