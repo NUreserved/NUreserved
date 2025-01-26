@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.widget.Toast
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -75,7 +76,7 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -349,7 +350,7 @@ private fun EmailField(
         placeholder = { AuthInputPlaceholderTextStyle("Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -440,7 +441,7 @@ private fun PasswordField(
             }
         },
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = white4,
+            containerColor = white5,
             focusedTextColor = white3,
             unfocusedTextColor = white3,
             cursorColor = white3,
@@ -511,9 +512,10 @@ private fun RegisterButton(
                                     .set(userData)
                                     .addOnCompleteListener {e ->
                                         if(e.isSuccessful){
-                                            navController.navigate(ScreenRoutes.Home.route) {
+                                            navController.navigate(ScreenRoutes.Login.route) {
                                                 popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                                             }
+                                            Toast.makeText(navController.context, "Account created successfully.", Toast.LENGTH_SHORT).show()
                                         }
                                         else{
                                             loading.value = false
