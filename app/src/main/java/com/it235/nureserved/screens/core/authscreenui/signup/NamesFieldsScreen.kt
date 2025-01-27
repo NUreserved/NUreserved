@@ -216,6 +216,7 @@ fun validateName(name: String) : String{
                                 when {
                                     el.startsWith("'") -> errorMessage = "Names cannot start with apostrophe"
                                     el.endsWith("'") -> errorMessage = "Names cannot ends with apostrophe"
+                                    nameApostrophePattern.findAll(el).count() > 1 -> errorMessage = "Names should not contain more than one apostrophe."
                                     else -> {
 
                                         for(char in el){
@@ -243,6 +244,7 @@ fun validateName(name: String) : String{
                 when {
                     name.startsWith("'") -> "Names cannot start with apostrophe"
                     name.endsWith("'") -> "Names cannot ends with apostrophe"
+                    nameApostrophePattern.findAll(name).count() > 1 -> "Names should not contain more than one apostrophe."
                     else -> {
                         var errorMessage = ""
 
