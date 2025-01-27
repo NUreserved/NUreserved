@@ -190,8 +190,8 @@ fun NameSignUpScreen(
 
 fun validateName(name: String) : String{
     val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
-    var nameDigitPattern = Regex("\\d")
-    var nameSpacePattern = Regex("\\s")
+    val nameDigitPattern = Regex("\\d")
+    val nameSpacePattern = Regex("\\s")
     val nameApostrophePattern = Regex("'")
 
     return when {
