@@ -104,6 +104,7 @@ private fun Main() {
 
                 // Composable with navigation arguments which are needed in order to pass data
                 // and make registration possible
+                composable(ScreenRoutes.RoleSignUp.route) { RolesFieldScreen(navController) }
                 composable(
                     route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{program}/{studentNumber}",
                     arguments = listOf(
