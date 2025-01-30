@@ -238,7 +238,7 @@ fun ProgramStudentNumberSignUpScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropdownTextField(
+private fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
     showSupportText: Boolean,
