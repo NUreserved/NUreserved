@@ -8,7 +8,7 @@ import java.time.OffsetDateTime
 class ReservationFormData (
     private var organization: String,
     private var activityTitle: String,
-    private var dateFilled: LocalDate,
+    private var dateFilled: OffsetDateTime,
     private var activityDateTime: ActivityDate,
     private var venue: Room,
     private var expectedAttendees: Int,
@@ -40,8 +40,8 @@ class ReservationFormData (
         activityTitle = value
     }
 
-    fun getDateFilled(): LocalDate = dateFilled
-    fun setDateFilled(value: LocalDate) {
+    fun getDateFilled(): OffsetDateTime = dateFilled
+    fun setDateFilled(value: OffsetDateTime) {
         dateFilled = value
     }
 
