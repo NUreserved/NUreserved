@@ -286,17 +286,22 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-//            if(isValidStudNumber.value && isValidProgram.value){
-//                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
-//            }
-//            else{
-//                scope.launch {
-//                    snackbarHostState.showSnackbar(
-//                        message = "Make sure your inputs are valid.",
-//                        duration = SnackbarDuration.Short
-//                    )
-//                }
-//            }
+            if(isValid.value){
+                if(selectedRole == "Student"){
+                    navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
+                }
+                else{
+                    navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
+                }
+            }
+            else{
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Make sure your inputs are valid.",
+                        duration = SnackbarDuration.Short
+                    )
+                }
+            }
         },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = 30.dp)

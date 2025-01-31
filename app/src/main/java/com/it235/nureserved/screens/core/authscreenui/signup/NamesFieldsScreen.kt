@@ -288,7 +288,19 @@ private fun NextButton(
             val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
 
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
+
+                if(role == "Student"){
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${""}/${program}"
+                    )
+                }
+
+                else{
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${school}/${""}"
+                    )
+                }
+
             }
 
             else{
