@@ -73,10 +73,11 @@ fun RolesFieldScreen(
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
 
-        val roleOptions = listOf("Student", "Faculty")
+        val roleOptions = listOf("Role", "Student", "Educator")
 
         var role by remember { mutableStateOf(roleOptions[0]) }
         val isValidRole = remember { mutableStateOf(false) }
+        var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
 
