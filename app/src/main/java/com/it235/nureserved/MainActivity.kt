@@ -144,6 +144,8 @@ private fun Main() {
                         firstName = firstName,
                         middleName = middleName,
                         lastName = lastName,
+                        role = role,
+                        school = school,
                         program = program,
                         studentNumber = studentNumber
                     )
