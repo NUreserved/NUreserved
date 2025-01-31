@@ -35,6 +35,8 @@ import com.it235.nureserved.screens.user.TermsAndConditionsScreen
 import com.it235.nureserved.screens.core.authscreenui.LoginScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
+import com.it235.nureserved.screens.core.authscreenui.signup.RolesFieldScreen
+import com.it235.nureserved.screens.core.authscreenui.signup.SchoolFieldScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.screens.user.homesreenui.HomeScreen
 import com.it235.nureserved.screens.core.RoomDetails
@@ -103,49 +105,79 @@ private fun Main() {
 
                 // Composable with navigation arguments which are needed in order to pass data
                 // and make registration possible
+                composable(ScreenRoutes.RoleSignUp.route) { RolesFieldScreen(navController) }
                 composable(
-                    route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{program}/{studentNumber}",
+                    route = "${ScreenRoutes.SchoolSignUp.route}/{role}",
+                    arguments = listOf(
+                        navArgument("role") { type = NavType.StringType},
+                    )
+                ){ backStackEntry ->
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+
+                    SchoolFieldScreen(
+                        navController = navController,
+                        role = role,
+                    )
+                }
+                composable(
+                    route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{role}/{school}/{program}",
                     arguments = listOf(
                         navArgument("firstName") { type = NavType.StringType},
                         navArgument("middleName") { type = NavType.StringType},
                         navArgument("lastName") { type = NavType.StringType},
+                        navArgument("role") { type = NavType.StringType},
+                        navArgument("school") { type = NavType.StringType},
                         navArgument("program") { type = NavType.StringType},
-                        navArgument("studentNumber") { type = NavType.StringType}
                     )
                 ) { backStackEntry ->
                     val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
                     val middleName = backStackEntry.arguments?.getString("middleName") ?: ""
                     val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+                    val school = backStackEntry.arguments?.getString("school") ?: ""
                     val program = backStackEntry.arguments?.getString("program") ?: ""
-                    val studentNumber = backStackEntry.arguments?.getString("studentNumber") ?: ""
 
                     SignUpScreen(
                         navController = navController,
                         firstName = firstName,
                         middleName = middleName,
                         lastName = lastName,
+                        role = role,
+                        school = school,
                         program = program,
-                        studentNumber = studentNumber
                     )
                 }
-                composable(ScreenRoutes.NameSignUp.route) { NameSignUpScreen(navController) }
                 composable(
-                    route = "${ScreenRoutes.ProgramStudentNumberSignUp.route}/{firstName}/{middleName}/{lastName}",
+                    route = "${ScreenRoutes.NameSignUp.route}/{role}/{school}/{program}",
                     arguments = listOf(
-                        navArgument("firstName") { type = NavType.StringType},
-                        navArgument("middleName") { type = NavType.StringType},
-                        navArgument("lastName") { type = NavType.StringType}
+                        navArgument("role") { type = NavType.StringType},
+                        navArgument("school") { type = NavType.StringType},
+                        navArgument("program") { type = NavType.StringType},
                     )
                 ) { backStackEntry ->
-                    val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
-                    val middleName = backStackEntry.arguments?.getString("middleName") ?: ""
-                    val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+                    val school = backStackEntry.arguments?.getString("school") ?: ""
+                    val program = backStackEntry.arguments?.getString("program") ?: ""
+
+                    NameSignUpScreen(
+                        navController = navController,
+                        role = role,
+                        school = school,
+                        program = program
+                    )
+                }
+                composable(
+                    route = "${ScreenRoutes.ProgramStudentNumberSignUp.route}/{role}",
+                    arguments = listOf(
+                        navArgument("role") { type = NavType.StringType},
+                    )
+                ) { backStackEntry ->
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
 
                     ProgramStudentNumberSignUpScreen(
                         navController = navController,
-                        firstName = firstName,
-                        middleName = middleName,
-                        lastName = lastName)
+                        role = role
+                    )
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(

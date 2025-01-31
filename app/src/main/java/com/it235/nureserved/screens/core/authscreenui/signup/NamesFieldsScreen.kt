@@ -59,7 +59,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NameSignUpScreen(
-    navController: NavController
+    navController: NavController,
+    role: String,
+    school: String,
+    program: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -173,6 +176,9 @@ fun NameSignUpScreen(
                             firstname,
                             middlename,
                             lastname,
+                            role,
+                            school,
+                            program,
                             scope,
                             snackbarHostState,
                             isValidFname,
@@ -311,6 +317,9 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
+    program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValidFname: MutableState<Boolean>,
@@ -329,7 +338,19 @@ private fun NextButton(
             val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
 
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
+
+                if(role == "Student"){
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${""}/${program}"
+                    )
+                }
+
+                else{
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${school}/${""}"
+                    )
+                }
+
             }
 
             else{

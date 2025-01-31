@@ -66,13 +66,26 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProgramStudentNumberSignUpScreen(
+fun SchoolFieldScreen(
     navController: NavController,
     role: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
+
+        val schoolOptions = listOf(
+            "School",
+            "School of Architecture",
+            "School of Arts and Sciences",
+            "School of Business and Accountancy",
+            "School of Engineering and Technology",
+            "School of Tourism and Hospitality Management",
+        )
+
+        var school by remember { mutableStateOf(schoolOptions[0]) }
+        val isValidSchool = remember { mutableStateOf(false) }
+        var showSchoolSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
 
@@ -131,25 +144,6 @@ fun ProgramStudentNumberSignUpScreen(
                         )
                     ){
 
-                        val options = listOf(
-                            "Program",
-                            "ABCOMM",
-                            "BS Accountancy",
-                            "BS Architecture",
-                            "BSBA-FM",
-                            "BSBA-MM",
-                            "BSCpE",
-                            "BSCE",
-                            "BSHM",
-                            "BSIT",
-                            "BSPSY",
-                            "BSTM",
-                        )
-
-                        var program by remember { mutableStateOf(options[0]) }
-                        var showProgramSupportTxt by remember { mutableStateOf(false) }
-                        var isValidProgram = remember { mutableStateOf(false) }
-
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -165,31 +159,31 @@ fun ProgramStudentNumberSignUpScreen(
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "What's your program?",
+                            text = "Which school or department are you affiliated with?",
                             fontSize = 18.sp,
                         )
 
                         Space("h", 15)
                         DropdownTextField(
-                            options = options,
-                            selectedOption = program,
-                            showProgramSupportTxt,
-                            isValidProgram,
+                            options = schoolOptions,
+                            selectedOption = school,
+                            showSchoolSupportTxt,
+                            isValidSchool,
                             onOptionSelected = {
-                                program = it
-                                showProgramSupportTxt = true
+                                school = it
+                                showSchoolSupportTxt = true
                             },
                         )
 
-                        Space("h", 5)
+                        Space("h", 10)
 
                         NextButton(
                             navController,
-                            role,
-                            program,
                             scope,
                             snackbarHostState,
-                            isValidProgram,
+                            isValidSchool,
+                            school,
+                            role,
                         )
 
                     }
@@ -230,12 +224,20 @@ private fun DropdownTextField(
                     tint = white3
                 )
             },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = white5,
+                focusedTextColor = white3,
+                unfocusedTextColor = white3,
+                cursorColor = white3,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
             supportingText = {
                 if(showSupportText){
-                    if(selectedOption == "Program"){
+                    if(selectedOption == "School"){
                         isValid.value = false
                         Text(
-                            text = "Please select a program.",
+                            text = "Please select a school.",
                             color = indicatorColorRed
                         )
                     }
@@ -245,14 +247,6 @@ private fun DropdownTextField(
                     }
                 }
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = white5,
-                focusedTextColor = white3,
-                unfocusedTextColor = white3,
-                cursorColor = white3,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
@@ -289,11 +283,11 @@ private fun DropdownTextField(
 @Composable
 private fun NextButton(
     navController: NavController,
-    selectedRole: String,
-    program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidProgram: MutableState<Boolean>,
+    isValid: MutableState<Boolean>,
+    selectedSchool: String,
+    selectedRole: String,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -302,8 +296,8 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidProgram.value){
-                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
+            if(isValid.value){
+                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${selectedSchool}/${""}")
             }
             else{
                 scope.launch {
