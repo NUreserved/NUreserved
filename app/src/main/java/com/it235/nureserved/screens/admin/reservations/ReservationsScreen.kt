@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.admin.reservations
 
+import ReservationFormDetailsScreen
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -80,7 +81,7 @@ fun ReservationStatusScreen(
                 },
                 sheetState = sheetState
             ) {
-                // Content here
+                ReservationFormDetailsScreen(selectedReservation!!)
             }
         }
 
