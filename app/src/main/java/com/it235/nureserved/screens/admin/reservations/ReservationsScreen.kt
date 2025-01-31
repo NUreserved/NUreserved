@@ -81,7 +81,13 @@ fun ReservationStatusScreen(
                 },
                 sheetState = sheetState
             ) {
-                ReservationFormDetailsScreen(selectedReservation!!)
+                Column (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    ReservationFormDetailsScreen(selectedReservation!!)
+                }
             }
         }
 
