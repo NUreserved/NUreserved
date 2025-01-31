@@ -214,24 +214,24 @@ fun validateName(name: String) : String{
 
                             if(el.contains("'")){
                                 when {
-                                    el.startsWith("'") -> errorMessage = "Names cannot start with apostrophe"
-                                    el.endsWith("'") -> errorMessage = "Names cannot ends with apostrophe"
-                                    nameApostrophePattern.findAll(el).count() > 1 -> errorMessage = "Names should not contain more than one apostrophe."
+                                    el.startsWith("'") -> errorMessage = "Name cannot start with an apostrophe"
+                                    el.endsWith("'") -> errorMessage = "Name cannot end with an apostrophe"
+                                    nameApostrophePattern.findAll(el).count() > 1 -> errorMessage = "Name should not contain more than one apostrophe."
                                     else -> {
 
                                         for(char in el){
                                             if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                                errorMessage = "Name should not contain any special characters."
+                                                errorMessage = "Name should not contain any special characters"
                                                 break
                                             }
                                         }
                                     }
                                 }
                             } else{
-                                errorMessage = "Name should not contain any special characters."
+                                errorMessage = "Name should not contain any special characters"
                             }
                         }
-                        else if(nameDigitPattern.containsMatchIn(el)) errorMessage = "Name should not contain any numbers."
+                        else if(nameDigitPattern.containsMatchIn(el)) errorMessage = "Name should not contain any numbers"
                     }
 
                     errorMessage
@@ -241,16 +241,16 @@ fun validateName(name: String) : String{
         nameSymbolPattern.containsMatchIn(name) -> when {
             name.contains("'") -> {
                 when {
-                    name.startsWith("'") -> "Names cannot start with apostrophe"
-                    name.endsWith("'") -> "Names cannot ends with apostrophe"
-                    nameApostrophePattern.findAll(name).count() > 1 -> "Names should not contain more than one apostrophe."
+                    name.startsWith("'") -> "Name cannot start with an apostrophe"
+                    name.endsWith("'") -> "Name cannot ends with an apostrophe"
+                    nameApostrophePattern.findAll(name).count() > 1 -> "Names should not contain more than one apostrophe"
                   
                     else -> {
                         var errorMessage = ""
 
                         for(char in name){
                             if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                errorMessage = "Name should not contain any special characters."
+                                errorMessage = "Name should not contain any special characters"
                                 break
                             }
                         }
@@ -260,7 +260,7 @@ fun validateName(name: String) : String{
                 }
             }
 
-            else -> "Name should not contain any special characters."
+            else -> "Name should not contain any special characters"
         }
         else -> ""
     }
