@@ -501,12 +501,22 @@ private fun RegisterButton(
 
                             if (userId != null) {
 
-                                val userData = hashMapOf(
+                                val studentData = hashMapOf(
                                     "firstName" to firstName,
                                     "middleName" to middleName,
                                     "lastName" to lastName,
                                     "program" to program,
-                                    "studentNumber" to studentNumber,
+                                    "role" to role,
+                                    "email" to email,
+                                    "isVerified" to false
+                                )
+
+                                val educatorData = hashMapOf(
+                                    "firstName" to firstName,
+                                    "middleName" to middleName,
+                                    "lastName" to lastName,
+                                    "school" to school,
+                                    "role" to role,
                                     "email" to email,
                                     "isVerified" to false
                                 )
