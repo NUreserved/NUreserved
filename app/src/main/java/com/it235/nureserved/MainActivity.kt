@@ -37,7 +37,7 @@ import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.screens.user.homesreenui.HomeScreen
-import com.it235.nureserved.screens.user.homesreenui.RoomDetails
+import com.it235.nureserved.screens.core.RoomDetails
 import com.it235.nureserved.screens.core.onboardingscreenui.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
@@ -149,11 +149,15 @@ private fun Main() {
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
-                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
-                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
+                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}/{isUser}",
+                    arguments = listOf(
+                        navArgument("roomId") { type = NavType.StringType },
+                        navArgument("isUser") { type = NavType.BoolType }
+                    )
                 ) { backStackEntry ->
                     val roomId = backStackEntry.arguments?.getString("roomId")
-                    RoomDetails(navController, roomId)
+                    val isUser = backStackEntry.arguments?.getBoolean("isUser")
+                    RoomDetails(navController, roomId, isUser)
                 }
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }

@@ -1,6 +1,7 @@
 package com.it235.nureserved.screens.admin.floor_rooms
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
+import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.screens.core.rescalePicture
@@ -66,7 +68,7 @@ fun FloorRoomsScreen(
         Scaffold (
             topBar = { TopBar(scrollBehavior, navController) }
         ) { innerPadding ->
-            FloorRoomsScreenContent(floorName, rooms, innerPadding)
+            FloorRoomsScreenContent(floorName, rooms, innerPadding, navController)
         }
 
     }
@@ -76,7 +78,8 @@ fun FloorRoomsScreen(
 private fun FloorRoomsScreenContent(
     floorName: FloorLocation,
     roomList: List<Room>,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    navController: NavController
 ) {
     Column (
         modifier = Modifier
@@ -98,7 +101,7 @@ private fun FloorRoomsScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(roomList) { room ->
-                RoomCard(room)
+                RoomCard(room, navController)
             }
         }
     }
@@ -130,13 +133,15 @@ private fun TopBar(
 
 @Composable
 private fun RoomCard(
-    room: Room
+    room: Room,
+    navController: NavController
 ) {
     val image = rescalePicture(imageResId = room.imageResId)
 
     Card (
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}/${false}") },
         colors = CardDefaults.cardColors(
             containerColor = indicatorColorGreen,
             contentColor = textColor1

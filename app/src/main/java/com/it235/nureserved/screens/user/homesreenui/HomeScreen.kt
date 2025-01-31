@@ -482,7 +482,8 @@ private fun TextContentComposable(
         Text(
             modifier = Modifier
                 .padding(start = 16.dp)
-                .weight(0.5f).widthIn(max = 200.dp),
+                .weight(0.5f)
+                .widthIn(max = 200.dp),
             color = if (isSystemInDarkTheme()) textColor4 else textColor3,
             text = field,
             style = LocalTextStyle.current.copy(
@@ -582,7 +583,7 @@ fun Card(room: Room, navController: NavController) {
         ),
         modifier = Modifier
             .width(240.dp)
-            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}") }
+            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}/${true}") }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()

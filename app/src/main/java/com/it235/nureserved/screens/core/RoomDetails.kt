@@ -1,5 +1,6 @@
-package com.it235.nureserved.screens.user.homesreenui
+package com.it235.nureserved.screens.core
 
+import User
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -41,7 +42,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.screens.core.RoomReservationFAB
 import com.it235.nureserved.data.rooms.DaySchedule
 import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.TimeSlot
@@ -54,7 +54,8 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 @Composable
 fun RoomDetails(
     navController: NavController,
-    roomId: String?
+    roomId: String?,
+    isUser: Boolean?
 ) {
     NUreservedTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -64,9 +65,9 @@ fun RoomDetails(
             topBar = {
                 RDTopBar(scrollBehavior, navController)
             },
-            floatingActionButton = { RoomReservationFAB(navController) }
+            floatingActionButton = { if (isUser == true) RoomReservationFAB(navController) }
         ) { innerPadding ->
-            RoomDetailsContent(innerPadding, roomId)
+            RoomDetailsContent(innerPadding, roomId, isUser)
         }
     }
 }
@@ -105,7 +106,8 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 @Composable
 fun RoomDetailsContent(
     innerPaddingValues: PaddingValues,
-    roomId: String?) {
+    roomId: String?,
+    isUser: Boolean?) {
 
     val room = roomId?.toIntOrNull()?.let { getRoomById(it) }
 
@@ -119,7 +121,9 @@ fun RoomDetailsContent(
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
             ScheduleGrid(room?.roomAvailabilitySchedule)
-            Spacer(modifier = Modifier.size(88.dp))
+            Spacer(modifier = Modifier.size(
+                if (isUser == true) 88.dp else 16.dp)
+            )
         }
     }
 }
@@ -315,5 +319,5 @@ private fun dateNavigator() {
 @Composable
 fun RoomDetailsPreview() {
     val navController = rememberNavController()
-    RoomDetails(navController, "1")
+    RoomDetails(navController, "1", true)
 }
