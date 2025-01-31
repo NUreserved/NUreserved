@@ -59,7 +59,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NameSignUpScreen(
-    navController: NavController
+    navController: NavController,
+    role: String,
+    school: String,
+    program: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -173,6 +176,9 @@ fun NameSignUpScreen(
                             firstname,
                             middlename,
                             lastname,
+                            role,
+                            school,
+                            program,
                             scope,
                             snackbarHostState,
                             isValidFname,
@@ -190,8 +196,9 @@ fun NameSignUpScreen(
 
 fun validateName(name: String) : String{
     val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
-    var nameDigitPattern = Regex("\\d")
-    var nameSpacePattern = Regex("\\s")
+    val nameDigitPattern = Regex("\\d")
+    val nameSpacePattern = Regex("\\s")
+    val nameApostrophePattern = Regex("'")
 
     return when {
         name.isEmpty() -> "This field cannot be empty."
@@ -205,34 +212,35 @@ fun validateName(name: String) : String{
                     //ensure that subnames separated by space adheres to the minimum character length
                     //ensure that subnames separated by space does not contain symbols or digits
                     val subNames = name.split(" ")
+                    var errorMessage = ""
+
                     subNames.forEach { el ->
-                        if(el.length == 1) return "Name separated by space should not contain single letter words."
+                        if(el.length == 1) errorMessage = "Name separated by space should not contain single letter words."
                         else if(nameSymbolPattern.containsMatchIn(el)){
 
-                            return if(el.contains("'")){
+                            if(el.contains("'")){
                                 when {
-                                    el.startsWith("'") -> "Name cannot start with an apostrophe"
-                                    el.endsWith("'") -> "Name cannot end with an apostrophe"
+                                    el.startsWith("'") -> errorMessage = "Name cannot start with an apostrophe"
+                                    el.endsWith("'") -> errorMessage = "Name cannot end with an apostrophe"
+                                    nameApostrophePattern.findAll(el).count() > 1 -> errorMessage = "Name should not contain more than one apostrophe."
                                     else -> {
-                                        var errorMessage = ""
 
                                         for(char in el){
                                             if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                                errorMessage = "Name should not contain any special characters."
+                                                errorMessage = "Name should not contain any special characters"
                                                 break
                                             }
                                         }
-
-                                        errorMessage
                                     }
                                 }
                             } else{
-                                "Name should not contain any special characters."
+                                errorMessage = "Name should not contain any special characters"
                             }
                         }
-                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers"
+                        else if(nameDigitPattern.containsMatchIn(el)) errorMessage = "Name should not contain any numbers"
                     }
-                    ""
+
+                    errorMessage
                 }
             }
         }
@@ -241,6 +249,8 @@ fun validateName(name: String) : String{
                 when {
                     name.startsWith("'") -> "Name cannot start with an apostrophe"
                     name.endsWith("'") -> "Name cannot ends with an apostrophe"
+                    nameApostrophePattern.findAll(name).count() > 1 -> "Names should not contain more than one apostrophe"
+                  
                     else -> {
                         var errorMessage = ""
 
@@ -307,6 +317,9 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
+    program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValidFname: MutableState<Boolean>,
@@ -325,7 +338,19 @@ private fun NextButton(
             val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
 
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
-                navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}")
+
+                if(role == "Student"){
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${""}/${program}"
+                    )
+                }
+
+                else{
+                    navController.navigate(
+                        "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${school}/${""}"
+                    )
+                }
+
             }
 
             else{

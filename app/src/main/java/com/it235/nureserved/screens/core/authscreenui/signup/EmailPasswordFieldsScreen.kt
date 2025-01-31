@@ -108,8 +108,9 @@ fun SignUpScreen(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
     program: String,
-    studentNumber: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -245,8 +246,9 @@ fun SignUpScreen(
                                 firstName,
                                 middleName,
                                 lastName,
+                                role,
+                                school,
                                 program,
-                                studentNumber,
                                 navController,
                                 scope,
                                 snackbarHostState,
@@ -469,8 +471,9 @@ private fun RegisterButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
     program: String,
-    studentNumber: String,
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
@@ -501,19 +504,29 @@ private fun RegisterButton(
 
                             if (userId != null) {
 
-                                val userData = hashMapOf(
+                                val studentData = hashMapOf(
                                     "firstName" to firstName,
                                     "middleName" to middleName,
                                     "lastName" to lastName,
                                     "program" to program,
-                                    "studentNumber" to studentNumber,
+                                    "role" to role,
+                                    "email" to email,
+                                    "isVerified" to false
+                                )
+
+                                val educatorData = hashMapOf(
+                                    "firstName" to firstName,
+                                    "middleName" to middleName,
+                                    "lastName" to lastName,
+                                    "school" to school,
+                                    "role" to role,
                                     "email" to email,
                                     "isVerified" to false
                                 )
 
                                 // Add data to Firestore
                                 db.collection("user").document(userId)
-                                    .set(userData)
+                                    .set(if(role == "Student") studentData else educatorData)
                                     .addOnCompleteListener { dbTask ->
                                         if (dbTask.isSuccessful) {
                                             // Send verification email

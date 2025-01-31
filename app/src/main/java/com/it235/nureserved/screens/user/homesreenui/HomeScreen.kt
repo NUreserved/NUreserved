@@ -430,23 +430,9 @@ private fun ProfileDialog(
                     field = "Email",
                     value = user?.email ?: "N/A"
                 )
-            }
-            Space("h", 16)
-
-
-            Space("h", 16)
-            HeadingComposable("Academic Information")
-            Space("h", 8)
-            if (loading) {
-                IndeterminateCircularIndicator()
-            } else {
                 TextContentComposable(
                     field = "Program",
                     value = user?.program ?: "N/A"
-                )
-                TextContentComposable(
-                    field = "Student Number",
-                    value = user?.studentNumber ?: "N/A"
                 )
             }
             Space("h", 16)

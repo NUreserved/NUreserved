@@ -66,13 +66,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProgramStudentNumberSignUpScreen(
+fun RolesFieldScreen(
     navController: NavController,
-    role: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
+
+        val roleOptions = listOf("Role", "Student", "Educator")
+
+        var role by remember { mutableStateOf(roleOptions[0]) }
+        val isValidRole = remember { mutableStateOf(false) }
+        var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
 
@@ -131,25 +136,6 @@ fun ProgramStudentNumberSignUpScreen(
                         )
                     ){
 
-                        val options = listOf(
-                            "Program",
-                            "ABCOMM",
-                            "BS Accountancy",
-                            "BS Architecture",
-                            "BSBA-FM",
-                            "BSBA-MM",
-                            "BSCpE",
-                            "BSCE",
-                            "BSHM",
-                            "BSIT",
-                            "BSPSY",
-                            "BSTM",
-                        )
-
-                        var program by remember { mutableStateOf(options[0]) }
-                        var showProgramSupportTxt by remember { mutableStateOf(false) }
-                        var isValidProgram = remember { mutableStateOf(false) }
-
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -165,31 +151,30 @@ fun ProgramStudentNumberSignUpScreen(
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "What's your program?",
+                            text = "Which one describes you?",
                             fontSize = 18.sp,
                         )
 
                         Space("h", 15)
                         DropdownTextField(
-                            options = options,
-                            selectedOption = program,
-                            showProgramSupportTxt,
-                            isValidProgram,
+                            options = roleOptions,
+                            selectedOption = role,
+                            showRoleSupportTxt,
+                            isValidRole,
                             onOptionSelected = {
-                                program = it
-                                showProgramSupportTxt = true
+                                role = it
+                                showRoleSupportTxt = true
                             },
                         )
 
-                        Space("h", 5)
+                        Space("h", 10)
 
                         NextButton(
                             navController,
-                            role,
-                            program,
                             scope,
                             snackbarHostState,
-                            isValidProgram,
+                            isValidRole,
+                            role,
                         )
 
                     }
@@ -230,12 +215,20 @@ private fun DropdownTextField(
                     tint = white3
                 )
             },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = white5,
+                focusedTextColor = white3,
+                unfocusedTextColor = white3,
+                cursorColor = white3,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
             supportingText = {
                 if(showSupportText){
-                    if(selectedOption == "Program"){
+                    if(selectedOption == "Role"){
                         isValid.value = false
                         Text(
-                            text = "Please select a program.",
+                            text = "Please select a role.",
                             color = indicatorColorRed
                         )
                     }
@@ -245,14 +238,6 @@ private fun DropdownTextField(
                     }
                 }
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = white5,
-                focusedTextColor = white3,
-                unfocusedTextColor = white3,
-                cursorColor = white3,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
@@ -289,11 +274,10 @@ private fun DropdownTextField(
 @Composable
 private fun NextButton(
     navController: NavController,
-    selectedRole: String,
-    program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidProgram: MutableState<Boolean>,
+    isValid: MutableState<Boolean>,
+    selectedRole: String,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -302,8 +286,13 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidProgram.value){
-                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
+            if(isValid.value){
+                if(selectedRole == "Student"){
+                    navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
+                }
+                else{
+                    navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
+                }
             }
             else{
                 scope.launch {
