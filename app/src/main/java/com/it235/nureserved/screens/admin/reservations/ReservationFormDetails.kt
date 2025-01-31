@@ -82,25 +82,7 @@ fun ReservationFormDetailsScreen(
                 )
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    StatusContentComposable()
-
-                    Text(
-                        modifier = Modifier
-                            .padding(end = 16.dp),
-                        text = "Valid until 8:40 PM today",
-                        style = LocalTextStyle.current.copy(
-                            fontSize = 13.sp,
-                            lineHeight = 16.sp
-                        )
-                    )
-                }
+                ReservationStatusComposable(reservationData, viewModel)
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
@@ -209,6 +191,77 @@ fun ReservationFormDetailsScreen(
 }
 
 @Composable
+private fun ReservationStatusComposable(
+    reservationData: ReservationFormData,
+    viewModel: ReservationFormDetailsViewModel) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+                Row(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .background(color = indicatorColorGreen, shape = CircleShape),
+                ) {}
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = ApprovalStatus.APPROVED.value,
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp
+                    )
+                )
+            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+                Row(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .background(color = indicatorColorOrange, shape = CircleShape),
+                ) {}
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = ApprovalStatus.PENDING.value,
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp
+                    )
+                )
+            }
+        }
+
+        if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+            Text(
+                modifier = Modifier
+                    .padding(end = 16.dp),
+                text = "Valid until 8:40 PM today",
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                )
+            )
+        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            Text(
+                modifier = Modifier
+                    .padding(end = 16.dp),
+                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                )
+            )
+        }
+    }
+}
+
+@Composable
 private fun RequestStatusComposable(
     reservationData: ReservationFormData,
     clipboardManager: ClipboardManager?,
@@ -289,24 +342,7 @@ private fun RequestStatusComposable(
 
 @Composable
 private fun StatusContentComposable() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(
-            modifier = Modifier
-                .size(16.dp)
-                .background(color = indicatorColorGreen, shape = CircleShape),
-        ) {}
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(
-            text = "Active",
-            style = LocalTextStyle.current.copy(
-                fontWeight = FontWeight.Bold,
-                fontSize = 13.sp,
-                lineHeight = 16.sp
-            )
-        )
-    }
+
 }
 
 @Composable
