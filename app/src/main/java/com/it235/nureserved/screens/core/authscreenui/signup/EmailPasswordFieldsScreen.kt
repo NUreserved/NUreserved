@@ -111,7 +111,6 @@ fun SignUpScreen(
     role: String,
     school: String,
     program: String,
-    studentNumber: String
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -248,7 +247,6 @@ fun SignUpScreen(
                                 middleName,
                                 lastName,
                                 program,
-                                studentNumber,
                                 navController,
                                 scope,
                                 snackbarHostState,

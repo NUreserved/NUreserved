@@ -128,7 +128,6 @@ private fun Main() {
                         navArgument("role") { type = NavType.StringType},
                         navArgument("school") { type = NavType.StringType},
                         navArgument("program") { type = NavType.StringType},
-                        navArgument("studentNumber") { type = NavType.StringType}
                     )
                 ) { backStackEntry ->
                     val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
@@ -137,7 +136,6 @@ private fun Main() {
                     val role = backStackEntry.arguments?.getString("role") ?: ""
                     val school = backStackEntry.arguments?.getString("school") ?: ""
                     val program = backStackEntry.arguments?.getString("program") ?: ""
-                    val studentNumber = backStackEntry.arguments?.getString("studentNumber") ?: ""
 
                     SignUpScreen(
                         navController = navController,
@@ -147,7 +145,6 @@ private fun Main() {
                         role = role,
                         school = school,
                         program = program,
-                        studentNumber = studentNumber
                     )
                 }
                 composable(

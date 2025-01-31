@@ -297,7 +297,7 @@ private fun NextButton(
             snackbarHostState.currentSnackbarData?.dismiss()
 
             if(isValid.value){
-//                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
+                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${selectedSchool}/${""}")
             }
             else{
                 scope.launch {

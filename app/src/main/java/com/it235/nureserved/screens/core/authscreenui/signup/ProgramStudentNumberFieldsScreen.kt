@@ -384,7 +384,6 @@ private fun NextButton(
     middleName: String,
     lastName: String,
     program: String,
-    studentNumber: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValidStudNumber: MutableState<Boolean>,
@@ -397,8 +396,8 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidStudNumber.value && isValidProgram.value){
-                navController.navigate("${ScreenRoutes.SignUp.route}/${firstName}/${middleName}/${lastName}/${program}/${studentNumber}")
+            if(isValidProgram.value){
+                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
             }
             else{
                 scope.launch {
