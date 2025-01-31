@@ -59,7 +59,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NameSignUpScreen(
-    navController: NavController
+    navController: NavController,
+    role: String,
+    school: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -264,6 +266,8 @@ private fun NextButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValidFname: MutableState<Boolean>,
