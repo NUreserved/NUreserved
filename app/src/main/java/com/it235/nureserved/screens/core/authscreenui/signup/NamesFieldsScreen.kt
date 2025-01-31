@@ -211,8 +211,8 @@ fun validateName(name: String) : String{
 
                             return if(el.contains("'")){
                                 when {
-                                    el.startsWith("'") -> "Names cannot start with apostrophe"
-                                    el.endsWith("'") -> "Names cannot ends with apostrophe"
+                                    el.startsWith("'") -> "Name cannot start with an apostrophe"
+                                    el.endsWith("'") -> "Name cannot end with an apostrophe"
                                     else -> {
                                         var errorMessage = ""
 
@@ -230,7 +230,7 @@ fun validateName(name: String) : String{
                                 "Name should not contain any special characters."
                             }
                         }
-                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers."
+                        else if(nameDigitPattern.containsMatchIn(el)) return "Name should not contain any numbers"
                     }
                     ""
                 }
@@ -239,14 +239,14 @@ fun validateName(name: String) : String{
         nameSymbolPattern.containsMatchIn(name) -> when {
             name.contains("'") -> {
                 when {
-                    name.startsWith("'") -> "Names cannot start with apostrophe"
-                    name.endsWith("'") -> "Names cannot ends with apostrophe"
+                    name.startsWith("'") -> "Name cannot start with an apostrophe"
+                    name.endsWith("'") -> "Name cannot ends with an apostrophe"
                     else -> {
                         var errorMessage = ""
 
                         for(char in name){
                             if(nameSymbolPattern.containsMatchIn(char.toString()) && !char.toString().contains("'")) {
-                                errorMessage = "Name should not contain any special characters."
+                                errorMessage = "Name should not contain any special characters"
                                 break
                             }
                         }
@@ -256,7 +256,7 @@ fun validateName(name: String) : String{
                 }
             }
 
-            else -> "Name should not contain any special characters."
+            else -> "Name should not contain any special characters"
         }
         else -> ""
     }
