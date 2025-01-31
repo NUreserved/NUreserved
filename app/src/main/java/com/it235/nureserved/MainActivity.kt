@@ -149,11 +149,15 @@ private fun Main() {
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
-                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
-                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
+                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}/{isUser}",
+                    arguments = listOf(
+                        navArgument("roomId") { type = NavType.StringType },
+                        navArgument("isUser") { type = NavType.BoolType }
+                    )
                 ) { backStackEntry ->
                     val roomId = backStackEntry.arguments?.getString("roomId")
-                    RoomDetails(navController, roomId)
+                    val isUser = backStackEntry.arguments?.getBoolean("isUser")
+                    RoomDetails(navController, roomId, isUser)
                 }
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
