@@ -523,7 +523,7 @@ private fun RegisterButton(
 
                                 // Add data to Firestore
                                 db.collection("user").document(userId)
-                                    .set(userData)
+                                    .set(if(role == "Student") studentData else educatorData)
                                     .addOnCompleteListener { dbTask ->
                                         if (dbTask.isSuccessful) {
                                             // Send verification email
