@@ -150,7 +150,22 @@ private fun Main() {
                         studentNumber = studentNumber
                     )
                 }
-                composable(ScreenRoutes.NameSignUp.route) { NameSignUpScreen(navController) }
+                composable(
+                    route = "${ScreenRoutes.NameSignUp.route}/{role}/{school}",
+                    arguments = listOf(
+                        navArgument("role") { type = NavType.StringType},
+                        navArgument("school") { type = NavType.StringType},
+                    )
+                ) { backStackEntry ->
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+                    val school = backStackEntry.arguments?.getString("school") ?: ""
+
+                    NameSignUpScreen(
+                        navController = navController,
+                        role = role,
+                        school = school,
+                    )
+                }
                 composable(
                     route = "${ScreenRoutes.ProgramStudentNumberSignUp.route}/{firstName}/{middleName}/{lastName}",
                     arguments = listOf(
