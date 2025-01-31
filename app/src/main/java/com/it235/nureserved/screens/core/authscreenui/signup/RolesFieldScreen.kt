@@ -159,6 +159,7 @@ fun RolesFieldScreen(
                         DropdownTextField(
                             options = roleOptions,
                             selectedOption = role,
+                            showRoleSupportTxt,
                             isValidRole,
                             onOptionSelected = {
                                 role = it
@@ -171,6 +172,8 @@ fun RolesFieldScreen(
                             navController,
                             scope,
                             snackbarHostState,
+                            isValidRole,
+                            role,
                         )
 
                     }
