@@ -470,7 +470,6 @@ private fun RegisterButton(
     middleName: String,
     lastName: String,
     program: String,
-    studentNumber: String,
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,

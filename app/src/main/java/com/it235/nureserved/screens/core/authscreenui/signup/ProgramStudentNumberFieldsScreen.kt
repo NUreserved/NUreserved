@@ -133,10 +133,6 @@ fun ProgramStudentNumberSignUpScreen(
                         )
                     ){
 
-                        var studentNumber by remember { mutableStateOf("") }
-                        var showStudNumberSupportTxt by remember { mutableStateOf(false) }
-                        var isValidStudNumber = remember { mutableStateOf(false) }
-
                         val options = listOf(
                             "Program",
                             "ABCOMM",
@@ -186,33 +182,7 @@ fun ProgramStudentNumberSignUpScreen(
                                 showProgramSupportTxt = true
                             },
                         )
-                        Space("h", 5)
 
-                        SignUpText(
-                            modifier = Modifier
-                                .padding(start = 20.dp),
-                            text = "What's your student number?",
-                            fontSize = 18.sp,
-                        )
-
-                        Space("h", 10)
-                        InputField(
-                            "Student Number",
-                            studentNumber,
-                            {
-                                Text (
-                                    text = "Example: 2024-123456",
-                                    style = LocalTextStyle.current.copy(
-                                        fontStyle = FontStyle.Italic
-                                    )
-                                )
-                            },
-                            showStudNumberSupportTxt,
-                            isValidStudNumber,
-                        ) {
-                            studentNumber = it
-                            showStudNumberSupportTxt = true
-                        }
                         Space("h", 5)
 
                         NextButton(
@@ -221,10 +191,8 @@ fun ProgramStudentNumberSignUpScreen(
                             middleName,
                             lastName,
                             program,
-                            studentNumber,
                             scope,
                             snackbarHostState,
-                            isValidStudNumber,
                             isValidProgram,
                         )
 
@@ -323,61 +291,6 @@ private fun DropdownTextField(
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun InputField(
-    label: String,
-    value: String,
-    supportingText: @Composable () -> Unit = {},
-    showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
-    onValueChange: (String) -> Unit,
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        singleLine = true,
-        placeholder = { AuthInputPlaceholderTextStyle(label) },
-        supportingText = {
-            val studentNumberPattern = Regex("^20(19|2[0-4])-\\d{6}$")
-
-            if (showSupportText) {
-                if(!studentNumberPattern.containsMatchIn(value)){
-                    isValid.value = false
-                    Column () {
-                        Text(
-                            text = "Please enter a valid student number format",
-                            color = indicatorColorRed
-                        )
-                        supportingText()
-                    }
-                }
-
-                else{
-                    isValid.value = true
-                    supportingText()
-                }
-            }
-
-            else{
-                supportingText()
-            }
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = white5,
-            focusedTextColor = white3,
-            unfocusedTextColor = white3,
-            cursorColor = white3,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-        ),
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp)
-    )
-}
-
-@Composable
 private fun NextButton(
     navController: NavController,
     firstName: String,
@@ -386,7 +299,6 @@ private fun NextButton(
     program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidStudNumber: MutableState<Boolean>,
     isValidProgram: MutableState<Boolean>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
