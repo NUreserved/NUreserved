@@ -223,7 +223,21 @@ private fun DropdownTextField(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
             ),
-            supportingText = {},
+            supportingText = {
+                if(showSupportText){
+                    if(selectedOption == "Role"){
+                        isValid.value = false
+                        Text(
+                            text = "Please select a role.",
+                            color = indicatorColorRed
+                        )
+                    }
+                    else {
+                        isValid.value = true
+                        Text( text = "" )
+                    }
+                }
+            },
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
