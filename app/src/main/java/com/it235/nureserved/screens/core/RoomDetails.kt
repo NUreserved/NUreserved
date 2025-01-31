@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.user.homesreenui
+package com.it235.nureserved.screens.core
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.screens.core.RoomReservationFAB
 import com.it235.nureserved.data.rooms.DaySchedule
 import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.TimeSlot

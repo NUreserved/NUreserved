@@ -37,7 +37,7 @@ import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.screens.user.homesreenui.HomeScreen
-import com.it235.nureserved.screens.user.homesreenui.RoomDetails
+import com.it235.nureserved.screens.core.RoomDetails
 import com.it235.nureserved.screens.core.onboardingscreenui.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
