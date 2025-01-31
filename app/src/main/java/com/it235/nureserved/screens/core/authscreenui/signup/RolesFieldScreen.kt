@@ -163,6 +163,7 @@ fun RolesFieldScreen(
                             isValidRole,
                             onOptionSelected = {
                                 role = it
+                                showRoleSupportTxt = true
                             },
                         )
 
