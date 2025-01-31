@@ -108,6 +108,8 @@ fun SignUpScreen(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
     program: String,
     studentNumber: String
 ){
