@@ -11,10 +11,10 @@ val sampleReservation =
     ReservationFormData(
         organization = "Student Executives",
         activityTitle = "Meeting for Paskong Nationalian",
-        dateFilled = LocalDate.of(2024, 11, 29),
+        dateFilled = OffsetDateTime.parse("2025-01-31T21:38:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-29T08:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-29T17:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-29T08:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-29T17:00:00+08:00"),
             startTime = LocalTime.of(8, 0),
             endTime = LocalTime.of(17, 0)
         ),
@@ -30,10 +30,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample1 = ReservationFormData(
         organization = "Student Executives",
         activityTitle = "Meeting for Paskong Nationalian",
-        dateFilled = LocalDate.of(2024, 11, 29),
+        dateFilled = OffsetDateTime.parse("2025-01-31T21:38:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-29T08:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-29T17:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-29T08:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-29T17:00:00+08:00"),
             startTime = LocalTime.of(8, 0),
             endTime = LocalTime.of(17, 0)
         ),
@@ -48,10 +48,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample2 = ReservationFormData(
         organization = "Faculty Association",
         activityTitle = "Annual General Meeting",
-        dateFilled = LocalDate.of(2024, 12, 1),
+        dateFilled = OffsetDateTime.parse("2024-12-01T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-12-15T09:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-12-15T12:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-12-15T09:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-12-15T12:00:00+08:00"),
             startTime = LocalTime.of(9, 0),
             endTime = LocalTime.of(12, 0)
         ),
@@ -66,10 +66,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample3 = ReservationFormData(
         organization = "Alumni Association",
         activityTitle = "Alumni Homecoming",
-        dateFilled = LocalDate.of(2024, 10, 20),
+        dateFilled = OffsetDateTime.parse("2024-10-20T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-12-20T18:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-12-20T21:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-12-20T18:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-12-20T21:00:00+08:00"),
             startTime = LocalTime.of(18, 0),
             endTime = LocalTime.of(21, 0)
         ),
@@ -84,10 +84,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample4 = ReservationFormData(
         organization = "Sports Club",
         activityTitle = "Basketball Tournament",
-        dateFilled = LocalDate.of(2024, 9, 15),
+        dateFilled = OffsetDateTime.parse("2024-09-15T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-10T10:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-10T15:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-10T10:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-10T15:00:00+08:00"),
             startTime = LocalTime.of(10, 0),
             endTime = LocalTime.of(15, 0)
         ),
@@ -102,10 +102,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample5 = ReservationFormData(
         organization = "Music Club",
         activityTitle = "Choir Practice",
-        dateFilled = LocalDate.of(2024, 8, 10),
+        dateFilled = OffsetDateTime.parse("2024-08-10T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-05T14:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-05T16:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-05T14:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-05T16:00:00+08:00"),
             startTime = LocalTime.of(14, 0),
             endTime = LocalTime.of(16, 0)
         ),
@@ -120,10 +120,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample6 = ReservationFormData(
         organization = "Drama Club",
         activityTitle = "Play Rehearsal",
-        dateFilled = LocalDate.of(2024, 7, 15),
+        dateFilled = OffsetDateTime.parse("2024-07-15T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-12T10:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-12T13:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-12T10:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-12T13:00:00+08:00"),
             startTime = LocalTime.of(10, 0),
             endTime = LocalTime.of(13, 0)
         ),
@@ -138,10 +138,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample7 = ReservationFormData(
         organization = "Science Club",
         activityTitle = "Science Fair",
-        dateFilled = LocalDate.of(2024, 6, 20),
+        dateFilled = OffsetDateTime.parse("2024-06-20T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-20T09:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-20T15:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-20T09:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-20T15:00:00+08:00"),
             startTime = LocalTime.of(9, 0),
             endTime = LocalTime.of(15, 0)
         ),
@@ -156,10 +156,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample8 = ReservationFormData(
         organization = "Art Club",
         activityTitle = "Art Exhibition",
-        dateFilled = LocalDate.of(2024, 5, 25),
+        dateFilled = OffsetDateTime.parse("2024-05-25T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-25T11:00:00+00:00"),
-            endDate = OffsetDateTime.parse("2024-11-25T17:00:00+00:00"),
+            startDate = OffsetDateTime.parse("2024-11-25T11:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-25T17:00:00+08:00"),
             startTime = LocalTime.of(11, 0),
             endTime = LocalTime.of(17, 0)
         ),
@@ -175,7 +175,7 @@ fun getSampleReservations(): List<ReservationFormData> {
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
             approvedBy = "Chris Johnson",
-            approvalDate = OffsetDateTime.parse("2024-11-02T10:00:00+00:00"),
+            approvalDate = OffsetDateTime.parse("2024-11-02T10:00:00+08:00"),
             eventDate = OffsetDateTime.now(),
         )
     )
@@ -183,7 +183,7 @@ fun getSampleReservations(): List<ReservationFormData> {
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
             approvedBy = "Alex Davis",
-            approvalDate = OffsetDateTime.parse("2024-11-03T10:00:00+00:00"),
+            approvalDate = OffsetDateTime.parse("2024-11-03T10:00:00+08:00"),
             eventDate = OffsetDateTime.now(),
         )
     )
@@ -192,7 +192,7 @@ fun getSampleReservations(): List<ReservationFormData> {
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
             approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2024-11-04T10:00:00+00:00"),
+            approvalDate = OffsetDateTime.parse("2024-11-04T10:00:00+08:00"),
             eventDate = OffsetDateTime.now(),
         )
     )
