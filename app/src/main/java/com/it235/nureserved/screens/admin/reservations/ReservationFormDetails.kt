@@ -35,8 +35,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.data.reservation_data.ApprovalStatus
 import com.it235.nureserved.data.reservation_data.ReservationFormData
@@ -112,7 +110,7 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date filled",
-                    value = reservationData.getDateFilled().toString()
+                    value = viewModel.formatDateFilled(reservationData.getDateFilled())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(

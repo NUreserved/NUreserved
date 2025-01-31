@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.Duration
-import java.time.LocalDateTime
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class ReservationFormDetailsViewModel : ViewModel() {
     private val _context = MutableStateFlow<Context?>(null)
@@ -40,5 +40,10 @@ class ReservationFormDetailsViewModel : ViewModel() {
             minutes > 1 -> "Requested $minutes mins ago"
             else -> "Requested a minute ago"
         }
+    }
+
+    fun formatDateFilled(dateTime: OffsetDateTime): String {
+        val formattedDateTime = DateTimeFormatter.ofPattern("MMM d, yyyy")
+        return dateTime.format(formattedDateTime)
     }
 }
