@@ -185,9 +185,7 @@ fun ProgramStudentNumberSignUpScreen(
 
                         NextButton(
                             navController,
-                            firstName,
-                            middleName,
-                            lastName,
+                            role,
                             program,
                             scope,
                             snackbarHostState,

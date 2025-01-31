@@ -246,6 +246,8 @@ fun SignUpScreen(
                                 firstName,
                                 middleName,
                                 lastName,
+                                role,
+                                school,
                                 program,
                                 navController,
                                 scope,

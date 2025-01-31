@@ -178,6 +178,7 @@ fun NameSignUpScreen(
                             lastname,
                             role,
                             school,
+                            program,
                             scope,
                             snackbarHostState,
                             isValidFname,
