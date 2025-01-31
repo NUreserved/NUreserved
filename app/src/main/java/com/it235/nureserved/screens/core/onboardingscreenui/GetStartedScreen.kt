@@ -19,14 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.OnboardingScreen
+import com.it235.nureserved.screens.core.OnboardingScreen
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white3

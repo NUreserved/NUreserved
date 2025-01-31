@@ -16,12 +16,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
+import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
+import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsViewModel
+import com.it235.nureserved.screens.admin.home.AdminHomeScreen
+import com.it235.nureserved.screens.admin.home.AdminHomeViewModel
 import com.it235.nureserved.screens.user.RoomReservationForm
 import com.it235.nureserved.screens.user.RoomUsageRules
 import com.it235.nureserved.screens.core.SplashScreen
@@ -31,7 +37,7 @@ import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
 import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.screens.user.homesreenui.HomeScreen
-import com.it235.nureserved.screens.user.homesreenui.RoomDetails
+import com.it235.nureserved.screens.core.RoomDetails
 import com.it235.nureserved.screens.core.onboardingscreenui.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
@@ -143,16 +149,32 @@ private fun Main() {
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
-                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}",
-                    arguments = listOf(navArgument("roomId") { type = NavType.StringType })
+                    route = "${ScreenRoutes.RoomDetails.route}/{roomId}/{isUser}",
+                    arguments = listOf(
+                        navArgument("roomId") { type = NavType.StringType },
+                        navArgument("isUser") { type = NavType.BoolType }
+                    )
                 ) { backStackEntry ->
                     val roomId = backStackEntry.arguments?.getString("roomId")
-                    RoomDetails(navController, roomId)
+                    val isUser = backStackEntry.arguments?.getBoolean("isUser")
+                    RoomDetails(navController, roomId, isUser)
                 }
                 composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
                 composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
                 composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
+                composable(ScreenRoutes.AdminHome.route) {
+                    val viewModel: AdminHomeViewModel = viewModel()
+                    AdminHomeScreen(navController, viewModel) }
+                composable(
+                    route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
+                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
+                        FloorLocation::class.java) })
+                ) { backStackEntry ->
+                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
+                    val viewModel: FloorRoomsViewModel = viewModel()
+                    FloorRoomsScreen(navController, floorName, viewModel)
+                }
             }
         }
     }

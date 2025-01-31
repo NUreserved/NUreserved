@@ -1,8 +1,6 @@
 package com.it235.nureserved.screens.user.homesreenui
 
 import User
-import android.content.Context
-import android.content.res.Resources.Theme
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -20,13 +18,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -50,7 +46,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -66,7 +61,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -82,13 +76,16 @@ import coil.size.Scale
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.RoomReservationFAB
-import com.it235.nureserved.composables.Space
+import com.it235.nureserved.screens.core.RoomReservationFAB
+import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.screens.core.LogoutConfirmationDialog
+import com.it235.nureserved.screens.core.ThemeSettingsDialog
+import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
@@ -148,8 +145,8 @@ fun HomeScreen(navController: NavController) {
             if (showLogoutConfirmationDialog) {
                 LogoutConfirmationDialog(
                     navController = navController,
-                    showDialog = showLogoutConfirmationDialog,
                     onDismiss = { showLogoutConfirmationDialog = false },
+                    accountType = "user"
                 )
             }
 
@@ -389,61 +386,6 @@ fun HomeScreenContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ThemeSettingsDialog(
-    onDismiss: () -> Unit
-) {
-    val context = LocalContext.current
-    val currentTheme = 0
-    val themeOptions = listOf("Light theme", "Dark theme", "Use device theme")
-    val selectedOption = remember { mutableStateOf(themeOptions[currentTheme]) }
-
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Change app theme") },
-        text = {
-            Column {
-                themeOptions.forEachIndexed { index, theme ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                selectedOption.value = theme
-                            }
-                    ) {
-                        RadioButton(
-                            selected = selectedOption.value == theme,
-                            onClick = {
-                                selectedOption.value = theme
-                            }
-                        )
-                        Text(
-                            text = theme,
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
-                    }
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = { onDismiss() }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = { onDismiss() }
-            ) {
-                Text("Cancel")
-            }
-        }
-    )
-}
-
 @Composable
 private fun ProfileDialog(
     onDismiss: () -> Unit
@@ -540,7 +482,8 @@ private fun TextContentComposable(
         Text(
             modifier = Modifier
                 .padding(start = 16.dp)
-                .weight(0.5f).widthIn(max = 200.dp),
+                .weight(0.5f)
+                .widthIn(max = 200.dp),
             color = if (isSystemInDarkTheme()) textColor4 else textColor3,
             text = field,
             style = LocalTextStyle.current.copy(
@@ -570,49 +513,6 @@ fun IndeterminateCircularIndicator(
             .width(32.dp),
         color = MaterialTheme.colorScheme.secondary,
         trackColor = MaterialTheme.colorScheme.surfaceVariant,
-    )
-}
-
-@Composable
-private fun LogoutConfirmationDialog(
-    navController: NavController,
-    showDialog: Boolean,
-    onDismiss: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Log out?") },
-        icon = {
-            Icon(
-                painter = painterResource(id = R.drawable.logout),
-                contentDescription = "Question mark icon"
-            )
-        },
-        text = {
-            Text(
-                text = "Are you sure you want to log out? You may need to log in again to access the features.",
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    FirebaseAuth.getInstance().signOut()
-                    navController.navigate(ScreenRoutes.Login.route) {
-                        popUpTo(ScreenRoutes.Home.route) { inclusive = true }
-                    }
-                }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = { onDismiss() }
-            ) {
-                Text("Cancel")
-            }
-        }
     )
 }
 
@@ -675,15 +575,7 @@ fun Floor(
 
 @Composable
 fun Card(room: Room, navController: NavController) {
-    val imagePainter = // Set the size to match the modifier dimensions
-        rememberAsyncImagePainter(
-            ImageRequest.Builder(LocalContext.current).data(data = room.imageResId ?: R.drawable.resource_default)
-                .apply(block = fun ImageRequest.Builder.() {
-                    size(720, 360) // Set the size to match the modifier dimensions
-                    scale(Scale.FILL)
-                }).build()
-        )
-
+    val imagePainter = rescalePicture(room.imageResId)
 
     Card(
         colors = CardDefaults.cardColors(
@@ -691,7 +583,7 @@ fun Card(room: Room, navController: NavController) {
         ),
         modifier = Modifier
             .width(240.dp)
-            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}") }
+            .clickable { navController.navigate("${ScreenRoutes.RoomDetails.route}/${room.id}/${true}") }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()

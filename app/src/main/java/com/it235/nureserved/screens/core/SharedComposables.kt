@@ -1,8 +1,9 @@
-package com.it235.nureserved.composables
+package com.it235.nureserved.screens.core
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,16 +16,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +39,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
@@ -190,6 +197,108 @@ fun OnboardingScreen(
 }
 
 /* end of Onboarding screens composables */
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ThemeSettingsDialog(
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    val currentTheme = 0
+    val themeOptions = listOf("Light theme", "Dark theme", "Use device theme")
+    val selectedOption = remember { mutableStateOf(themeOptions[currentTheme]) }
+
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Change app theme") },
+        text = {
+            Column {
+                themeOptions.forEachIndexed { index, theme ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                selectedOption.value = theme
+                            }
+                    ) {
+                        RadioButton(
+                            selected = selectedOption.value == theme,
+                            onClick = {
+                                selectedOption.value = theme
+                            }
+                        )
+                        Text(
+                            text = theme,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+fun LogoutConfirmationDialog(
+    navController: NavController,
+    onDismiss: () -> Unit,
+    accountType: String
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Log out?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.logout),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to log out? You may need to log in again to access the features.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    FirebaseAuth.getInstance().signOut()
+                    navController.navigate(ScreenRoutes.Login.route) {
+                        if (accountType == "user") {
+                            popUpTo(ScreenRoutes.Home.route) { inclusive = true }
+                        } else if (accountType == "admin") {
+                            popUpTo(ScreenRoutes.AdminHome.route) { inclusive = true }
+                        }
+                    }
+                }
+            ) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismiss() }
+            ) {
+                Text("Cancel")
+            }
+        }
+    )
+}
 
 /* Sign-up screen composables */
 

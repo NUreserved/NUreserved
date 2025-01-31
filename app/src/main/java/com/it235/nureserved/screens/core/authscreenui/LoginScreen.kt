@@ -74,7 +74,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.composables.Space
+import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
@@ -439,9 +439,21 @@ private fun LoginButton(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            navController.navigate(ScreenRoutes.Home.route) {
-                                popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                            //check if verified
+                            val user = auth.currentUser
+                            if (user != null && user.isEmailVerified) {
+                                navController.navigate(ScreenRoutes.Home.route) {
+                                    popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                }
+                            } else {
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "Please verify your email before logging in.",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
                             }
+
                         } else {
                             loading.value = false
 
