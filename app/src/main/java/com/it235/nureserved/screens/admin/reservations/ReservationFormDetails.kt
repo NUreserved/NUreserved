@@ -13,12 +13,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,6 +36,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +52,7 @@ import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
+import com.it235.nureserved.ui.theme.white
 
 @Composable
 fun ReservationFormDetailsScreen(
@@ -169,9 +178,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
-
             if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+                Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     text = "Approved by ${reservationData.getLatestApprovalDetail()!!.approvedBy}",
                     color = if (isSystemInDarkTheme()) textColor4 else textColor3,
@@ -181,6 +189,17 @@ fun ReservationFormDetailsScreen(
                         lineHeight = 16.sp
                     ),
                 )
+            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Column (
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                ){
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(vertical = 8.dp)
+                    )
+                    ApprovalSectionComposable(viewModel)
+                }
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -339,8 +358,62 @@ private fun RequestStatusComposable(
 }
 
 @Composable
-private fun StatusContentComposable() {
-
+private fun ApprovalSectionComposable(viewModel: ReservationFormDetailsViewModel) {
+    Column (
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = "Add remarks",
+            style = LocalTextStyle.current.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+        )
+        OutlinedTextField(
+            value = viewModel.remarks.collectAsState().value,
+            onValueChange = { viewModel.updateRemarks(it) },
+            label = { Text("Remarks") },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+        ) {
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = indicatorColorRed,
+                    contentColor = white
+                ),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "Decline",
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = indicatorColorGreen,
+                    contentColor = white
+                ),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "Approve",
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
 }
 
 @Composable

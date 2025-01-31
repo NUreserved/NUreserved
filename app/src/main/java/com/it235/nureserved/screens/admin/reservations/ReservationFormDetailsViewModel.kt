@@ -5,6 +5,7 @@ import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.lang.Thread.State
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -15,6 +16,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
 
     private val _clipboardManager = MutableStateFlow<ClipboardManager?>(null)
     val clipboardManager: StateFlow<ClipboardManager?> = _clipboardManager
+
+    private var _remarks = MutableStateFlow<String>("")
+    var remarks: StateFlow<String> = _remarks
 
     fun initialize(context: Context, clipboardManager: ClipboardManager) {
         _context.value = context
@@ -45,5 +49,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
     fun formatDateFilled(dateTime: OffsetDateTime): String {
         val formattedDateTime = DateTimeFormatter.ofPattern("MMM d, yyyy")
         return dateTime.format(formattedDateTime)
+    }
+
+    fun updateRemarks(newRemarks: String) {
+        _remarks.value = newRemarks
     }
 }
