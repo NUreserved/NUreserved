@@ -1,11 +1,16 @@
 package com.it235.nureserved.screens.admin.reservations
 
 import androidx.lifecycle.ViewModel
+import com.it235.nureserved.data.reservation_data.ApprovalStatus
+import com.it235.nureserved.data.reservation_data.ReservationFormData
+import getSampleReservations
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class ReservationsScreenViewModel : ViewModel() {
+    private val _reservationList = MutableStateFlow(getSampleReservations())
+
     private val _selectedTabIndex = MutableStateFlow(0)
     val selectedTabIndex: StateFlow<Int> = _selectedTabIndex.asStateFlow()
 
@@ -16,6 +21,18 @@ class ReservationsScreenViewModel : ViewModel() {
 
     fun setSelectedTabIndex(index: Int) {
         _selectedTabIndex.value = index
+    }
+
+    fun getApprovedReservationsList(): List<ReservationFormData> {
+        return _reservationList.value.filter { reservation ->
+            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.APPROVED
+        }
+    }
+
+    fun getPendingReservationsList(): List<ReservationFormData> {
+        return _reservationList.value.filter { reservation ->
+            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.PENDING
+        }
     }
 
     fun setShowBottomSheet(show: Boolean) {
