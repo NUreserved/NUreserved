@@ -183,6 +183,7 @@ fun SchoolFieldScreen(
                             snackbarHostState,
                             isValidSchool,
                             school,
+                            role,
                         )
 
                     }
@@ -285,6 +286,7 @@ private fun NextButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValid: MutableState<Boolean>,
+    selectedSchool: String,
     selectedRole: String,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
