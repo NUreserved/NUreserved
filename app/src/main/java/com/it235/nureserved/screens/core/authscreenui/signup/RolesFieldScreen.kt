@@ -190,6 +190,7 @@ fun RolesFieldScreen(
 private fun DropdownTextField(
     options: List<String>,
     selectedOption: String,
+    showSupportText: Boolean,
     isValid: MutableState<Boolean>,
     onOptionSelected: (String) -> Unit
 ) {
@@ -261,6 +262,8 @@ private fun NextButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
+    isValid: MutableState<Boolean>,
+    selectedRole: String,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
