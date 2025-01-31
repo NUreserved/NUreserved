@@ -107,6 +107,19 @@ private fun Main() {
                 // and make registration possible
                 composable(ScreenRoutes.RoleSignUp.route) { RolesFieldScreen(navController) }
                 composable(
+                    route = "${ScreenRoutes.SchoolSignUp.route}/{role}",
+                    arguments = listOf(
+                        navArgument("role") { type = NavType.StringType},
+                    )
+                ){ backStackEntry ->
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+
+                    SchoolFieldScreen(
+                        navController = navController,
+                        role = role,
+                    )
+                }
+                composable(
                     route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{program}/{studentNumber}",
                     arguments = listOf(
                         navArgument("firstName") { type = NavType.StringType},
