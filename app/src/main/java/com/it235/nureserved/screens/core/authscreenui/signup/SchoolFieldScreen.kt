@@ -159,7 +159,7 @@ fun SchoolFieldScreen(
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "Which one describes you?",
+                            text = "Which school or department are you affiliated with?",
                             fontSize = 18.sp,
                         )
 
