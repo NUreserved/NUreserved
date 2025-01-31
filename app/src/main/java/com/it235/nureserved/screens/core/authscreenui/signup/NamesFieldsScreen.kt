@@ -62,6 +62,7 @@ fun NameSignUpScreen(
     navController: NavController,
     role: String,
     school: String,
+    program: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -270,6 +271,7 @@ private fun NextButton(
     lastName: String,
     role: String,
     school: String,
+    program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValidFname: MutableState<Boolean>,

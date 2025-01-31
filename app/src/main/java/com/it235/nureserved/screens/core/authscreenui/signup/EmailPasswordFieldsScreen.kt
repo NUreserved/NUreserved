@@ -469,6 +469,8 @@ private fun RegisterButton(
     firstName: String,
     middleName: String,
     lastName: String,
+    role: String,
+    school: String,
     program: String,
     navController: NavController,
     scope: CoroutineScope,

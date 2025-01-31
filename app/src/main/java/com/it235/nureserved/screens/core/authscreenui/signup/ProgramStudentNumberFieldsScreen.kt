@@ -68,9 +68,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ProgramStudentNumberSignUpScreen(
     navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String
+    role: String,
 ){
     NUreservedTheme {
         val scope = rememberCoroutineScope()
@@ -293,9 +291,7 @@ private fun DropdownTextField(
 @Composable
 private fun NextButton(
     navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String,
+    selectedRole: String,
     program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
