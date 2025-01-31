@@ -51,11 +51,11 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.screens.admin.reservations.ReservationStatusScreen
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
-import com.it235.nureserved.ui.theme.brandColorGold
 import com.it235.nureserved.ui.theme.primaryLight
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -111,7 +111,7 @@ fun AdminHomeScreen(
 
             when (selectedItem) {
                 0 -> { HomeScreenContent(innerPadding = innerPadding, navController) }
-                1 -> { ReservationsScreenContent(innerPadding = innerPadding) }
+                1 -> { ReservationStatusScreen(innerPadding = innerPadding) }
             }
         }
     }
