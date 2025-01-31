@@ -120,11 +120,13 @@ private fun Main() {
                     )
                 }
                 composable(
-                    route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{program}/{studentNumber}",
+                    route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{role}/{school}/{program}/{studentNumber}",
                     arguments = listOf(
                         navArgument("firstName") { type = NavType.StringType},
                         navArgument("middleName") { type = NavType.StringType},
                         navArgument("lastName") { type = NavType.StringType},
+                        navArgument("role") { type = NavType.StringType},
+                        navArgument("school") { type = NavType.StringType},
                         navArgument("program") { type = NavType.StringType},
                         navArgument("studentNumber") { type = NavType.StringType}
                     )
@@ -132,6 +134,8 @@ private fun Main() {
                     val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
                     val middleName = backStackEntry.arguments?.getString("middleName") ?: ""
                     val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+                    val role = backStackEntry.arguments?.getString("role") ?: ""
+                    val school = backStackEntry.arguments?.getString("school") ?: ""
                     val program = backStackEntry.arguments?.getString("program") ?: ""
                     val studentNumber = backStackEntry.arguments?.getString("studentNumber") ?: ""
 
