@@ -64,6 +64,7 @@ fun ReservationStatusScreen(
     val selectedTabIndex by viewModel.selectedTabIndex.collectAsState()
     val tabs = viewModel.tabs
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
+    val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
 
     Column(
@@ -72,20 +73,14 @@ fun ReservationStatusScreen(
             .padding(innerPadding)
     ){
 
-        if (showBottomSheet) {
+        if (showBottomSheet && selectedReservation != null) {
             ModalBottomSheet(
                 onDismissRequest = {
                     viewModel.setShowBottomSheet(false)
                 },
                 sheetState = sheetState
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .verticalScroll(rememberScrollState())
-                ) {
-//                    ReservationFilledOutFormScreen(navController)
-                }
+                // Content here
             }
         }
 
@@ -122,7 +117,12 @@ fun ReservationStatusScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
                         items(viewModel.getApprovedReservationsList()) { reservation ->
-                            ReservationCard(reservation = reservation)
+                            ReservationCard(
+                                reservation = reservation,
+                                onClick = {
+                                    viewModel.setSelectedReservation(it)
+                                    viewModel.setShowBottomSheet(true)
+                                })
                         }
                     }
                 }
@@ -140,7 +140,13 @@ fun ReservationStatusScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
                         items(viewModel.getPendingReservationsList()) { reservation ->
-                            ReservationCard(reservation = reservation)
+                            ReservationCard(
+                                reservation = reservation,
+                                onClick = {
+                                    viewModel.setSelectedReservation(it)
+                                    viewModel.setShowBottomSheet(true)
+                                }
+                            )
                         }
                     }
                 }
@@ -153,11 +159,13 @@ fun ReservationStatusScreen(
 @Composable
 private fun ReservationCard(
     modifier: Modifier = Modifier,
-    reservation: ReservationFormData
+    reservation: ReservationFormData,
+    onClick: (ReservationFormData) -> Unit
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
             containerColor = when (reservation.getLatestApprovalDetail()!!.status) {
                 ApprovalStatus.PENDING -> Color(0xFFd69c40)

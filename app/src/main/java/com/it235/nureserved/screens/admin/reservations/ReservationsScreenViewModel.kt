@@ -19,6 +19,9 @@ class ReservationsScreenViewModel : ViewModel() {
 
     val tabs = listOf("Active", "Pending")
 
+    private val _selectedReservation = MutableStateFlow<ReservationFormData?>(null)
+    val selectedReservation: StateFlow<ReservationFormData?> = _selectedReservation.asStateFlow()
+
     fun setSelectedTabIndex(index: Int) {
         _selectedTabIndex.value = index
     }
@@ -37,5 +40,9 @@ class ReservationsScreenViewModel : ViewModel() {
 
     fun setShowBottomSheet(show: Boolean) {
         _showBottomSheet.value = show
+    }
+
+    fun setSelectedReservation(reservation: ReservationFormData?) {
+        _selectedReservation.value = reservation
     }
 }
