@@ -277,7 +277,7 @@ private fun ReservationStatusComposable(
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = "Valid until 8:40 PM today",
+                text = viewModel.getTimeLeft(reservationData.getActivityDateTime()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp

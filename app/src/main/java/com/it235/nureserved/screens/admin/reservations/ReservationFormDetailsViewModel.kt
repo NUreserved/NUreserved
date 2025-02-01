@@ -93,6 +93,20 @@ class ReservationFormDetailsViewModel : ViewModel() {
         return "$date\n$time"
     }
 
+    fun getTimeLeft(activityDate: ActivityDate): String {
+        val now = OffsetDateTime.now()
+        val endDate = activityDate.endDate
+
+        val dateFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
+        val timeFormatter = DateTimeFormatter.ofPattern("h:mm a")
+
+        return if (now.toLocalDate().isEqual(endDate.toLocalDate())) {
+            "Valid until ${endDate.format(timeFormatter)} today"
+        } else {
+            "Valid until ${endDate.format(dateFormatter)}, ${endDate.format(timeFormatter)}"
+        }
+    }
+
     fun updateRemarks(newRemarks: String) {
         _remarks.value = newRemarks
     }
