@@ -7,6 +7,7 @@ import getSampleReservations
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.OffsetDateTime
 
 class ReservationsStatusScreenViewModel : ViewModel() {
     private val _reservationList = MutableStateFlow(getSampleReservations())
@@ -28,7 +29,8 @@ class ReservationsStatusScreenViewModel : ViewModel() {
 
     fun getApprovedReservationsList(): List<ReservationFormData> {
         return _reservationList.value.filter { reservation ->
-            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.APPROVED
+            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.APPROVED &&
+            reservation.getActivityDateTime().startDate.isAfter(OffsetDateTime.now())
         }
     }
 
