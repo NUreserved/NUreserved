@@ -12,8 +12,8 @@ class ReservationsHistoryScreenViewModel : ViewModel() {
 
 
     fun getPastReservationsList(): List<ReservationFormData> {
-        return _reservationList.value.filter {
-            it.getLatestApprovalDetail()?.status != ApprovalStatus.PENDING &&
-            it.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()) }
+        return _reservationList.value.filter { reservation ->
+            reservation.getLatestApprovalDetail()?.status != ApprovalStatus.PENDING &&
+            reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()) }
     }
 }
