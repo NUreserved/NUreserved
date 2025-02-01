@@ -1,9 +1,9 @@
 package com.it235.nureserved.data.reservation_data
 
 import com.it235.nureserved.data.rooms.Room
-import java.time.LocalDate
 import java.time.LocalTime
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class ReservationFormData (
     private var organization: String,
@@ -16,7 +16,8 @@ class ReservationFormData (
     private var requesterMiddleName: String,
     private var requesterGivenName: String,
     private var requesterPosition: String,
-    private var approvalDetailsManager: ApprovalDetailsManager = ApprovalDetailsManager()
+    private var approvalDetailsManager: ApprovalDetailsManager = ApprovalDetailsManager(),
+    private var requestNumber: String = generateRequestNumber(existingReservationNumbers),
 ) {
 
     init {
@@ -28,6 +29,27 @@ class ReservationFormData (
                 eventDate = OffsetDateTime.now(),
             )
         )
+    }
+
+    companion object {
+        private val existingReservationNumbers: MutableSet<String> = mutableSetOf()
+
+        fun generateRequestNumber(existingReservationNumbers: MutableSet<String>): String {
+            val datePart = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"))
+            var sequenceNumber = 1
+
+            // Loop until a unique reservation number is found
+            var reservationNumber: String
+            do {
+                reservationNumber = "$datePart${sequenceNumber.toString().padStart(4, '0')}"
+                sequenceNumber++
+            } while (existingReservationNumbers.contains(reservationNumber))  // Check for duplicate
+
+            // Add the generated number to the set to avoid future duplicates
+            existingReservationNumbers.add(reservationNumber)
+
+            return reservationNumber
+        }
     }
 
     fun getOrganization(): String = organization
@@ -94,6 +116,10 @@ class ReservationFormData (
 
     fun getHistory(): List<ApprovalDetails> {
         return approvalDetailsManager.getHistory()
+    }
+
+    fun getRequestNumber(): String {
+        return requestNumber
     }
 }
 
