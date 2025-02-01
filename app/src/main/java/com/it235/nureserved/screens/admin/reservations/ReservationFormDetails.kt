@@ -221,7 +221,8 @@ fun ReservationFormDetailsScreen(
             onDismiss = {
                 viewModel.setShowApprovedReservationDialog(false)
                 dismissModalBottomSheet()
-            }
+            },
+            reservation = reservationData
         )
     }
 }
@@ -523,7 +524,8 @@ private fun ConfirmReservationApprovalDialog(
 
 @Composable
 private fun ApprovedReservationDialog(
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    reservation: ReservationFormData
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
@@ -536,7 +538,7 @@ private fun ApprovedReservationDialog(
         },
         text = {
             Text(
-                text = "Reservation #23525623 has been approved. The requester has been notified for their reservation request.",
+                text = "Reservation #${reservation.getTrackingNumber()} has been approved. The requester has been notified for their reservation request.",
                 textAlign = TextAlign.Center
             )
         },

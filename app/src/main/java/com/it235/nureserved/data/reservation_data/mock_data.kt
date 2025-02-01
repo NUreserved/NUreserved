@@ -195,7 +195,7 @@ fun getSampleReservations(): List<ReservationFormData> {
         dateFilled = OffsetDateTime.parse("2025-02-01T00:08:00+08:00"),
         activityDateTime = ActivityDate(
             startDate = OffsetDateTime.parse("2025-02-01T10:00:00+08:00"),
-            endDate = OffsetDateTime.parse("2025-02-01T12:31:00+08:00"),
+            endDate = OffsetDateTime.parse("2025-02-01T20:31:00+08:00"),
             startTime = LocalTime.of(10, 0),
             endTime = LocalTime.of(16, 0)
         ),
