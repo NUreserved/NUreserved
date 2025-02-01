@@ -30,7 +30,7 @@ class ReservationsStatusScreenViewModel : ViewModel() {
     fun getApprovedReservationsList(): List<ReservationFormData> {
         return _reservationList.value.filter { reservation ->
             reservation.getLatestApprovalDetail()?.status == ApprovalStatus.APPROVED &&
-            reservation.getActivityDateTime().startDate.isAfter(OffsetDateTime.now())
+            reservation.getActivityDateTime().endDate.isAfter(OffsetDateTime.now())
         }
     }
 
