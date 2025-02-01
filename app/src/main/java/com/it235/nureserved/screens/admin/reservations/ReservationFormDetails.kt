@@ -127,7 +127,7 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date and time of activity",
-                    value = reservationData.getActivityDateTime().toString()
+                    value = viewModel.formatActivityDateAndTIme(reservationData.getActivityDateTime())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(

@@ -87,7 +87,7 @@ fun getSampleReservations(): List<ReservationFormData> {
         dateFilled = OffsetDateTime.parse("2024-09-15T00:00:00+08:00"),
         activityDateTime = ActivityDate(
             startDate = OffsetDateTime.parse("2024-11-10T10:00:00+08:00"),
-            endDate = OffsetDateTime.parse("2024-11-10T15:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2024-11-13T15:00:00+08:00"),
             startTime = LocalTime.of(10, 0),
             endTime = LocalTime.of(15, 0)
         ),
@@ -138,10 +138,10 @@ fun getSampleReservations(): List<ReservationFormData> {
     var sample7 = ReservationFormData(
         organization = "Science Club",
         activityTitle = "Science Fair",
-        dateFilled = OffsetDateTime.parse("2024-06-20T00:00:00+08:00"),
+        dateFilled = OffsetDateTime.parse("2022-06-20T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-20T09:00:00+08:00"),
-            endDate = OffsetDateTime.parse("2024-11-20T15:00:00+08:00"),
+            startDate = OffsetDateTime.parse("2024-12-29T09:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2025-01-02T15:00:00+08:00"),
             startTime = LocalTime.of(9, 0),
             endTime = LocalTime.of(15, 0)
         ),
@@ -158,8 +158,8 @@ fun getSampleReservations(): List<ReservationFormData> {
         activityTitle = "Art Exhibition",
         dateFilled = OffsetDateTime.parse("2024-05-25T00:00:00+08:00"),
         activityDateTime = ActivityDate(
-            startDate = OffsetDateTime.parse("2024-11-25T11:00:00+08:00"),
-            endDate = OffsetDateTime.parse("2024-11-25T17:00:00+08:00"),
+            startDate = OffsetDateTime.parse("2025-01-25T11:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2025-02-27T17:00:00+08:00"),
             startTime = LocalTime.of(11, 0),
             endTime = LocalTime.of(17, 0)
         ),
@@ -197,5 +197,5 @@ fun getSampleReservations(): List<ReservationFormData> {
         )
     )
 
-    return listOf(sample1, sample2, sample3, sample4, sample5, sample6, sample7)
+    return listOf(sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8)
 }
