@@ -17,7 +17,7 @@ class ReservationsHistoryScreenViewModel : ViewModel() {
 
     // It displays the reservations that was approved in the past, OR reservations
     // that was declined regardless of time frame
-    fun getPastReservationsList(): List<ReservationFormData> {
+    fun getReservationsListHistory(): List<ReservationFormData> {
         return _reservationList.value
             .filter { reservation ->
                 (reservation.getLatestApprovalDetail()?.status != ApprovalStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
@@ -28,7 +28,7 @@ class ReservationsHistoryScreenViewModel : ViewModel() {
     }
 
     fun getFilteredList(): List<ReservationFormData>{
-        return getPastReservationsList()
+        return getReservationsListHistory()
             .filter {
                 _filterStatus.value == null || it.getLatestApprovalDetail()?.status == _filterStatus.value
             }
