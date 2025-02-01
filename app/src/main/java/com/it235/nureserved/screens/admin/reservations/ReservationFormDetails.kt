@@ -321,10 +321,10 @@ private fun RequestStatusComposable(
            )
            Spacer(modifier = Modifier.height(4.dp))
            Text(
-               text = "#${reservationData.getRequestNumber()}",
+               text = "#${reservationData.getTrackingNumber()}",
                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
                modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getRequestNumber()}"))
+                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
@@ -343,10 +343,10 @@ private fun RequestStatusComposable(
            )
            Spacer(modifier = Modifier.height(4.dp))
            Text(
-               text = "#${reservationData.getRequestNumber()}",
+               text = "#${reservationData.getTrackingNumber()}",
                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
                modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("${reservationData.getRequestNumber()}"))
+                   clipboardManager!!.setText(AnnotatedString("${reservationData.getTrackingNumber()}"))
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
