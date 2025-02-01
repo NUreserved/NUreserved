@@ -14,18 +14,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,7 +37,6 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,6 +57,7 @@ import com.it235.nureserved.ui.theme.white
 @Composable
 fun ReservationFormDetailsScreen(
     reservationData: ReservationFormData,
+    dismissModalBottomSheet: () -> Unit,
     viewModel: ReservationFormDetailsViewModel = viewModel()
 ) {
     // Clipboard manager to handle copy functionality
@@ -64,6 +65,8 @@ fun ReservationFormDetailsScreen(
 
     val clipboardManager by viewModel.clipboardManager.collectAsState()
     val context by viewModel.context.collectAsState()
+    val showConfirmDialog by viewModel.showConfirmDialog.collectAsState()
+    val showApprovedReservationDialog by viewModel.showApprovedReservationDialog.collectAsState()
 
     Column (
         modifier = Modifier
@@ -204,6 +207,22 @@ fun ReservationFormDetailsScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
         }
+    }
+
+    if (showConfirmDialog) {
+        ConfirmReservationApprovalDialog(
+            onDismiss = { viewModel.setShowConfirmDialog(false) },
+            showApprovedReservationDialog = { viewModel.setShowApprovedReservationDialog(true) }
+        )
+    }
+
+    if (showApprovedReservationDialog) {
+        ApprovedReservationDialog(
+            onDismiss = {
+                viewModel.setShowApprovedReservationDialog(false)
+                dismissModalBottomSheet()
+            }
+        )
     }
 }
 
@@ -358,7 +377,9 @@ private fun RequestStatusComposable(
 }
 
 @Composable
-private fun ApprovalSectionComposable(viewModel: ReservationFormDetailsViewModel) {
+private fun ApprovalSectionComposable(
+    viewModel: ReservationFormDetailsViewModel
+) {
     Column (
         modifier = Modifier
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
@@ -383,7 +404,7 @@ private fun ApprovalSectionComposable(viewModel: ReservationFormDetailsViewModel
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
         ) {
             Button(
-                onClick = {},
+                onClick = { },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = indicatorColorRed,
                     contentColor = white
@@ -398,7 +419,7 @@ private fun ApprovalSectionComposable(viewModel: ReservationFormDetailsViewModel
                 )
             }
             Button(
-                onClick = {},
+                onClick = { viewModel.setShowConfirmDialog(true) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = indicatorColorGreen,
                     contentColor = white
@@ -466,6 +487,65 @@ private fun TextContentComposable(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ConfirmReservationApprovalDialog(
+    onDismiss: () -> Unit,
+    showApprovedReservationDialog: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Confirm approval?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to confirm reservation?",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                showApprovedReservationDialog()
+            }) { Text("Confirm") }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }
+            ) { Text("Cancel") }
+        }
+    )
+}
+
+@Composable
+private fun ApprovedReservationDialog(
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Reservation approved") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.check_circle),
+                contentDescription = "Check or approved icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Reservation #23525623 has been approved. The requester has been notified for their reservation request.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = { onDismiss() }) { Text("OK") }
+        },
+    )
+}
+
 @Preview(
     showBackground = true
 )
@@ -473,6 +553,7 @@ private fun TextContentComposable(
 fun Default() {
     ReservationFormDetailsScreen(
         reservationData = sampleReservation,
+        dismissModalBottomSheet = {}
     )
 }
 
@@ -484,6 +565,7 @@ fun Default() {
 fun Preview480() {
     ReservationFormDetailsScreen(
         reservationData = sampleReservation,
+        dismissModalBottomSheet = {}
     )
 }
 
@@ -495,6 +577,7 @@ fun Preview480() {
 fun Preview550() {
     ReservationFormDetailsScreen(
         reservationData = sampleReservation,
+        dismissModalBottomSheet = {}
     )
 }
 
@@ -506,5 +589,6 @@ fun Preview550() {
 fun Preview720() {
     ReservationFormDetailsScreen(
         reservationData = sampleReservation,
+        dismissModalBottomSheet = {}
     )
 }

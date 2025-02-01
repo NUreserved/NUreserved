@@ -5,7 +5,6 @@ import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.lang.Thread.State
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -19,6 +18,12 @@ class ReservationFormDetailsViewModel : ViewModel() {
 
     private var _remarks = MutableStateFlow<String>("")
     var remarks: StateFlow<String> = _remarks
+
+    private val _showConfirmDialog = MutableStateFlow(false)
+    val showConfirmDialog: StateFlow<Boolean> = _showConfirmDialog
+
+    private val _showApprovedReservationDialog = MutableStateFlow(false)
+    val showApprovedReservationDialog: StateFlow<Boolean> = _showApprovedReservationDialog
 
     fun initialize(context: Context, clipboardManager: ClipboardManager) {
         _context.value = context
@@ -53,5 +58,13 @@ class ReservationFormDetailsViewModel : ViewModel() {
 
     fun updateRemarks(newRemarks: String) {
         _remarks.value = newRemarks
+    }
+
+    fun setShowConfirmDialog(show: Boolean) {
+        _showConfirmDialog.value = show
+    }
+
+    fun setShowApprovedReservationDialog(show: Boolean) {
+        _showApprovedReservationDialog.value = show
     }
 }

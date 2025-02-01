@@ -86,7 +86,12 @@ fun ReservationStatusScreen(
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    ReservationFormDetailsScreen(selectedReservation!!)
+                    ReservationFormDetailsScreen(
+                        reservationData = selectedReservation!!,
+                        dismissModalBottomSheet = {
+                            viewModel.setShowBottomSheet(false)
+                        }
+                    )
                 }
             }
         }
