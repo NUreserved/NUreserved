@@ -18,9 +18,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,21 +58,71 @@ fun ReservationsHistoryScreen(
         if (viewModel.getPastReservationsList().isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ){
-                items(viewModel.getPastReservationsList()) { reservation ->
-                    ReservationCard(
-                        reservation = reservation,
-                        onClick = {
-//                            viewModel.setSelectedReservation(it)
-//                            viewModel.setShowBottomSheet(true)
-                        })
+            val filteredList = viewModel.getFilteredList()
+            val filterStatus by viewModel.filterStatus.collectAsState()
+
+            ReservationFilterChipComposable(filterStatus, viewModel)
+
+            if (filteredList.isEmpty()) {
+                EmptyListComposable("No history recorded")
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                ) {
+                    items(filteredList) { reservation ->
+                        ReservationCard(
+                            reservation = reservation,
+                            onClick = {
+                                // viewModel.setSelectedReservation(it)
+                                // viewModel.setShowBottomSheet(true)
+                            })
+                    }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ReservationFilterChipComposable(
+    filterStatus: ApprovalStatus?,
+    viewModel: ReservationsHistoryScreenViewModel
+) {
+
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+    ) {
+        Text(
+            text = "Show reservations that were",
+            style = LocalTextStyle.current.copy(
+                fontSize = 14.sp,
+                lineHeight = 6.sp
+            )
+        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            FilterChip(
+                selected = filterStatus == ApprovalStatus.APPROVED,
+                onClick = {
+                    if (filterStatus == ApprovalStatus.APPROVED) viewModel.setFilterStatus(null)
+                    else viewModel.setFilterStatus(ApprovalStatus.APPROVED)
+                },
+                label = { Text("Approved") }
+            )
+            FilterChip(
+                selected = filterStatus == ApprovalStatus.DECLINED,
+                onClick = {
+                    if (filterStatus == ApprovalStatus.DECLINED) viewModel.setFilterStatus(null)
+                    else viewModel.setFilterStatus(ApprovalStatus.DECLINED)
+                },
+                label = { Text("Declined") }
+            )
         }
     }
 }
