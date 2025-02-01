@@ -171,6 +171,42 @@ fun getSampleReservations(): List<ReservationFormData> {
         requesterPosition = "President"
     )
 
+    var sample9 = ReservationFormData(
+        organization = "Tech Innovators",
+        activityTitle = "Hackathon 2025",
+        dateFilled = OffsetDateTime.parse("2025-01-29T00:00:00+08:00"),
+        activityDateTime = ActivityDate(
+            startDate = OffsetDateTime.parse("2025-02-10T09:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2025-02-10T13:00:00+08:00"),
+            startTime = LocalTime.of(9, 0),
+            endTime = LocalTime.of(21, 0)
+        ),
+        venue = roomList[25],
+        expectedAttendees = 150,
+        requesterLastName = "Nguyen",
+        requesterMiddleName = "Minh",
+        requesterGivenName = "An",
+        requesterPosition = "Event Coordinator"
+    )
+
+    var sample10 = ReservationFormData(
+        organization = "Robotics Club",
+        activityTitle = "Robotics Workshop",
+        dateFilled = OffsetDateTime.parse("2025-02-01T00:08:00+08:00"),
+        activityDateTime = ActivityDate(
+            startDate = OffsetDateTime.parse("2025-02-01T10:00:00+08:00"),
+            endDate = OffsetDateTime.parse("2025-02-01T12:31:00+08:00"),
+            startTime = LocalTime.of(10, 0),
+            endTime = LocalTime.of(16, 0)
+        ),
+        venue = roomList[8],
+        expectedAttendees = 40,
+        requesterLastName = "Wang",
+        requesterMiddleName = "Li",
+        requesterGivenName = "Wei",
+        requesterPosition = "Workshop Coordinator"
+    )
+
     sample6.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
@@ -197,5 +233,23 @@ fun getSampleReservations(): List<ReservationFormData> {
         )
     )
 
-    return listOf(sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8)
+    sample9.addApprovalDetail(
+        ApprovalDetails(
+            status = ApprovalStatus.APPROVED,
+            approvedBy = "Maria Martinez",
+            approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+            eventDate = OffsetDateTime.now(),
+        )
+    )
+
+    sample10.addApprovalDetail(
+        ApprovalDetails(
+            status = ApprovalStatus.APPROVED,
+            approvedBy = "Maria Martinez",
+            approvalDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
+            eventDate = OffsetDateTime.now(),
+        )
+    )
+
+    return listOf(sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10)
 }
