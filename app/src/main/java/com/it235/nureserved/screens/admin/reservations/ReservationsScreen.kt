@@ -32,6 +32,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -67,6 +68,15 @@ fun ReservationStatusScreen(
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
+
+    // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
+    // called  on dismissModalBottomSheet() to avoid triggering weird movement
+    // of modal bottom sheet
+    LaunchedEffect(showBottomSheet) {
+        if (!showBottomSheet) {
+            sheetState.hide()
+        }
+    }
 
     Column(
         modifier = Modifier
