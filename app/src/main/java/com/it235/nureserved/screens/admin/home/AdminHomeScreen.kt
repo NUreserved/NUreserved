@@ -52,6 +52,7 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.screens.admin.reservations.ReservationStatusScreen
+import com.it235.nureserved.screens.admin.reservations.ReservationsHistoryScreen
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
@@ -112,6 +113,7 @@ fun AdminHomeScreen(
             when (selectedItem) {
                 0 -> { HomeScreenContent(innerPadding = innerPadding, navController) }
                 1 -> { ReservationStatusScreen(innerPadding = innerPadding) }
+                2 -> { ReservationsHistoryScreen(innerPadding = innerPadding) }
             }
         }
     }
