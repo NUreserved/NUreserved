@@ -1,7 +1,6 @@
 package com.it235.nureserved.screens.admin.reservations
 
 import ReservationFormDetailsScreen
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -40,8 +39,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,10 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.data.reservation_data.ApprovalStatus
 import com.it235.nureserved.data.reservation_data.ReservationFormData
-import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.screens.core.StateCard
 import com.it235.nureserved.screens.core.rescalePicture
-import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
 import java.time.format.DateTimeFormatter
@@ -61,7 +55,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun ReservationStatusScreen(
     innerPadding: PaddingValues,
-    viewModel: ReservationsScreenViewModel = viewModel()
+    viewModel: ReservationsStatusScreenViewModel = viewModel()
 ) {
     val selectedTabIndex by viewModel.selectedTabIndex.collectAsState()
     val tabs = viewModel.tabs

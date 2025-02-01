@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class ReservationsScreenViewModel : ViewModel() {
+class ReservationsStatusScreenViewModel : ViewModel() {
     private val _reservationList = MutableStateFlow(getSampleReservations())
 
     private val _selectedTabIndex = MutableStateFlow(0)
