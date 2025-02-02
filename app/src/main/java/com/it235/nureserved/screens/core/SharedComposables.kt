@@ -49,6 +49,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.white
@@ -207,12 +208,12 @@ fun OnboardingScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeSettingsDialog(
+    currentTheme: ThemeOption,
+    onThemeChange: (ThemeOption) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val context = LocalContext.current
-    val currentTheme = 0
     val themeOptions = listOf("Light theme", "Dark theme", "Use device theme")
-    val selectedOption = remember { mutableStateOf(themeOptions[currentTheme]) }
+    val selectedOption = remember { mutableStateOf(themeOptions[currentTheme.ordinal]) }
 
     AlertDialog(
         onDismissRequest = { onDismiss() },
@@ -226,12 +227,14 @@ fun ThemeSettingsDialog(
                             .fillMaxWidth()
                             .clickable {
                                 selectedOption.value = theme
+                                onThemeChange(ThemeOption.values()[index])
                             }
                     ) {
                         RadioButton(
                             selected = selectedOption.value == theme,
                             onClick = {
                                 selectedOption.value = theme
+                                onThemeChange(ThemeOption.values()[index])
                             }
                         )
                         Text(
