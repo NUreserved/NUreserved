@@ -5,7 +5,7 @@ data class Room(
     val id: Int,
     val name: String,
     val location: FloorLocation,
-    val type: RoomType,
+    val type: RoomType?,
     val imageResId: Int?,
     var roomAvailabilitySchedule: List<DaySchedule>
 )
@@ -20,7 +20,10 @@ fun getRoomById(id: Int): Room? {
 }
 
 enum class RoomType(val value: String) {
-    LABORATORY("Laboratory"), CLASSROOM("Classroom")
+    CLASSROOM("Classroom"),
+    COMPUTER_LABORATORY("Computer Laboratory"),
+    DRAFTING_ROOM("Drafting Room"),
+    PHYSICS_LABORATORY("Physics Laboratory")
 }
 
 enum class FloorLocation(val value: String) {
