@@ -193,7 +193,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED ||
+                reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column (
@@ -303,6 +304,21 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
+            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+                Row(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .background(color = indicatorColorRed, shape = CircleShape),
+                ) {}
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = ApprovalStatus.DECLINED.value,
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp
+                    )
+                )
             }
         }
 
@@ -317,6 +333,16 @@ private fun ReservationStatusComposable(
                 )
             )
         } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            Text(
+                modifier = Modifier
+                    .padding(end = 16.dp),
+                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                style = LocalTextStyle.current.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp
+                )
+            )
+        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -379,7 +405,7 @@ private fun RequestStatusComposable(
                text = "#${reservationData.getTrackingNumber()}",
                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
                modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("${reservationData.getTrackingNumber()}"))
+                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
@@ -398,10 +424,10 @@ private fun RequestStatusComposable(
            )
            Spacer(modifier = Modifier.height(4.dp))
            Text(
-               text = "#247142164",
+               text = "#${reservationData.getTrackingNumber()}",
                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
                modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#247142164"))
+                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )

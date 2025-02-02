@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.admin.reservations
 
+import ReservationFormDetailsScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -15,12 +16,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -42,16 +48,45 @@ import com.it235.nureserved.ui.theme.white4
 import com.it235.nureserved.ui.theme.white6
 import java.time.format.DateTimeFormatter
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReservationsHistoryScreen(
     innerPadding: PaddingValues,
+    viewModel: ReservationsHistoryScreenViewModel = viewModel(),
     sharedViewModel: ReservationsSharedViewModel = viewModel()
 ) {
+    val showBottomSheet by viewModel.showBottomSheet.collectAsState()
+    val selectedReservation by viewModel.selectedReservation.collectAsState()
+    val sheetState = rememberModalBottomSheetState()
+
     Column(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
     ) {
+        if (showBottomSheet && selectedReservation != null) {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    viewModel.setShowBottomSheet(false)
+                },
+                sheetState = sheetState
+            ) {
+                Column (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    ReservationFormDetailsScreen(
+                        reservationData = selectedReservation!!,
+                        dismissModalBottomSheet = {
+                            viewModel.setShowBottomSheet(false)
+                        }
+                    )
+                }
+            }
+        }
+
+
         if (sharedViewModel.getReservationsListHistory().isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
@@ -73,8 +108,8 @@ fun ReservationsHistoryScreen(
                         ReservationCard(
                             reservation = reservation,
                             onClick = {
-                                // viewModel.setSelectedReservation(it)
-                                // viewModel.setShowBottomSheet(true)
+                                 viewModel.setSelectedReservation(it)
+                                 viewModel.setShowBottomSheet(true)
                             })
                     }
                 }
