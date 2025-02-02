@@ -42,3 +42,33 @@ fun getUserData(onResult: (User?) -> Unit) {
         onResult(null)
     }
 }
+
+fun checkIfAdmin(onResult: (Boolean) -> Unit) {
+    val auth = FirebaseAuth.getInstance()
+    val firestore = Firebase.firestore
+    val currentUser = auth.currentUser
+
+    if (currentUser != null) {
+        val uid = currentUser.uid
+        val userDocRef = firestore.collection("user").document(uid)
+
+        userDocRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val isAdmin = document.getBoolean("isAdmin") ?: false
+                    Log.d("UserData", "isAdmin: $isAdmin")
+                    onResult(isAdmin)
+                } else {
+                    Log.d("UserData", "Document does not exist")
+                    onResult(false)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("UserData", "Error getting documents: ", exception)
+                onResult(false)
+            }
+    } else {
+        Log.d("UserData", "No current user")
+        onResult(false)
+    }
+}

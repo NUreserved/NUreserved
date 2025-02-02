@@ -88,6 +88,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.content.Context
 import android.content.SharedPreferences
+import checkIfAdmin
 import com.it235.nureserved.ui.theme.white4
 
 @Composable
@@ -442,8 +443,16 @@ private fun LoginButton(
                             //check if verified
                             val user = auth.currentUser
                             if (user != null && user.isEmailVerified) {
-                                navController.navigate(ScreenRoutes.Home.route) {
-                                    popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                checkIfAdmin { admin ->
+                                    if (admin) {
+                                        navController.navigate(ScreenRoutes.AdminHome.route) {
+                                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                        }
+                                    } else {
+                                        navController.navigate(ScreenRoutes.Home.route) {
+                                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                        }
+                                    }
                                 }
                             } else {
                                 scope.launch {
