@@ -35,12 +35,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +53,8 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.reservations.ReservationStatusScreen
 import com.it235.nureserved.screens.admin.reservations.ReservationsHistoryScreen
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
@@ -58,6 +62,7 @@ import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.primaryLight
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,6 +70,10 @@ fun AdminHomeScreen(
     navController: NavController,
     viewModel: AdminHomeViewModel
 ) {
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+    val coroutineScope = rememberCoroutineScope()
+
     val selectedItem by viewModel.selectedItem.collectAsState()
     val showThemeSettingsDialog by viewModel.showThemeSettingsDialog.collectAsState()
     val showLogoutConfirmationDialog by viewModel.showLogoutConfirmationDialog.collectAsState()
@@ -77,7 +86,7 @@ fun AdminHomeScreen(
         }
     }
 
-    NUreservedTheme {
+    NUreservedTheme(themeOption) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold (
@@ -98,7 +107,13 @@ fun AdminHomeScreen(
         ){ innerPadding ->
             if (showThemeSettingsDialog) {
                 ThemeSettingsDialog(
-                    onDismiss = { viewModel.toggleThemeSettingsDialog() }
+                    onDismiss = { viewModel.toggleThemeSettingsDialog() },
+                    currentTheme = themeOption,
+                    onThemeChange = { newTheme ->
+                        coroutineScope.launch {
+                            appPreferences.saveThemeOption(newTheme)
+                        }
+                    },
                 )
             }
 

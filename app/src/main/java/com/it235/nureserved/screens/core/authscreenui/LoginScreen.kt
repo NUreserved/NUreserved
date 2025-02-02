@@ -88,6 +88,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.compose.runtime.collectAsState
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import checkIfAdmin
 import com.it235.nureserved.ui.theme.white4
 
@@ -95,8 +98,11 @@ import com.it235.nureserved.ui.theme.white4
 fun LoginScreen(
     navController: NavController
 ){
-    NUreservedTheme {
-        val scope = rememberCoroutineScope()
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+    val scope = rememberCoroutineScope()
+
+    NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
 
         val loading = remember { mutableStateOf(false) }

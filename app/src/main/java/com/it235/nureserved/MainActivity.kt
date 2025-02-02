@@ -11,7 +11,10 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +27,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsViewModel
 import com.it235.nureserved.screens.admin.home.AdminHomeScreen
@@ -56,7 +61,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun Main() {
-    NUreservedTheme {
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+
+    NUreservedTheme(themeOption) {
         val navController = rememberNavController()
         val showSplash = rememberSaveable { mutableStateOf(true) }
         val auth = FirebaseAuth.getInstance()
