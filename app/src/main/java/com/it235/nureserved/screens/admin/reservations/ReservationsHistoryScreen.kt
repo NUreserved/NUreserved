@@ -45,20 +45,20 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun ReservationsHistoryScreen(
     innerPadding: PaddingValues,
-    viewModel: ReservationsHistoryScreenViewModel = viewModel()
+    sharedViewModel: ReservationsSharedViewModel = viewModel()
 ) {
     Column(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
     ) {
-        if (viewModel.getReservationsListHistory().isEmpty()) {
+        if (sharedViewModel.getReservationsListHistory().isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
-            val filteredList = viewModel.getFilteredList()
-            val filterStatus by viewModel.filterStatus.collectAsState()
+            val filteredList = sharedViewModel.getFilteredList()
+            val filterStatus by sharedViewModel.filterStatus.collectAsState()
 
-            ReservationFilterChipComposable(filterStatus, viewModel)
+            ReservationFilterChipComposable(filterStatus, sharedViewModel)
 
             if (filteredList.isEmpty()) {
                 EmptyListComposable("No history recorded")
@@ -86,7 +86,7 @@ fun ReservationsHistoryScreen(
 @Composable
 private fun ReservationFilterChipComposable(
     filterStatus: ApprovalStatus?,
-    viewModel: ReservationsHistoryScreenViewModel
+    sharedViewModel: ReservationsSharedViewModel
 ) {
 
     Column (
@@ -107,16 +107,16 @@ private fun ReservationFilterChipComposable(
             FilterChip(
                 selected = filterStatus == ApprovalStatus.APPROVED,
                 onClick = {
-                    if (filterStatus == ApprovalStatus.APPROVED) viewModel.setFilterStatus(null)
-                    else viewModel.setFilterStatus(ApprovalStatus.APPROVED)
+                    if (filterStatus == ApprovalStatus.APPROVED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(ApprovalStatus.APPROVED)
                 },
                 label = { Text("Approved") }
             )
             FilterChip(
                 selected = filterStatus == ApprovalStatus.DECLINED,
                 onClick = {
-                    if (filterStatus == ApprovalStatus.DECLINED) viewModel.setFilterStatus(null)
-                    else viewModel.setFilterStatus(ApprovalStatus.DECLINED)
+                    if (filterStatus == ApprovalStatus.DECLINED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(ApprovalStatus.DECLINED)
                 },
                 label = { Text("Declined") }
             )

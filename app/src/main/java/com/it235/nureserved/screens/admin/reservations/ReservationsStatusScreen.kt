@@ -55,7 +55,8 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun ReservationStatusScreen(
     innerPadding: PaddingValues,
-    viewModel: ReservationsStatusScreenViewModel = viewModel()
+    viewModel: ReservationsStatusScreenViewModel = viewModel(),
+    sharedViewModel: ReservationsSharedViewModel = viewModel()
 ) {
     val selectedTabIndex by viewModel.selectedTabIndex.collectAsState()
     val tabs = viewModel.tabs
@@ -121,7 +122,7 @@ fun ReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                val approvedReservations = viewModel.getApprovedReservationsList()
+                val approvedReservations = sharedViewModel.getApprovedReservationsList()
 
                 if (approvedReservations.isEmpty()) {
                     EmptyListComposable("No active reservations")
@@ -132,7 +133,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(viewModel.getApprovedReservationsList()) { reservation ->
+                        items(sharedViewModel.getApprovedReservationsList()) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {
@@ -144,7 +145,7 @@ fun ReservationStatusScreen(
                 }
             }
             1 -> {
-                val pendingReservations = viewModel.getPendingReservationsList()
+                val pendingReservations = sharedViewModel.getPendingReservationsList()
 
                 if (pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
@@ -155,7 +156,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(viewModel.getPendingReservationsList()) { reservation ->
+                        items(sharedViewModel.getPendingReservationsList()) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {

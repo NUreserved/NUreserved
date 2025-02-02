@@ -10,8 +10,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.time.OffsetDateTime
 
 class ReservationsStatusScreenViewModel : ViewModel() {
-    private val _reservationList = MutableStateFlow(getSampleReservations())
-
     private val _selectedTabIndex = MutableStateFlow(0)
     val selectedTabIndex: StateFlow<Int> = _selectedTabIndex.asStateFlow()
 
@@ -25,19 +23,6 @@ class ReservationsStatusScreenViewModel : ViewModel() {
 
     fun setSelectedTabIndex(index: Int) {
         _selectedTabIndex.value = index
-    }
-
-    fun getApprovedReservationsList(): List<ReservationFormData> {
-        return _reservationList.value.filter { reservation ->
-            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.APPROVED &&
-            reservation.getActivityDateTime().endDate.isAfter(OffsetDateTime.now())
-        }
-    }
-
-    fun getPendingReservationsList(): List<ReservationFormData> {
-        return _reservationList.value.filter { reservation ->
-            reservation.getLatestApprovalDetail()?.status == ApprovalStatus.PENDING
-        }
     }
 
     fun setShowBottomSheet(show: Boolean) {
