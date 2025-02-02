@@ -44,15 +44,18 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -74,6 +77,8 @@ import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
 import com.it235.nureserved.screens.core.rescalePicture
@@ -82,6 +87,7 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
 import getUserData
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,7 +114,11 @@ fun HomeScreen(navController: NavController) {
         }
     }
 
-    NUreservedTheme {
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+    val coroutineScope = rememberCoroutineScope()
+
+    NUreservedTheme(themeOption) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold(
@@ -143,7 +153,13 @@ fun HomeScreen(navController: NavController) {
 
             if (showThemeSettingsDialog) {
                 ThemeSettingsDialog(
-                    onDismiss = { showThemeSettingsDialog = false }
+                    onDismiss = { showThemeSettingsDialog = false },
+                    currentTheme = themeOption,
+                    onThemeChange = { newTheme ->
+                        coroutineScope.launch {
+                            appPreferences.saveThemeOption(newTheme)
+                        }
+                    },
                 )
             }
 

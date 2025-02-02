@@ -37,6 +37,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +50,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -71,6 +73,8 @@ import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -108,8 +112,11 @@ fun SignUpScreen(
     school: String,
     program: String,
 ){
-    NUreservedTheme {
-        val scope = rememberCoroutineScope()
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+    val scope = rememberCoroutineScope()
+
+    NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
 
         var loading = remember { mutableStateOf(false) }

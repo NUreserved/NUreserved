@@ -30,9 +30,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,8 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.data.rooms.Room
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorGreen
@@ -56,13 +60,15 @@ fun FloorRoomsScreen(
     floorName: FloorLocation,
     viewModel: FloorRoomsViewModel
 ) {
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
     val rooms by viewModel.rooms.collectAsState()
 
     LaunchedEffect(floorName) {
         viewModel.loadRooms(floorName)
     }
 
-    NUreservedTheme {
+    NUreservedTheme(themeOption) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
         Scaffold (

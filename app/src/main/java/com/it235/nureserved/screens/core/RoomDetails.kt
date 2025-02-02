@@ -1,6 +1,5 @@
 package com.it235.nureserved.screens.core
 
-import User
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,12 +26,16 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +50,8 @@ import com.it235.nureserved.data.rooms.Room
 import com.it235.nureserved.data.rooms.TimeSlot
 import com.it235.nureserved.data.rooms.getRoomById
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
 
@@ -57,7 +62,10 @@ fun RoomDetails(
     roomId: String?,
     isUser: Boolean?
 ) {
-    NUreservedTheme {
+    val appPreferences = AppPreferences(LocalContext.current)
+    val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
+
+    NUreservedTheme(themeOption) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
 
