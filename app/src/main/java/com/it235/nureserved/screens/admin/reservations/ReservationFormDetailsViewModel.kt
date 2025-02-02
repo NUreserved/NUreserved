@@ -61,6 +61,27 @@ class ReservationFormDetailsViewModel : ViewModel() {
         }
     }
 
+    fun getTimeLapseStringForHistory(eventDate: OffsetDateTime): String {
+        val now = OffsetDateTime.now()
+        val duration = Duration.between(eventDate, now)
+
+        val days = duration.toDays()
+        val hours = duration.toHours() % 24
+        val minutes = duration.toMinutes() % 60
+
+        return when {
+            days > 30 -> {
+                val months = days / 30
+                val remainingDays = days % 30
+                "$months m, $remainingDays d"
+            }
+            days > 0 -> "$days d"
+            hours > 0 -> "$hours h"
+            minutes > 1 -> "$minutes m"
+            else -> "Less than a minute ago"
+        }
+    }
+
     fun formatDateFilled(dateTime: OffsetDateTime): String {
         val formattedDateTime = DateTimeFormatter.ofPattern("MMM d, yyyy")
         return dateTime.format(formattedDateTime)
@@ -114,6 +135,13 @@ class ReservationFormDetailsViewModel : ViewModel() {
         } else {
             "Valid until ${endDate.format(dateFormatter)}, ${endDate.format(timeFormatter)}"
         }
+    }
+
+    fun formatHistoryDate(date: OffsetDateTime): String {
+        val dateFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
+        val timeFormatter = DateTimeFormatter.ofPattern("h:mm a")
+
+        return "${date.format(dateFormatter)}, ${date.format(timeFormatter)}"
     }
 
     fun updateRemarks(newRemarks: String) {

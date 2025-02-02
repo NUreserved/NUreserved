@@ -1,5 +1,6 @@
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,6 +34,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -44,15 +49,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
+import com.it235.nureserved.data.reservation_data.ApprovalDetails
 import com.it235.nureserved.data.reservation_data.ApprovalStatus
 import com.it235.nureserved.data.reservation_data.ReservationFormData
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
+import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
+import com.it235.nureserved.ui.theme.white3
+import java.time.OffsetDateTime
 
 @Composable
 fun ReservationFormDetailsScreen(
@@ -185,16 +194,17 @@ fun ReservationFormDetailsScreen(
             }
 
             if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    text = "Approved by ${reservationData.getLatestApprovalDetail()!!.approvedBy}",
-                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-                    textAlign = TextAlign.Center,
-                    style = LocalTextStyle.current.copy(
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
-                    ),
-                )
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Column (
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+                    RequestTimelineHistory(reservationData.getHistory(), viewModel)
+                }
+
             } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column (
@@ -398,6 +408,86 @@ private fun RequestStatusComposable(
        }
     }
 }
+
+@Composable
+private fun RequestTimelineHistory(
+    approvalDetailHistory: List<ApprovalDetails>,
+    viewModel: ReservationFormDetailsViewModel
+) {
+    Column (
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Text(
+            text = "Request History",
+            style = LocalTextStyle.current.copy(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+            ),
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        for ((index, approvalDetail) in approvalDetailHistory.withIndex()) {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+                // Timeline Indicator: Circle + Vertical Line
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .widthIn(max = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // Circle with Icon inside
+                    Canvas(modifier = Modifier.size(24.dp)) {
+                        val circleColor = when (approvalDetail.status) {
+                            ApprovalStatus.PENDING -> indicatorColorOrange
+                            ApprovalStatus.APPROVED -> indicatorColorGreen
+                            ApprovalStatus.DECLINED -> indicatorColorRed
+                        }
+                        drawCircle(
+                            color = circleColor
+                        )
+                    }
+
+                    // Vertical Line (only if not last)
+                    if (index != approvalDetailHistory.size - 1) {
+                        Canvas(modifier = Modifier.height(48.dp).width(2.dp)) {
+                            drawLine(
+                                color = Color.Gray,
+                                start = Offset(x = size.width / 2, y = 0f),
+                                end = Offset(x = size.width / 2, y = size.height),
+                                strokeWidth = 4f
+                            )
+                        }
+                    }
+                }
+
+                // Event content (text)
+                Column() {
+                    Text(
+                        text = when (approvalDetail.status) {
+                            ApprovalStatus.PENDING -> "Request awaiting approval"
+                            ApprovalStatus.APPROVED -> "Request has been approved"
+                            ApprovalStatus.DECLINED -> "Request has been declined"
+                        },
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = if (isSystemInDarkTheme()) white3 else darkGray
+                    )
+                    Text(
+                        text = viewModel.formatHistoryDate(approvalDetail.eventDate),
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 13.sp
+                        ),
+                        color = if (isSystemInDarkTheme()) white3 else darkGray
+                    )
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun ApprovalSectionComposable(
@@ -647,44 +737,27 @@ private fun DeclinedReservationDialog(
 )
 @Composable
 fun Default() {
-    ReservationFormDetailsScreen(
-        reservationData = sampleReservation,
-        dismissModalBottomSheet = {}
-    )
-}
-
-@Preview(
-    showBackground = true,
-    widthDp = 480
-)
-@Composable
-fun Preview480() {
-    ReservationFormDetailsScreen(
-        reservationData = sampleReservation,
-        dismissModalBottomSheet = {}
-    )
-}
-
-@Preview(
-    showBackground = true,
-    widthDp = 550
-)
-@Composable
-fun Preview550() {
-    ReservationFormDetailsScreen(
-        reservationData = sampleReservation,
-        dismissModalBottomSheet = {}
-    )
-}
-
-@Preview(
-    showBackground = true,
-    widthDp = 720
-)
-@Composable
-fun Preview720() {
-    ReservationFormDetailsScreen(
-        reservationData = sampleReservation,
-        dismissModalBottomSheet = {}
+    RequestTimelineHistory(
+        listOf(
+            ApprovalDetails(
+                status = ApprovalStatus.APPROVED,
+                approvedBy = "Maria Martinez",
+                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+            ),
+            ApprovalDetails(
+                status = ApprovalStatus.DECLINED,
+                approvedBy = "Maria Martinez",
+                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+            ),
+            ApprovalDetails(
+                status = ApprovalStatus.DECLINED,
+                approvedBy = "Maria Martinez",
+                approvalDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
+                eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
+            ),
+        ),
+        viewModel = ReservationFormDetailsViewModel()
     )
 }
