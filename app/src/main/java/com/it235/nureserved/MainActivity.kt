@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import checkIfAdmin
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.data.rooms.FloorLocation
 import com.it235.nureserved.preferences.AppPreferences
@@ -71,13 +72,27 @@ private fun Main() {
         val isLoggedIn = auth.currentUser != null
 
         val sharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
-        //create hasSeenOnBoarding flag indicating whether the user has seen the onboarding screen
-        //if flag does not exist it will automatically create
         val hasSeenOnBoarding = sharedPreferences.getBoolean("hasSeenOnBoarding", false)
+
+        val startDestination = rememberSaveable { mutableStateOf<String?>(null) }
 
         LaunchedEffect(Unit) {
             delay(1000)
-            showSplash.value = false
+
+            if (isLoggedIn) {
+                checkIfAdmin { admin ->
+                    startDestination.value = if (admin) ScreenRoutes.AdminHome.route else ScreenRoutes.Home.route
+                    showSplash.value = false
+                }
+            } else {
+                startDestination.value = if (!hasSeenOnBoarding) {
+                    sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
+                    ScreenRoutes.GetStarted.route
+                } else {
+                    ScreenRoutes.Login.route
+                }
+                showSplash.value = false
+            }
         }
 
         AnimatedVisibility(
@@ -88,54 +103,29 @@ private fun Main() {
             SplashScreen()
         }
 
-        AnimatedVisibility(
-            visible = !showSplash.value,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
+        if (!showSplash.value && startDestination.value != null) {
             NavHost(
                 navController = navController,
-                startDestination = if (isLoggedIn){
-                    ScreenRoutes.Home.route
-                } else {
-                    ScreenRoutes.GetStarted.route
-                    if(!hasSeenOnBoarding){
-                        //edit the hasSeenOnBoarding flag to true, so the next time user opens the app, it will not show the onboarding screen
-                        sharedPreferences.edit().putBoolean("hasSeenOnBoarding", true).apply()
-                        ScreenRoutes.GetStarted.route
-                    }
-                    else{
-                        ScreenRoutes.Login.route
-                    }
-                }
+                startDestination = startDestination.value!!
             ) {
                 composable(ScreenRoutes.Login.route) { LoginScreen(navController) }
-
-                // Composable with navigation arguments which are needed in order to pass data
-                // and make registration possible
                 composable(ScreenRoutes.RoleSignUp.route) { RolesFieldScreen(navController) }
                 composable(
                     route = "${ScreenRoutes.SchoolSignUp.route}/{role}",
-                    arguments = listOf(
-                        navArgument("role") { type = NavType.StringType},
-                    )
-                ){ backStackEntry ->
+                    arguments = listOf(navArgument("role") { type = NavType.StringType })
+                ) { backStackEntry ->
                     val role = backStackEntry.arguments?.getString("role") ?: ""
-
-                    SchoolFieldScreen(
-                        navController = navController,
-                        role = role,
-                    )
+                    SchoolFieldScreen(navController, role)
                 }
                 composable(
                     route = "${ScreenRoutes.SignUp.route}/{firstName}/{middleName}/{lastName}/{role}/{school}/{program}",
                     arguments = listOf(
-                        navArgument("firstName") { type = NavType.StringType},
-                        navArgument("middleName") { type = NavType.StringType},
-                        navArgument("lastName") { type = NavType.StringType},
-                        navArgument("role") { type = NavType.StringType},
-                        navArgument("school") { type = NavType.StringType},
-                        navArgument("program") { type = NavType.StringType},
+                        navArgument("firstName") { type = NavType.StringType },
+                        navArgument("middleName") { type = NavType.StringType },
+                        navArgument("lastName") { type = NavType.StringType },
+                        navArgument("role") { type = NavType.StringType },
+                        navArgument("school") { type = NavType.StringType },
+                        navArgument("program") { type = NavType.StringType }
                     )
                 ) { backStackEntry ->
                     val firstName = backStackEntry.arguments?.getString("firstName") ?: ""
@@ -144,48 +134,27 @@ private fun Main() {
                     val role = backStackEntry.arguments?.getString("role") ?: ""
                     val school = backStackEntry.arguments?.getString("school") ?: ""
                     val program = backStackEntry.arguments?.getString("program") ?: ""
-
-                    SignUpScreen(
-                        navController = navController,
-                        firstName = firstName,
-                        middleName = middleName,
-                        lastName = lastName,
-                        role = role,
-                        school = school,
-                        program = program,
-                    )
+                    SignUpScreen(navController, firstName, middleName, lastName, role, school, program)
                 }
                 composable(
                     route = "${ScreenRoutes.NameSignUp.route}/{role}/{school}/{program}",
                     arguments = listOf(
-                        navArgument("role") { type = NavType.StringType},
-                        navArgument("school") { type = NavType.StringType},
-                        navArgument("program") { type = NavType.StringType},
+                        navArgument("role") { type = NavType.StringType },
+                        navArgument("school") { type = NavType.StringType },
+                        navArgument("program") { type = NavType.StringType }
                     )
                 ) { backStackEntry ->
                     val role = backStackEntry.arguments?.getString("role") ?: ""
                     val school = backStackEntry.arguments?.getString("school") ?: ""
                     val program = backStackEntry.arguments?.getString("program") ?: ""
-
-                    NameSignUpScreen(
-                        navController = navController,
-                        role = role,
-                        school = school,
-                        program = program
-                    )
+                    NameSignUpScreen(navController, role, school, program)
                 }
                 composable(
                     route = "${ScreenRoutes.ProgramStudentNumberSignUp.route}/{role}",
-                    arguments = listOf(
-                        navArgument("role") { type = NavType.StringType},
-                    )
+                    arguments = listOf(navArgument("role") { type = NavType.StringType })
                 ) { backStackEntry ->
                     val role = backStackEntry.arguments?.getString("role") ?: ""
-
-                    ProgramStudentNumberSignUpScreen(
-                        navController = navController,
-                        role = role
-                    )
+                    ProgramStudentNumberSignUpScreen(navController, role)
                 }
                 composable(ScreenRoutes.Home.route) { HomeScreen(navController) }
                 composable(
@@ -199,17 +168,17 @@ private fun Main() {
                     val isUser = backStackEntry.arguments?.getBoolean("isUser")
                     RoomDetails(navController, roomId, isUser)
                 }
-                composable(ScreenRoutes.RoomReservationForm.route){ RoomReservationForm(navController) }
-                composable(ScreenRoutes.RoomUsageRules.route){ RoomUsageRules(navController) }
+                composable(ScreenRoutes.RoomReservationForm.route) { RoomReservationForm(navController) }
+                composable(ScreenRoutes.RoomUsageRules.route) { RoomUsageRules(navController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
                 composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
                 composable(ScreenRoutes.AdminHome.route) {
                     val viewModel: AdminHomeViewModel = viewModel()
-                    AdminHomeScreen(navController, viewModel) }
+                    AdminHomeScreen(navController, viewModel)
+                }
                 composable(
                     route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
-                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
-                        FloorLocation::class.java) })
+                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(FloorLocation::class.java) })
                 ) { backStackEntry ->
                     val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
                     val viewModel: FloorRoomsViewModel = viewModel()
