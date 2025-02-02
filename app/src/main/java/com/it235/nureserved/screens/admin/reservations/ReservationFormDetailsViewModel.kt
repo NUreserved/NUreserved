@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
 import com.it235.nureserved.data.reservation_data.ActivityDate
+import com.it235.nureserved.data.reservation_data.ApprovalDetails
+import com.it235.nureserved.data.reservation_data.ApprovalStatus
+import com.it235.nureserved.data.reservation_data.ReservationFormData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.Duration
@@ -117,5 +120,16 @@ class ReservationFormDetailsViewModel : ViewModel() {
 
     fun setShowApprovedReservationDialog(show: Boolean) {
         _showApprovedReservationDialog.value = show
+    }
+
+    fun approveReservation(reservationData: ReservationFormData) {
+        reservationData.addApprovalDetail(
+            ApprovalDetails(
+                status = ApprovalStatus.APPROVED,
+                approvedBy = "ADMIN", // Use admin name here later
+                approvalDate = OffsetDateTime.now(),
+                eventDate = OffsetDateTime.now(),
+            )
+        )
     }
 }

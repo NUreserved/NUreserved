@@ -222,7 +222,8 @@ fun ReservationFormDetailsScreen(
                 viewModel.setShowApprovedReservationDialog(false)
                 dismissModalBottomSheet()
             },
-            reservation = reservationData
+            reservation = reservationData,
+            approveReservation = { viewModel.approveReservation(reservationData) }
         )
     }
 }
@@ -525,7 +526,8 @@ private fun ConfirmReservationApprovalDialog(
 @Composable
 private fun ApprovedReservationDialog(
     onDismiss: () -> Unit,
-    reservation: ReservationFormData
+    reservation: ReservationFormData,
+    approveReservation: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
@@ -543,7 +545,12 @@ private fun ApprovedReservationDialog(
             )
         },
         confirmButton = {
-            TextButton(onClick = { onDismiss() }) { Text("OK") }
+            TextButton(onClick = {
+                onDismiss()
+                approveReservation()
+            }) {
+                Text("OK")
+            }
         },
     )
 }
