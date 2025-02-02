@@ -227,14 +227,12 @@ fun ThemeSettingsDialog(
                             .fillMaxWidth()
                             .clickable {
                                 selectedOption.value = theme
-                                onThemeChange(ThemeOption.values()[index])
                             }
                     ) {
                         RadioButton(
                             selected = selectedOption.value == theme,
                             onClick = {
                                 selectedOption.value = theme
-                                onThemeChange(ThemeOption.values()[index])
                             }
                         )
                         Text(
@@ -247,7 +245,10 @@ fun ThemeSettingsDialog(
         },
         confirmButton = {
             TextButton(
-                onClick = { onDismiss() }
+                onClick = {
+                    onThemeChange(ThemeOption.values()[themeOptions.indexOf(selectedOption.value)])
+                    onDismiss()
+                }
             ) {
                 Text("Confirm")
             }
