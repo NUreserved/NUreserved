@@ -50,70 +50,10 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.font.poppinsFamily
+import com.it235.nureserved.screens.core.StateCard
 import com.it235.nureserved.ui.theme.darkGray
 
-@Composable()
-fun StateCard(
-    modifier: Modifier = Modifier,
-    roomNumber: String, 
-    reservationStatus: String, 
-    @DrawableRes roomImage: Int,
-    cardContainerColor: Color){
-    Card(
-        modifier = modifier
-            .fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = cardContainerColor,
-            contentColor = Color(0xFFFEFEFE)
-        )
-    ){
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-        ){
-            Image(
-                modifier = Modifier
-                    .weight(2f)
-                    .clip(RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop,
-                painter = painterResource(roomImage),
-                contentDescription = "",
-            )
-
-            Column(
-                modifier = Modifier
-                    .weight(4f)
-                    .fillMaxHeight()
-                    .padding(start = 15.dp),
-                verticalArrangement = Arrangement.Center
-            ){
-                Text(
-                    text = roomNumber,
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        fontFamily = poppinsFamily
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(5.dp))
-
-                Text(
-                    text = reservationStatus,
-                    style = TextStyle(
-                        fontWeight = FontWeight.Normal,
-                        fontFamily = poppinsFamily
-                    )
-                )
-            }
-        }
-
-    }
-
-    Spacer(modifier = Modifier.height(10.dp))
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
