@@ -65,8 +65,11 @@ fun ReservationFormDetailsScreen(
 
     val clipboardManager by viewModel.clipboardManager.collectAsState()
     val context by viewModel.context.collectAsState()
-    val showConfirmDialog by viewModel.showConfirmDialog.collectAsState()
+    val showConfirmReservationApprovalDialog by viewModel.showConfirmReservationApprovalDialog.collectAsState()
+    val showConfirmReservationDeclineDialog by viewModel.showConfirmReservationDeclineDialog.collectAsState()
     val showApprovedReservationDialog by viewModel.showApprovedReservationDialog.collectAsState()
+    val showDeclinedReservationDialog by viewModel.showDeclinedReservationDialog.collectAsState()
+
 
     Column (
         modifier = Modifier
@@ -209,10 +212,17 @@ fun ReservationFormDetailsScreen(
         }
     }
 
-    if (showConfirmDialog) {
+    if (showConfirmReservationApprovalDialog) {
         ConfirmReservationApprovalDialog(
-            onDismiss = { viewModel.setShowConfirmDialog(false) },
+            onDismiss = { viewModel.setShowConfirmReservationApprovalDialog(false) },
             showApprovedReservationDialog = { viewModel.setShowApprovedReservationDialog(true) }
+        )
+    }
+
+    if (showConfirmReservationDeclineDialog) {
+        ConfirmReservationDeclineDialog (
+            onDismiss = { viewModel.setShowConfirmReservationDeclineDialog(false) },
+            showDeclineReservationDialog = { viewModel.setShowDeclinedReservationDialog(true) }
         )
     }
 
@@ -224,6 +234,17 @@ fun ReservationFormDetailsScreen(
             },
             reservation = reservationData,
             approveReservation = { viewModel.approveReservation(reservationData) }
+        )
+    }
+
+    if (showDeclinedReservationDialog) {
+        DeclinedReservationDialog(
+            onDismiss = {
+                viewModel.setShowDeclinedReservationDialog(false)
+                dismissModalBottomSheet()
+            },
+            reservation = reservationData,
+            declineReservation = { viewModel.declineReservation(reservationData) }
         )
     }
 }
@@ -406,7 +427,7 @@ private fun ApprovalSectionComposable(
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
         ) {
             Button(
-                onClick = { },
+                onClick = { viewModel.setShowConfirmReservationDeclineDialog(true) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = indicatorColorRed,
                     contentColor = white
@@ -421,7 +442,7 @@ private fun ApprovalSectionComposable(
                 )
             }
             Button(
-                onClick = { viewModel.setShowConfirmDialog(true) },
+                onClick = { viewModel.setShowConfirmReservationApprovalDialog(true) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = indicatorColorGreen,
                     contentColor = white
@@ -523,6 +544,40 @@ private fun ConfirmReservationApprovalDialog(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ConfirmReservationDeclineDialog(
+    onDismiss: () -> Unit,
+    showDeclineReservationDialog: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Confirm decline?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to decline reservation?",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                showDeclineReservationDialog()
+            }) { Text("Confirm") }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }
+            ) { Text("Cancel") }
+        }
+    )
+}
+
 @Composable
 private fun ApprovedReservationDialog(
     onDismiss: () -> Unit,
@@ -548,6 +603,38 @@ private fun ApprovedReservationDialog(
             TextButton(onClick = {
                 onDismiss()
                 approveReservation()
+            }) {
+                Text("OK")
+            }
+        },
+    )
+}
+
+@Composable
+private fun DeclinedReservationDialog(
+    onDismiss: () -> Unit,
+    reservation: ReservationFormData,
+    declineReservation: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Reservation declined") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Check or declined icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Reservation #${reservation.getTrackingNumber()} has been declined. The requester has been notified for their reservation request.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                declineReservation()
             }) {
                 Text("OK")
             }

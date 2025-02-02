@@ -23,11 +23,17 @@ class ReservationFormDetailsViewModel : ViewModel() {
     private var _remarks = MutableStateFlow<String>("")
     var remarks: StateFlow<String> = _remarks
 
-    private val _showConfirmDialog = MutableStateFlow(false)
-    val showConfirmDialog: StateFlow<Boolean> = _showConfirmDialog
+    private val _showConfirmReservationApprovalDialog = MutableStateFlow(false)
+    val showConfirmReservationApprovalDialog: StateFlow<Boolean> = _showConfirmReservationApprovalDialog
+
+    private val _showConfirmReservationDeclineDialog = MutableStateFlow(false)
+    val showConfirmReservationDeclineDialog: StateFlow<Boolean> = _showConfirmReservationDeclineDialog
 
     private val _showApprovedReservationDialog = MutableStateFlow(false)
     val showApprovedReservationDialog: StateFlow<Boolean> = _showApprovedReservationDialog
+
+    private val _showDeclinedReservationDialog = MutableStateFlow(false)
+    val showDeclinedReservationDialog: StateFlow<Boolean> = _showDeclinedReservationDialog
 
     fun initialize(context: Context, clipboardManager: ClipboardManager) {
         _context.value = context
@@ -114,18 +120,37 @@ class ReservationFormDetailsViewModel : ViewModel() {
         _remarks.value = newRemarks
     }
 
-    fun setShowConfirmDialog(show: Boolean) {
-        _showConfirmDialog.value = show
+    fun setShowConfirmReservationApprovalDialog(show: Boolean) {
+        _showConfirmReservationApprovalDialog.value = show
+    }
+
+    fun setShowConfirmReservationDeclineDialog(show: Boolean) {
+        _showConfirmReservationDeclineDialog.value = show
     }
 
     fun setShowApprovedReservationDialog(show: Boolean) {
         _showApprovedReservationDialog.value = show
     }
 
+    fun setShowDeclinedReservationDialog(show: Boolean) {
+        _showDeclinedReservationDialog.value = show
+    }
+
     fun approveReservation(reservationData: ReservationFormData) {
         reservationData.addApprovalDetail(
             ApprovalDetails(
                 status = ApprovalStatus.APPROVED,
+                approvedBy = "ADMIN", // Use admin name here later
+                approvalDate = OffsetDateTime.now(),
+                eventDate = OffsetDateTime.now(),
+            )
+        )
+    }
+
+    fun declineReservation(reservationData: ReservationFormData) {
+        reservationData.addApprovalDetail(
+            ApprovalDetails(
+                status = ApprovalStatus.DECLINED,
                 approvedBy = "ADMIN", // Use admin name here later
                 approvalDate = OffsetDateTime.now(),
                 eventDate = OffsetDateTime.now(),
