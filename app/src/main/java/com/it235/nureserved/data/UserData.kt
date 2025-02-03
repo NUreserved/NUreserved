@@ -57,7 +57,9 @@ fun checkIfAdmin(onResult: (Boolean) -> Unit) {
                 if (document != null && document.exists()) {
                     val isAdmin = document.getBoolean("isAdmin")
                     Log.d("UserData", "isAdmin: $isAdmin")
-                    onResult(isAdmin)
+                    if (isAdmin != null) {
+                        onResult(isAdmin)
+                    }
                 } else {
                     Log.d("UserData", "Document does not exist")
                     onResult(false)
