@@ -55,7 +55,7 @@ fun checkIfAdmin(onResult: (Boolean) -> Unit) {
         userDocRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    val isAdmin = document.getBoolean("isAdmin") ?: false
+                    val isAdmin = document.getBoolean("isAdmin")
                     Log.d("UserData", "isAdmin: $isAdmin")
                     onResult(isAdmin)
                 } else {
