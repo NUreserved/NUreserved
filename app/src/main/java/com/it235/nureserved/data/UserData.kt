@@ -60,6 +60,9 @@ fun checkIfAdmin(onResult: (Boolean) -> Unit) {
                     if (isAdmin != null) {
                         onResult(isAdmin)
                     }
+                    else {
+                        onResult(false)
+                    }
                 } else {
                     Log.d("UserData", "Document does not exist")
                     onResult(false)
