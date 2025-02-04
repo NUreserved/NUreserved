@@ -243,14 +243,14 @@ private fun DropdownTextField(
             supportingText = {
                 if(showSupportText){
                     if(selectedOption == "Program"){
-                        isValid.value = false
+                        isValid.value = "false"
                         Text(
                             text = "Please select a program.",
                             color = indicatorColorRed
                         )
                     }
                     else {
-                        isValid.value = true
+                        isValid.value = "true"
                         Text( text = "" )
                     }
                 }

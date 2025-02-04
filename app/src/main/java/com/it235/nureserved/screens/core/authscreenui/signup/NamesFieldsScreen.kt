@@ -307,7 +307,7 @@ private fun NameField(
                     color = indicatorColorRed,
                 )
 
-                if (validationResult == "") isValidInput.value = true else isValidInput.value = false
+                if (validationResult == "") isValidInput.value = "true" else isValidInput.value = "false"
             }
         },
         colors = TextFieldDefaults.textFieldColors(

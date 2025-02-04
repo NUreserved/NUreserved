@@ -236,14 +236,14 @@ private fun DropdownTextField(
             supportingText = {
                 if(showSupportText){
                     if(selectedOption == "Role"){
-                        isValid.value = false
+                        isValid.value = "false"
                         Text(
                             text = "Please select a role.",
                             color = indicatorColorRed
                         )
                     }
                     else {
-                        isValid.value = true
+                        isValid.value = "true"
                         Text( text = "" )
                     }
                 }
