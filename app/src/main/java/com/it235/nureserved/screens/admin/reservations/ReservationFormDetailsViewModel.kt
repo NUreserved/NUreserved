@@ -149,6 +149,7 @@ class ReservationFormDetailsViewModel : ViewModel() {
                 status = ApprovalStatus.APPROVED,
                 processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
+                remarks = _remarks.value
             )
         )
     }
@@ -159,6 +160,7 @@ class ReservationFormDetailsViewModel : ViewModel() {
                 status = ApprovalStatus.DECLINED,
                 processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
+                remarks = _remarks.value
             )
         )
     }
