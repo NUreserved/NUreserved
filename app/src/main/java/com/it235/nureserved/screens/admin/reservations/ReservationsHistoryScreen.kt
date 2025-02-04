@@ -87,7 +87,7 @@ fun ReservationsHistoryScreen(
         }
 
 
-        if (sharedViewModel.getReservationsListHistory().isEmpty()) {
+        if (sharedViewModel.reservationHistory.isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
             val filteredList = sharedViewModel.getFilteredList()

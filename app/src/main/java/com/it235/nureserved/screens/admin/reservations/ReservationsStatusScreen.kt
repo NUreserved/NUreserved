@@ -122,9 +122,7 @@ fun ReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                val approvedReservations = sharedViewModel.getApprovedReservationsList()
-
-                if (approvedReservations.isEmpty()) {
+                if (sharedViewModel.approvedReservations.isEmpty()) {
                     EmptyListComposable("No active reservations")
                 } else {
                     LazyColumn(
@@ -133,7 +131,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(sharedViewModel.getApprovedReservationsList()) { reservation ->
+                        items(sharedViewModel.approvedReservations) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {
@@ -145,9 +143,7 @@ fun ReservationStatusScreen(
                 }
             }
             1 -> {
-                val pendingReservations = sharedViewModel.getPendingReservationsList()
-
-                if (pendingReservations.isEmpty()) {
+                if (sharedViewModel.pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
                 } else {
                     LazyColumn(
@@ -156,7 +152,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(sharedViewModel.getPendingReservationsList()) { reservation ->
+                        items(sharedViewModel.pendingReservations) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {

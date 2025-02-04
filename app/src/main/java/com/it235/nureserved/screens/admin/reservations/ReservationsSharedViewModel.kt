@@ -11,15 +11,18 @@ import java.time.OffsetDateTime
 
 class ReservationsSharedViewModel : ViewModel() {
     private val _reservationList = MutableStateFlow(getSampleReservations())
+    val approvedReservations = getApprovedReservationsList()
+    val pendingReservations = getPendingReservationsList()
+    val reservationHistory = getReservationsListHistory()
 
-    fun getApprovedReservationsList(): List<ReservationFormData> {
+    private fun getApprovedReservationsList(): List<ReservationFormData> {
         return _reservationList.value.filter { reservation ->
             reservation.getLatestTransactionDetail()?.status == TransactionStatus.APPROVED &&
                     reservation.getActivityDateTime().endDate.isAfter(OffsetDateTime.now())
         }
     }
 
-    fun getPendingReservationsList(): List<ReservationFormData> {
+    private fun getPendingReservationsList(): List<ReservationFormData> {
         return _reservationList.value.filter { reservation ->
             reservation.getLatestTransactionDetail()?.status == TransactionStatus.PENDING
         }
@@ -27,7 +30,7 @@ class ReservationsSharedViewModel : ViewModel() {
 
     // It displays the reservations that was approved in the past, OR reservations
     // that was declined regardless of time frame
-    fun getReservationsListHistory(): List<ReservationFormData> {
+    private fun getReservationsListHistory(): List<ReservationFormData> {
         return _reservationList.value
             .filter { reservation ->
                 (reservation.getLatestTransactionDetail()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
