@@ -1,6 +1,5 @@
 package com.it235.nureserved.screens.user
 
-import User
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.foundation.Image
