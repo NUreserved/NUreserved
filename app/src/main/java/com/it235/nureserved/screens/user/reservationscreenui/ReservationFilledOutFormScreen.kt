@@ -448,9 +448,13 @@ private fun RequestTimelineHistory(
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
-                    if (!approvalDetail.processedBy.isNullOrEmpty()) {
+                    if (!approvalDetail.processedBy.isNullOrEmpty() && approvalDetail.status != TransactionStatus.PENDING) {
                         Text(
-                            text = "Approved by: ${approvalDetail.processedBy}",
+                            text = when (approvalDetail.status) {
+                                TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
+                                TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
+                                TransactionStatus.PENDING -> ""
+                            },
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
                                 lineHeight = 14.sp
