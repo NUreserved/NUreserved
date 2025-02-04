@@ -295,7 +295,7 @@ private fun NameField(
     isValidInput: MutableState<String?>,
     onValueChange: (String) -> Unit) {
     TextField(
-        value = value,
+        value = value ?: "",
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },

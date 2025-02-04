@@ -215,7 +215,7 @@ private fun DropdownTextField(
     ) {
 
         TextField(
-            value = selectedOption,
+            value = selectedOption ?: "",
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
