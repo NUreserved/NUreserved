@@ -26,6 +26,7 @@ class ReservationFormData (
                 status = ApprovalStatus.PENDING,
                 processedBy = null,
                 eventDate = OffsetDateTime.now(),
+                remarks = null
             )
         )
     }
@@ -149,6 +150,7 @@ data class ApprovalDetails(
     val status: ApprovalStatus,
     val eventDate: OffsetDateTime,
     val processedBy: String?,
+    val remarks: String?
 )
 
 enum class ApprovalStatus(val value: String) {
