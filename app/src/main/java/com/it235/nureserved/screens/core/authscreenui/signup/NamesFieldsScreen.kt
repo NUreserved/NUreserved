@@ -352,7 +352,7 @@ private fun NextButton(
             val formattedMiddleName = middleName!!.lowercase().replaceFirstChar { it.uppercase() }
             val formattedLastName = lastName!!.lowercase().replaceFirstChar { it.uppercase() }
 
-            if (isValidFname.value && isValidMname.value && isValidLname.value) {
+            if (isValidFname.value == "true" && isValidMname.value == "true" && isValidLname.value == "true") {
 
                 if(role == "Student"){
                     namesPreference.edit().putString("firstname", firstName).apply()
