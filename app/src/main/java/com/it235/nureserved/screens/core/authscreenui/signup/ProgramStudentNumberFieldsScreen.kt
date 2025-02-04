@@ -303,7 +303,6 @@ private fun NextButton(
     program: String?,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidProgram: MutableState<Boolean>,
     isValidProgram: MutableState<String?>,
     programPreference: SharedPreferences
 ){

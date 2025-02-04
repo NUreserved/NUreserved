@@ -286,8 +286,6 @@ private fun NextButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValid: MutableState<Boolean>,
-    selectedRole: String,
     isValid: MutableState<String?>,
     selectedRole: String?,
     rolePreference: SharedPreferences,
