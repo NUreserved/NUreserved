@@ -1,8 +1,8 @@
 package com.it235.nureserved
 
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.ApprovalDetails
-import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.data.rooms.roomList
 import org.junit.Test
@@ -32,16 +32,16 @@ class ReservationDataDetailsTest {
         )
 
         sampleReservation.setVenue(roomList[18])
-        sampleReservation.addApprovalDetail(
-            ApprovalDetails(
-                status = ApprovalStatus.APPROVED,
+        sampleReservation.addTransactionDetail(
+            TransactionDetails(
+                status = TransactionStatus.APPROVED,
                 processedBy = "Jane Doe",
                 approvalDate = OffsetDateTime.now(),
                 eventDate = OffsetDateTime.now(),
             )
         )
-        println("Latest Status: ${sampleReservation.getLatestApprovalDetail()}")
-        println("Latest Status History: ${sampleReservation.getHistory()}")
+        println("Latest Status: ${sampleReservation.getLatestTransactionDetail()}")
+        println("Latest Status History: ${sampleReservation.getTransactionHistory()}")
 
 
         println("Organization: ${sampleReservation.getOrganization()}")

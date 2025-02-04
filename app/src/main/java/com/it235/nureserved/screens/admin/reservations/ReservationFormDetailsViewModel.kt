@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.ApprovalDetails
-import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.model.ReservationFormData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -144,9 +144,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
     }
 
     fun approveReservation(reservationData: ReservationFormData) {
-        reservationData.addApprovalDetail(
-            ApprovalDetails(
-                status = ApprovalStatus.APPROVED,
+        reservationData.addTransactionDetail(
+            TransactionDetails(
+                status = TransactionStatus.APPROVED,
                 processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
                 remarks = _remarks.value
@@ -155,9 +155,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
     }
 
     fun declineReservation(reservationData: ReservationFormData) {
-        reservationData.addApprovalDetail(
-            ApprovalDetails(
-                status = ApprovalStatus.DECLINED,
+        reservationData.addTransactionDetail(
+            TransactionDetails(
+                status = TransactionStatus.DECLINED,
                 processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
                 remarks = _remarks.value

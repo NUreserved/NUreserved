@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
@@ -184,9 +184,9 @@ private fun ReservationCard(
             .fillMaxWidth()
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
-            containerColor = when (reservation.getLatestApprovalDetail()!!.status) {
-                ApprovalStatus.PENDING -> Color(0xFFd69c40)
-                ApprovalStatus.APPROVED -> Color(0xFF49844b)
+            containerColor = when (reservation.getLatestTransactionDetail()!!.status) {
+                TransactionStatus.PENDING -> Color(0xFFd69c40)
+                TransactionStatus.APPROVED -> Color(0xFF49844b)
                 else -> Color(0xFF49844b)
             },
             contentColor = Color(0xFFFEFEFE)
@@ -225,10 +225,10 @@ private fun ReservationCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Column {
-                    if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestApprovalDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",

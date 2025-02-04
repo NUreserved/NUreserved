@@ -1,6 +1,5 @@
 package com.it235.nureserved.data.model
 
-import java.time.LocalTime
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -15,14 +14,14 @@ class ReservationFormData (
     private var requesterMiddleName: String,
     private var requesterGivenName: String,
     private var requesterPosition: String,
-    private var approvalDetailsManager: ApprovalDetailsManager = ApprovalDetailsManager(),
+    private var transactionDetailsManager: TransactionHistoryManager = TransactionHistoryManager(),
     private var trackingNumber: String = generateTrackingNumber(existingTrackingNumbers),
 ) {
 
     init {
-        approvalDetailsManager.addApprovalDetail(
-            ApprovalDetails(
-                status = ApprovalStatus.PENDING,
+        transactionDetailsManager.addTransactionDetail(
+            TransactionDetails(
+                status = TransactionStatus.PENDING,
                 processedBy = null,
                 eventDate = OffsetDateTime.now(),
                 remarks = null
@@ -105,16 +104,16 @@ class ReservationFormData (
         requesterPosition = value
     }
 
-    fun getLatestApprovalDetail(): ApprovalDetails? {
-        return approvalDetailsManager.getLatestApprovalDetail()
+    fun getLatestTransactionDetail(): TransactionDetails? {
+        return transactionDetailsManager.getLatestTransactionDetail()
     }
 
-    fun addApprovalDetail(detail: ApprovalDetails) {
-        approvalDetailsManager.addApprovalDetail(detail)
+    fun addTransactionDetail(detail: TransactionDetails) {
+        transactionDetailsManager.addTransactionDetail(detail)
     }
 
-    fun getHistory(): List<ApprovalDetails> {
-        return approvalDetailsManager.getHistory()
+    fun getTransactionHistory(): List<TransactionDetails> {
+        return transactionDetailsManager.getTransactionHistory()
     }
 
     fun getTrackingNumber(): String {
@@ -122,37 +121,30 @@ class ReservationFormData (
     }
 }
 
-class ApprovalDetailsManager() {
-    private val approvalDetails: MutableList<ApprovalDetails> = mutableListOf()
+class TransactionHistoryManager() {
+    private val transactionDetails: MutableList<TransactionDetails> = mutableListOf()
 
-    fun getLatestApprovalDetail(): ApprovalDetails? {
-        return approvalDetails.maxByOrNull { it.eventDate }
+    fun getLatestTransactionDetail(): TransactionDetails? {
+        return transactionDetails.maxByOrNull { it.eventDate }
     }
 
-    fun addApprovalDetail(detail: ApprovalDetails) {
-        approvalDetails.add(detail)
+    fun addTransactionDetail(detail: TransactionDetails) {
+        transactionDetails.add(detail)
     }
 
-    fun getHistory(): List<ApprovalDetails> {
-        return approvalDetails.sortedByDescending { it.eventDate }
+    fun getTransactionHistory(): List<TransactionDetails> {
+        return transactionDetails.sortedByDescending { it.eventDate }
     }
 }
 
-data class ActivityDate (
-    val startDate: OffsetDateTime,
-    val endDate: OffsetDateTime,
-    val startTime: LocalTime,
-    val endTime: LocalTime
-)
-
-data class ApprovalDetails(
-    val status: ApprovalStatus,
+data class TransactionDetails(
+    val status: TransactionStatus,
     val eventDate: OffsetDateTime,
     val processedBy: String?,
     val remarks: String?
 )
 
-enum class ApprovalStatus(val value: String) {
+enum class TransactionStatus(val value: String) {
     APPROVED("Approved"),
     PENDING("Pending"),
     DECLINED("Declined"),

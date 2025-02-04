@@ -48,8 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.model.ApprovalDetails
-import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
@@ -193,8 +193,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED ||
-                reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED ||
+                reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column (
@@ -203,10 +203,10 @@ fun ReservationFormDetailsScreen(
                 ) {
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    RequestTimelineHistory(reservationData.getHistory(), viewModel)
+                    RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
                 }
 
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column (
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
@@ -274,7 +274,7 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -282,14 +282,14 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.APPROVED.value,
+                    text = TransactionStatus.APPROVED.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -297,14 +297,14 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.PENDING.value,
+                    text = TransactionStatus.PENDING.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -312,7 +312,7 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.DECLINED.value,
+                    text = TransactionStatus.DECLINED.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
@@ -322,7 +322,7 @@ private fun ReservationStatusComposable(
             }
         }
 
-        if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -332,7 +332,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -342,7 +342,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -365,7 +365,7 @@ private fun RequestStatusComposable(
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+       if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -387,7 +387,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -409,7 +409,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -437,7 +437,7 @@ private fun RequestStatusComposable(
 
 @Composable
 private fun RequestTimelineHistory(
-    approvalDetailHistory: List<ApprovalDetails>,
+    approvalDetailHistory: List<TransactionDetails>,
     viewModel: ReservationFormDetailsViewModel
 ) {
     Column (
@@ -465,9 +465,9 @@ private fun RequestTimelineHistory(
                     // Circle with Icon inside
                     Canvas(modifier = Modifier.size(24.dp)) {
                         val circleColor = when (approvalDetail.status) {
-                            ApprovalStatus.PENDING -> indicatorColorOrange
-                            ApprovalStatus.APPROVED -> indicatorColorGreen
-                            ApprovalStatus.DECLINED -> indicatorColorRed
+                            TransactionStatus.PENDING -> indicatorColorOrange
+                            TransactionStatus.APPROVED -> indicatorColorGreen
+                            TransactionStatus.DECLINED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -491,9 +491,9 @@ private fun RequestTimelineHistory(
                 Column() {
                     Text(
                         text = when (approvalDetail.status) {
-                            ApprovalStatus.PENDING -> "Request awaiting approval"
-                            ApprovalStatus.APPROVED -> "Request has been approved"
-                            ApprovalStatus.DECLINED -> "Request has been declined"
+                            TransactionStatus.PENDING -> "Request awaiting approval"
+                            TransactionStatus.APPROVED -> "Request has been approved"
+                            TransactionStatus.DECLINED -> "Request has been declined"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
@@ -786,20 +786,20 @@ private fun DeclinedReservationDialog(
 fun Default() {
     RequestTimelineHistory(
         listOf(
-            ApprovalDetails(
-                status = ApprovalStatus.APPROVED,
+            TransactionDetails(
+                status = TransactionStatus.APPROVED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
                 remarks = "Sample remark 1"
             ),
-            ApprovalDetails(
-                status = ApprovalStatus.DECLINED,
+            TransactionDetails(
+                status = TransactionStatus.DECLINED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
                 remarks = "Sample remark awdawdawd1"
             ),
-            ApprovalDetails(
-                status = ApprovalStatus.DECLINED,
+            TransactionDetails(
+                status = TransactionStatus.DECLINED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
                 remarks = null
