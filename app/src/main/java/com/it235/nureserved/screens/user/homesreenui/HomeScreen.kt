@@ -1,6 +1,5 @@
 package com.it235.nureserved.screens.user.homesreenui
 
-import User
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -72,9 +71,10 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.RoomReservationFAB
 import com.it235.nureserved.screens.core.Space
-import com.it235.nureserved.data.rooms.FloorLocation
-import com.it235.nureserved.data.rooms.Room
-import com.it235.nureserved.data.rooms.areAllTimeSlotsUnavailable
+import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.data.model.Room
+import com.it235.nureserved.data.model.User
+import com.it235.nureserved.data.model.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences

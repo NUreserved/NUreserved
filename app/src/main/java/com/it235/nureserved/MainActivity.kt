@@ -14,7 +14,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import checkIfAdmin
 import com.google.firebase.auth.FirebaseAuth
-import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
@@ -178,7 +177,8 @@ private fun Main() {
                 }
                 composable(
                     route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
-                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(FloorLocation::class.java) })
+                    arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
+                        FloorLocation::class.java) })
                 ) { backStackEntry ->
                     val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
                     val viewModel: FloorRoomsViewModel = viewModel()

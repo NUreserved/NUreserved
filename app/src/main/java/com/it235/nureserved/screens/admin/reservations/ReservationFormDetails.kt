@@ -5,10 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -49,9 +50,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.reservation_data.ApprovalDetails
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
@@ -61,9 +62,12 @@ import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
 import com.it235.nureserved.ui.theme.white5
-import com.it235.nureserved.ui.theme.white6
+import com.it235.nureserved.utils.formatActivityDateAndTIme
+import com.it235.nureserved.utils.formatDateFilled
+import com.it235.nureserved.utils.formatHistoryDate
+import com.it235.nureserved.utils.getTimeLapseString
+import com.it235.nureserved.utils.getTimeLeft
 import java.time.OffsetDateTime
 
 @Composable
@@ -137,12 +141,12 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date filled",
-                    value = viewModel.formatDateFilled(reservationData.getDateFilled())
+                    value = formatDateFilled(reservationData.getDateFilled())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date and time of activity",
-                    value = viewModel.formatActivityDateAndTIme(reservationData.getActivityDateTime())
+                    value = formatActivityDateAndTIme(reservationData.getActivityDateTime())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
@@ -196,8 +200,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED ||
-                reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED ||
+                reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column (
@@ -206,10 +210,10 @@ fun ReservationFormDetailsScreen(
                 ) {
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    RequestTimelineHistory(reservationData.getHistory(), viewModel)
+                    RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
                 }
 
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column (
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
@@ -277,7 +281,7 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -285,14 +289,14 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.APPROVED.value,
+                    text = TransactionStatus.APPROVED.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -300,14 +304,14 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.PENDING.value,
+                    text = TransactionStatus.PENDING.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -315,7 +319,7 @@ private fun ReservationStatusComposable(
                 ) {}
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = ApprovalStatus.DECLINED.value,
+                    text = TransactionStatus.DECLINED.value,
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
@@ -325,31 +329,31 @@ private fun ReservationStatusComposable(
             }
         }
 
-        if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLeft(reservationData.getActivityDateTime()),
+                text = getTimeLeft(reservationData.getActivityDateTime()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                text = getTimeLapseString(reservationData.getDateFilled()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                text = getTimeLapseString(reservationData.getDateFilled()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
@@ -368,7 +372,7 @@ private fun RequestStatusComposable(
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+       if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -390,7 +394,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.PENDING) {
+       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -412,7 +416,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -440,7 +444,7 @@ private fun RequestStatusComposable(
 
 @Composable
 private fun RequestTimelineHistory(
-    approvalDetailHistory: List<ApprovalDetails>,
+    approvalDetailHistory: List<TransactionDetails>,
     viewModel: ReservationFormDetailsViewModel
 ) {
     Column (
@@ -457,7 +461,11 @@ private fun RequestTimelineHistory(
         Spacer(modifier = Modifier.height(16.dp))
 
         for ((index, approvalDetail) in approvalDetailHistory.withIndex()) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min), // Sets the height based on the minimum height of the children of this parent layout
+                verticalAlignment = Alignment.Top) {
                 // Timeline Indicator: Circle + Vertical Line
                 Column(
                     modifier = Modifier
@@ -468,9 +476,9 @@ private fun RequestTimelineHistory(
                     // Circle with Icon inside
                     Canvas(modifier = Modifier.size(24.dp)) {
                         val circleColor = when (approvalDetail.status) {
-                            ApprovalStatus.PENDING -> indicatorColorOrange
-                            ApprovalStatus.APPROVED -> indicatorColorGreen
-                            ApprovalStatus.DECLINED -> indicatorColorRed
+                            TransactionStatus.PENDING -> indicatorColorOrange
+                            TransactionStatus.APPROVED -> indicatorColorGreen
+                            TransactionStatus.DECLINED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -479,7 +487,7 @@ private fun RequestTimelineHistory(
 
                     // Vertical Line (only if not last)
                     if (index != approvalDetailHistory.size - 1) {
-                        Canvas(modifier = Modifier.height(60.dp).width(2.dp)) {
+                        Canvas(modifier = Modifier.fillMaxHeight().width(2.dp)) {
                             drawLine(
                                 color = Color.Gray,
                                 start = Offset(x = size.width / 2, y = 0f),
@@ -494,9 +502,9 @@ private fun RequestTimelineHistory(
                 Column() {
                     Text(
                         text = when (approvalDetail.status) {
-                            ApprovalStatus.PENDING -> "Request awaiting approval"
-                            ApprovalStatus.APPROVED -> "Request has been approved"
-                            ApprovalStatus.DECLINED -> "Request has been declined"
+                            TransactionStatus.PENDING -> "Request awaiting approval"
+                            TransactionStatus.APPROVED -> "Request has been approved"
+                            TransactionStatus.DECLINED -> "Request has been declined"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
@@ -505,16 +513,20 @@ private fun RequestTimelineHistory(
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
                     Text(
-                        text = viewModel.formatHistoryDate(approvalDetail.eventDate),
+                        text = formatHistoryDate(approvalDetail.eventDate),
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
                             lineHeight = 14.sp
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
-                    if (!approvalDetail.processedBy.isNullOrEmpty()) {
+                    if (!approvalDetail.processedBy.isNullOrEmpty() && approvalDetail.status != TransactionStatus.PENDING) {
                         Text(
-                            text = "Approved by: ${approvalDetail.processedBy}",
+                            text = when (approvalDetail.status) {
+                                TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
+                                TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
+                                TransactionStatus.PENDING -> ""
+                            },
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
                                 lineHeight = 14.sp
@@ -532,6 +544,9 @@ private fun RequestTimelineHistory(
                             ),
                         )
                     }
+                    // Spacer is used here to allow the vertical line to fillMaxHeight properly,
+                    // ensuring visual separation between transaction details
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
@@ -789,20 +804,20 @@ private fun DeclinedReservationDialog(
 fun Default() {
     RequestTimelineHistory(
         listOf(
-            ApprovalDetails(
-                status = ApprovalStatus.APPROVED,
+            TransactionDetails(
+                status = TransactionStatus.APPROVED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
                 remarks = "Sample remark 1"
             ),
-            ApprovalDetails(
-                status = ApprovalStatus.DECLINED,
+            TransactionDetails(
+                status = TransactionStatus.DECLINED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
                 remarks = "Sample remark awdawdawd1"
             ),
-            ApprovalDetails(
-                status = ApprovalStatus.DECLINED,
+            TransactionDetails(
+                status = TransactionStatus.DECLINED,
                 processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
                 remarks = null

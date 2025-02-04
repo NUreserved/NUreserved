@@ -40,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -87,7 +87,7 @@ fun ReservationsHistoryScreen(
         }
 
 
-        if (sharedViewModel.getReservationsListHistory().isEmpty()) {
+        if (sharedViewModel.reservationHistory.isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
             val filteredList = sharedViewModel.getFilteredList()
@@ -120,7 +120,7 @@ fun ReservationsHistoryScreen(
 
 @Composable
 private fun ReservationFilterChipComposable(
-    filterStatus: ApprovalStatus?,
+    filterStatus: TransactionStatus?,
     sharedViewModel: ReservationsSharedViewModel
 ) {
 
@@ -140,18 +140,18 @@ private fun ReservationFilterChipComposable(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             FilterChip(
-                selected = filterStatus == ApprovalStatus.APPROVED,
+                selected = filterStatus == TransactionStatus.APPROVED,
                 onClick = {
-                    if (filterStatus == ApprovalStatus.APPROVED) sharedViewModel.setFilterStatus(null)
-                    else sharedViewModel.setFilterStatus(ApprovalStatus.APPROVED)
+                    if (filterStatus == TransactionStatus.APPROVED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(TransactionStatus.APPROVED)
                 },
                 label = { Text("Approved") }
             )
             FilterChip(
-                selected = filterStatus == ApprovalStatus.DECLINED,
+                selected = filterStatus == TransactionStatus.DECLINED,
                 onClick = {
-                    if (filterStatus == ApprovalStatus.DECLINED) sharedViewModel.setFilterStatus(null)
-                    else sharedViewModel.setFilterStatus(ApprovalStatus.DECLINED)
+                    if (filterStatus == TransactionStatus.DECLINED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(TransactionStatus.DECLINED)
                 },
                 label = { Text("Declined") }
             )
@@ -207,10 +207,10 @@ private fun ReservationCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Column {
-                    if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestApprovalDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
@@ -219,10 +219,10 @@ private fun ReservationCard(
                                 lineHeight = 10.sp
                             )
                         )
-                    } else if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
+                    } else if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
                         Text(
                             text = "Declined: ${
-                                reservation.getLatestApprovalDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
