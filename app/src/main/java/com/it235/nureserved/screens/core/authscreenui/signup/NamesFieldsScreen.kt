@@ -355,12 +355,24 @@ private fun NextButton(
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
 
                 if(role == "Student"){
+                    namesPreference.edit().putString("firstname", firstName).apply()
+                    namesPreference.edit().putString("firstnameState", "true").apply()
+                    namesPreference.edit().putString("middlename", middleName).apply()
+                    namesPreference.edit().putString("middlenameState", "true").apply()
+                    namesPreference.edit().putString("lastname", lastName).apply()
+                    namesPreference.edit().putString("lastnameState", "true").apply()
                     navController.navigate(
                         "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${""}/${program}"
                     )
                 }
 
                 else{
+                    namesPreference.edit().putString("firstname", firstName).apply()
+                    namesPreference.edit().putString("firstnameState", "true").apply()
+                    namesPreference.edit().putString("middlename", middleName).apply()
+                    namesPreference.edit().putString("middlenameState", "true").apply()
+                    namesPreference.edit().putString("lastname", lastName).apply()
+                    namesPreference.edit().putString("lastnameState", "true").apply()
                     navController.navigate(
                         "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${school}/${""}"
                     )

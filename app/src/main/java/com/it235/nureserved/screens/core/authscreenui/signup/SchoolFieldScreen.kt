@@ -307,7 +307,9 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValid.value){
+            if(isValid.value == "true"){
+                schoolPreference.edit().putString("school", selectedSchool).apply()
+                schoolPreference.edit().putString("schoolState", "true").apply()
                 navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${selectedSchool}/${""}")
             }
             else{

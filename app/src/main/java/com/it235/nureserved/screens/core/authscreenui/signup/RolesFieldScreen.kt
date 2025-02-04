@@ -297,11 +297,15 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValid.value){
+            if(isValid.value == "true"){
                 if(selectedRole == "Student"){
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
                     navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
                 }
                 else{
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
                     navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
                 }
             }

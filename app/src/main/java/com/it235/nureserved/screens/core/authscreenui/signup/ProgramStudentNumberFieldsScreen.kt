@@ -313,7 +313,9 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidProgram.value){
+            if(isValidProgram.value == "true"){
+                programPreference.edit().putString("program", program).apply()
+                programPreference.edit().putString("programState", "true").apply()
                 navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
             }
             else{
