@@ -247,6 +247,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.APPROVED,
             processedBy = "Chris Johnson",
             eventDate = OffsetDateTime.parse("2024-11-02T10:00:00+08:00"),
+            remarks = "Sample remark 1"
         )
     )
     sample2.addApprovalDetail(
@@ -254,6 +255,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.APPROVED,
             processedBy = "Alex Davis",
             eventDate = OffsetDateTime.parse("2024-11-03T10:00:00+08:00"),
+            remarks = "Sample remark awdawdawd1"
         )
     )
 
@@ -262,6 +264,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2024-11-04T10:00:00+08:00"),
+            remarks = null
         )
     )
 
@@ -270,6 +273,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+            remarks = "Sample remarkawefasefgewgfergferwadwd 1"
         )
     )
 
@@ -278,6 +282,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
+            remarks = "Sample remark segrsdgseg1"
         )
     )
 
@@ -286,6 +291,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.DECLINED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
+            remarks = null
         )
     )
 
@@ -294,6 +300,7 @@ fun getSampleReservations(): List<ReservationFormData> {
             status = ApprovalStatus.DECLINED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:15:00+08:00"),
+            remarks = null
         )
     )
 
