@@ -35,7 +35,7 @@ class ReservationDataDetailsTest {
         sampleReservation.addApprovalDetail(
             ApprovalDetails(
                 status = ApprovalStatus.APPROVED,
-                approvedBy = "Jane Doe",
+                processedBy = "Jane Doe",
                 approvalDate = OffsetDateTime.now(),
                 eventDate = OffsetDateTime.now(),
             )

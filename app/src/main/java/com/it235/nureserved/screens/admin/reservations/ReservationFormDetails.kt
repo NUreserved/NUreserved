@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -61,6 +61,9 @@ import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
+import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white5
+import com.it235.nureserved.ui.theme.white6
 import java.time.OffsetDateTime
 
 @Composable
@@ -476,7 +479,7 @@ private fun RequestTimelineHistory(
 
                     // Vertical Line (only if not last)
                     if (index != approvalDetailHistory.size - 1) {
-                        Canvas(modifier = Modifier.height(48.dp).width(2.dp)) {
+                        Canvas(modifier = Modifier.height(60.dp).width(2.dp)) {
                             drawLine(
                                 color = Color.Gray,
                                 start = Offset(x = size.width / 2, y = 0f),
@@ -504,10 +507,31 @@ private fun RequestTimelineHistory(
                     Text(
                         text = viewModel.formatHistoryDate(approvalDetail.eventDate),
                         style = LocalTextStyle.current.copy(
-                            fontSize = 13.sp
+                            fontSize = 13.sp,
+                            lineHeight = 14.sp
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
+                    if (!approvalDetail.processedBy.isNullOrEmpty()) {
+                        Text(
+                            text = "Approved by: ${approvalDetail.processedBy}",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                lineHeight = 14.sp
+                            ),
+                            color = if (isSystemInDarkTheme()) white3 else darkGray
+                        )
+                    }
+                    if (!approvalDetail.remarks.isNullOrEmpty()) {
+                        Text(
+                            text = "Remarks: ${approvalDetail.remarks}",
+                            color = white5,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                lineHeight = 14.sp
+                            ),
+                        )
+                    }
                 }
             }
         }
@@ -767,21 +791,21 @@ fun Default() {
         listOf(
             ApprovalDetails(
                 status = ApprovalStatus.APPROVED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                remarks = "Sample remark 1"
             ),
             ApprovalDetails(
                 status = ApprovalStatus.DECLINED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                remarks = "Sample remark awdawdawd1"
             ),
             ApprovalDetails(
                 status = ApprovalStatus.DECLINED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
+                remarks = null
             ),
         ),
         viewModel = ReservationFormDetailsViewModel()

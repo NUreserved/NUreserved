@@ -24,9 +24,9 @@ class ReservationFormData (
         approvalDetailsManager.addApprovalDetail(
             ApprovalDetails(
                 status = ApprovalStatus.PENDING,
-                approvedBy = null,
-                approvalDate = null,
+                processedBy = null,
                 eventDate = OffsetDateTime.now(),
+                remarks = null
             )
         )
     }
@@ -149,8 +149,8 @@ data class ActivityDate (
 data class ApprovalDetails(
     val status: ApprovalStatus,
     val eventDate: OffsetDateTime,
-    val approvedBy: String?,
-    val approvalDate: OffsetDateTime?
+    val processedBy: String?,
+    val remarks: String?
 )
 
 enum class ApprovalStatus(val value: String) {

@@ -147,9 +147,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
         reservationData.addApprovalDetail(
             ApprovalDetails(
                 status = ApprovalStatus.APPROVED,
-                approvedBy = "ADMIN", // Use admin name here later
-                approvalDate = OffsetDateTime.now(),
+                processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
+                remarks = _remarks.value
             )
         )
     }
@@ -158,9 +158,9 @@ class ReservationFormDetailsViewModel : ViewModel() {
         reservationData.addApprovalDetail(
             ApprovalDetails(
                 status = ApprovalStatus.DECLINED,
-                approvedBy = "ADMIN", // Use admin name here later
-                approvalDate = OffsetDateTime.now(),
+                processedBy = "ADMIN", // Use admin name here later
                 eventDate = OffsetDateTime.now(),
+                remarks = _remarks.value
             )
         )
     }

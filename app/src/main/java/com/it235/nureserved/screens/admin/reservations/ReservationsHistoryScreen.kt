@@ -210,7 +210,7 @@ private fun ReservationCard(
                     if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestApprovalDetail()!!.approvalDate!!.format(
+                                reservation.getLatestApprovalDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
@@ -222,7 +222,7 @@ private fun ReservationCard(
                     } else if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.DECLINED) {
                         Text(
                             text = "Declined: ${
-                                reservation.getLatestApprovalDetail()!!.approvalDate!!.format(
+                                reservation.getLatestApprovalDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
