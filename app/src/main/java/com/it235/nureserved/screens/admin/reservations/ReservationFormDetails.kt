@@ -6,8 +6,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -459,7 +461,11 @@ private fun RequestTimelineHistory(
         Spacer(modifier = Modifier.height(16.dp))
 
         for ((index, approvalDetail) in approvalDetailHistory.withIndex()) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min), // Sets the height based on the minimum height of the children of this parent layout
+                verticalAlignment = Alignment.Top) {
                 // Timeline Indicator: Circle + Vertical Line
                 Column(
                     modifier = Modifier
@@ -481,7 +487,7 @@ private fun RequestTimelineHistory(
 
                     // Vertical Line (only if not last)
                     if (index != approvalDetailHistory.size - 1) {
-                        Canvas(modifier = Modifier.height(60.dp).width(2.dp)) {
+                        Canvas(modifier = Modifier.fillMaxHeight().width(2.dp)) {
                             drawLine(
                                 color = Color.Gray,
                                 start = Offset(x = size.width / 2, y = 0f),
@@ -534,6 +540,9 @@ private fun RequestTimelineHistory(
                             ),
                         )
                     }
+                    // Spacer is used here to allow the vertical line to fillMaxHeight properly,
+                    // ensuring visual separation between transaction details
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
