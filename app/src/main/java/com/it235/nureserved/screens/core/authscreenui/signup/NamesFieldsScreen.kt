@@ -215,7 +215,7 @@ fun validateName(name: String?) : String{
     val nameApostrophePattern = Regex("'")
 
     return when {
-        name.isEmpty() -> "This field cannot be empty."
+        name!!.isEmpty() -> "This field cannot be empty."
         name.length <= 1 -> "Name should be more than 1 character."
         nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
         nameSpacePattern.containsMatchIn(name) -> {
@@ -351,9 +351,9 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            val formattedFirstName = firstName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedMiddleName = middleName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedFirstName = firstName!!.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedMiddleName = middleName!!.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedLastName = lastName!!.lowercase().replaceFirstChar { it.uppercase() }
 
             if (isValidFname.value && isValidMname.value && isValidLname.value) {
 
