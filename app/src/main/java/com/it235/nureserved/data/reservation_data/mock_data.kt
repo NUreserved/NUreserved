@@ -3,7 +3,6 @@ import com.it235.nureserved.data.reservation_data.ApprovalDetails
 import com.it235.nureserved.data.reservation_data.ApprovalStatus
 import com.it235.nureserved.data.reservation_data.ReservationFormData
 import com.it235.nureserved.data.rooms.roomList
-import java.time.LocalDate
 import java.time.LocalTime
 import java.time.OffsetDateTime
 
@@ -246,62 +245,55 @@ fun getSampleReservations(): List<ReservationFormData> {
     sample6.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
-            approvedBy = "Chris Johnson",
-            approvalDate = OffsetDateTime.parse("2024-11-02T10:00:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Chris Johnson",
+            eventDate = OffsetDateTime.parse("2024-11-02T10:00:00+08:00"),
         )
     )
     sample2.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
-            approvedBy = "Alex Davis",
-            approvalDate = OffsetDateTime.parse("2024-11-03T10:00:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Alex Davis",
+            eventDate = OffsetDateTime.parse("2024-11-03T10:00:00+08:00"),
         )
     )
 
     sample3.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
-            approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2024-11-04T10:00:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Maria Martinez",
+            eventDate = OffsetDateTime.parse("2024-11-04T10:00:00+08:00"),
         )
     )
 
     sample9.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
-            approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Maria Martinez",
+            eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
         )
     )
 
     sample10.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.APPROVED,
-            approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Maria Martinez",
+            eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
         )
     )
 
     sample11.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.DECLINED,
-            approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Maria Martinez",
+            eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
         )
     )
 
     sample12.addApprovalDetail(
         ApprovalDetails(
             status = ApprovalStatus.DECLINED,
-            approvedBy = "Maria Martinez",
-            approvalDate = OffsetDateTime.parse("2025-02-01T12:15:00+08:00"),
-            eventDate = OffsetDateTime.now(),
+            processedBy = "Maria Martinez",
+            eventDate = OffsetDateTime.parse("2025-02-01T12:15:00+08:00"),
         )
     )
 

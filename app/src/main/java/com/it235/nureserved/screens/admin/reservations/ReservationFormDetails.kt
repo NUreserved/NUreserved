@@ -36,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -767,20 +766,17 @@ fun Default() {
         listOf(
             ApprovalDetails(
                 status = ApprovalStatus.APPROVED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
             ),
             ApprovalDetails(
                 status = ApprovalStatus.DECLINED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
             ),
             ApprovalDetails(
                 status = ApprovalStatus.DECLINED,
-                approvedBy = "Maria Martinez",
-                approvalDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
+                processedBy = "Maria Martinez",
                 eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
             ),
         ),

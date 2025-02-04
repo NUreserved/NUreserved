@@ -228,7 +228,7 @@ private fun ReservationCard(
                     if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestApprovalDetail()!!.approvalDate!!.format(
+                                reservation.getLatestApprovalDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
