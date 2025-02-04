@@ -76,10 +76,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.data.controller.ReservationDataController
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.data.model.User
@@ -713,7 +715,8 @@ fun FilterChipsCategoryDivider(){
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RoomReservationForm(
-    navController: NavController
+    navController: NavController,
+    reservationDataController: ReservationDataController
 ){
     var selectedRooms by rememberSaveable { mutableStateOf(listOf<String>()) }
     val focusManager = LocalFocusManager.current
@@ -823,6 +826,18 @@ fun RoomReservationForm(
             onDismiss = { showAlertDialog = false },
             showConfirmDialog = {
                 navController.navigate(ScreenRoutes.RoomUsageRules.route)
+                reservationDataController.storeValues(
+                    nameOfOrgDeptColg.value,
+                    givenName.value,
+                    middleName.value,
+                    lastName.value,
+                    position.value,
+                    titleOfTheActivity.value,
+                    fromDatesOfActivity,
+                    toDatesOfActivity,
+                    expectedNumberOfAttendees.value,
+                    selectedRooms
+                )
             },
         )
     }
@@ -1282,11 +1297,4 @@ fun RoomReservationForm(
 
         }
     }
-}
-
-@Preview(showBackground = true, heightDp = 3000)
-@Composable
-fun RoomReservationFormPreview() {
-    val navController = rememberNavController()
-    RoomReservationForm(navController)
 }
