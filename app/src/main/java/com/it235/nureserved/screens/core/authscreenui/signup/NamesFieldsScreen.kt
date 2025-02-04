@@ -136,6 +136,7 @@ fun NameSignUpScreen(
                     ){
                         var firstname by remember { mutableStateOf("") }
                         var isValidFname = remember { mutableStateOf(false) }
+                        val namesPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
                         var fnameShowSupportText by remember { mutableStateOf(false) }
 
                         var middlename by remember { mutableStateOf("") }

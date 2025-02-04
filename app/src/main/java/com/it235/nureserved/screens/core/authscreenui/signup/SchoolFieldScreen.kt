@@ -93,6 +93,7 @@ fun SchoolFieldScreen(
 
         var school by remember { mutableStateOf(schoolOptions[0]) }
         val isValidSchool = remember { mutableStateOf(false) }
+        val schoolPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
         var showSchoolSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current

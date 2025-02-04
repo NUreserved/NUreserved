@@ -492,6 +492,8 @@ private fun RegisterButton(
     val keyboardController = LocalSoftwareKeyboardController.current
     var showDialog by remember { mutableStateOf(false) }
 
+    val signupSharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+
     Button(
         onClick = {
             // Sign up system

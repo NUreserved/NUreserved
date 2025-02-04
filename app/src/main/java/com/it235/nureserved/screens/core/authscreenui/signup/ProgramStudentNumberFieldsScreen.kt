@@ -153,6 +153,7 @@ fun ProgramStudentNumberSignUpScreen(
                             "BSPSY",
                             "BSTM",
                         )
+                        val programPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
 
                         var program by remember { mutableStateOf(options[0]) }
                         var showProgramSupportTxt by remember { mutableStateOf(false) }
