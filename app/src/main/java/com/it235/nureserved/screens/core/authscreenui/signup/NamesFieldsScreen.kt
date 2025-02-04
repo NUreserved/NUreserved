@@ -134,17 +134,19 @@ fun NameSignUpScreen(
                             containerColor = white
                         )
                     ){
-                        var firstname by remember { mutableStateOf("") }
-                        var isValidFname = remember { mutableStateOf(false) }
+
                         val namesPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+
+                        var firstname by rememberSaveable { mutableStateOf(namesPreference.getString("firstname", "")) }
+                        var isValidFname = rememberSaveable { mutableStateOf(namesPreference.getString("firstnameState", "false")) }
                         var fnameShowSupportText by remember { mutableStateOf(false) }
 
-                        var middlename by remember { mutableStateOf("") }
-                        var isValidMname = remember { mutableStateOf(false) }
+                        var middlename by rememberSaveable { mutableStateOf(namesPreference.getString("middlename", "")) }
+                        var isValidMname = rememberSaveable { mutableStateOf(namesPreference.getString("middlenameState", "false")) }
                         var mnameShowSupportText by remember { mutableStateOf(false) }
 
-                        var lastname by remember { mutableStateOf("") }
-                        var isValidLname = remember { mutableStateOf(false) }
+                        var lastname by rememberSaveable { mutableStateOf(namesPreference.getString("lastname", "")) }
+                        var isValidLname = rememberSaveable { mutableStateOf(namesPreference.getString("lastnameState", "false")) }
                         var lnameShowSupportText by remember { mutableStateOf(false) }
 
                         SignUpText(

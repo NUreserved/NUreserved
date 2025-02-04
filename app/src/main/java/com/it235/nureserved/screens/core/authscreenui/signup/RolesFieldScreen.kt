@@ -83,9 +83,9 @@ fun RolesFieldScreen(
 
         val roleOptions = listOf("Role", "Student", "Educator")
 
-        var role by remember { mutableStateOf(roleOptions[0]) }
-        val isValidRole = remember { mutableStateOf(false) }
         val rolePreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+        var role by rememberSaveable { mutableStateOf(rolePreference.getString("role", roleOptions[0])) }
+        val isValidRole = rememberSaveable { mutableStateOf(rolePreference.getString("roleState", "false")) }
         var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current

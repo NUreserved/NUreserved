@@ -155,9 +155,9 @@ fun ProgramStudentNumberSignUpScreen(
                         )
                         val programPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
 
-                        var program by remember { mutableStateOf(options[0]) }
+                        var program by rememberSaveable { mutableStateOf(programPreference.getString("program", options[0])) }
                         var showProgramSupportTxt by remember { mutableStateOf(false) }
-                        var isValidProgram = remember { mutableStateOf(false) }
+                        var isValidProgram = rememberSaveable { mutableStateOf(programPreference.getString("programState", "false")) }
 
                         SignUpText(
                             modifier = Modifier
