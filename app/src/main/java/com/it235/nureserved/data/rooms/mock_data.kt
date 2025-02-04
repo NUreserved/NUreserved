@@ -1,6 +1,12 @@
 package com.it235.nureserved.data.rooms
 
 import com.it235.nureserved.R
+import com.it235.nureserved.data.model.DaySchedule
+import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.data.model.Room
+import com.it235.nureserved.data.model.RoomType
+import com.it235.nureserved.data.model.TimeSlot
+import com.it235.nureserved.data.model.TimeSlotAvailability
 import kotlin.random.Random
 
 var id_ctr = 0

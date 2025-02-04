@@ -1,7 +1,7 @@
-import com.it235.nureserved.data.reservation_data.ActivityDate
-import com.it235.nureserved.data.reservation_data.ApprovalDetails
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime
@@ -242,62 +242,62 @@ fun getSampleReservations(): List<ReservationFormData> {
         requesterPosition = "Tournament Organizer"
     )
 
-    sample6.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.APPROVED,
+    sample6.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.APPROVED,
             processedBy = "Chris Johnson",
             eventDate = OffsetDateTime.parse("2024-11-02T10:00:00+08:00"),
             remarks = "Sample remark 1"
         )
     )
-    sample2.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.APPROVED,
+    sample2.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.APPROVED,
             processedBy = "Alex Davis",
             eventDate = OffsetDateTime.parse("2024-11-03T10:00:00+08:00"),
             remarks = "Sample remark awdawdawd1"
         )
     )
 
-    sample3.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.APPROVED,
+    sample3.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2024-11-04T10:00:00+08:00"),
             remarks = null
         )
     )
 
-    sample9.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.APPROVED,
+    sample9.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
             remarks = "Sample remarkawefasefgewgfergferwadwd 1"
         )
     )
 
-    sample10.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.APPROVED,
+    sample10.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.APPROVED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
             remarks = "Sample remark segrsdgseg1"
         )
     )
 
-    sample11.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.DECLINED,
+    sample11.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.DECLINED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:20:00+08:00"),
             remarks = null
         )
     )
 
-    sample12.addApprovalDetail(
-        ApprovalDetails(
-            status = ApprovalStatus.DECLINED,
+    sample12.addTransactionDetail(
+        TransactionDetails(
+            status = TransactionStatus.DECLINED,
             processedBy = "Maria Martinez",
             eventDate = OffsetDateTime.parse("2025-02-01T12:15:00+08:00"),
             remarks = null

@@ -44,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -122,9 +122,7 @@ fun ReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                val approvedReservations = sharedViewModel.getApprovedReservationsList()
-
-                if (approvedReservations.isEmpty()) {
+                if (sharedViewModel.approvedReservations.isEmpty()) {
                     EmptyListComposable("No active reservations")
                 } else {
                     LazyColumn(
@@ -133,7 +131,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(sharedViewModel.getApprovedReservationsList()) { reservation ->
+                        items(sharedViewModel.approvedReservations) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {
@@ -145,9 +143,7 @@ fun ReservationStatusScreen(
                 }
             }
             1 -> {
-                val pendingReservations = sharedViewModel.getPendingReservationsList()
-
-                if (pendingReservations.isEmpty()) {
+                if (sharedViewModel.pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
                 } else {
                     LazyColumn(
@@ -156,7 +152,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(sharedViewModel.getPendingReservationsList()) { reservation ->
+                        items(sharedViewModel.pendingReservations) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {
@@ -184,9 +180,9 @@ private fun ReservationCard(
             .fillMaxWidth()
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
-            containerColor = when (reservation.getLatestApprovalDetail()!!.status) {
-                ApprovalStatus.PENDING -> Color(0xFFd69c40)
-                ApprovalStatus.APPROVED -> Color(0xFF49844b)
+            containerColor = when (reservation.getLatestTransactionDetail()!!.status) {
+                TransactionStatus.PENDING -> Color(0xFFd69c40)
+                TransactionStatus.APPROVED -> Color(0xFF49844b)
                 else -> Color(0xFF49844b)
             },
             contentColor = Color(0xFFFEFEFE)
@@ -225,10 +221,10 @@ private fun ReservationCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Column {
-                    if (reservation.getLatestApprovalDetail()!!.status == ApprovalStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestApprovalDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetail()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
