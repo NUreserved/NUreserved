@@ -193,6 +193,7 @@ fun SchoolFieldScreen(
                             isValidSchool,
                             school,
                             role,
+                            schoolPreference,
                         )
 
                     }

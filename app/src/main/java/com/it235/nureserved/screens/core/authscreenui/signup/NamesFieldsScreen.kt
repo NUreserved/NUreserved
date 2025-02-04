@@ -197,6 +197,7 @@ fun NameSignUpScreen(
                             isValidFname,
                             isValidMname,
                             isValidLname,
+                            namesPreference,
                         )
 
                     }

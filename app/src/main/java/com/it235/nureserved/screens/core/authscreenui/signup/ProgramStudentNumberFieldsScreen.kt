@@ -199,6 +199,7 @@ fun ProgramStudentNumberSignUpScreen(
                             scope,
                             snackbarHostState,
                             isValidProgram,
+                            programPreference
                         )
 
                     }
