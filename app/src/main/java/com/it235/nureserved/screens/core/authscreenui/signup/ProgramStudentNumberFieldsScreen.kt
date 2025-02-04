@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -37,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -150,10 +153,11 @@ fun ProgramStudentNumberSignUpScreen(
                             "BSPSY",
                             "BSTM",
                         )
+                        val programPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
 
-                        var program by remember { mutableStateOf(options[0]) }
+                        var program by rememberSaveable { mutableStateOf(programPreference.getString("program", options[0])) }
                         var showProgramSupportTxt by remember { mutableStateOf(false) }
-                        var isValidProgram = remember { mutableStateOf(false) }
+                        var isValidProgram = rememberSaveable { mutableStateOf(programPreference.getString("programState", "false")) }
 
                         SignUpText(
                             modifier = Modifier
@@ -195,6 +199,7 @@ fun ProgramStudentNumberSignUpScreen(
                             scope,
                             snackbarHostState,
                             isValidProgram,
+                            programPreference
                         )
 
                     }
@@ -209,9 +214,9 @@ fun ProgramStudentNumberSignUpScreen(
 @Composable
 private fun DropdownTextField(
     options: List<String>,
-    selectedOption: String,
+    selectedOption: String?,
     showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
+    isValid: MutableState<String?>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -225,7 +230,7 @@ private fun DropdownTextField(
     ) {
 
         TextField(
-            value = selectedOption,
+            value = selectedOption ?: "",
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -238,14 +243,14 @@ private fun DropdownTextField(
             supportingText = {
                 if(showSupportText){
                     if(selectedOption == "Program"){
-                        isValid.value = false
+                        isValid.value = "false"
                         Text(
                             text = "Please select a program.",
                             color = indicatorColorRed
                         )
                     }
                     else {
-                        isValid.value = true
+                        isValid.value = "true"
                         Text( text = "" )
                     }
                 }
@@ -295,10 +300,11 @@ private fun DropdownTextField(
 private fun NextButton(
     navController: NavController,
     selectedRole: String,
-    program: String,
+    program: String?,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidProgram: MutableState<Boolean>,
+    isValidProgram: MutableState<String?>,
+    programPreference: SharedPreferences
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -307,7 +313,9 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValidProgram.value){
+            if(isValidProgram.value == "true"){
+                programPreference.edit().putString("program", program).apply()
+                programPreference.edit().putString("programState", "true").apply()
                 navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
             }
             else{

@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -37,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -80,8 +83,9 @@ fun RolesFieldScreen(
 
         val roleOptions = listOf("Role", "Student", "Educator")
 
-        var role by remember { mutableStateOf(roleOptions[0]) }
-        val isValidRole = remember { mutableStateOf(false) }
+        val rolePreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+        var role by rememberSaveable { mutableStateOf(rolePreference.getString("role", roleOptions[0])) }
+        val isValidRole = rememberSaveable { mutableStateOf(rolePreference.getString("roleState", "false")) }
         var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
@@ -175,11 +179,12 @@ fun RolesFieldScreen(
                         Space("h", 10)
 
                         NextButton(
-                            navController,
-                            scope,
-                            snackbarHostState,
-                            isValidRole,
-                            role,
+                            navController = navController,
+                            scope = scope,
+                            snackbarHostState = snackbarHostState,
+                            isValid = isValidRole,
+                            selectedRole = role,
+                            rolePreference,
                         )
 
                     }
@@ -194,10 +199,10 @@ fun RolesFieldScreen(
 @Composable
 private fun DropdownTextField(
     options: List<String>,
-    selectedOption: String,
+    selectedOption: String?,
     showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
-    onOptionSelected: (String) -> Unit
+    isValid: MutableState<String?>,
+    onOptionSelected: (String?) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -210,7 +215,7 @@ private fun DropdownTextField(
     ) {
 
         TextField(
-            value = selectedOption,
+            value = selectedOption ?: "",
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -231,14 +236,14 @@ private fun DropdownTextField(
             supportingText = {
                 if(showSupportText){
                     if(selectedOption == "Role"){
-                        isValid.value = false
+                        isValid.value = "false"
                         Text(
                             text = "Please select a role.",
                             color = indicatorColorRed
                         )
                     }
                     else {
-                        isValid.value = true
+                        isValid.value = "true"
                         Text( text = "" )
                     }
                 }
@@ -281,8 +286,9 @@ private fun NextButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValid: MutableState<Boolean>,
-    selectedRole: String,
+    isValid: MutableState<String?>,
+    selectedRole: String?,
+    rolePreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -291,11 +297,15 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValid.value){
+            if(isValid.value == "true"){
                 if(selectedRole == "Student"){
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
                     navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
                 }
                 else{
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
                     navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
                 }
             }

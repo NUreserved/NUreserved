@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.user
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -58,11 +60,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -711,43 +715,43 @@ fun FilterChipsCategoryDivider(){
 fun RoomReservationForm(
     navController: NavController
 ){
-    var selectedRooms by remember { mutableStateOf(listOf<String>()) }
+    var selectedRooms by rememberSaveable { mutableStateOf(listOf<String>()) }
     val focusManager = LocalFocusManager.current
 
     var venueShowSuppTxt by remember { mutableStateOf(false) }
-    val isVenueValid = remember { mutableStateOf(false) }
+    val isVenueValid = rememberSaveable { mutableStateOf(false) }
 
     val nameLabels = listOf("Given Name", "Middle Name", "Surname");
 
-    val nameOfOrgDeptColg = remember { mutableStateOf("") }
+    val nameOfOrgDeptColg = rememberSaveable { mutableStateOf("") }
     val nameOfOrgShowSuppTxt = remember { mutableStateOf(false) }
-    val isNameOfOrgValid = remember { mutableStateOf(false) }
+    val isNameOfOrgValid = rememberSaveable { mutableStateOf(false) }
 
-    val position = remember { mutableStateOf("") }
+    val position = rememberSaveable { mutableStateOf("") }
     val positionShowSuppTxt = remember { mutableStateOf(false) }
-    val isPositionValid = remember { mutableStateOf(false) }
+    val isPositionValid = rememberSaveable { mutableStateOf(false) }
 
-    val titleOfTheActivity = remember { mutableStateOf("") }
+    val titleOfTheActivity = rememberSaveable { mutableStateOf("") }
     val titleOfTheActivityShowSuppTxt = remember { mutableStateOf(false) }
-    val isTitleOfTheActivityValid = remember { mutableStateOf(false) }
+    val isTitleOfTheActivityValid = rememberSaveable { mutableStateOf(false) }
 
-    val expectedNumberOfAttendees = remember { mutableStateOf("") }
+    val expectedNumberOfAttendees = rememberSaveable { mutableStateOf("") }
     val expectedNumberOfAttendeesShowSuppTxt = remember { mutableStateOf(false) }
-    val isExpectedNumberOfAttendeesValid = remember { mutableStateOf(false) }
+    val isExpectedNumberOfAttendeesValid = rememberSaveable { mutableStateOf(false) }
 
-    var fromDatesOfActivity by remember { mutableStateOf(Date()) }
+    var fromDatesOfActivity by rememberSaveable { mutableStateOf(Date()) }
     val fromDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
-    val isValidFromDatesOfActivity = remember { mutableStateOf(false) }
-    var isFromDatesOfActivitySelected by remember { mutableStateOf(false) }
+    val isValidFromDatesOfActivity = rememberSaveable { mutableStateOf(false) }
+    var isFromDatesOfActivitySelected by rememberSaveable { mutableStateOf(false) }
     val fromDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
-    var toDatesOfActivity by remember { mutableStateOf(Date()) }
+    var toDatesOfActivity by rememberSaveable { mutableStateOf(Date()) }
     val toDatesOfActivityShowSuppTxt = remember { mutableStateOf(false) }
-    val isValidToDatesOfActivity = remember { mutableStateOf(false) }
-    var istoDatesOfActivitySelected by remember { mutableStateOf(false) }
+    val isValidToDatesOfActivity = rememberSaveable { mutableStateOf(false) }
+    var istoDatesOfActivitySelected by rememberSaveable { mutableStateOf(false) }
     val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
-    var currentFloorLocation by remember { mutableStateOf<FloorLocation?>(null) }
+    var currentFloorLocation by rememberSaveable { mutableStateOf<FloorLocation?>(null) }
 
     var user by remember { mutableStateOf<User?>(null) }
     var loadingUserData by remember { mutableStateOf(true)}
@@ -805,13 +809,13 @@ fun RoomReservationForm(
     )
 
 
-    var selectedFromTimeOption by remember { mutableStateOf(timeOptions[0]) }
+    var selectedFromTimeOption by rememberSaveable { mutableStateOf(timeOptions[0]) }
     val selectedFromTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
-    val isValidFromTimeOption = remember { mutableStateOf(false) }
+    val isValidFromTimeOption = rememberSaveable { mutableStateOf(false) }
 
-    var selectedToTimeOption by remember { mutableStateOf(timeOptions[0]) }
+    var selectedToTimeOption by rememberSaveable { mutableStateOf(timeOptions[0]) }
     val selectedToTimeOptionShowSuppTxt = remember { mutableStateOf(false) }
-    val isValidToTimeOption = remember { mutableStateOf(false) }
+    val isValidToTimeOption = rememberSaveable { mutableStateOf(false) }
 
     if(showAlertDialog){
         ConfirmationDialog(

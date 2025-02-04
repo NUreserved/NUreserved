@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -131,16 +134,19 @@ fun NameSignUpScreen(
                             containerColor = white
                         )
                     ){
-                        var firstname by remember { mutableStateOf("") }
-                        var isValidFname = remember { mutableStateOf(false) }
+
+                        val namesPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+
+                        var firstname by rememberSaveable { mutableStateOf(namesPreference.getString("firstname", "")) }
+                        var isValidFname = rememberSaveable { mutableStateOf(namesPreference.getString("firstnameState", "false")) }
                         var fnameShowSupportText by remember { mutableStateOf(false) }
 
-                        var middlename by remember { mutableStateOf("") }
-                        var isValidMname = remember { mutableStateOf(false) }
+                        var middlename by rememberSaveable { mutableStateOf(namesPreference.getString("middlename", "")) }
+                        var isValidMname = rememberSaveable { mutableStateOf(namesPreference.getString("middlenameState", "false")) }
                         var mnameShowSupportText by remember { mutableStateOf(false) }
 
-                        var lastname by remember { mutableStateOf("") }
-                        var isValidLname = remember { mutableStateOf(false) }
+                        var lastname by rememberSaveable { mutableStateOf(namesPreference.getString("lastname", "")) }
+                        var isValidLname = rememberSaveable { mutableStateOf(namesPreference.getString("lastnameState", "false")) }
                         var lnameShowSupportText by remember { mutableStateOf(false) }
 
                         SignUpText(
@@ -191,6 +197,7 @@ fun NameSignUpScreen(
                             isValidFname,
                             isValidMname,
                             isValidLname,
+                            namesPreference,
                         )
 
                     }
@@ -201,14 +208,14 @@ fun NameSignUpScreen(
     }
 }
 
-fun validateName(name: String) : String{
+fun validateName(name: String?) : String{
     val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
     val nameDigitPattern = Regex("\\d")
     val nameSpacePattern = Regex("\\s")
     val nameApostrophePattern = Regex("'")
 
     return when {
-        name.isEmpty() -> "This field cannot be empty."
+        name!!.isEmpty() -> "This field cannot be empty."
         name.length <= 1 -> "Name should be more than 1 character."
         nameDigitPattern.containsMatchIn(name) -> "Name should not contain any numbers."
         nameSpacePattern.containsMatchIn(name) -> {
@@ -283,12 +290,12 @@ fun validateName(name: String) : String{
 @OptIn(ExperimentalMaterial3Api::class)
 private fun NameField(
     label: String,
-    value: String,
+    value: String?,
     showSupportText: Boolean,
-    isValidInput: MutableState<Boolean>,
+    isValidInput: MutableState<String?>,
     onValueChange: (String) -> Unit) {
     TextField(
-        value = value,
+        value = value ?: "",
         onValueChange = onValueChange,
         singleLine = true,
         placeholder = { AuthInputPlaceholderTextStyle(label) },
@@ -300,7 +307,7 @@ private fun NameField(
                     color = indicatorColorRed,
                 )
 
-                if (validationResult == "") isValidInput.value = true else isValidInput.value = false
+                if (validationResult == "") isValidInput.value = "true" else isValidInput.value = "false"
             }
         },
         colors = TextFieldDefaults.textFieldColors(
@@ -321,17 +328,18 @@ private fun NameField(
 @Composable
 private fun NextButton(
     navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String,
+    firstName: String?,
+    middleName: String?,
+    lastName: String?,
     role: String,
     school: String,
     program: String,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValidFname: MutableState<Boolean>,
-    isValidMname: MutableState<Boolean>,
-    isValidLname: MutableState<Boolean>,
+    isValidFname: MutableState<String?>,
+    isValidMname: MutableState<String?>,
+    isValidLname: MutableState<String?>,
+    namesPreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -340,19 +348,31 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            val formattedFirstName = firstName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedMiddleName = middleName.lowercase().replaceFirstChar { it.uppercase() }
-            val formattedLastName = lastName.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedFirstName = firstName!!.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedMiddleName = middleName!!.lowercase().replaceFirstChar { it.uppercase() }
+            val formattedLastName = lastName!!.lowercase().replaceFirstChar { it.uppercase() }
 
-            if (isValidFname.value && isValidMname.value && isValidLname.value) {
+            if (isValidFname.value == "true" && isValidMname.value == "true" && isValidLname.value == "true") {
 
                 if(role == "Student"){
+                    namesPreference.edit().putString("firstname", firstName).apply()
+                    namesPreference.edit().putString("firstnameState", "true").apply()
+                    namesPreference.edit().putString("middlename", middleName).apply()
+                    namesPreference.edit().putString("middlenameState", "true").apply()
+                    namesPreference.edit().putString("lastname", lastName).apply()
+                    namesPreference.edit().putString("lastnameState", "true").apply()
                     navController.navigate(
                         "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${""}/${program}"
                     )
                 }
 
                 else{
+                    namesPreference.edit().putString("firstname", firstName).apply()
+                    namesPreference.edit().putString("firstnameState", "true").apply()
+                    namesPreference.edit().putString("middlename", middleName).apply()
+                    namesPreference.edit().putString("middlenameState", "true").apply()
+                    namesPreference.edit().putString("lastname", lastName).apply()
+                    namesPreference.edit().putString("lastnameState", "true").apply()
                     navController.navigate(
                         "${ScreenRoutes.SignUp.route}/${formattedFirstName}/${formattedMiddleName}/${formattedLastName}/${role}/${school}/${""}"
                     )

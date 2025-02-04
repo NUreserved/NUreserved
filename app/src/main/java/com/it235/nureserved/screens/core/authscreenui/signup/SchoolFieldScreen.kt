@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -37,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -88,8 +91,9 @@ fun SchoolFieldScreen(
             "School of Tourism and Hospitality Management",
         )
 
-        var school by remember { mutableStateOf(schoolOptions[0]) }
-        val isValidSchool = remember { mutableStateOf(false) }
+        val schoolPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+        var school by rememberSaveable { mutableStateOf(schoolPreference.getString("school", schoolOptions[0])) }
+        val isValidSchool = rememberSaveable { mutableStateOf(schoolPreference.getString("schoolState", "false")) }
         var showSchoolSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
@@ -189,6 +193,7 @@ fun SchoolFieldScreen(
                             isValidSchool,
                             school,
                             role,
+                            schoolPreference,
                         )
 
                     }
@@ -203,9 +208,9 @@ fun SchoolFieldScreen(
 @Composable
 private fun DropdownTextField(
     options: List<String>,
-    selectedOption: String,
+    selectedOption: String?,
     showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
+    isValid: MutableState<String?>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -219,7 +224,7 @@ private fun DropdownTextField(
     ) {
 
         TextField(
-            value = selectedOption,
+            value = selectedOption ?: "",
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -240,14 +245,14 @@ private fun DropdownTextField(
             supportingText = {
                 if(showSupportText){
                     if(selectedOption == "School"){
-                        isValid.value = false
+                        isValid.value = "false"
                         Text(
                             text = "Please select a school.",
                             color = indicatorColorRed
                         )
                     }
                     else {
-                        isValid.value = true
+                        isValid.value = "true"
                         Text( text = "" )
                     }
                 }
@@ -290,9 +295,10 @@ private fun NextButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValid: MutableState<Boolean>,
-    selectedSchool: String,
+    isValid: MutableState<String?>,
+    selectedSchool: String?,
     selectedRole: String,
+    schoolPreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -301,7 +307,9 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValid.value){
+            if(isValid.value == "true"){
+                schoolPreference.edit().putString("school", selectedSchool).apply()
+                schoolPreference.edit().putString("schoolState", "true").apply()
                 navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${selectedSchool}/${""}")
             }
             else{
