@@ -1,8 +1,8 @@
 package com.it235.nureserved.screens.admin.reservations
 
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import getSampleReservations
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -49,9 +48,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.reservation_data.ApprovalDetails
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.ApprovalDetails
+import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
@@ -61,9 +60,7 @@ import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
-import com.it235.nureserved.ui.theme.white4
 import com.it235.nureserved.ui.theme.white5
-import com.it235.nureserved.ui.theme.white6
 import java.time.OffsetDateTime
 
 @Composable

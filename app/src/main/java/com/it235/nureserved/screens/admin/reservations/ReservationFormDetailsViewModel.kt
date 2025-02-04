@@ -3,10 +3,10 @@ package com.it235.nureserved.screens.admin.reservations
 import android.content.Context
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.data.reservation_data.ActivityDate
-import com.it235.nureserved.data.reservation_data.ApprovalDetails
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.data.model.ApprovalDetails
+import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.Duration

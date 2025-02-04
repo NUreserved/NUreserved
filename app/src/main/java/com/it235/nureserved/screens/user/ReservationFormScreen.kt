@@ -1,6 +1,5 @@
 package com.it235.nureserved.screens.user
 
-import User
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -78,7 +77,8 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.Space
-import com.it235.nureserved.data.rooms.FloorLocation
+import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.data.model.User
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
@@ -86,13 +86,11 @@ import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor1
-import com.it235.nureserved.ui.theme.textColor2
 import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white6
 import getUserData
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
