@@ -208,9 +208,9 @@ fun SchoolFieldScreen(
 @Composable
 private fun DropdownTextField(
     options: List<String>,
-    selectedOption: String,
+    selectedOption: String?,
     showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
+    isValid: MutableState<String?>,
     onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -295,8 +295,8 @@ private fun NextButton(
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValid: MutableState<Boolean>,
-    selectedSchool: String,
+    isValid: MutableState<String?>,
+    selectedSchool: String?,
     selectedRole: String,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current

@@ -208,7 +208,7 @@ fun NameSignUpScreen(
     }
 }
 
-fun validateName(name: String) : String{
+fun validateName(name: String?) : String{
     val nameSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
     val nameDigitPattern = Regex("\\d")
     val nameSpacePattern = Regex("\\s")
@@ -290,9 +290,9 @@ fun validateName(name: String) : String{
 @OptIn(ExperimentalMaterial3Api::class)
 private fun NameField(
     label: String,
-    value: String,
+    value: String?,
     showSupportText: Boolean,
-    isValidInput: MutableState<Boolean>,
+    isValidInput: MutableState<String?>,
     onValueChange: (String) -> Unit) {
     TextField(
         value = value,
@@ -328,9 +328,9 @@ private fun NameField(
 @Composable
 private fun NextButton(
     navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String,
+    firstName: String?,
+    middleName: String?,
+    lastName: String?,
     role: String,
     school: String,
     program: String,
@@ -339,6 +339,9 @@ private fun NextButton(
     isValidFname: MutableState<Boolean>,
     isValidMname: MutableState<Boolean>,
     isValidLname: MutableState<Boolean>,
+    isValidFname: MutableState<String?>,
+    isValidMname: MutableState<String?>,
+    isValidLname: MutableState<String?>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 

@@ -179,11 +179,11 @@ fun RolesFieldScreen(
                         Space("h", 10)
 
                         NextButton(
-                            navController,
-                            scope,
-                            snackbarHostState,
-                            isValidRole,
-                            role,
+                            navController = navController,
+                            scope = scope,
+                            snackbarHostState = snackbarHostState,
+                            isValid = isValidRole,
+                            selectedRole = role,
                             rolePreference,
                         )
 
@@ -199,10 +199,10 @@ fun RolesFieldScreen(
 @Composable
 private fun DropdownTextField(
     options: List<String>,
-    selectedOption: String,
+    selectedOption: String?,
     showSupportText: Boolean,
-    isValid: MutableState<Boolean>,
-    onOptionSelected: (String) -> Unit
+    isValid: MutableState<String?>,
+    onOptionSelected: (String?) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -288,6 +288,8 @@ private fun NextButton(
     snackbarHostState: SnackbarHostState,
     isValid: MutableState<Boolean>,
     selectedRole: String,
+    isValid: MutableState<String?>,
+    selectedRole: String?,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
