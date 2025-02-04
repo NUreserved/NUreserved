@@ -1,7 +1,7 @@
-import com.it235.nureserved.data.reservation_data.ActivityDate
-import com.it235.nureserved.data.reservation_data.ApprovalDetails
-import com.it235.nureserved.data.reservation_data.ApprovalStatus
-import com.it235.nureserved.data.reservation_data.ReservationFormData
+import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.data.model.ApprovalDetails
+import com.it235.nureserved.data.model.ApprovalStatus
+import com.it235.nureserved.data.model.ReservationFormData
 import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime

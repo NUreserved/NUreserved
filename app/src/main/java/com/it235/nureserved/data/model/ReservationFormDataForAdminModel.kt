@@ -1,6 +1,5 @@
-package com.it235.nureserved.data.reservation_data
+package com.it235.nureserved.data.model
 
-import com.it235.nureserved.data.rooms.Room
 import java.time.LocalTime
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
