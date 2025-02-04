@@ -1,5 +1,7 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
