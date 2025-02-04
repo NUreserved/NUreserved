@@ -305,6 +305,7 @@ private fun NextButton(
     snackbarHostState: SnackbarHostState,
     isValidProgram: MutableState<Boolean>,
     isValidProgram: MutableState<String?>,
+    programPreference: SharedPreferences
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 

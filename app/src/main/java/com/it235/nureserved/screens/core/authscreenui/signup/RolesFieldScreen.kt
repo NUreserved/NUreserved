@@ -290,6 +290,7 @@ private fun NextButton(
     selectedRole: String,
     isValid: MutableState<String?>,
     selectedRole: String?,
+    rolePreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 

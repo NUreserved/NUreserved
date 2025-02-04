@@ -298,6 +298,7 @@ private fun NextButton(
     isValid: MutableState<String?>,
     selectedSchool: String?,
     selectedRole: String,
+    schoolPreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 

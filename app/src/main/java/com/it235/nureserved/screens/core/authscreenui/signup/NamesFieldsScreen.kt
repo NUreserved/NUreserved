@@ -342,6 +342,7 @@ private fun NextButton(
     isValidFname: MutableState<String?>,
     isValidMname: MutableState<String?>,
     isValidLname: MutableState<String?>,
+    namesPreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
