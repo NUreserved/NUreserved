@@ -540,6 +540,7 @@ private fun RegisterButton(
                                             user.sendEmailVerification()
                                                 .addOnCompleteListener { emailTask ->
                                                     if (emailTask.isSuccessful) {
+                                                        signupSharedPreferences.edit().clear().apply()
                                                         loading.value = false
                                                         // dialog box for email verification
                                                         showDialog = true

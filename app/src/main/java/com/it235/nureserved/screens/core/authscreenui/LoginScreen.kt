@@ -103,6 +103,8 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
     val signupSharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
 
+    signupSharedPreferences.edit().clear().apply()
+
     NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
 
