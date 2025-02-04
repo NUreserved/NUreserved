@@ -61,6 +61,11 @@ import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white5
+import com.it235.nureserved.utils.formatActivityDateAndTIme
+import com.it235.nureserved.utils.formatDateFilled
+import com.it235.nureserved.utils.formatHistoryDate
+import com.it235.nureserved.utils.getTimeLapseString
+import com.it235.nureserved.utils.getTimeLeft
 import java.time.OffsetDateTime
 
 @Composable
@@ -134,12 +139,12 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date filled",
-                    value = viewModel.formatDateFilled(reservationData.getDateFilled())
+                    value = formatDateFilled(reservationData.getDateFilled())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Date and time of activity",
-                    value = viewModel.formatActivityDateAndTIme(reservationData.getActivityDateTime())
+                    value = formatActivityDateAndTIme(reservationData.getActivityDateTime())
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
@@ -326,7 +331,7 @@ private fun ReservationStatusComposable(
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLeft(reservationData.getActivityDateTime()),
+                text = getTimeLeft(reservationData.getActivityDateTime()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
@@ -336,7 +341,7 @@ private fun ReservationStatusComposable(
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                text = getTimeLapseString(reservationData.getDateFilled()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
@@ -346,7 +351,7 @@ private fun ReservationStatusComposable(
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
-                text = viewModel.getTimeLapseString(reservationData.getDateFilled()),
+                text = getTimeLapseString(reservationData.getDateFilled()),
                 style = LocalTextStyle.current.copy(
                     fontSize = 13.sp,
                     lineHeight = 16.sp
@@ -502,7 +507,7 @@ private fun RequestTimelineHistory(
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
                     Text(
-                        text = viewModel.formatHistoryDate(approvalDetail.eventDate),
+                        text = formatHistoryDate(approvalDetail.eventDate),
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
                             lineHeight = 14.sp
