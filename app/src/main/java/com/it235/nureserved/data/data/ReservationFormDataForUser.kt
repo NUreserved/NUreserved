@@ -8,7 +8,7 @@ import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime
 
-fun getUserReservations(): List<ReservationFormData> {
+fun getSampleUserReservations(): List<ReservationFormData> {
     val sample1 = ReservationFormData(
         organization = "Student Executives",
         activityTitle = "Meeting for Paskong Nationalian",
@@ -37,7 +37,7 @@ fun getUserReservations(): List<ReservationFormData> {
             startTime = LocalTime.of(15, 0),
             endTime = LocalTime.of(16, 0)
         ),
-        venue = roomList[0],
+        venue = roomList[27],
         expectedAttendees = 25,
         requesterLastName = "Juan",
         requesterMiddleName = "Marcio",
@@ -55,7 +55,7 @@ fun getUserReservations(): List<ReservationFormData> {
             startTime = LocalTime.of(18, 0),
             endTime = LocalTime.of(19, 0)
         ),
-        venue = roomList[0],
+        venue = roomList[13],
         expectedAttendees = 25,
         requesterLastName = "Juan",
         requesterMiddleName = "Marcio",
@@ -73,7 +73,7 @@ fun getUserReservations(): List<ReservationFormData> {
             startTime = LocalTime.of(20, 0),
             endTime = LocalTime.of(21, 0)
         ),
-        venue = roomList[0],
+        venue = roomList[18],
         expectedAttendees = 25,
         requesterLastName = "Juan",
         requesterMiddleName = "Marcio",
@@ -101,13 +101,12 @@ fun getUserReservations(): List<ReservationFormData> {
 
     sample4.addTransactionDetail(
         TransactionDetails(
-            status = TransactionStatus.DECLINED,
+            status = TransactionStatus.APPROVED,
             processedBy = "Chris Johnson",
             eventDate = OffsetDateTime.parse("2024-12-13T12:00:00+08:00"),
             remarks = "The room is under maintenenace"
         )
     )
 
-
-    return listOf(sample1, sample2, sample3)
+    return listOf(sample1, sample2, sample3, sample4)
 }

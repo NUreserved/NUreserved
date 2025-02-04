@@ -23,7 +23,7 @@ class ReservationFormData (
             TransactionDetails(
                 status = TransactionStatus.PENDING,
                 processedBy = null,
-                eventDate = OffsetDateTime.now(),
+                eventDate = OffsetDateTime.parse("2024-06-01T00:00:00+08:00"),
                 remarks = null
             )
         )
