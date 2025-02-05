@@ -4,7 +4,7 @@ import com.it235.nureserved.utils.generateReservationNumber
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class ReservationFormDataV2 (
+class ReservationFormDataV2(
     private var organization: String,
     private var activityTitle: String,
     private var dateFilled: OffsetDateTime,
@@ -16,7 +16,7 @@ class ReservationFormDataV2 (
     private var requesterGivenName: String,
     private var requesterPosition: String,
     private val transactionHistory: MutableList<TransactionDetails> = mutableListOf(),
-    private var trackingNumber: String = generateReservationNumber(),
+    private var trackingNumber: String,
 ) {
     fun getOrganization(): String = organization
     fun setOrganization(value: String) {
@@ -85,6 +85,19 @@ class ReservationFormDataV2 (
 
     fun getTrackingNumber(): String {
         return trackingNumber
+    }
+
+    override fun toString(): String {
+        return "ReservationFormDataV2(organization='$organization', " +
+                "activityTitle='$activityTitle', dateFilled=$dateFilled," +
+                " activityDateTime=$activityDateTime, venue=$venue," +
+                " expectedAttendees=$expectedAttendees, " +
+                "requesterLastName='$requesterLastName', " +
+                "requesterMiddleName='$requesterMiddleName', " +
+                "requesterGivenName='$requesterGivenName', " +
+                "requesterPosition='$requesterPosition', " +
+                "transactionHistory=$transactionHistory, " +
+                "trackingNumber='$trackingNumber')"
     }
 }
 

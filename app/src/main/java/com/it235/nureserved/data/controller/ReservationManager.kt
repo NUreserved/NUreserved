@@ -19,20 +19,20 @@ class ReservationManager {
             }
 
             val reservationData = hashMapOf(
+                "reservationNumber" to data.getTrackingNumber(),
+                "dateFilled" to data.getDateFilled().toString(),
                 "userId" to userId,
                 "reservationStatus" to data.getLatestTransactionDetails()!!.status,
-                "reservationDetails" to hashMapOf(
-                    "nameOfOrgDeptColg" to data.getOrganization(),
-                    "givenName" to data.getRequesterGivenName(),
-                    "middleName" to data.getRequesterMiddleName(),
-                    "lastName" to data.getRequesterLastName(),
-                    "position" to data.getRequesterPosition(),
-                    "titleOfTheActivity" to data.getActivityTitle(),
-                    "fromDatesOfActivity" to data.getActivityDateTime().startDate.toString(),
-                    "toDatesOfActivity" to data.getActivityDateTime().endDate.toString(),
-                    "expectedNumberOfAttendees" to data.getExpectedAttendees(),
-                    "selectedRooms" to data.getVenue().map { it.name }
-                ),
+                "nameOfOrgDeptColg" to data.getOrganization(),
+                "givenName" to data.getRequesterGivenName(),
+                "middleName" to data.getRequesterMiddleName(),
+                "lastName" to data.getRequesterLastName(),
+                "position" to data.getRequesterPosition(),
+                "titleOfTheActivity" to data.getActivityTitle(),
+                "fromDatesOfActivity" to data.getActivityDateTime().startDate.toString(),
+                "toDatesOfActivity" to data.getActivityDateTime().endDate.toString(),
+                "expectedNumberOfAttendees" to data.getExpectedAttendees(),
+                "selectedRooms" to data.getVenue(),
                 "transactionHistory" to listOf(
                     hashMapOf(
                         "status" to data.getLatestTransactionDetails()!!.status,
@@ -44,7 +44,7 @@ class ReservationManager {
             )
 
             val db = FirebaseFirestore.getInstance()
-            db.collection("reservations").document(generateReservationNumber())
+            db.collection("reservations").document(data.getTrackingNumber())
                 .set(reservationData)
                 .addOnSuccessListener {
                     Log.d("ReservationDataController", "Reservation added successfully")
@@ -56,6 +56,7 @@ class ReservationManager {
 
         fun retrieveReservations(callback: (List<Map<String, Any>>?) -> Unit) {
             val db = FirebaseFirestore.getInstance()
+            Log.d("ReservationManager", "Retrieving reservations for user: $userId")
 
             db.collection("reservations")
                 .whereEqualTo("userId", userId)
@@ -63,6 +64,7 @@ class ReservationManager {
                 .addOnSuccessListener { documents ->
                     if (!documents.isEmpty) {
                         val reservations = documents.map { it.data }
+                        Log.d("ReservationManager", "Reservations retrieved: $reservations")
                         callback(reservations)
                     } else {
                         Log.w("ReservationManager", "No reservations found for user")
