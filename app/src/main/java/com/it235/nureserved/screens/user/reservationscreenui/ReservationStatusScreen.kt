@@ -72,9 +72,9 @@ fun RoomReservationStatusScreen(
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
-    val approvedReservations = viewModel.approvedReservations
-    val pendingReservations = viewModel.pendingReservations
-    val reservationHistory = viewModel.reservationHistory
+    val approvedReservations by viewModel.approvedReservations.collectAsState()
+    val pendingReservations by viewModel.pendingReservations.collectAsState()
+    val reservationHistory by viewModel.reservationHistory.collectAsState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
