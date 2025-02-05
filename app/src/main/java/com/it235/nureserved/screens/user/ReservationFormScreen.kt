@@ -1,7 +1,5 @@
 package com.it235.nureserved.screens.user
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -66,24 +64,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.data.controller.ReservationDataController
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.data.model.Room
 import com.it235.nureserved.data.model.User
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
@@ -281,12 +276,12 @@ fun DatePickerTextField(
 
 @Composable
 fun FilterChipComposable(
-    roomNumber: String,
-    selectedRooms: List<String>,
-    onRoomSelected: (String) -> Unit,
-    onRoomDeselected: (String) -> Unit
+    room: Room,
+    selectedRooms: List<Room>,
+    onRoomSelected: (Room) -> Unit,
+    onRoomDeselected: (Room) -> Unit
 ) {
-    val isSelected = selectedRooms.contains(roomNumber)
+    val isSelected = selectedRooms.contains(room)
 
     FilterChip(
         colors = FilterChipDefaults.filterChipColors(
@@ -294,13 +289,13 @@ fun FilterChipComposable(
         ),
         onClick = {
             if (isSelected) {
-                onRoomDeselected(roomNumber)
+                onRoomDeselected(room)
             } else {
-                onRoomSelected(roomNumber)
+                onRoomSelected(room)
             }
         },
         label = {
-            Text(text = roomNumber)
+            Text(text = room.name)
         },
         selected = isSelected,
         leadingIcon = if (isSelected) {
@@ -327,7 +322,7 @@ fun OutlineTextFieldComposable(
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
     readOnly: Boolean = false,
-    selectedRooms: List<String> = listOf(),
+    selectedRooms: List<Room> = listOf(),
     textStyle: TextStyle? = null,
     onValueChange: (String) -> Unit,
 ){
@@ -586,7 +581,7 @@ fun InputAndLabelLayout(
     dimension: String,
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
-    selectedRooms: List<String> = listOf(),
+    selectedRooms: List<Room> = listOf(),
 ){
     if(dimension == "col"){
         Column(
@@ -718,7 +713,7 @@ fun RoomReservationForm(
     navController: NavController,
     reservationDataController: ReservationDataController
 ){
-    var selectedRooms by rememberSaveable { mutableStateOf(listOf<String>()) }
+    var selectedRooms by rememberSaveable { mutableStateOf(listOf<Room>()) }
     val focusManager = LocalFocusManager.current
 
     var venueShowSuppTxt by remember { mutableStateOf(false) }
@@ -1162,7 +1157,7 @@ fun RoomReservationForm(
                                 }
 
                                 FilterChipComposable(
-                                    roomNumber = room.name,
+                                    room = room,
                                     selectedRooms = selectedRooms,
                                     onRoomSelected = {
                                         selectedRooms = selectedRooms + it
