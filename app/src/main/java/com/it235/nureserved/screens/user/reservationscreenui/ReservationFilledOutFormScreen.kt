@@ -132,8 +132,8 @@ fun ReservationFilledOutFormScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Venue",
-                    value = reservationData.getVenue().toString()
-                )
+                    value = reservationData.getVenue().joinToString(", ") { it.name }
+                ) // Recommendation: Move out this business logic later
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Expected # of Attendees",
