@@ -1,8 +1,10 @@
 package com.it235.nureserved.screens.user.reservationscreenui
 
 import androidx.lifecycle.ViewModel
+import com.it235.nureserved.data.controller.ReservationDataController
 import com.it235.nureserved.data.data.getSampleUserReservations
 import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.data.model.ReservationFormDataV2
 import com.it235.nureserved.data.model.TransactionStatus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -10,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.time.OffsetDateTime
 
 class ReservationsViewModel : ViewModel() {
-    private val _reservationList = MutableStateFlow(getSampleUserReservations())
+    private val _reservationList = MutableStateFlow(ReservationDataController.getReservationList())
     val approvedReservations = getApprovedReservationsList()
     val pendingReservations = getPendingReservationsList()
     val reservationHistory = getReservationsListHistory()
@@ -23,33 +25,33 @@ class ReservationsViewModel : ViewModel() {
 
     val tabs = listOf("Active", "Pending", "History")
 
-    private val _selectedReservation = MutableStateFlow<ReservationFormData?>(null)
-    val selectedReservation: StateFlow<ReservationFormData?> = _selectedReservation.asStateFlow()
+    private val _selectedReservation = MutableStateFlow<ReservationFormDataV2?>(null)
+    val selectedReservation: StateFlow<ReservationFormDataV2?> = _selectedReservation.asStateFlow()
 
-    private fun getApprovedReservationsList(): List<ReservationFormData> {
+    private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
         return _reservationList.value.filter { reservation ->
-            reservation.getLatestTransactionDetail()?.status == TransactionStatus.APPROVED &&
+            reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
                     reservation.getActivityDateTime().endDate.isAfter(OffsetDateTime.now())
         }
     }
 
-    private fun getPendingReservationsList(): List<ReservationFormData> {
+    private fun getPendingReservationsList(): List<ReservationFormDataV2> {
         return _reservationList.value.filter { reservation ->
-            reservation.getLatestTransactionDetail()?.status == TransactionStatus.PENDING
+            reservation.getLatestTransactionDetails()?.status == TransactionStatus.PENDING
         }
     }
 
     // It displays the reservations that was approved in the past, OR reservations
     // that was declined regardless of time frame
-    private fun getReservationsListHistory(): List<ReservationFormData> {
+    private fun getReservationsListHistory(): List<ReservationFormDataV2> {
         return _reservationList.value
             .filter { reservation ->
-                (reservation.getLatestTransactionDetail()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(
+                (reservation.getLatestTransactionDetails()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(
                     OffsetDateTime.now()))
                         ||
-                        reservation.getLatestTransactionDetail()?.status == TransactionStatus.DECLINED
+                        reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED
             }
-            .sortedByDescending { it.getLatestTransactionDetail()?.eventDate }
+            .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
 
     fun setShowBottomSheet(show: Boolean) {
@@ -60,7 +62,7 @@ class ReservationsViewModel : ViewModel() {
         _selectedTabIndex.value = index
     }
 
-    fun setSelectedReservation(reservation: ReservationFormData?) {
+    fun setSelectedReservation(reservation: ReservationFormDataV2?) {
         _selectedReservation.value = reservation
     }
 }
