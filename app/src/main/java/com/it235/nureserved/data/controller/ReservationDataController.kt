@@ -2,9 +2,15 @@ package com.it235.nureserved.data.controller
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.MutableLiveData
+import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.data.model.ReservationFormDataV2
+import com.it235.nureserved.data.model.Room
+import com.it235.nureserved.data.model.TransactionDetails
+import com.it235.nureserved.data.model.TransactionStatus
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.util.Date
 
 class ReservationDataController : ViewModel() {
@@ -17,8 +23,7 @@ class ReservationDataController : ViewModel() {
     private val _fromDatesOfActivity = MutableStateFlow<Date?>(null)
     private val _toDatesOfActivity = MutableStateFlow<Date?>(null)
     private val _expectedNumberOfAttendees = MutableStateFlow<String?>(null)
-    private val _selectedRooms = MutableStateFlow<List<String>?>(null)
-
+    private val _selectedRooms = MutableStateFlow<List<Room>?>(null)
 
     fun storeValues(
         nameOfOrgDeptColg: String,
@@ -30,7 +35,7 @@ class ReservationDataController : ViewModel() {
         fromDatesOfActivity: Date,
         toDatesOfActivity: Date,
         expectedNumberOfAttendees: String,
-        selectedRooms: List<String>
+        selectedRooms: List<Room>
     ) {
         _nameOfOrgDeptColg.value = nameOfOrgDeptColg
         Log.d("ReservationDataController", "Stored nameOfOrgDeptColg: ${_nameOfOrgDeptColg.value}")
@@ -64,6 +69,33 @@ class ReservationDataController : ViewModel() {
     }
 
     fun submitReservationRequest() {
-        TODO()
+        val data = ReservationFormDataV2(
+            organization = _nameOfOrgDeptColg.value!!,
+            activityTitle = _titleOfTheActivity.value!!,
+            dateFilled = OffsetDateTime.now(),
+            activityDateTime = ActivityDate(
+                startDate = _fromDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.UTC),
+                endDate = _toDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.UTC),
+                startTime = LocalTime.of(8, 0),
+                endTime = LocalTime.of(12, 0)
+            ),
+            venue = _selectedRooms.value!!,
+            expectedAttendees = 15,
+            requesterLastName = _lastName.value!!,
+            requesterMiddleName = _middleName.value!!,
+            requesterGivenName = _givenName.value!!,
+            requesterPosition = _position.value!!,
+        )
+
+        data.addTransactionDetails(
+            TransactionDetails(
+                status = TransactionStatus.PENDING,
+                processedBy = null,
+                eventDate = OffsetDateTime.now(),
+                remarks = null
+            )
+        )
+
+        ReservationManager.submitReservationRequest(data)
     }
 }
