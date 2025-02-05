@@ -27,7 +27,7 @@ class ReservationDataController {
                             startTime = LocalTime.of(8, 0),
                             endTime = LocalTime.of(12, 0)
                         ),
-                        venue = listOf(roomList[0]),
+                        venue = listOf(roomList[0]), // Hardcoded for now, will fix this one later
                         expectedAttendees = (reservationData["expectedNumberOfAttendees"] as? Long)?.toInt() ?: 0,
                         requesterLastName = reservationData["lastName"] as? String ?: "",
                         requesterMiddleName = reservationData["middleName"] as? String ?: "",
