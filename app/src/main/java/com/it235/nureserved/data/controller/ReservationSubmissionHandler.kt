@@ -76,8 +76,8 @@ class ReservationSubmissionHandler : ViewModel() {
             activityTitle = _titleOfTheActivity.value!!,
             dateFilled = OffsetDateTime.now(),
             activityDateTime = ActivityDate(
-                startDate = _fromDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.UTC),
-                endDate = _toDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.UTC),
+                startDate = _fromDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.ofHours(8)),
+                endDate = _toDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.ofHours(8)),
                 startTime = LocalTime.of(8, 0),
                 endTime = LocalTime.of(12, 0)
             ),
