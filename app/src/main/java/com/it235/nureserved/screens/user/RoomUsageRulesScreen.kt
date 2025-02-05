@@ -34,15 +34,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.data.controller.ReservationDataController
+import com.it235.nureserved.data.controller.ReservationSubmissionHandler
 import com.it235.nureserved.screens.core.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -161,7 +158,7 @@ fun ReservationRequestSuccessDialog(navController: NavController) {
 @Composable
 fun RoomUsageRules(
     navController: NavController,
-    reservationDataController: ReservationDataController
+    reservationSubmissionHandler: ReservationSubmissionHandler
 ){
     var showConfirmationDialog by remember { mutableStateOf(false) }
     var showSuccessfulDialog by remember { mutableStateOf(false) }
@@ -174,7 +171,7 @@ fun RoomUsageRules(
                 showDialog = showConfirmationDialog,
                 onDismiss = { showConfirmationDialog = false },
                 showSuccessfulDialog = { showSuccessfulDialog = true },
-                submitReservationRequest = { reservationDataController.submitReservationRequest() }
+                submitReservationRequest = { reservationSubmissionHandler.submitReservationRequest() }
             )
         }
 

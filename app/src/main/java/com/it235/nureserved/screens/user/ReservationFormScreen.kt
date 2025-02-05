@@ -75,7 +75,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.data.controller.ReservationDataController
+import com.it235.nureserved.data.controller.ReservationSubmissionHandler
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.data.model.Room
@@ -711,7 +711,7 @@ fun FilterChipsCategoryDivider(){
 @Composable
 fun RoomReservationForm(
     navController: NavController,
-    reservationDataController: ReservationDataController
+    reservationSubmissionHandler: ReservationSubmissionHandler
 ){
     var selectedRooms by rememberSaveable { mutableStateOf(listOf<Room>()) }
     val focusManager = LocalFocusManager.current
@@ -821,7 +821,7 @@ fun RoomReservationForm(
             onDismiss = { showAlertDialog = false },
             showConfirmDialog = {
                 navController.navigate(ScreenRoutes.RoomUsageRules.route)
-                reservationDataController.storeValues(
+                reservationSubmissionHandler.storeValues(
                     nameOfOrgDeptColg.value,
                     givenName.value,
                     middleName.value,

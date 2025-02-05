@@ -13,7 +13,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.util.Date
 
-class ReservationDataController : ViewModel() {
+class ReservationSubmissionHandler : ViewModel() {
     private val _nameOfOrgDeptColg = MutableStateFlow<String?>(null)
     private val _givenName = MutableStateFlow<String?>(null)
     private val _middleName = MutableStateFlow<String?>(null)
