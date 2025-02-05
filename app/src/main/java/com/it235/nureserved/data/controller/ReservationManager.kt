@@ -32,7 +32,7 @@ class ReservationManager {
                 "fromDatesOfActivity" to data.getActivityDateTime().startDate.toString(),
                 "toDatesOfActivity" to data.getActivityDateTime().endDate.toString(),
                 "expectedNumberOfAttendees" to data.getExpectedAttendees(),
-                "selectedRooms" to data.getVenue(),
+                "selectedRooms" to data.getVenue().map { it.name }, // Only get the name of each room, nut the Room object
                 "transactionHistory" to listOf(
                     hashMapOf(
                         "status" to data.getLatestTransactionDetails()!!.status,
