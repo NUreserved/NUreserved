@@ -76,7 +76,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.data.controller.ReservationSubmissionHandler
+import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.data.model.Room

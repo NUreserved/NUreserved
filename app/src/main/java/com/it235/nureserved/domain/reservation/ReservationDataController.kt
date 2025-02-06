@@ -1,11 +1,7 @@
-package com.it235.nureserved.data.controller
+package com.it235.nureserved.domain.reservation
 
 import android.util.Log
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.ReservationFormDataV2
-import com.it235.nureserved.data.model.Room
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime

@@ -1,6 +1,7 @@
-package com.it235.nureserved.data.model
+package com.it235.nureserved.domain.reservation
 
-import com.it235.nureserved.utils.generateReservationNumber
+import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.data.model.Room
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 

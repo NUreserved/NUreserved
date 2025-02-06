@@ -1,10 +1,8 @@
-package com.it235.nureserved.data.controller
+package com.it235.nureserved.domain.reservation
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.it235.nureserved.data.model.ReservationFormDataV2
-import com.it235.nureserved.utils.generateReservationNumber
 
 class ReservationManager {
     companion object {

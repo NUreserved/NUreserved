@@ -39,12 +39,10 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.model.ReservationFormData
-import com.it235.nureserved.data.model.ReservationFormDataV2
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.TransactionDetails
+import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange

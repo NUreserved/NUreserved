@@ -1,9 +1,9 @@
 package com.it235.nureserved
 
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
-import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.domain.reservation.TransactionDetails
+import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.domain.reservation.ReservationFormData
 import com.it235.nureserved.data.rooms.roomList
 import org.junit.Test
 import java.time.LocalDate

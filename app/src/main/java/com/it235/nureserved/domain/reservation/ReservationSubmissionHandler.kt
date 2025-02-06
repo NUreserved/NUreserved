@@ -1,13 +1,9 @@
-package com.it235.nureserved.data.controller
+package com.it235.nureserved.domain.reservation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.R
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.ReservationFormDataV2
 import com.it235.nureserved.data.model.Room
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.utils.generateReservationNumber
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.time.LocalTime

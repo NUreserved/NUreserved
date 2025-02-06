@@ -44,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
-import com.it235.nureserved.data.model.TransactionStatus
-import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.domain.reservation.ReservationFormData
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4

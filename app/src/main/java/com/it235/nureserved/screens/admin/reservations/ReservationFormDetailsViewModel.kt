@@ -3,15 +3,12 @@ package com.it235.nureserved.screens.admin.reservations
 import android.content.Context
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
-import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.domain.reservation.TransactionDetails
+import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.domain.reservation.ReservationFormData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.time.Duration
 import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
 
 class ReservationFormDetailsViewModel : ViewModel() {
     private val _context = MutableStateFlow<Context?>(null)

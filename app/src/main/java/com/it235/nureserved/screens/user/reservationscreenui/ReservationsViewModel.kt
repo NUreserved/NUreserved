@@ -3,11 +3,9 @@ package com.it235.nureserved.screens.user.reservationscreenui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.it235.nureserved.data.controller.ReservationDataController
-import com.it235.nureserved.data.data.getSampleUserReservations
-import com.it235.nureserved.data.model.ReservationFormData
-import com.it235.nureserved.data.model.ReservationFormDataV2
-import com.it235.nureserved.data.model.TransactionStatus
+import com.it235.nureserved.domain.reservation.ReservationDataController
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.TransactionStatus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

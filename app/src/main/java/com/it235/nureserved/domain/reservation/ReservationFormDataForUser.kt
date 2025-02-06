@@ -1,9 +1,6 @@
-package com.it235.nureserved.data.data
+package com.it235.nureserved.domain.reservation
 
 import com.it235.nureserved.data.model.ActivityDate
-import com.it235.nureserved.data.model.ReservationFormData
-import com.it235.nureserved.data.model.TransactionDetails
-import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime
