@@ -4,7 +4,7 @@ import AuthService.Companion.isSignedIn
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapDataForDb
+import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapFromModelToDb
 
 class ReservationManager {
     companion object {
@@ -13,7 +13,7 @@ class ReservationManager {
 
         fun submitReservationRequest(data: ReservationFormDataV2) {
             if (isSignedIn()) {
-                val reservationData = mapDataForDb(data, userId)
+                val reservationData = mapFromModelToDb(data, userId)
 
                 val db = FirebaseFirestore.getInstance()
                 db.collection("reservations").document(data.getTrackingNumber())
@@ -29,7 +29,7 @@ class ReservationManager {
 
         fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
             retrieveFromDb() { data ->
-                callback(ReservationDataMapper.getReservationList(data))
+                callback(ReservationDataMapper.mapFromDbToModel(data))
             }
         }
 

@@ -8,7 +8,7 @@ import java.time.OffsetDateTime
 
 class ReservationDataMapper {
     companion object {
-        fun getReservationList(data: List<Map<String, Any>>?): MutableList<ReservationFormDataV2> {
+        fun mapFromDbToModel(data: List<Map<String, Any>>?): MutableList<ReservationFormDataV2> {
             val reservations = mutableListOf<ReservationFormDataV2>()
 
             data?.forEach { reservationData ->
@@ -49,7 +49,7 @@ class ReservationDataMapper {
 
         }
 
-        fun mapDataForDb(data: ReservationFormDataV2, userId: String?): HashMap<String, Any?> {
+        fun mapFromModelToDb(data: ReservationFormDataV2, userId: String?): HashMap<String, Any?> {
             val reservationData = hashMapOf(
                 "reservationNumber" to data.getTrackingNumber(),
                 "dateFilled" to data.getDateFilled().toString(),
