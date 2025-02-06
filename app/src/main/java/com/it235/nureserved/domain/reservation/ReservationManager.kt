@@ -1,5 +1,6 @@
 package com.it235.nureserved.domain.reservation
 
+import AuthService.Companion.isSignedIn
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,10 +12,7 @@ class ReservationManager {
 
         fun submitReservationRequest(data: ReservationFormDataV2) {
 
-            if (userId == null) {
-                Log.w("ReservationManager", "User not logged in")
-                return
-            }
+            if (isSignedIn()) return
 
             val reservationData = hashMapOf(
                 "reservationNumber" to data.getTrackingNumber(),
