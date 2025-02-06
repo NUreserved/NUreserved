@@ -10,10 +10,11 @@ class AuthService {
             val auth = FirebaseAuth.getInstance()
             val userId = auth.currentUser?.uid
 
-            if (userId == null) {
-                Log.w("ReservationManager", "User not logged in")
+            if (userId != null) {
                 return true
             }
+
+            Log.w("ReservationManager", "User not logged in")
             return false
         }
 
