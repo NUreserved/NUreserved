@@ -52,7 +52,13 @@ class ReservationManager {
                 }
         }
 
-        fun retrieveReservations(callback: (List<Map<String, Any>>?) -> Unit) {
+        fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
+            retrieveFromDb() { data ->
+                callback(ReservationDataMapper.getReservationList(data))
+            }
+        }
+
+        private fun retrieveFromDb(callback: (List<Map<String, Any>>?) -> Unit) {
             val db = FirebaseFirestore.getInstance()
             Log.d("ReservationManager", "Retrieving reservations for user: $userId")
 
