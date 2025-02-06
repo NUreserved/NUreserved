@@ -3,7 +3,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.it235.nureserved.domain.auth.User
-import com.it235.nureserved.domain.reservation.ReservationManager.Companion.userId
 
 class AuthService {
     companion object {
