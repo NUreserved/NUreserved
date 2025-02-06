@@ -3,7 +3,7 @@ package com.it235.nureserved.screens.user.reservationscreenui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.it235.nureserved.domain.reservation.ReservationDataController
+import com.it235.nureserved.domain.reservation.ReservationDataMapper
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,7 +45,7 @@ class ReservationsViewModel : ViewModel() {
 
     private fun loadReservations() {
         viewModelScope.launch {
-            ReservationDataController.getReservationList { reservations ->
+            ReservationDataMapper.getReservationList { reservations ->
                 _reservationList.value = reservations
                 Log.d("ReservationsViewModel", "Loaded reservations: ${_reservationList.value.size}")
 

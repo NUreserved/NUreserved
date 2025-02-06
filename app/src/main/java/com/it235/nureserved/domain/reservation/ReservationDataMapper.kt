@@ -6,7 +6,7 @@ import com.it235.nureserved.data.rooms.roomList
 import java.time.LocalTime
 import java.time.OffsetDateTime
 
-class ReservationDataController {
+class ReservationDataMapper {
     companion object {
         fun getReservationList(callback: (List<ReservationFormDataV2>) -> Unit) {
             val reservations = mutableListOf<ReservationFormDataV2>()
