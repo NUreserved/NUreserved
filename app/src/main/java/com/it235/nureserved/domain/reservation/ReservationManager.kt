@@ -12,7 +12,6 @@ class ReservationManager {
         private val userId = auth.currentUser?.uid
 
         fun submitReservationRequest(data: ReservationFormDataV2) {
-
             if (isSignedIn()) {
                 val reservationData = mapDataForDb(data, userId)
 
@@ -27,8 +26,6 @@ class ReservationManager {
                     }
             }
         }
-
-
 
         fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
             retrieveFromDb() { data ->
