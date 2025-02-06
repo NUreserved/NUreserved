@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.user.homesreenui
 
+import AuthService.Companion.getUserData
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -86,7 +87,6 @@ import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStat
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
-import getUserData
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

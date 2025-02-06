@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.user
 
+import AuthService.Companion.getUserData
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -91,7 +92,6 @@ import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white6
-import getUserData
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date

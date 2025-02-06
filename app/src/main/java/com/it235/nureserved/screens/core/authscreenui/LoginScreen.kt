@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.core.authscreenui
 
+import AuthService.Companion.checkIfAdmin
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -91,7 +92,6 @@ import android.content.SharedPreferences
 import androidx.compose.runtime.collectAsState
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
-import checkIfAdmin
 import com.it235.nureserved.ui.theme.white4
 
 @Composable

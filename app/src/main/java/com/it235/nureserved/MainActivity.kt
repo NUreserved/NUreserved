@@ -1,5 +1,6 @@
 package com.it235.nureserved
 
+import AuthService.Companion.checkIfAdmin
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -24,7 +25,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import checkIfAdmin
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.data.controller.ReservationSubmissionHandler
 import com.it235.nureserved.data.model.FloorLocation
