@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.data.model.ReservationFormDataV2
 import com.it235.nureserved.data.model.TransactionDetails
 import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.ui.theme.darkGray
@@ -60,7 +61,7 @@ import com.it235.nureserved.utils.getTimeLeft
 
 @Composable
 fun ReservationFilledOutFormScreen(
-    reservationData: ReservationFormData,
+    reservationData: ReservationFormDataV2,
     dismissModalBottomSheet: () -> Unit,
 ) {
     // Clipboard manager to handle copy functionality
@@ -131,8 +132,8 @@ fun ReservationFilledOutFormScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Venue",
-                    value = reservationData.getVenue().name
-                )
+                    value = reservationData.getVenue().joinToString(", ") { it.name }
+                ) // Recommendation: Move out this business logic later
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Expected # of Attendees",
@@ -198,14 +199,14 @@ fun ReservationFilledOutFormScreen(
 
 @Composable
 private fun RequestStatusComposable(
-    reservationData: ReservationFormData,
+    reservationData: ReservationFormDataV2,
     clipboardManager: ClipboardManager?,
     context: Context?
 ) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
             Icon (
                 modifier = Modifier
                     .size(48.dp),
@@ -227,7 +228,7 @@ private fun RequestStatusComposable(
                     Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                 }
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
             Icon (
                 modifier = Modifier
                     .size(48.dp),
@@ -249,7 +250,7 @@ private fun RequestStatusComposable(
                     Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                 }
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
             Icon (
                 modifier = Modifier
                     .size(48.dp),
@@ -277,7 +278,7 @@ private fun RequestStatusComposable(
 
 @Composable
 private fun ReservationStatusComposable(
-    reservationData: ReservationFormData,
+    reservationData: ReservationFormDataV2,
 ) {
     Row(
         modifier = Modifier
@@ -289,7 +290,7 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -304,7 +305,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -319,7 +320,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -337,7 +338,7 @@ private fun ReservationStatusComposable(
             }
         }
 
-        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -347,7 +348,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -357,7 +358,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),

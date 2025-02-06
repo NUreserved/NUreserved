@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import checkIfAdmin
 import com.google.firebase.auth.FirebaseAuth
+import com.it235.nureserved.data.controller.ReservationSubmissionHandler
 import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
@@ -61,6 +62,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun Main() {
+    val reservationDataController: ReservationSubmissionHandler = viewModel()
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
 
@@ -167,8 +169,8 @@ private fun Main() {
                     val isUser = backStackEntry.arguments?.getBoolean("isUser")
                     RoomDetails(navController, roomId, isUser)
                 }
-                composable(ScreenRoutes.RoomReservationForm.route) { RoomReservationForm(navController) }
-                composable(ScreenRoutes.RoomUsageRules.route) { RoomUsageRules(navController) }
+                composable(ScreenRoutes.RoomReservationForm.route) { RoomReservationForm(navController, reservationDataController) }
+                composable(ScreenRoutes.RoomUsageRules.route) { RoomUsageRules(navController, reservationDataController) }
                 composable(ScreenRoutes.TermsAndConditions.route) { TermsAndConditionsScreen(navController) }
                 composable(ScreenRoutes.GetStarted.route) { GetStartedScreen(navController) }
                 composable(ScreenRoutes.AdminHome.route) {

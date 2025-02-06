@@ -34,13 +34,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
+import com.it235.nureserved.data.controller.ReservationSubmissionHandler
 import com.it235.nureserved.screens.core.RowHeader
 import com.it235.nureserved.font.poppinsFamily
 
@@ -82,7 +81,8 @@ fun ReservationConfirmationDialog(
     navController: NavController,
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    showSuccessfulDialog: () -> Unit
+    showSuccessfulDialog: () -> Unit,
+    submitReservationRequest: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
@@ -101,7 +101,7 @@ fun ReservationConfirmationDialog(
        },
         confirmButton = {
             TextButton(
-                onClick = { onDismiss(); showSuccessfulDialog() }
+                onClick = { onDismiss(); showSuccessfulDialog(); submitReservationRequest() }
             ) {
                 Text("Confirm")
             }
@@ -156,7 +156,10 @@ fun ReservationRequestSuccessDialog(navController: NavController) {
 }
 
 @Composable
-fun RoomUsageRules(navController: NavController){
+fun RoomUsageRules(
+    navController: NavController,
+    reservationSubmissionHandler: ReservationSubmissionHandler
+){
     var showConfirmationDialog by remember { mutableStateOf(false) }
     var showSuccessfulDialog by remember { mutableStateOf(false) }
     var checked by remember { mutableStateOf(false) }
@@ -168,6 +171,7 @@ fun RoomUsageRules(navController: NavController){
                 showDialog = showConfirmationDialog,
                 onDismiss = { showConfirmationDialog = false },
                 showSuccessfulDialog = { showSuccessfulDialog = true },
+                submitReservationRequest = { reservationSubmissionHandler.submitReservationRequest() }
             )
         }
 
@@ -282,11 +286,4 @@ fun RoomUsageRules(navController: NavController){
 
         }
     }
-}
-
-@Preview(showBackground = true, heightDp = 1500)
-@Composable
-fun RoomUsageRules() {
-    val navController = rememberNavController()
-    RoomUsageRules(navController)
 }

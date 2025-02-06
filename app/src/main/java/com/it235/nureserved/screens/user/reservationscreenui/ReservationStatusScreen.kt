@@ -52,6 +52,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.data.model.ReservationFormDataV2
 import com.it235.nureserved.data.model.TransactionStatus
 import com.it235.nureserved.screens.core.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
@@ -71,9 +72,9 @@ fun RoomReservationStatusScreen(
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
-    val approvedReservations = viewModel.approvedReservations
-    val pendingReservations = viewModel.pendingReservations
-    val reservationHistory = viewModel.reservationHistory
+    val approvedReservations by viewModel.approvedReservations.collectAsState()
+    val pendingReservations by viewModel.pendingReservations.collectAsState()
+    val reservationHistory by viewModel.reservationHistory.collectAsState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
@@ -206,15 +207,15 @@ fun RoomReservationStatusScreen(
 @Composable
 private fun ReservationCard(
     modifier: Modifier = Modifier,
-    reservation: ReservationFormData,
-    onClick: (ReservationFormData) -> Unit
+    reservation: ReservationFormDataV2,
+    onClick: (ReservationFormDataV2) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
-            containerColor = when (reservation.getLatestTransactionDetail()!!.status) {
+            containerColor = when (reservation.getLatestTransactionDetails()!!.status) {
                 TransactionStatus.PENDING -> Color(0xFFd69c40)
                 TransactionStatus.APPROVED -> Color(0xFF49844b)
                 else -> Color(0xFF49844b)
@@ -233,7 +234,7 @@ private fun ReservationCard(
                     .weight(2f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
-                painter = rescalePicture(reservation.getVenue().imageResId ?: R.drawable.resource_default),
+                painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
                 contentDescription = "A room image",
             )
 
@@ -245,7 +246,7 @@ private fun ReservationCard(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue().name,
+                    text = reservation.getVenue()[0].name,
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium,
@@ -255,10 +256,10 @@ private fun ReservationCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Column {
-                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestTransactionDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
