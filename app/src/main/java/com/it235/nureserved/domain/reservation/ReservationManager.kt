@@ -4,6 +4,7 @@ import AuthService.Companion.isSignedIn
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapDataForDb
 
 class ReservationManager {
     companion object {
@@ -12,43 +13,22 @@ class ReservationManager {
 
         fun submitReservationRequest(data: ReservationFormDataV2) {
 
-            if (isSignedIn()) return
+            if (isSignedIn()) {
+                val reservationData = mapDataForDb(data, userId)
 
-            val reservationData = hashMapOf(
-                "reservationNumber" to data.getTrackingNumber(),
-                "dateFilled" to data.getDateFilled().toString(),
-                "userId" to userId,
-                "reservationStatus" to data.getLatestTransactionDetails()!!.status,
-                "nameOfOrgDeptColg" to data.getOrganization(),
-                "givenName" to data.getRequesterGivenName(),
-                "middleName" to data.getRequesterMiddleName(),
-                "lastName" to data.getRequesterLastName(),
-                "position" to data.getRequesterPosition(),
-                "titleOfTheActivity" to data.getActivityTitle(),
-                "fromDatesOfActivity" to data.getActivityDateTime().startDate.toString(),
-                "toDatesOfActivity" to data.getActivityDateTime().endDate.toString(),
-                "expectedNumberOfAttendees" to data.getExpectedAttendees(),
-                "selectedRooms" to data.getVenue().map { it.name }, // Only get the name of each room, nut the Room object
-                "transactionHistory" to listOf(
-                    hashMapOf(
-                        "status" to data.getLatestTransactionDetails()!!.status,
-                        "date" to data.getLatestTransactionDetails()!!.eventDate.toString(),
-                        "approvedBy" to data.getLatestTransactionDetails()!!.processedBy,
-                        "remarks" to data.getLatestTransactionDetails()!!.remarks
-                    )
-                )
-            )
-
-            val db = FirebaseFirestore.getInstance()
-            db.collection("reservations").document(data.getTrackingNumber())
-                .set(reservationData)
-                .addOnSuccessListener {
-                    Log.d("ReservationDataController", "Reservation added successfully")
-                }
-                .addOnFailureListener { e ->
-                    Log.w("ReservationDataController", "Error adding reservation", e)
-                }
+                val db = FirebaseFirestore.getInstance()
+                db.collection("reservations").document(data.getTrackingNumber())
+                    .set(reservationData)
+                    .addOnSuccessListener {
+                        Log.d("ReservationDataController", "Reservation added successfully")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("ReservationDataController", "Error adding reservation", e)
+                    }
+            }
         }
+
+
 
         fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
             retrieveFromDb() { data ->
