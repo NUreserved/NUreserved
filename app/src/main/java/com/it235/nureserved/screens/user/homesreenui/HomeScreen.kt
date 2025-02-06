@@ -73,7 +73,7 @@ import com.it235.nureserved.screens.core.RoomReservationFAB
 import com.it235.nureserved.screens.core.Space
 import com.it235.nureserved.data.model.FloorLocation
 import com.it235.nureserved.data.model.Room
-import com.it235.nureserved.data.model.User
+import com.it235.nureserved.domain.auth.User
 import com.it235.nureserved.data.model.areAllTimeSlotsUnavailable
 import com.it235.nureserved.data.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily

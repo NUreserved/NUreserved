@@ -2,7 +2,7 @@ import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
-import com.it235.nureserved.data.model.User
+import com.it235.nureserved.domain.auth.User
 
 fun getUserData(onResult: (User?) -> Unit) {
     val auth = FirebaseAuth.getInstance()
