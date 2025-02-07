@@ -58,17 +58,6 @@ class ReservationFormDetailsViewModel : ViewModel() {
         _showDeclinedReservationDialog.value = show
     }
 
-    fun approveReservation(reservationData: ReservationFormDataV2) {
-        reservationData.addTransactionDetails(
-            TransactionDetails(
-                status = TransactionStatus.APPROVED,
-                processedBy = "ADMIN", // Use admin name here later
-                eventDate = OffsetDateTime.now(),
-                remarks = _remarks.value
-            )
-        )
-    }
-
     fun declineReservation(reservationData: ReservationFormDataV2) {
         reservationData.addTransactionDetails(
             TransactionDetails(

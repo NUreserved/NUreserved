@@ -1,13 +1,16 @@
 package com.it235.nureserved.domain.reservation
 
+import AuthService.Companion.getFullName
 import AuthService.Companion.isSignedIn
 import AuthService.Companion.isVerified
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapFromModelToDb
+import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapTransactionDetails
 import com.it235.nureserved.domain.reservation.ReservationManager.Companion
 import com.it235.nureserved.domain.reservation.ReservationManager.Companion.retrieveFromDb
+import java.time.OffsetDateTime
 
 class ReservationManager {
     companion object {
@@ -69,6 +72,37 @@ class ReservationManagerAdmin {
         fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
             retrieveFromDb() { data ->
                 callback(ReservationDataMapper.mapFromDbToModel(data))
+            }
+        }
+
+        fun approveReservation(reservation: ReservationFormDataV2, remarks: String) {
+            getFullName { name ->
+                reservation.addTransactionDetails(
+                    TransactionDetails(
+                        status = TransactionStatus.APPROVED,
+                        processedBy = name,
+                        eventDate = OffsetDateTime.now(),
+                        remarks = remarks,
+                    )
+                )
+
+                val data = mapTransactionDetails(reservation)
+
+                val db = FirebaseFirestore.getInstance()
+                Log.d("ReservationManagerAdmin", "Updating reservation transaction history")
+
+                db.collection("reservations").document(reservation.getTrackingNumber())
+                    .update(mapOf(
+                        "transactionHistory" to data,
+                        "status" to reservation.getLatestTransactionDetails()!!.status,
+                        "processedBy" to reservation.getLatestTransactionDetails()!!.processedBy
+                    ))
+                    .addOnSuccessListener {
+                        Log.d("ReservationManagerAdmin", "Transaction history updated successfully")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("ReservationManagerAdmin", "Error updating transaction history", e)
+                    }
             }
         }
 

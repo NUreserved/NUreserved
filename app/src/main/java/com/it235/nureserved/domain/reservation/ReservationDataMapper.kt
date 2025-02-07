@@ -77,5 +77,19 @@ class ReservationDataMapper {
             )
             return reservationData
         }
+
+        fun mapTransactionDetails(data: ReservationFormDataV2): List<HashMap<String, Any?>> {
+            val transactionHistory = data.getTransactionHistory()
+
+            val mappedTransactionHistory = transactionHistory.map { transaction ->
+                hashMapOf<String, Any?>(
+                    "status" to transaction.status,
+                    "date" to transaction.eventDate.toString(),
+                    "approvedBy" to transaction.processedBy,
+                    "remarks" to transaction.remarks
+                )
+            }
+            return mappedTransactionHistory
+        }
     }
 }
