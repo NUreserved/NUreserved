@@ -1,7 +1,7 @@
 package com.it235.nureserved.screens.admin.reservations
 
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.data.model.ReservationFormData
+import com.it235.nureserved.domain.reservation.ReservationFormData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

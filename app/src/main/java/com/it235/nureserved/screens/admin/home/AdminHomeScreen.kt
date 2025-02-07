@@ -52,13 +52,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.reservations.ReservationStatusScreen
 import com.it235.nureserved.screens.admin.reservations.ReservationsHistoryScreen
-import com.it235.nureserved.screens.core.LogoutConfirmationDialog
-import com.it235.nureserved.screens.core.ThemeSettingsDialog
+import com.it235.nureserved.screens.shared.LogoutConfirmationDialog
+import com.it235.nureserved.screens.shared.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.primaryLight

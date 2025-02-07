@@ -1,3 +1,5 @@
+package com.it235.nureserved.screens.user.reservations
+
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Canvas
@@ -17,23 +19,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -44,23 +37,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.domain.reservation.ReservationFormData
-import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
-import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white5
 import com.it235.nureserved.utils.formatActivityDateAndTIme
@@ -68,24 +56,15 @@ import com.it235.nureserved.utils.formatDateFilled
 import com.it235.nureserved.utils.formatHistoryDate
 import com.it235.nureserved.utils.getTimeLapseString
 import com.it235.nureserved.utils.getTimeLeft
-import java.time.OffsetDateTime
 
 @Composable
-fun ReservationFormDetailsScreen(
-    reservationData: ReservationFormData,
+fun ReservationFilledOutFormScreen(
+    reservationData: ReservationFormDataV2,
     dismissModalBottomSheet: () -> Unit,
-    viewModel: ReservationFormDetailsViewModel = viewModel()
 ) {
     // Clipboard manager to handle copy functionality
-    viewModel.initialize(LocalContext.current, LocalClipboardManager.current)
-
-    val clipboardManager by viewModel.clipboardManager.collectAsState()
-    val context by viewModel.context.collectAsState()
-    val showConfirmReservationApprovalDialog by viewModel.showConfirmReservationApprovalDialog.collectAsState()
-    val showConfirmReservationDeclineDialog by viewModel.showConfirmReservationDeclineDialog.collectAsState()
-    val showApprovedReservationDialog by viewModel.showApprovedReservationDialog.collectAsState()
-    val showDeclinedReservationDialog by viewModel.showDeclinedReservationDialog.collectAsState()
-
+    val clipboardManager = LocalClipboardManager.current
+    val context = LocalContext.current
 
     Column (
         modifier = Modifier
@@ -111,7 +90,7 @@ fun ReservationFormDetailsScreen(
                 )
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                ReservationStatusComposable(reservationData, viewModel)
+                ReservationStatusComposable(reservationData)
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
@@ -151,8 +130,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Venue",
-                    value = reservationData.getVenue().name
-                )
+                    value = reservationData.getVenue().joinToString(", ") { it.name }
+                ) // Recommendation: Move out this business logic later
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Expected # of Attendees",
@@ -200,77 +179,105 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED ||
-                reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Column (
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            Column (
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
-                }
-
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Column (
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-                ){
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                    )
-                    ApprovalSectionComposable(viewModel)
-                }
+                RequestTimelineHistory(reservationData.getTransactionHistory())
             }
 
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
+}
 
-    if (showConfirmReservationApprovalDialog) {
-        ConfirmReservationApprovalDialog(
-            onDismiss = { viewModel.setShowConfirmReservationApprovalDialog(false) },
-            showApprovedReservationDialog = { viewModel.setShowApprovedReservationDialog(true) }
-        )
-    }
-
-    if (showConfirmReservationDeclineDialog) {
-        ConfirmReservationDeclineDialog (
-            onDismiss = { viewModel.setShowConfirmReservationDeclineDialog(false) },
-            showDeclineReservationDialog = { viewModel.setShowDeclinedReservationDialog(true) }
-        )
-    }
-
-    if (showApprovedReservationDialog) {
-        ApprovedReservationDialog(
-            onDismiss = {
-                viewModel.setShowApprovedReservationDialog(false)
-                dismissModalBottomSheet()
-            },
-            reservation = reservationData,
-            approveReservation = { viewModel.approveReservation(reservationData) }
-        )
-    }
-
-    if (showDeclinedReservationDialog) {
-        DeclinedReservationDialog(
-            onDismiss = {
-                viewModel.setShowDeclinedReservationDialog(false)
-                dismissModalBottomSheet()
-            },
-            reservation = reservationData,
-            declineReservation = { viewModel.declineReservation(reservationData) }
-        )
+@Composable
+private fun RequestStatusComposable(
+    reservationData: ReservationFormDataV2,
+    clipboardManager: ClipboardManager?,
+    context: Context?
+) {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
+            Icon (
+                modifier = Modifier
+                    .size(48.dp),
+                painter = painterResource(id = R.drawable.check_circle),
+                contentDescription = "Form icon",
+                tint = indicatorColorGreen
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Request approved",
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "#${reservationData.getTrackingNumber()}",
+                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                modifier = Modifier.clickable {
+                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                }
+            )
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
+            Icon (
+                modifier = Modifier
+                    .size(48.dp),
+                painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Form icon",
+                tint = indicatorColorOrange
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Request pending",
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "#${reservationData.getTrackingNumber()}",
+                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                modifier = Modifier.clickable {
+                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                }
+            )
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
+            Icon (
+                modifier = Modifier
+                    .size(48.dp),
+                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Form icon",
+                tint = indicatorColorRed
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Request declined",
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "#${reservationData.getTrackingNumber()}",
+                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                modifier = Modifier.clickable {
+                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
     }
 }
 
 @Composable
 private fun ReservationStatusComposable(
-    reservationData: ReservationFormData,
-    viewModel: ReservationFormDetailsViewModel) {
+    reservationData: ReservationFormDataV2,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -281,7 +288,7 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -296,7 +303,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -311,7 +318,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -329,7 +336,7 @@ private fun ReservationStatusComposable(
             }
         }
 
-        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -339,7 +346,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -349,7 +356,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -364,88 +371,8 @@ private fun ReservationStatusComposable(
 }
 
 @Composable
-private fun RequestStatusComposable(
-    reservationData: ReservationFormData,
-    clipboardManager: ClipboardManager?,
-    context: Context?
-) {
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-       if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.check_circle),
-               contentDescription = "Form icon",
-               tint = indicatorColorGreen
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request approved",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-               contentDescription = "Form icon",
-               tint = indicatorColorOrange
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request pending",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-               contentDescription = "Form icon",
-               tint = indicatorColorRed
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request declined",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       }
-    }
-}
-
-@Composable
 private fun RequestTimelineHistory(
     approvalDetailHistory: List<TransactionDetails>,
-    viewModel: ReservationFormDetailsViewModel
 ) {
     Column (
         modifier = Modifier.padding(16.dp)
@@ -553,68 +480,6 @@ private fun RequestTimelineHistory(
     }
 }
 
-
-@Composable
-private fun ApprovalSectionComposable(
-    viewModel: ReservationFormDetailsViewModel
-) {
-    Column (
-        modifier = Modifier
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-    ) {
-        Text(
-            text = "Add remarks",
-            style = LocalTextStyle.current.copy(
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-        )
-        OutlinedTextField(
-            value = viewModel.remarks.collectAsState().value,
-            onValueChange = { viewModel.updateRemarks(it) },
-            label = { Text("Remarks") },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-        Spacer(Modifier.height(8.dp))
-        Row (
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
-        ) {
-            Button(
-                onClick = { viewModel.setShowConfirmReservationDeclineDialog(true) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = indicatorColorRed,
-                    contentColor = white
-                ),
-                shape = RoundedCornerShape(10.dp)
-            ) {
-                Text(
-                    text = "Decline",
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-            }
-            Button(
-                onClick = { viewModel.setShowConfirmReservationApprovalDialog(true) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = indicatorColorGreen,
-                    contentColor = white
-                ),
-                shape = RoundedCornerShape(10.dp)
-            ) {
-                Text(
-                    text = "Approve",
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-            }
-        }
-    }
-}
-
 @Composable
 private fun HeadingComposable(
     value: String
@@ -643,8 +508,7 @@ private fun TextContentComposable(
         Text(
             modifier = Modifier
                 .padding(start = 16.dp)
-                .weight(0.5f)
-                .widthIn(max = 200.dp),
+                .weight(0.5f).widthIn(max = 200.dp),
             color = if (isSystemInDarkTheme()) textColor4 else textColor3,
             text = field,
             style = LocalTextStyle.current.copy(
@@ -663,166 +527,4 @@ private fun TextContentComposable(
             ),
         )
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ConfirmReservationApprovalDialog(
-    onDismiss: () -> Unit,
-    showApprovedReservationDialog: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Confirm approval?") },
-        icon = {
-            Icon(
-                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                contentDescription = "Question mark icon"
-            )
-        },
-        text = {
-            Text(
-                text = "Are you sure you want to confirm reservation?",
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                onDismiss()
-                showApprovedReservationDialog()
-            }) { Text("Confirm") }
-        },
-        dismissButton = {
-            TextButton(onClick = { onDismiss() }
-            ) { Text("Cancel") }
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ConfirmReservationDeclineDialog(
-    onDismiss: () -> Unit,
-    showDeclineReservationDialog: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Confirm decline?") },
-        icon = {
-            Icon(
-                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                contentDescription = "Question mark icon"
-            )
-        },
-        text = {
-            Text(
-                text = "Are you sure you want to decline reservation?",
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                onDismiss()
-                showDeclineReservationDialog()
-            }) { Text("Confirm") }
-        },
-        dismissButton = {
-            TextButton(onClick = { onDismiss() }
-            ) { Text("Cancel") }
-        }
-    )
-}
-
-@Composable
-private fun ApprovedReservationDialog(
-    onDismiss: () -> Unit,
-    reservation: ReservationFormData,
-    approveReservation: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Reservation approved") },
-        icon = {
-            Icon(
-                painter = painterResource(id = R.drawable.check_circle),
-                contentDescription = "Check or approved icon"
-            )
-        },
-        text = {
-            Text(
-                text = "Reservation #${reservation.getTrackingNumber()} has been approved. The requester has been notified for their reservation request.",
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                onDismiss()
-                approveReservation()
-            }) {
-                Text("OK")
-            }
-        },
-    )
-}
-
-@Composable
-private fun DeclinedReservationDialog(
-    onDismiss: () -> Unit,
-    reservation: ReservationFormData,
-    declineReservation: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = "Reservation declined") },
-        icon = {
-            Icon(
-                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                contentDescription = "Check or declined icon"
-            )
-        },
-        text = {
-            Text(
-                text = "Reservation #${reservation.getTrackingNumber()} has been declined. The requester has been notified for their reservation request.",
-                textAlign = TextAlign.Center
-            )
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                onDismiss()
-                declineReservation()
-            }) {
-                Text("OK")
-            }
-        },
-    )
-}
-
-@Preview(
-    showBackground = true
-)
-@Composable
-fun Default() {
-    RequestTimelineHistory(
-        listOf(
-            TransactionDetails(
-                status = TransactionStatus.APPROVED,
-                processedBy = "Maria Martinez",
-                eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
-                remarks = "Sample remark 1"
-            ),
-            TransactionDetails(
-                status = TransactionStatus.DECLINED,
-                processedBy = "Maria Martinez",
-                eventDate = OffsetDateTime.parse("2025-01-30T10:00:00+08:00"),
-                remarks = "Sample remark awdawdawd1"
-            ),
-            TransactionDetails(
-                status = TransactionStatus.DECLINED,
-                processedBy = "Maria Martinez",
-                eventDate = OffsetDateTime.parse("2025-01-25T10:00:00+08:00"),
-                remarks = null
-            ),
-        ),
-        viewModel = ReservationFormDetailsViewModel()
-    )
 }

@@ -1,5 +1,7 @@
 package com.it235.nureserved
 
+import AuthService.Companion.checkIfAdmin
+import AuthService.Companion.isVerified
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -24,10 +26,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import checkIfAdmin
 import com.google.firebase.auth.FirebaseAuth
-import com.it235.nureserved.data.controller.ReservationSubmissionHandler
-import com.it235.nureserved.data.model.FloorLocation
+import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
+import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
@@ -36,17 +37,17 @@ import com.it235.nureserved.screens.admin.home.AdminHomeScreen
 import com.it235.nureserved.screens.admin.home.AdminHomeViewModel
 import com.it235.nureserved.screens.user.RoomReservationForm
 import com.it235.nureserved.screens.user.RoomUsageRules
-import com.it235.nureserved.screens.core.SplashScreen
+import com.it235.nureserved.screens.prelogin.SplashScreen
 import com.it235.nureserved.screens.user.TermsAndConditionsScreen
-import com.it235.nureserved.screens.core.authscreenui.LoginScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.RolesFieldScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.SchoolFieldScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
-import com.it235.nureserved.screens.user.homesreenui.HomeScreen
-import com.it235.nureserved.screens.core.RoomDetails
-import com.it235.nureserved.screens.core.onboardingscreenui.GetStartedScreen
+import com.it235.nureserved.screens.prelogin.auth.LoginScreen
+import com.it235.nureserved.screens.prelogin.auth.signup.NameSignUpScreen
+import com.it235.nureserved.screens.prelogin.auth.signup.ProgramStudentNumberSignUpScreen
+import com.it235.nureserved.screens.prelogin.auth.signup.RolesFieldScreen
+import com.it235.nureserved.screens.prelogin.auth.signup.SchoolFieldScreen
+import com.it235.nureserved.screens.prelogin.auth.signup.SignUpScreen
+import com.it235.nureserved.screens.user.HomeScreen
+import com.it235.nureserved.screens.shared.RoomDetails
+import com.it235.nureserved.screens.prelogin.onboarding_screen.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -80,7 +81,7 @@ private fun Main() {
         LaunchedEffect(Unit) {
             delay(1000)
 
-            if (isLoggedIn) {
+            if (isLoggedIn && isVerified()) {
                 checkIfAdmin { admin ->
                     startDestination.value = if (admin) ScreenRoutes.AdminHome.route else ScreenRoutes.Home.route
                     showSplash.value = false

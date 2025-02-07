@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.user
 
+import AuthService.Companion.getUserData
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -75,12 +76,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.data.controller.ReservationSubmissionHandler
-import com.it235.nureserved.screens.core.Space
-import com.it235.nureserved.data.model.FloorLocation
-import com.it235.nureserved.data.model.Room
-import com.it235.nureserved.data.model.User
-import com.it235.nureserved.data.rooms.roomList
+import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
+import com.it235.nureserved.screens.shared.Space
+import com.it235.nureserved.domain.rooms.FloorLocation
+import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.domain.auth.User
+import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -91,7 +92,6 @@ import com.it235.nureserved.ui.theme.textColor4
 import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white6
-import getUserData
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -1147,7 +1147,7 @@ fun RoomReservationForm(
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
 
-                            roomList.forEachIndexed {index, room ->
+                            roomList.forEachIndexed { index, room ->
                                 if (currentFloorLocation == null) {
                                     FilterChipsLabel(label = room.location.value)
                                 } else {
