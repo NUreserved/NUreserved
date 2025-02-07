@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.core.authscreenui.signup
 
+import AuthService.Companion.signUp
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.animation.core.LinearEasing
@@ -487,8 +488,6 @@ private fun RegisterButton(
     isValidPassword: MutableState<Boolean>,
     isValidConfirmPassword: MutableState<Boolean>,
 ) {
-    val auth = FirebaseAuth.getInstance()
-    val db = FirebaseFirestore.getInstance() // Database reference
     val keyboardController = LocalSoftwareKeyboardController.current
     var showDialog by remember { mutableStateOf(false) }
 
@@ -502,79 +501,22 @@ private fun RegisterButton(
 
             if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
                 loading.value = true
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-
-                            val user = auth.currentUser
-                            val userId = user?.uid
-
-                            if (userId != null) {
-
-                                val studentData = hashMapOf(
-                                    "firstName" to firstName,
-                                    "middleName" to middleName,
-                                    "lastName" to lastName,
-                                    "program" to program,
-                                    "role" to role,
-                                    "email" to email,
-                                    "isVerified" to false
-                                )
-
-                                val educatorData = hashMapOf(
-                                    "firstName" to firstName,
-                                    "middleName" to middleName,
-                                    "lastName" to lastName,
-                                    "school" to school,
-                                    "role" to role,
-                                    "email" to email,
-                                    "isVerified" to false
-                                )
-
-                                // Add data to Firestore
-                                db.collection("user").document(userId)
-                                    .set(if(role == "Student") studentData else educatorData)
-                                    .addOnCompleteListener { dbTask ->
-                                        if (dbTask.isSuccessful) {
-                                            // Send verification email
-                                            user.sendEmailVerification()
-                                                .addOnCompleteListener { emailTask ->
-                                                    if (emailTask.isSuccessful) {
-                                                        signupSharedPreferences.edit().clear().apply()
-                                                        loading.value = false
-                                                        // dialog box for email verification
-                                                        showDialog = true
-                                                    } else {
-                                                        loading.value = false
-                                                        scope.launch {
-                                                            snackbarHostState.showSnackbar(
-                                                                message = "Failed to send verification email: ${emailTask.exception?.message}",
-                                                                duration = SnackbarDuration.Short
-                                                            )
-                                                        }
-                                                    }
-                                                }
-                                        } else {
-                                            loading.value = false
-                                            scope.launch {
-                                                snackbarHostState.showSnackbar(
-                                                    message = "Sign up failed: ${dbTask.exception?.message}",
-                                                    duration = SnackbarDuration.Short
-                                                )
-                                            }
-                                        }
-                                    }
-                            }
-                        } else {
-                            loading.value = false
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Sign up failed: ${task.exception?.message}",
-                                    duration = SnackbarDuration.Short
-                                )
-                            }
+                signUp(email, password, firstName, middleName, lastName, program, role, school) { signUpResult, signUpExcMessage ->
+                    if (signUpResult) {
+                        signupSharedPreferences.edit().clear().apply()
+                        loading.value = false
+                        // dialog box for email verification
+                        showDialog = true
+                    } else {
+                        loading.value = false
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "Sign up failed: $signUpExcMessage",
+                                duration = SnackbarDuration.Short
+                            )
                         }
                     }
+                }
             } else {
                 scope.launch {
                     snackbarHostState.showSnackbar(
