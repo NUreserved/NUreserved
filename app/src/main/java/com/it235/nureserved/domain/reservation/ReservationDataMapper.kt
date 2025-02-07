@@ -66,14 +66,14 @@ class ReservationDataMapper {
                 "expectedNumberOfAttendees" to data.getExpectedAttendees(),
                 "selectedRooms" to data.getVenue()
                     .map { it.name }, // Only get the name of each room, nut the Room object
-                "transactionHistory" to listOf(
+                "transactionHistory" to data.getTransactionHistory().map { transaction ->
                     hashMapOf(
-                        "status" to data.getLatestTransactionDetails()!!.status,
-                        "date" to data.getLatestTransactionDetails()!!.eventDate.toString(),
-                        "approvedBy" to data.getLatestTransactionDetails()!!.processedBy,
-                        "remarks" to data.getLatestTransactionDetails()!!.remarks
+                        "status" to transaction.status,
+                        "date" to transaction.eventDate.toString(),
+                        "approvedBy" to transaction.processedBy,
+                        "remarks" to transaction.remarks
                     )
-                )
+                }
             )
             return reservationData
         }
