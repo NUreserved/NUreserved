@@ -2,6 +2,7 @@ package com.it235.nureserved.screens.core.authscreenui
 
 import AuthService.Companion.checkIfAdmin
 import AuthService.Companion.isSignedIn
+import AuthService.Companion.isVerified
 import AuthService.Companion.signIn
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -435,8 +436,6 @@ private fun LoginButton(
     isLoginEnabled: MutableState<Boolean>,
     sharedPreferences: SharedPreferences,
 ) {
-    val context = LocalContext.current
-    val auth = FirebaseAuth.getInstance()
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Button(
@@ -450,7 +449,7 @@ private fun LoginButton(
                 loading.value = true
                 signIn(email, password) { result, exceptionMessage ->
                     if (result) {
-                        if (isSignedIn()) {
+                        if (isSignedIn() && isVerified()) {
                             checkIfAdmin { admin ->
                                 if (admin) {
                                     navController.navigate(ScreenRoutes.AdminHome.route) {

@@ -1,6 +1,7 @@
 package com.it235.nureserved.domain.reservation
 
 import AuthService.Companion.isSignedIn
+import AuthService.Companion.isVerified
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,7 +13,7 @@ class ReservationManager {
         private val userId = auth.currentUser?.uid
 
         fun submitReservationRequest(data: ReservationFormDataV2) {
-            if (isSignedIn()) {
+            if (isSignedIn() && isVerified()) {
                 val reservationData = mapFromModelToDb(data, userId)
 
                 val db = FirebaseFirestore.getInstance()
