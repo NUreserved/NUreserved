@@ -53,6 +53,7 @@ import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
@@ -263,7 +264,7 @@ fun ReservationFormDetailsScreen(
                 dismissModalBottomSheet()
             },
             reservation = reservationData,
-            declineReservation = { viewModel.declineReservation(reservationData) }
+            declineReservation = { ReservationManagerAdmin.declineReservation(reservationData, viewModel.remarks.value) }
         )
     }
 }
