@@ -48,7 +48,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.screens.core.rescalePicture
+import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
 import java.time.format.DateTimeFormatter

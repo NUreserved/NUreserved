@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core
+package com.it235.nureserved.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext

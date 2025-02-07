@@ -82,7 +82,7 @@ import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.core.LogoutConfirmationDialog
 import com.it235.nureserved.screens.core.ThemeSettingsDialog
-import com.it235.nureserved.screens.core.rescalePicture
+import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3

@@ -45,7 +45,7 @@ import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
-import com.it235.nureserved.screens.core.rescalePicture
+import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.textColor1
