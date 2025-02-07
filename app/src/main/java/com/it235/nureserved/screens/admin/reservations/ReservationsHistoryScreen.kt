@@ -42,6 +42,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormData
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -55,6 +56,7 @@ fun ReservationsHistoryScreen(
     viewModel: ReservationsHistoryScreenViewModel = viewModel(),
     sharedViewModel: ReservationsSharedViewModel = viewModel()
 ) {
+    val reservationHistory by sharedViewModel.reservationHistory.collectAsState()
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
@@ -87,7 +89,7 @@ fun ReservationsHistoryScreen(
         }
 
 
-        if (sharedViewModel.reservationHistory.isEmpty()) {
+        if (reservationHistory.isEmpty()) {
             EmptyListComposable("No history recorded")
         } else {
             val filteredList = sharedViewModel.getFilteredList()
@@ -110,7 +112,8 @@ fun ReservationsHistoryScreen(
                             onClick = {
                                  viewModel.setSelectedReservation(it)
                                  viewModel.setShowBottomSheet(true)
-                            })
+                            }
+                        )
                     }
                 }
             }
@@ -162,8 +165,8 @@ private fun ReservationFilterChipComposable(
 @Composable
 private fun ReservationCard(
     modifier: Modifier = Modifier,
-    reservation: ReservationFormData,
-    onClick: (ReservationFormData) -> Unit
+    reservation: ReservationFormDataV2,
+    onClick: (ReservationFormDataV2) -> Unit
 ) {
     Card(
         modifier = modifier
@@ -185,7 +188,7 @@ private fun ReservationCard(
                     .weight(2f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
-                painter = rescalePicture(reservation.getVenue().imageResId ?: R.drawable.resource_default),
+                painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
                 contentDescription = "A room image",
             )
 
@@ -197,7 +200,7 @@ private fun ReservationCard(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue().name,
+                    text = reservation.getVenue()[0].name,
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium,
@@ -207,10 +210,10 @@ private fun ReservationCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Column {
-                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestTransactionDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
@@ -219,10 +222,10 @@ private fun ReservationCard(
                                 lineHeight = 10.sp
                             )
                         )
-                    } else if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+                    } else if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
                         Text(
                             text = "Declined: ${
-                                reservation.getLatestTransactionDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",

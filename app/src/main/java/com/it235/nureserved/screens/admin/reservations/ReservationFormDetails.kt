@@ -52,7 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.domain.reservation.ReservationFormData
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
@@ -72,7 +72,7 @@ import java.time.OffsetDateTime
 
 @Composable
 fun ReservationFormDetailsScreen(
-    reservationData: ReservationFormData,
+    reservationData: ReservationFormDataV2,
     dismissModalBottomSheet: () -> Unit,
     viewModel: ReservationFormDetailsViewModel = viewModel()
 ) {
@@ -111,7 +111,7 @@ fun ReservationFormDetailsScreen(
                 )
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                ReservationStatusComposable(reservationData, viewModel)
+                ReservationStatusComposable(reservationData)
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
@@ -151,7 +151,7 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
                     field = "Venue",
-                    value = reservationData.getVenue().name
+                    value = reservationData.getVenue()[0].name
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextContentComposable(
@@ -200,8 +200,8 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED ||
-                reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED ||
+                reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column (
@@ -213,7 +213,7 @@ fun ReservationFormDetailsScreen(
                     RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
                 }
 
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column (
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
@@ -268,9 +268,7 @@ fun ReservationFormDetailsScreen(
 }
 
 @Composable
-private fun ReservationStatusComposable(
-    reservationData: ReservationFormData,
-    viewModel: ReservationFormDetailsViewModel) {
+private fun ReservationStatusComposable(reservationData: ReservationFormDataV2) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -281,7 +279,7 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -296,7 +294,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -311,7 +309,7 @@ private fun ReservationStatusComposable(
                         lineHeight = 16.sp
                     )
                 )
-            } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
                 Row(
                     modifier = Modifier
                         .size(16.dp)
@@ -329,7 +327,7 @@ private fun ReservationStatusComposable(
             }
         }
 
-        if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -339,7 +337,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -349,7 +347,7 @@ private fun ReservationStatusComposable(
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -365,14 +363,14 @@ private fun ReservationStatusComposable(
 
 @Composable
 private fun RequestStatusComposable(
-    reservationData: ReservationFormData,
+    reservationData: ReservationFormDataV2,
     clipboardManager: ClipboardManager?,
     context: Context?
 ) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+       if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -394,7 +392,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.PENDING) {
+       } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -416,7 +414,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestTransactionDetail()!!.status == TransactionStatus.DECLINED) {
+       } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -736,7 +734,7 @@ private fun ConfirmReservationDeclineDialog(
 @Composable
 private fun ApprovedReservationDialog(
     onDismiss: () -> Unit,
-    reservation: ReservationFormData,
+    reservation: ReservationFormDataV2,
     approveReservation: () -> Unit
 ) {
     AlertDialog(
@@ -768,7 +766,7 @@ private fun ApprovedReservationDialog(
 @Composable
 private fun DeclinedReservationDialog(
     onDismiss: () -> Unit,
-    reservation: ReservationFormData,
+    reservation: ReservationFormDataV2,
     declineReservation: () -> Unit
 ) {
     AlertDialog(

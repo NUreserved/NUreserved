@@ -83,7 +83,7 @@ private fun Main() {
 
             if (isLoggedIn && isVerified()) {
                 checkIfAdmin { admin ->
-                    startDestination.value = if (admin) ScreenRoutes.AdminHome.route else ScreenRoutes.Home.route
+                    startDestination.value = if (admin) ScreenRoutes.AdminHome.route else ScreenRoutes.AdminHome.route
                     showSplash.value = false
                 }
             } else {

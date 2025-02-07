@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormData
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.OffsetDateTime
@@ -57,8 +58,8 @@ class ReservationFormDetailsViewModel : ViewModel() {
         _showDeclinedReservationDialog.value = show
     }
 
-    fun approveReservation(reservationData: ReservationFormData) {
-        reservationData.addTransactionDetail(
+    fun approveReservation(reservationData: ReservationFormDataV2) {
+        reservationData.addTransactionDetails(
             TransactionDetails(
                 status = TransactionStatus.APPROVED,
                 processedBy = "ADMIN", // Use admin name here later
@@ -68,8 +69,8 @@ class ReservationFormDetailsViewModel : ViewModel() {
         )
     }
 
-    fun declineReservation(reservationData: ReservationFormData) {
-        reservationData.addTransactionDetail(
+    fun declineReservation(reservationData: ReservationFormDataV2) {
+        reservationData.addTransactionDetails(
             TransactionDetails(
                 status = TransactionStatus.DECLINED,
                 processedBy = "ADMIN", // Use admin name here later
