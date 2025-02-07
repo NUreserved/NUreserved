@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.prelogin.authscreenui.signup
+package com.it235.nureserved.screens.prelogin.auth.signup
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -71,8 +71,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun RolesFieldScreen(
+fun ProgramStudentNumberSignUpScreen(
     navController: NavController,
+    role: String,
 ){
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
@@ -80,13 +81,6 @@ fun RolesFieldScreen(
 
     NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
-
-        val roleOptions = listOf("Role", "Student", "Educator")
-
-        val rolePreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
-        var role by rememberSaveable { mutableStateOf(rolePreference.getString("role", roleOptions[0])) }
-        val isValidRole = rememberSaveable { mutableStateOf(rolePreference.getString("roleState", "false")) }
-        var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
 
@@ -145,6 +139,26 @@ fun RolesFieldScreen(
                         )
                     ){
 
+                        val options = listOf(
+                            "Program",
+                            "ABCOMM",
+                            "BS Accountancy",
+                            "BS Architecture",
+                            "BSBA-FM",
+                            "BSBA-MM",
+                            "BSCpE",
+                            "BSCE",
+                            "BSHM",
+                            "BSIT",
+                            "BSPSY",
+                            "BSTM",
+                        )
+                        val programPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+
+                        var program by rememberSaveable { mutableStateOf(programPreference.getString("program", options[0])) }
+                        var showProgramSupportTxt by remember { mutableStateOf(false) }
+                        var isValidProgram = rememberSaveable { mutableStateOf(programPreference.getString("programState", "false")) }
+
                         SignUpText(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -160,31 +174,32 @@ fun RolesFieldScreen(
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "Which one describes you?",
+                            text = "What's your program?",
                             fontSize = 18.sp,
                         )
 
                         Space("h", 15)
                         DropdownTextField(
-                            options = roleOptions,
-                            selectedOption = role,
-                            showRoleSupportTxt,
-                            isValidRole,
+                            options = options,
+                            selectedOption = program,
+                            showProgramSupportTxt,
+                            isValidProgram,
                             onOptionSelected = {
-                                role = it
-                                showRoleSupportTxt = true
+                                program = it
+                                showProgramSupportTxt = true
                             },
                         )
 
-                        Space("h", 10)
+                        Space("h", 5)
 
                         NextButton(
-                            navController = navController,
-                            scope = scope,
-                            snackbarHostState = snackbarHostState,
-                            isValid = isValidRole,
-                            selectedRole = role,
-                            rolePreference,
+                            navController,
+                            role,
+                            program,
+                            scope,
+                            snackbarHostState,
+                            isValidProgram,
+                            programPreference
                         )
 
                     }
@@ -202,7 +217,7 @@ private fun DropdownTextField(
     selectedOption: String?,
     showSupportText: Boolean,
     isValid: MutableState<String?>,
-    onOptionSelected: (String?) -> Unit
+    onOptionSelected: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -225,20 +240,12 @@ private fun DropdownTextField(
                     tint = white3
                 )
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = white5,
-                focusedTextColor = white3,
-                unfocusedTextColor = white3,
-                cursorColor = white3,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
             supportingText = {
                 if(showSupportText){
-                    if(selectedOption == "Role"){
+                    if(selectedOption == "Program"){
                         isValid.value = "false"
                         Text(
-                            text = "Please select a role.",
+                            text = "Please select a program.",
                             color = indicatorColorRed
                         )
                     }
@@ -248,6 +255,14 @@ private fun DropdownTextField(
                     }
                 }
             },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = white5,
+                focusedTextColor = white3,
+                unfocusedTextColor = white3,
+                cursorColor = white3,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
@@ -284,11 +299,12 @@ private fun DropdownTextField(
 @Composable
 private fun NextButton(
     navController: NavController,
+    selectedRole: String,
+    program: String?,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
-    isValid: MutableState<String?>,
-    selectedRole: String?,
-    rolePreference: SharedPreferences,
+    isValidProgram: MutableState<String?>,
+    programPreference: SharedPreferences
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -297,17 +313,10 @@ private fun NextButton(
             keyboardController?.hide()
             snackbarHostState.currentSnackbarData?.dismiss()
 
-            if(isValid.value == "true"){
-                if(selectedRole == "Student"){
-                    rolePreference.edit().putString("role", selectedRole).apply()
-                    rolePreference.edit().putString("roleState", "true").apply()
-                    navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
-                }
-                else{
-                    rolePreference.edit().putString("role", selectedRole).apply()
-                    rolePreference.edit().putString("roleState", "true").apply()
-                    navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
-                }
+            if(isValidProgram.value == "true"){
+                programPreference.edit().putString("program", program).apply()
+                programPreference.edit().putString("programState", "true").apply()
+                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${""}/${program}")
             }
             else{
                 scope.launch {

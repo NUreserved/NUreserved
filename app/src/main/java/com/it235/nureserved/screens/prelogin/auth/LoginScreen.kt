@@ -1,8 +1,9 @@
-package com.it235.nureserved.screens.prelogin.authscreenui.signup
+package com.it235.nureserved.screens.prelogin.auth
 
-import AuthService.Companion.signUp
-import android.content.Context
-import android.content.SharedPreferences
+import AuthService.Companion.checkIfAdmin
+import AuthService.Companion.isSignedIn
+import AuthService.Companion.isVerified
+import AuthService.Companion.signIn
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -13,12 +14,13 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -34,13 +36,11 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,31 +51,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.screens.shared.AuthInputPlaceholderTextStyle
 import com.it235.nureserved.screens.shared.Space
 import com.it235.nureserved.font.poppinsFamily
-import com.it235.nureserved.preferences.AppPreferences
-import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -86,41 +87,28 @@ import com.it235.nureserved.ui.theme.white5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-fun isValidPassword(password: String) : String{
-    val passwordSymbolPattern = Regex("[^a-zA-Z0-9\\s]")
-    val passwordUppercasePattern = Regex("[A-Z]")
-    val passwordLowercasePattern = Regex("[a-z]")
-    val passwordDigitPattern = Regex("[0-9]")
-
-    return when {
-        password.count() <= 7 -> "Password must be at least 8 characters long"
-        !passwordSymbolPattern.containsMatchIn(password) -> "Password must contain at least one of the following symbols: !@#\$%^&*()"
-        !passwordUppercasePattern.containsMatchIn(password) -> "Password must contain at least one uppercase letter"
-        !passwordLowercasePattern.containsMatchIn(password) -> "Password must contain at least one lowercase letter"
-        !passwordDigitPattern.containsMatchIn(password) -> "Password must contain at least one digit"
-        else -> ""
-    }
-}
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.compose.runtime.collectAsState
+import com.it235.nureserved.preferences.AppPreferences
+import com.it235.nureserved.preferences.ThemeOption
+import com.it235.nureserved.ui.theme.white4
 
 @Composable
-fun SignUpScreen(
-    navController: NavController,
-    firstName: String,
-    middleName: String,
-    lastName: String,
-    role: String,
-    school: String,
-    program: String,
+fun LoginScreen(
+    navController: NavController
 ){
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
     val scope = rememberCoroutineScope()
+    val signupSharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+
+    signupSharedPreferences.edit().clear().apply()
 
     NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
 
-        var loading = remember { mutableStateOf(false) }
+        val loading = remember { mutableStateOf(false) }
 
         var currentRotation by remember { mutableStateOf(0f) }
         val rotationAnimation = animateFloatAsState(
@@ -128,8 +116,31 @@ fun SignUpScreen(
             animationSpec = tween(durationMillis = 500, easing = LinearEasing) // Adjust duration here
         )
 
-        val focusManager = LocalFocusManager.current
+        val sharedPreferences = LocalContext.current.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
 
+        val currentTime = System.currentTimeMillis()
+
+        if(currentTime < sharedPreferences.getLong("block_time", 0)){
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+        }
+
+        else{
+            sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+            sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+            sharedPreferences.edit().putLong("block_time", 0).apply()
+            sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+        }
+
+        val showLoginFailedAttemptMessage = remember {
+            mutableStateOf(sharedPreferences.getBoolean("show_login_failed_attempts_msg", false))
+        }
+
+        val isLoginEnabled = remember {
+            mutableStateOf(sharedPreferences.getBoolean("is_login_enabled", false))
+        }
+
+        val focusManager = LocalFocusManager.current
 
         Scaffold(
             modifier = Modifier
@@ -143,10 +154,10 @@ fun SignUpScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize(),
-                    contentAlignment = Alignment.BottomEnd
+                    contentAlignment = Alignment.BottomEnd,
                 ){
                     SnackbarHost(
-                        hostState = snackbarHostState
+                        hostState = snackbarHostState,
                     ){data ->
                         Snackbar(
                             snackbarData = data,
@@ -167,7 +178,7 @@ fun SignUpScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     painter = painterResource(R.drawable.splash_background),
-                    contentDescription = null,
+                    contentDescription = "Background image",
                     contentScale = ContentScale.Crop,
                 )
 
@@ -190,83 +201,80 @@ fun SignUpScreen(
                                 .fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ){
-
+                            Logo()
+                            Space("h", 20)
                             AppTitle()
                             Space("h", 40)
 
                             var email by remember { mutableStateOf("") }
-                            var isValidEmail = remember { mutableStateOf(false) }
-                            var isEmailValueChange by remember { mutableStateOf(false) }
-
                             var password by remember { mutableStateOf("") }
-                            var isPasswordValueChange by remember { mutableStateOf(false) }
-                            var isPasswordVisible by remember { mutableStateOf(false) }
-                            var isValidPassword = remember { mutableStateOf(false) }
 
-                            var confirmPassword by remember { mutableStateOf("") }
-                            var isValidConfirmPassword = remember { mutableStateOf(false) }
-                            var isConfirmPasswordValueChange by remember { mutableStateOf(false) }
-                            var isConfirmPasswordVisible by remember { mutableStateOf(false) }
+                            EmailField(email) {email = it}
+                            Spacer(modifier = Modifier.height(10.dp))
+                            PasswordField(password) {password = it}
 
-                            EmailField(
-                                email,
-                                isEmailValueChange,
-                                isValidEmail,
-                            ) {
-                                email = it
-                                isEmailValueChange = true
-                            }
-                            Space("h", 5)
+                            Space("h", 15)
 
-                            PasswordField(
-                                labelValue = "Password",
-                                password,
-                                isPasswordValueChange,
-                                isValidPassword
-                            ) {
-                                password = it
-                                isPasswordValueChange = true
-                            }
-
-                            Space("h", 5)
-
-                            PasswordField(
-                                labelValue = "Confirm Password",
-                                confirmPassword,
-                                isConfirmPasswordValueChange,
-                                isValidConfirmPassword,
-                                password,
-                            ){
-                                confirmPassword = it
-                                isConfirmPasswordValueChange = true
-                            }
-
-                            Space("h", 5)
-
-                            RegisterButton(
+                            LoginButton(
                                 email,
                                 password,
-                                confirmPassword,
-                                firstName,
-                                middleName,
-                                lastName,
-                                role,
-                                school,
-                                program,
                                 navController,
                                 scope,
                                 snackbarHostState,
                                 loading,
-                                isValidEmail,
-                                isValidPassword,
-                                isValidConfirmPassword,
+                                showLoginFailedAttemptMessage,
+                                isLoginEnabled,
+                                sharedPreferences,
                             )
+
+                            Space("h", 10)
+
+                            if(showLoginFailedAttemptMessage.value){
+
+                                val currentTime = System.currentTimeMillis()
+                                var trigger by remember { mutableStateOf(0) }
+
+                                LaunchedEffect(key1 = trigger){
+                                    if(currentTime < sharedPreferences.getLong("block_time", 0)){
+                                        delay(1000)
+                                        trigger++
+                                        println(trigger)
+                                    }
+
+                                    else{
+                                        sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", false).apply()
+                                        sharedPreferences.edit().putBoolean("is_login_enabled", true).apply()
+                                        sharedPreferences.edit().putLong("block_time", 0).apply()
+                                        sharedPreferences.edit().putInt("failed_attempts", 0).apply()
+
+                                        showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                                        isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+                                    }
+                                }
+
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 20.dp),
+                                    color = indicatorColorRed,
+                                    text = "Maximum login failed attempts are 3. Please try again after 3 minutes",
+                                    style = TextStyle(
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 14.sp,
+                                    ),
+                                    textAlign = TextAlign.Center
+                                )
+
+                                Space("h", 15)
+
+                            }
 
                             Space("h", 15)
 
-                            AccountExistNote(navController)
+                            NoAccountNote(navController)
                             Space("h", 40)
-                            RegisterNote()
+                            LoginNote()
                         }
 
                     }
@@ -302,16 +310,26 @@ fun SignUpScreen(
 }
 
 @Composable
+private fun Logo() {
+    Image(
+        modifier = Modifier
+            .width(90.dp)
+            .padding(top = 40.dp),
+        painter = painterResource(R.drawable.logo),
+        contentDescription = "App logo",
+    )
+}
+
+@Composable
 private fun AppTitle() {
     Text(
-        modifier = Modifier
-            .padding(top = 40.dp),
-        color = Color(0xFF333333),
-        text = "Create an account",
+        color = Color(0xFF35408e),
+        text = "NUreserved",
         style = TextStyle(
             fontFamily = poppinsFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
+            fontStyle = FontStyle.Italic
         )
     )
 }
@@ -319,47 +337,24 @@ private fun AppTitle() {
 //email field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun EmailField(
-    value: String,
-    isValueChange: Boolean,
-    isValid: MutableState<Boolean>,
-    onValueChange: (String) -> Unit) {
+private fun EmailField(value: String, onValueChange: (String) -> Unit) {
+    //var email by remember { mutableStateOf("") }
+
     TextField(
         value = value,
         onValueChange = onValueChange,
-        supportingText = {
-            val nationalUniversityEmailPattern = Regex("^.+@(students.nu-fairview.edu.ph|nu-fairview.edu.ph)$")
-
-            if(isValueChange){
-
-                when {
-                    value == "" -> {
-                        isValid.value = false
-                        Text(
-                            text = "Please fill out this field",
-                            color = indicatorColorRed
-                        )
-                    }
-
-                    !value.matches(nationalUniversityEmailPattern) -> {
-                        isValid.value = false
-                        Text(
-                            text = "Please use a valid NU Fairview email address to continue.",
-                            color = indicatorColorRed
-                        )
-                    }
-
-                    else -> {
-                        isValid.value = true
-                        Text( text = "" )
-                    }
-                }
-
-            }
-        },
         singleLine = true,
-        placeholder = { AuthInputPlaceholderTextStyle("Email") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        placeholder = {
+            Text(
+                color = white3,
+                text = "Email",
+                style = TextStyle(
+                    fontFamily = poppinsFamily,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            )
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = white5,
             focusedTextColor = white3,
@@ -378,74 +373,33 @@ private fun EmailField(
 //password field
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-
-private fun PasswordField(
-    labelValue: String = "",
-    value: String,
-    isValueChange: Boolean,
-    isValidPassword: MutableState<Boolean>,
-    password: String? = null,
-    onValueChange: (String) -> Unit,) {
+private fun PasswordField(value: String, onValueChange: (String) -> Unit) {
+    //var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        supportingText = {
-            if(isValueChange && labelValue == "Password"){
-                val validationResult = isValidPassword(value)
-
-                when {
-                    validationResult != "" -> {
-                        isValidPassword.value = false
-                        Text(
-                            color = indicatorColorRed,
-                            text = validationResult
-                        )
-                    }
-
-                    else -> {
-                        isValidPassword.value = true
-                        Text(
-                            text = validationResult
-                        )
-                    }
-                }
-            }
-
-            else if(isValueChange && labelValue == "Confirm Password"){
-                if(value == ""){
-                    isValidPassword.value = false
-                    Text(
-                        color = indicatorColorRed,
-                        text = "Please fill in this field"
-                    )
-                }
-
-                else if(value != password){
-                    isValidPassword.value = false
-                    Text(
-                        color = indicatorColorRed,
-                        text = "Password does not match"
-                    )
-                }
-
-                else{
-                    isValidPassword.value = true
-                    Text(
-                        text = ""
-                    )
-                }
-            }
+        placeholder = {
+            Text(
+                color = white3,
+                text = "Password",
+                style = TextStyle(
+                    fontFamily = poppinsFamily,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            )
         },
-        placeholder = { AuthInputPlaceholderTextStyle(labelValue) },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            val image = if (!passwordVisible) R.drawable.ic_password_visibility_off else R.drawable.ic_password_visibility_on
+            val image: ImageVector =
+                if (!passwordVisible) ImageVector.vectorResource(R.drawable.ic_password_visibility_off)
+                else ImageVector.vectorResource(R.drawable.ic_password_visibility_on)
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
-                    painter = painterResource(image),
+                    imageVector = image,
                     contentDescription = if (passwordVisible) "Hide password" else "Show password",
                     tint = white3
                 )
@@ -466,126 +420,121 @@ private fun PasswordField(
     )
 }
 
-//register button
+//login
 @Composable
-private fun RegisterButton(
+private fun LoginButton(
     email: String,
     password: String,
-    confirmPassword: String,
-    firstName: String,
-    middleName: String,
-    lastName: String,
-    role: String,
-    school: String,
-    program: String,
     navController: NavController,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     loading: MutableState<Boolean>,
-    isValidEmail: MutableState<Boolean>,
-    isValidPassword: MutableState<Boolean>,
-    isValidConfirmPassword: MutableState<Boolean>,
+    showLoginFailedAttemptMessage: MutableState<Boolean>,
+    isLoginEnabled: MutableState<Boolean>,
+    sharedPreferences: SharedPreferences,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    var showDialog by remember { mutableStateOf(false) }
-
-    val signupSharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
 
     Button(
         onClick = {
-            // Sign up system
             keyboardController?.hide()
-            snackbarHostState.currentSnackbarData?.dismiss() // Dismiss any current snackbar
+            // Dismiss the currently shown Snackbar, if any
+            snackbarHostState.currentSnackbarData?.dismiss()
 
-            if (isValidEmail.value && isValidPassword.value && isValidConfirmPassword.value) {
+            //login system
+            if (email.isNotBlank() && password.isNotBlank()) {
                 loading.value = true
-                signUp(email, password, firstName, middleName, lastName, program, role, school) { signUpResult, signUpExcMessage ->
-                    if (signUpResult) {
-                        signupSharedPreferences.edit().clear().apply()
-                        loading.value = false
-                        // dialog box for email verification
-                        showDialog = true
+                signIn(email, password) { result, exceptionMessage ->
+                    if (result) {
+                        if (isSignedIn() && isVerified()) {
+                            checkIfAdmin { admin ->
+                                if (admin) {
+                                    navController.navigate(ScreenRoutes.AdminHome.route) {
+                                        popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                    }
+                                } else {
+                                    navController.navigate(ScreenRoutes.Home.route) {
+                                        popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                    }
+                                }
+                            }
+                        } else {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Please verify your email before logging in.",
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
+                        }
                     } else {
                         loading.value = false
+
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Sign up failed: $signUpExcMessage",
+                                message = exceptionMessage!!,
                                 duration = SnackbarDuration.Short
                             )
                         }
                     }
                 }
+                loading.value = false
+                val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+                sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
             } else {
+                loading.value = false
+
+                val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
+
+                sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()
+
                 scope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Make sure your inputs are correct",
+                        message = "Please fill in all the fields with email and password.",
                         duration = SnackbarDuration.Short
                     )
                 }
             }
+
+            if(sharedPreferences.getInt("failed_attempts", 0) == 3){
+                sharedPreferences.edit().putBoolean("show_login_failed_attempts_msg", true).apply()
+                sharedPreferences.edit().putBoolean("is_login_enabled", false).apply()
+                sharedPreferences.edit().putLong("block_time", System.currentTimeMillis() + 180000L).apply()
+
+                showLoginFailedAttemptMessage.value = sharedPreferences.getBoolean("show_login_failed_attempts_msg", false)
+                isLoginEnabled.value = sharedPreferences.getBoolean("is_login_enabled", true)
+            }
         },
+        enabled = isLoginEnabled.value,
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             containerColor = brandColorBlue,
-            contentColor = white3
+            contentColor = white3,
+            disabledContainerColor = white3,
+            disabledContentColor = white4
         ),
         shape = RoundedCornerShape(10.dp)
     ) {
         Text(
-            text = "Sign up",
+            text = "Log in",
             style = LocalTextStyle.current.copy(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
         )
     }
-    EmailVerificationDialog(showDialog, navController)
-}
-
-//email dialog
-@Composable
-fun EmailVerificationDialog(showDialog: Boolean, navController: NavController) {
-    if(showDialog){
-        AlertDialog(
-            onDismissRequest = {},
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.mail_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                    contentDescription = "Mail icon"
-                )
-            },
-            title = { Text(text = "Verify your email") },
-            text = {
-                Text(
-                    text = "A verification email has been sent to your email address. Please verify your email before logging in.",
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        navController.navigate(ScreenRoutes.Login.route) {
-                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                        }
-                    }
-                ) {
-                    Text("OK")
-                }
-            }
-        )
-    }
 }
 
 @Composable
-fun AccountExistNote(navController: NavController) {
+fun NoAccountNote(navController: NavController) {
     // Create an annotated string for the "No account yet? Register" text
     val annotatedText = buildAnnotatedString {
-        append("Already have an account? ")
+        append("No account yet? ")
         // Add a clickable annotation for the "Register" part
-        pushStringAnnotation(tag = "Login", annotation = "Login")
+        pushStringAnnotation(tag = "Register", annotation = "Register")
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = brandColorBlue)) {
-            append("Login")
+            append("Register")
         }
         pop()
     }
@@ -595,12 +544,10 @@ fun AccountExistNote(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                // Navigate back to the login screen when "Login" is clicked
-                annotatedText.getStringAnnotations(tag = "Login", start = 0, end = annotatedText.length)
+                // Navigate to the SignUpScreen when "Register" is clicked
+                annotatedText.getStringAnnotations(tag = "Register", start = 0, end = annotatedText.length)
                     .firstOrNull()?.let {
-                        navController.navigate(ScreenRoutes.Login.route) {
-                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                        }
+                        navController.navigate(ScreenRoutes.RoleSignUp.route)
                     }
             },
         text = annotatedText,
@@ -615,12 +562,12 @@ fun AccountExistNote(navController: NavController) {
 }
 
 @Composable
-private fun RegisterNote() {
+private fun LoginNote() {
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 40.dp),
-        text = "Sign Up with your Office 365 account to use and benefit from the service" +
+        text = "Login with your Office 365 account to use and benefit from the service" +
                 " we offer",
         style = LocalTextStyle.current.copy(
             fontWeight = FontWeight.Normal,
@@ -630,4 +577,11 @@ private fun RegisterNote() {
         ),
         textAlign = TextAlign.Center,
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLoginScreen(){
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }
