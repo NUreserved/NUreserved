@@ -49,7 +49,11 @@ import com.it235.nureserved.domain.reservation.ReservationFormData
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
+import com.it235.nureserved.ui.theme.indicatorColorGreen
+import com.it235.nureserved.ui.theme.indicatorColorOrange
+import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white4
+import com.it235.nureserved.ui.theme.white6
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -185,9 +189,9 @@ private fun ReservationCard(
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
             containerColor = when (reservation.getLatestTransactionDetails()!!.status) {
-                TransactionStatus.PENDING -> Color(0xFFd69c40)
-                TransactionStatus.APPROVED -> Color(0xFF49844b)
-                else -> Color(0xFF49844b)
+                TransactionStatus.PENDING -> indicatorColorOrange
+                TransactionStatus.APPROVED -> indicatorColorGreen
+                TransactionStatus.DECLINED -> indicatorColorRed
             },
             contentColor = Color(0xFFFEFEFE)
         )
