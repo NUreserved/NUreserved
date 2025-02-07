@@ -1,6 +1,8 @@
 package com.it235.nureserved.screens.core.authscreenui
 
 import AuthService.Companion.checkIfAdmin
+import AuthService.Companion.isSignedIn
+import AuthService.Companion.signIn
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -446,56 +448,39 @@ private fun LoginButton(
             //login system
             if (email.isNotBlank() && password.isNotBlank()) {
                 loading.value = true
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            //check if verified
-                            val user = auth.currentUser
-                            if (user != null && user.isEmailVerified) {
-                                checkIfAdmin { admin ->
-                                    if (admin) {
-                                        navController.navigate(ScreenRoutes.AdminHome.route) {
-                                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                                        }
-                                    } else {
-                                        navController.navigate(ScreenRoutes.Home.route) {
-                                            popUpTo(ScreenRoutes.Login.route) { inclusive = true }
-                                        }
+                signIn(email, password) { result, exceptionMessage ->
+                    if (result) {
+                        if (isSignedIn()) {
+                            checkIfAdmin { admin ->
+                                if (admin) {
+                                    navController.navigate(ScreenRoutes.AdminHome.route) {
+                                        popUpTo(ScreenRoutes.Login.route) { inclusive = true }
+                                    }
+                                } else {
+                                    navController.navigate(ScreenRoutes.Home.route) {
+                                        popUpTo(ScreenRoutes.Login.route) { inclusive = true }
                                     }
                                 }
-                            } else {
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = "Please verify your email before logging in.",
-                                        duration = SnackbarDuration.Short
-                                    )
-                                }
                             }
-
                         } else {
-                            loading.value = false
-
-                            val errorMessage = when(val exception = task.exception) {
-                                is FirebaseAuthInvalidCredentialsException -> "Invalid email or password. Please try again."
-                                is FirebaseAuthInvalidUserException -> {
-                                    if(exception.errorCode == "ERROR_USER_DISABLED"){
-                                        "Your account has been disabled. Please contact the administrator."
-                                    }
-                                    else{
-                                        "An unknown error occurred. Please try again."
-                                    }
-                                }
-                                else -> "An unknown error occurred. Please try again."
-                            }
-
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = errorMessage,
+                                    message = "Please verify your email before logging in.",
                                     duration = SnackbarDuration.Short
                                 )
                             }
                         }
+                    } else {
+                        loading.value = false
+
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = exceptionMessage!!,
+                                duration = SnackbarDuration.Short
+                            )
+                        }
                     }
+                }
                 loading.value = false
                 val currentNumberOfAttempts = sharedPreferences.getInt("failed_attempts", 0)
                 sharedPreferences.edit().putInt("failed_attempts", currentNumberOfAttempts + 1).apply()

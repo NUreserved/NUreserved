@@ -1,6 +1,8 @@
 import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.firestore.firestore
 import com.it235.nureserved.domain.auth.User
 
@@ -8,9 +10,10 @@ class AuthService {
     companion object {
         fun isSignedIn(): Boolean {
             val auth = FirebaseAuth.getInstance()
-            val userId = auth.currentUser?.uid
+            val user = auth.currentUser
+            val userId = user?.uid
 
-            if (userId != null) {
+            if (userId != null && user.isEmailVerified) {
                 return true
             }
 
@@ -76,6 +79,37 @@ class AuthService {
                 Log.d("UserData", "No current user")
                 onResult(false)
             }
+        }
+
+        fun signIn(
+            email: String, password:
+            String,
+            onResult: (Boolean, String?) -> Unit
+        ) {
+            val auth = FirebaseAuth.getInstance()
+
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) { onResult(true, null) }
+                    else { onResult(false, loginExceptionMessage(task.exception)) }
+                }
+        }
+
+        private fun loginExceptionMessage(exception: java.lang.Exception?): String {
+            val exceptionMessage = when(exception) {
+                is FirebaseAuthInvalidCredentialsException -> "Invalid email or password. Please try again."
+                is FirebaseAuthInvalidUserException -> {
+                    if(exception.errorCode == "ERROR_USER_DISABLED"){
+                        "Your account has been disabled. Please contact the administrator."
+                    }
+                    else{
+                        "An unknown error occurred. Please try again."
+                    }
+                }
+                else -> "An unknown error occurred. Please try again."
+            }
+
+            return exceptionMessage
         }
     }
 }
