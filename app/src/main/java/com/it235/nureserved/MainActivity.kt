@@ -37,17 +37,17 @@ import com.it235.nureserved.screens.admin.home.AdminHomeScreen
 import com.it235.nureserved.screens.admin.home.AdminHomeViewModel
 import com.it235.nureserved.screens.user.RoomReservationForm
 import com.it235.nureserved.screens.user.RoomUsageRules
-import com.it235.nureserved.screens.core.SplashScreen
+import com.it235.nureserved.screens.prelogin.SplashScreen
 import com.it235.nureserved.screens.user.TermsAndConditionsScreen
-import com.it235.nureserved.screens.core.authscreenui.LoginScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.NameSignUpScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.ProgramStudentNumberSignUpScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.RolesFieldScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.SchoolFieldScreen
-import com.it235.nureserved.screens.core.authscreenui.signup.SignUpScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.LoginScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.signup.NameSignUpScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.signup.ProgramStudentNumberSignUpScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.signup.RolesFieldScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.signup.SchoolFieldScreen
+import com.it235.nureserved.screens.prelogin.authscreenui.signup.SignUpScreen
 import com.it235.nureserved.screens.user.homesreenui.HomeScreen
 import com.it235.nureserved.screens.core.RoomDetails
-import com.it235.nureserved.screens.core.onboardingscreenui.GetStartedScreen
+import com.it235.nureserved.screens.prelogin.onboardingscreenui.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 

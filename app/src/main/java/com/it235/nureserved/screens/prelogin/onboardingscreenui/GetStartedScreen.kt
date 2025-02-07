@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core.onboardingscreenui
+package com.it235.nureserved.screens.prelogin.onboardingscreenui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

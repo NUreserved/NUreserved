@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core.authscreenui.signup
+package com.it235.nureserved.screens.prelogin.authscreenui.signup
 
 import AuthService.Companion.signUp
 import android.content.Context
@@ -69,8 +69,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.AuthInputPlaceholderTextStyle

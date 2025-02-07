@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core.authscreenui.signup
+package com.it235.nureserved.screens.prelogin.authscreenui.signup
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core.authscreenui.signup
+package com.it235.nureserved.screens.prelogin.authscreenui.signup
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -71,9 +71,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun SchoolFieldScreen(
+fun RolesFieldScreen(
     navController: NavController,
-    role: String,
 ){
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
@@ -82,19 +81,12 @@ fun SchoolFieldScreen(
     NUreservedTheme(themeOption) {
         val snackbarHostState = remember { SnackbarHostState() }
 
-        val schoolOptions = listOf(
-            "School",
-            "School of Architecture",
-            "School of Arts and Sciences",
-            "School of Business and Accountancy",
-            "School of Engineering and Technology",
-            "School of Tourism and Hospitality Management",
-        )
+        val roleOptions = listOf("Role", "Student", "Educator")
 
-        val schoolPreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
-        var school by rememberSaveable { mutableStateOf(schoolPreference.getString("school", schoolOptions[0])) }
-        val isValidSchool = rememberSaveable { mutableStateOf(schoolPreference.getString("schoolState", "false")) }
-        var showSchoolSupportTxt by remember { mutableStateOf(false) }
+        val rolePreference: SharedPreferences = LocalContext.current.getSharedPreferences("signupPrefs", Context.MODE_PRIVATE)
+        var role by rememberSaveable { mutableStateOf(rolePreference.getString("role", roleOptions[0])) }
+        val isValidRole = rememberSaveable { mutableStateOf(rolePreference.getString("roleState", "false")) }
+        var showRoleSupportTxt by remember { mutableStateOf(false) }
 
         val focusManager = LocalFocusManager.current
 
@@ -168,32 +160,31 @@ fun SchoolFieldScreen(
                         SignUpText(
                             modifier = Modifier
                                 .padding(start = 20.dp),
-                            text = "Which school or department are you affiliated with?",
+                            text = "Which one describes you?",
                             fontSize = 18.sp,
                         )
 
                         Space("h", 15)
                         DropdownTextField(
-                            options = schoolOptions,
-                            selectedOption = school,
-                            showSchoolSupportTxt,
-                            isValidSchool,
+                            options = roleOptions,
+                            selectedOption = role,
+                            showRoleSupportTxt,
+                            isValidRole,
                             onOptionSelected = {
-                                school = it
-                                showSchoolSupportTxt = true
+                                role = it
+                                showRoleSupportTxt = true
                             },
                         )
 
                         Space("h", 10)
 
                         NextButton(
-                            navController,
-                            scope,
-                            snackbarHostState,
-                            isValidSchool,
-                            school,
-                            role,
-                            schoolPreference,
+                            navController = navController,
+                            scope = scope,
+                            snackbarHostState = snackbarHostState,
+                            isValid = isValidRole,
+                            selectedRole = role,
+                            rolePreference,
                         )
 
                     }
@@ -211,7 +202,7 @@ private fun DropdownTextField(
     selectedOption: String?,
     showSupportText: Boolean,
     isValid: MutableState<String?>,
-    onOptionSelected: (String) -> Unit
+    onOptionSelected: (String?) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -244,10 +235,10 @@ private fun DropdownTextField(
             ),
             supportingText = {
                 if(showSupportText){
-                    if(selectedOption == "School"){
+                    if(selectedOption == "Role"){
                         isValid.value = "false"
                         Text(
-                            text = "Please select a school.",
+                            text = "Please select a role.",
                             color = indicatorColorRed
                         )
                     }
@@ -296,9 +287,8 @@ private fun NextButton(
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     isValid: MutableState<String?>,
-    selectedSchool: String?,
-    selectedRole: String,
-    schoolPreference: SharedPreferences,
+    selectedRole: String?,
+    rolePreference: SharedPreferences,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -308,9 +298,16 @@ private fun NextButton(
             snackbarHostState.currentSnackbarData?.dismiss()
 
             if(isValid.value == "true"){
-                schoolPreference.edit().putString("school", selectedSchool).apply()
-                schoolPreference.edit().putString("schoolState", "true").apply()
-                navController.navigate("${ScreenRoutes.NameSignUp.route}/${selectedRole}/${selectedSchool}/${""}")
+                if(selectedRole == "Student"){
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
+                    navController.navigate("${ScreenRoutes.ProgramStudentNumberSignUp.route}/${selectedRole}")
+                }
+                else{
+                    rolePreference.edit().putString("role", selectedRole).apply()
+                    rolePreference.edit().putString("roleState", "true").apply()
+                    navController.navigate("${ScreenRoutes.SchoolSignUp.route}/${selectedRole}")
+                }
             }
             else{
                 scope.launch {

@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core.authscreenui
+package com.it235.nureserved.screens.prelogin.authscreenui
 
 import AuthService.Companion.checkIfAdmin
 import AuthService.Companion.isSignedIn
@@ -73,9 +73,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.Space
