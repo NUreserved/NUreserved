@@ -45,8 +45,8 @@ import com.it235.nureserved.screens.prelogin.authscreenui.signup.ProgramStudentN
 import com.it235.nureserved.screens.prelogin.authscreenui.signup.RolesFieldScreen
 import com.it235.nureserved.screens.prelogin.authscreenui.signup.SchoolFieldScreen
 import com.it235.nureserved.screens.prelogin.authscreenui.signup.SignUpScreen
-import com.it235.nureserved.screens.user.homesreenui.HomeScreen
-import com.it235.nureserved.screens.core.RoomDetails
+import com.it235.nureserved.screens.user.HomeScreen
+import com.it235.nureserved.screens.shared.RoomDetails
 import com.it235.nureserved.screens.prelogin.onboardingscreenui.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay

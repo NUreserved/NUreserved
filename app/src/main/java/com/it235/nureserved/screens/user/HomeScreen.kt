@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.user.homesreenui
+package com.it235.nureserved.screens.user
 
 import AuthService.Companion.getUserData
 import androidx.activity.compose.BackHandler
@@ -70,8 +70,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.screens.core.RoomReservationFAB
-import com.it235.nureserved.screens.core.Space
+import com.it235.nureserved.screens.shared.RoomReservationFAB
+import com.it235.nureserved.screens.shared.Space
 import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
@@ -80,10 +80,10 @@ import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
-import com.it235.nureserved.screens.core.LogoutConfirmationDialog
-import com.it235.nureserved.screens.core.ThemeSettingsDialog
+import com.it235.nureserved.screens.shared.LogoutConfirmationDialog
+import com.it235.nureserved.screens.shared.ThemeSettingsDialog
 import com.it235.nureserved.utils.rescalePicture
-import com.it235.nureserved.screens.user.reservationscreenui.RoomReservationStatusScreen
+import com.it235.nureserved.screens.user.reservations.RoomReservationStatusScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4

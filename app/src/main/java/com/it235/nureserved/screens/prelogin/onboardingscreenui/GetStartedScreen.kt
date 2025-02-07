@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
-import com.it235.nureserved.screens.core.OnboardingScreen
+import com.it235.nureserved.screens.shared.OnboardingScreen
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.white2
 import com.it235.nureserved.ui.theme.white3

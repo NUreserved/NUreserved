@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.core
+package com.it235.nureserved.screens.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

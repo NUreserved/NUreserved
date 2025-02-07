@@ -1,9 +1,8 @@
-package com.it235.nureserved.screens.user.reservationscreenui
+package com.it235.nureserved.screens.user.reservations
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.it235.nureserved.domain.reservation.ReservationDataMapper
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.TransactionStatus

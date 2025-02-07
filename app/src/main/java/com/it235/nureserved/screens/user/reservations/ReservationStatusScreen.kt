@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.user.reservationscreenui
+package com.it235.nureserved.screens.user.reservations
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

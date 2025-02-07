@@ -77,7 +77,7 @@ import androidx.navigation.NavController
 import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
-import com.it235.nureserved.screens.core.Space
+import com.it235.nureserved.screens.shared.Space
 import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User

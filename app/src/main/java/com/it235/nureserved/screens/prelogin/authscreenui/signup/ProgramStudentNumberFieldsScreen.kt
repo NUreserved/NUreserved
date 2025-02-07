@@ -59,8 +59,8 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
-import com.it235.nureserved.screens.core.SignUpText
-import com.it235.nureserved.screens.core.Space
+import com.it235.nureserved.screens.shared.SignUpText
+import com.it235.nureserved.screens.shared.Space
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.indicatorColorRed
