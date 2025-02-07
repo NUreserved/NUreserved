@@ -1,6 +1,7 @@
 package com.it235.nureserved
 
 import AuthService.Companion.checkIfAdmin
+import AuthService.Companion.isVerified
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -80,7 +81,7 @@ private fun Main() {
         LaunchedEffect(Unit) {
             delay(1000)
 
-            if (isLoggedIn) {
+            if (isLoggedIn && isVerified()) {
                 checkIfAdmin { admin ->
                     startDestination.value = if (admin) ScreenRoutes.AdminHome.route else ScreenRoutes.Home.route
                     showSplash.value = false
