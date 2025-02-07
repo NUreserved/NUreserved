@@ -1,6 +1,4 @@
-package com.it235.nureserved.data.model
-
-import com.it235.nureserved.data.rooms.roomList
+package com.it235.nureserved.domain.rooms
 
 
 data class Room(

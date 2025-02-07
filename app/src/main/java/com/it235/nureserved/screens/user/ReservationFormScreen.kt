@@ -78,10 +78,10 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
 import com.it235.nureserved.screens.core.Space
-import com.it235.nureserved.data.model.FloorLocation
-import com.it235.nureserved.data.model.Room
+import com.it235.nureserved.domain.rooms.FloorLocation
+import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
-import com.it235.nureserved.data.rooms.roomList
+import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -1147,7 +1147,7 @@ fun RoomReservationForm(
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
 
-                            roomList.forEachIndexed {index, room ->
+                            roomList.forEachIndexed { index, room ->
                                 if (currentFloorLocation == null) {
                                     FilterChipsLabel(label = room.location.value)
                                 } else {

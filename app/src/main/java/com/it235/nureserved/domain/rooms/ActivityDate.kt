@@ -1,4 +1,4 @@
-package com.it235.nureserved.data.model
+package com.it235.nureserved.domain.rooms
 
 import java.time.LocalTime
 import java.time.OffsetDateTime

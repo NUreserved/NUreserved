@@ -1,6 +1,6 @@
 package com.it235.nureserved.utils
 
-import com.it235.nureserved.data.model.ActivityDate
+import com.it235.nureserved.domain.rooms.ActivityDate
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter

@@ -44,10 +44,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.data.model.DaySchedule
-import com.it235.nureserved.data.model.Room
-import com.it235.nureserved.data.model.TimeSlot
-import com.it235.nureserved.data.model.getRoomById
+import com.it235.nureserved.domain.rooms.DaySchedule
+import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.domain.rooms.TimeSlot
+import com.it235.nureserved.domain.rooms.getRoomById
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption

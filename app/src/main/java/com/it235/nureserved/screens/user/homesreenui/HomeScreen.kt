@@ -72,11 +72,11 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.core.RoomReservationFAB
 import com.it235.nureserved.screens.core.Space
-import com.it235.nureserved.data.model.FloorLocation
-import com.it235.nureserved.data.model.Room
+import com.it235.nureserved.domain.rooms.FloorLocation
+import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
-import com.it235.nureserved.data.model.areAllTimeSlotsUnavailable
-import com.it235.nureserved.data.rooms.roomList
+import com.it235.nureserved.domain.rooms.areAllTimeSlotsUnavailable
+import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
