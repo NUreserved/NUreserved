@@ -131,7 +131,8 @@ fun RoomDetailsContent(
             Spacer(modifier = Modifier.size(16.dp))
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
-            ScheduleGrid(room?.roomAvailabilitySchedule, viewModel)
+//            ScheduleGrid(room?.roomAvailabilitySchedule, viewModel)
+            ScheduleGridV2(viewModel)
             Spacer(modifier = Modifier.size(
                 if (isUser == true) 88.dp else 16.dp)
             )
@@ -229,6 +230,56 @@ private fun RoomDetails(
             ),
             modifier = Modifier.padding(start = 8.dp)
         )
+    }
+}
+
+@Composable
+private fun ScheduleGridV2(
+    viewModel: RoomDetailsViewModel) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        DateNavigator(viewModel)
+        Spacer(modifier = Modifier.size(16.dp))
+        Row {
+            timeIndicator()
+            Spacer(modifier = Modifier.size(8.dp))
+            TimeGridV2(viewModel)
+        }
+    }
+}
+
+@Composable
+private fun TimeGridV2(viewModel: RoomDetailsViewModel) {
+    val listOfDates by viewModel.listOfDates.collectAsState()
+
+    listOfDates.forEach { date ->
+        Row() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = date,
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                for (i in 1..16) {
+                    Box(
+                        modifier = Modifier
+                            .size(width = 100.dp, height = 40.dp)
+                            .border(
+                                width = 0.5.dp,
+                                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                            )
+                            .background(
+                                indicatorColorRed
+                            )
+                    )
+                }
+
+            }
+        }
     }
 }
 
@@ -331,7 +382,6 @@ private fun DateNavigator(viewModel: RoomDetailsViewModel) {
 
 @Preview (showBackground = true, heightDp = 2000)
 @Composable
-fun RoomDetailsPreview() {
-    val navController = rememberNavController()
-    RoomDetails(navController, "1", true)
+fun ScheduleGridV2Preview() {
+    ScheduleGridV2(viewModel = RoomDetailsViewModel())
 }
