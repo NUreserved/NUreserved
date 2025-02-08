@@ -42,10 +42,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.domain.reservation.ReservationFormData
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
@@ -53,7 +53,6 @@ import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white4
-import com.it235.nureserved.ui.theme.white6
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,10 +73,12 @@ fun ReservationStatusScreen(
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
-    // of modal bottom sheet
+    // of modal bottom sheet. This LaunchedEffect is also used to update the
+    // list of active and pending reservations properly
     LaunchedEffect(showBottomSheet) {
         if (!showBottomSheet) {
             sheetState.hide()
+            sharedViewModel.updateReservationList()
         }
     }
 

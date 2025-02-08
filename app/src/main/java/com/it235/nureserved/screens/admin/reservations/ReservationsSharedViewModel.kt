@@ -4,11 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.domain.reservation.ReservationFormData
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
-import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
-import com.it235.nureserved.domain.reservation.getSampleReservations
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,20 +35,26 @@ class ReservationsSharedViewModel : ViewModel() {
         viewModelScope.launch {
             ReservationManagerAdmin.retrieveReservations { reservations ->
                 _reservationList.value = reservations
-                Log.d("ReservationsViewModel", "Loaded reservations: ${_reservationList.value.size}")
+                Log.d("ReservationsSharedViewModel", "Loaded reservations: ${_reservationList.value.size}")
 
                 _approvedReservations.value = getApprovedReservationsList()
-                Log.d("ReservationsViewModel", "Approved reservations: ${_approvedReservations.value.size}")
+                Log.d("ReservationsSharedViewModel", "Approved reservations: ${_approvedReservations.value.size}")
 
                 _pendingReservations.value = getPendingReservationsList()
-                Log.d("ReservationsViewModel", "Pending reservations: ${_pendingReservations.value.size}")
+                Log.d("ReservationsSharedViewModel", "Pending reservations: ${_pendingReservations.value.size}")
 
                 _reservationHistory.value = getReservationsListHistory()
-                Log.d("ReservationsViewModel", "Reservation history: ${_reservationHistory.value.size}")
+                Log.d("ReservationsSharedViewModel", "Reservation history: ${_reservationHistory.value.size}")
 
                 _isLoading.value = false
             }
         }
+    }
+
+    fun updateReservationList() {
+        _approvedReservations.value = getApprovedReservationsList()
+        _pendingReservations.value = getPendingReservationsList()
+        _reservationHistory.value = getReservationsListHistory()
     }
 
     private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
