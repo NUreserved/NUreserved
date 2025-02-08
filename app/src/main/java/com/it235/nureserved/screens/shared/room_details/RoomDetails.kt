@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.shared
+package com.it235.nureserved.screens.shared.room_details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -51,6 +51,7 @@ import com.it235.nureserved.domain.rooms.getRoomById
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
+import com.it235.nureserved.screens.shared.RoomReservationFAB
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
 
