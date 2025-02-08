@@ -43,6 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -60,6 +61,7 @@ fun ReservationsHistoryScreen(
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
+    val isLoadingData by sharedViewModel.isLoading.collectAsState()
 
     Column(
         modifier = Modifier
@@ -88,32 +90,35 @@ fun ReservationsHistoryScreen(
             }
         }
 
-
-        if (reservationHistory.isEmpty()) {
-            EmptyListComposable("No history recorded")
+        if (isLoadingData) {
+            LoadingIndicator()
         } else {
-            val filteredList = sharedViewModel.getFilteredList()
-            val filterStatus by sharedViewModel.filterStatus.collectAsState()
-
-            ReservationFilterChipComposable(filterStatus, sharedViewModel)
-
-            if (filteredList.isEmpty()) {
+            if (reservationHistory.isEmpty()) {
                 EmptyListComposable("No history recorded")
             } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
-                ) {
-                    items(filteredList) { reservation ->
-                        ReservationCard(
-                            reservation = reservation,
-                            onClick = {
-                                 viewModel.setSelectedReservation(it)
-                                 viewModel.setShowBottomSheet(true)
-                            }
-                        )
+                val filteredList = sharedViewModel.getFilteredList()
+                val filterStatus by sharedViewModel.filterStatus.collectAsState()
+
+                ReservationFilterChipComposable(filterStatus, sharedViewModel)
+
+                if (filteredList.isEmpty()) {
+                    EmptyListComposable("No history recorded")
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                    ) {
+                        items(filteredList) { reservation ->
+                            ReservationCard(
+                                reservation = reservation,
+                                onClick = {
+                                    viewModel.setSelectedReservation(it)
+                                    viewModel.setShowBottomSheet(true)
+                                }
+                            )
+                        }
                     }
                 }
             }

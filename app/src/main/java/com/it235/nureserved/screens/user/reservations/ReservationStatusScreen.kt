@@ -155,7 +155,9 @@ fun RoomReservationStatusScreen(
                 }
             }
             1 -> {
-                if (pendingReservations.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                } else if (pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
                 } else {
                     LazyColumn(
@@ -177,7 +179,9 @@ fun RoomReservationStatusScreen(
                 }
             }
             2 -> {
-                if (reservationHistory.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                } else if (reservationHistory.isEmpty()) {
                     EmptyListComposable("No history available")
                 } else {
                     LazyColumn(
