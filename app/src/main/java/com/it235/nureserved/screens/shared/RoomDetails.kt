@@ -236,7 +236,7 @@ fun ScheduleGrid(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        dateNavigator()
+        DateNavigator()
         Spacer(modifier = Modifier.size(16.dp))
         Row {
             timeIndicator()
@@ -294,7 +294,7 @@ private fun timeIndicator() {
 }
 
 @Composable
-private fun dateNavigator() {
+private fun DateNavigator() {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
