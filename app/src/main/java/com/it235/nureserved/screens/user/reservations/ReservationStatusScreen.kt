@@ -48,6 +48,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -69,6 +70,7 @@ fun RoomReservationStatusScreen(
     val approvedReservations by viewModel.approvedReservations.collectAsState()
     val pendingReservations by viewModel.pendingReservations.collectAsState()
     val reservationHistory by viewModel.reservationHistory.collectAsState()
+    val isLoadingData by viewModel.isLoading.collectAsState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
@@ -128,7 +130,10 @@ fun RoomReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                if (approvedReservations.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                }
+                else if (approvedReservations.isEmpty()) {
                     EmptyListComposable("No active reservations")
                 } else {
                     LazyColumn(

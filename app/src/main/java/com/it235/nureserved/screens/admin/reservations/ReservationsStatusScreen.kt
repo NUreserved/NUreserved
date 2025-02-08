@@ -47,6 +47,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorGreen
@@ -69,6 +70,7 @@ fun ReservationStatusScreen(
     val tabs = viewModel.tabs
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
+    val isLoadingData by sharedViewModel.isLoading.collectAsState()
     val sheetState = rememberModalBottomSheetState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
@@ -131,22 +133,26 @@ fun ReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                if (approvedReservations.isEmpty()) {
-                    EmptyListComposable("No active reservations")
+                if (isLoadingData) {
+                    LoadingIndicator()
                 } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ){
-                        items(approvedReservations) { reservation ->
-                            ReservationCard(
-                                reservation = reservation,
-                                onClick = {
-                                    viewModel.setSelectedReservation(it)
-                                    viewModel.setShowBottomSheet(true)
-                                })
+                    if (approvedReservations.isEmpty()) {
+                        EmptyListComposable("No active reservations")
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ){
+                            items(approvedReservations) { reservation ->
+                                ReservationCard(
+                                    reservation = reservation,
+                                    onClick = {
+                                        viewModel.setSelectedReservation(it)
+                                        viewModel.setShowBottomSheet(true)
+                                    })
+                            }
                         }
                     }
                 }
