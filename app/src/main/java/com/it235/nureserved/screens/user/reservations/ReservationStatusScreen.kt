@@ -39,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +49,7 @@ import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.white4
@@ -69,6 +71,7 @@ fun RoomReservationStatusScreen(
     val approvedReservations by viewModel.approvedReservations.collectAsState()
     val pendingReservations by viewModel.pendingReservations.collectAsState()
     val reservationHistory by viewModel.reservationHistory.collectAsState()
+    val isLoadingData by viewModel.isLoading.collectAsState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
@@ -128,7 +131,10 @@ fun RoomReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                if (approvedReservations.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                }
+                else if (approvedReservations.isEmpty()) {
                     EmptyListComposable("No active reservations")
                 } else {
                     LazyColumn(
@@ -150,7 +156,9 @@ fun RoomReservationStatusScreen(
                 }
             }
             1 -> {
-                if (pendingReservations.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                } else if (pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
                 } else {
                     LazyColumn(
@@ -172,7 +180,9 @@ fun RoomReservationStatusScreen(
                 }
             }
             2 -> {
-                if (reservationHistory.isEmpty()) {
+                if (isLoadingData) {
+                    LoadingIndicator()
+                } else if (reservationHistory.isEmpty()) {
                     EmptyListComposable("No history available")
                 } else {
                     LazyColumn(
@@ -221,11 +231,11 @@ private fun ReservationCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(100.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(3f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
                 painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
@@ -234,20 +244,20 @@ private fun ReservationCard(
 
             Column(
                 modifier = Modifier
-                    .weight(4f)
+                    .weight(7f)
                     .fillMaxHeight()
-                    .padding(start = 15.dp),
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue()[0].name,
+                    text = "#${reservation.getTrackingNumber()}",
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Bold,
                     )
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Column {
                     if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
@@ -259,7 +269,7 @@ private fun ReservationCard(
                             }",
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
-                                lineHeight = 10.sp
+                                lineHeight = 16.sp
                             )
                         )
                     }
@@ -268,8 +278,10 @@ private fun ReservationCard(
                         text = "Requested by: ${reservation.getRequesterFullName()}",
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
-                            lineHeight = 10.sp
-                        )
+                            lineHeight = 16.sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }

@@ -1,4 +1,9 @@
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -62,6 +67,16 @@ class AuthService {
             } else {
                 Log.d("UserData", "No current user")
                 onResult(null)
+            }
+        }
+
+        fun getFullName(onResult: (String) -> Unit) {
+            getUserData { fetchedUser ->
+                if (fetchedUser != null) {
+                    onResult("${fetchedUser.firstName} ${fetchedUser.middleName} ${fetchedUser.lastName}")
+                } else {
+                    onResult("N/A")
+                }
             }
         }
 

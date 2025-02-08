@@ -2,17 +2,21 @@ package com.it235.nureserved.screens.admin.reservations
 
 import ReservationFormDetailsScreen
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,17 +43,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionStatus
-import com.it235.nureserved.domain.reservation.ReservationFormData
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
+import com.it235.nureserved.ui.theme.indicatorColorGreen
+import com.it235.nureserved.ui.theme.indicatorColorOrange
+import com.it235.nureserved.ui.theme.indicatorColorRed
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white4
 import java.time.format.DateTimeFormatter
+import kotlin.math.max
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,18 +71,24 @@ fun ReservationStatusScreen(
     viewModel: ReservationsStatusScreenViewModel = viewModel(),
     sharedViewModel: ReservationsSharedViewModel = viewModel()
 ) {
+    val approvedReservations by sharedViewModel.approvedReservations.collectAsState()
+    val pendingReservations by sharedViewModel.pendingReservations.collectAsState()
+
     val selectedTabIndex by viewModel.selectedTabIndex.collectAsState()
     val tabs = viewModel.tabs
     val showBottomSheet by viewModel.showBottomSheet.collectAsState()
     val selectedReservation by viewModel.selectedReservation.collectAsState()
+    val isLoadingData by sharedViewModel.isLoading.collectAsState()
     val sheetState = rememberModalBottomSheetState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
-    // of modal bottom sheet
+    // of modal bottom sheet. This LaunchedEffect is also used to update the
+    // list of active and pending reservations properly
     LaunchedEffect(showBottomSheet) {
         if (!showBottomSheet) {
             sheetState.hide()
+            sharedViewModel.updateReservationList()
         }
     }
 
@@ -122,28 +141,32 @@ fun ReservationStatusScreen(
 
         when(selectedTabIndex){
             0 -> {
-                if (sharedViewModel.approvedReservations.isEmpty()) {
-                    EmptyListComposable("No active reservations")
+                if (isLoadingData) {
+                    LoadingIndicator()
                 } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ){
-                        items(sharedViewModel.approvedReservations) { reservation ->
-                            ReservationCard(
-                                reservation = reservation,
-                                onClick = {
-                                    viewModel.setSelectedReservation(it)
-                                    viewModel.setShowBottomSheet(true)
-                                })
+                    if (approvedReservations.isEmpty()) {
+                        EmptyListComposable("No active reservations")
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ){
+                            items(approvedReservations) { reservation ->
+                                ReservationCard(
+                                    reservation = reservation,
+                                    onClick = {
+                                        viewModel.setSelectedReservation(it)
+                                        viewModel.setShowBottomSheet(true)
+                                    })
+                            }
                         }
                     }
                 }
             }
             1 -> {
-                if (sharedViewModel.pendingReservations.isEmpty()) {
+                if (pendingReservations.isEmpty()) {
                     EmptyListComposable("No pending reservations")
                 } else {
                     LazyColumn(
@@ -152,7 +175,7 @@ fun ReservationStatusScreen(
                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ){
-                        items(sharedViewModel.pendingReservations) { reservation ->
+                        items(pendingReservations) { reservation ->
                             ReservationCard(
                                 reservation = reservation,
                                 onClick = {
@@ -172,18 +195,18 @@ fun ReservationStatusScreen(
 @Composable
 private fun ReservationCard(
     modifier: Modifier = Modifier,
-    reservation: ReservationFormData,
-    onClick: (ReservationFormData) -> Unit
+    reservation: ReservationFormDataV2,
+    onClick: (ReservationFormDataV2) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
-            containerColor = when (reservation.getLatestTransactionDetail()!!.status) {
-                TransactionStatus.PENDING -> Color(0xFFd69c40)
-                TransactionStatus.APPROVED -> Color(0xFF49844b)
-                else -> Color(0xFF49844b)
+            containerColor = when (reservation.getLatestTransactionDetails()!!.status) {
+                TransactionStatus.PENDING -> indicatorColorOrange
+                TransactionStatus.APPROVED -> indicatorColorGreen
+                TransactionStatus.DECLINED -> indicatorColorRed
             },
             contentColor = Color(0xFFFEFEFE)
         )
@@ -192,45 +215,44 @@ private fun ReservationCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(100.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(3f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
-                painter = rescalePicture(reservation.getVenue().imageResId ?: R.drawable.resource_default),
+                painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
                 contentDescription = "A room image",
             )
 
             Column(
                 modifier = Modifier
-                    .weight(4f)
-                    .fillMaxHeight()
-                    .padding(start = 15.dp),
+                    .weight(7f)
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue().name,
+                    text = "#${reservation.getTrackingNumber()}",
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Bold,
                     )
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Column {
-                    if (reservation.getLatestTransactionDetail()!!.status == TransactionStatus.APPROVED) {
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
                         Text(
                             text = "Approved: ${
-                                reservation.getLatestTransactionDetail()!!.eventDate.format(
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
-                                lineHeight = 10.sp
+                                lineHeight = 16.sp
                             )
                         )
                     }
@@ -239,8 +261,11 @@ private fun ReservationCard(
                         text = "Requested by: ${reservation.getRequesterFullName()}",
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
-                            lineHeight = 10.sp
-                        )
+                            lineHeight = 16.sp,
+
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
