@@ -2,17 +2,21 @@ package com.it235.nureserved.screens.admin.reservations
 
 import ReservationFormDetailsScreen
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,7 +43,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,8 +59,10 @@ import com.it235.nureserved.ui.theme.darkGray2
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white4
 import java.time.format.DateTimeFormatter
+import kotlin.math.max
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -207,11 +215,11 @@ private fun ReservationCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(100.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(3f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
                 painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
@@ -220,20 +228,19 @@ private fun ReservationCard(
 
             Column(
                 modifier = Modifier
-                    .weight(4f)
-                    .fillMaxHeight()
-                    .padding(start = 15.dp),
+                    .weight(7f)
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue()[0].name,
+                    text = "#${reservation.getTrackingNumber()}",
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Bold,
                     )
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Column {
                     if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
@@ -245,7 +252,7 @@ private fun ReservationCard(
                             }",
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
-                                lineHeight = 10.sp
+                                lineHeight = 16.sp
                             )
                         )
                     }
@@ -254,8 +261,11 @@ private fun ReservationCard(
                         text = "Requested by: ${reservation.getRequesterFullName()}",
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
-                            lineHeight = 10.sp
-                        )
+                            lineHeight = 16.sp,
+
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }

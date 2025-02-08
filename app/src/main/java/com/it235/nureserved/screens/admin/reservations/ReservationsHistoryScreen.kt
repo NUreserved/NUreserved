@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -180,11 +181,11 @@ private fun ReservationCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(100.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(3f)
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
                 painter = rescalePicture(reservation.getVenue()[0].imageResId ?: R.drawable.resource_default),
@@ -193,20 +194,19 @@ private fun ReservationCard(
 
             Column(
                 modifier = Modifier
-                    .weight(4f)
-                    .fillMaxHeight()
-                    .padding(start = 15.dp),
+                    .weight(7f)
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = reservation.getVenue()[0].name,
+                    text = "#${reservation.getTrackingNumber()}",
                     style = LocalTextStyle.current.copy(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Bold,
                     )
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Column {
                     if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
@@ -218,7 +218,7 @@ private fun ReservationCard(
                             }",
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
-                                lineHeight = 10.sp
+                                lineHeight = 16.sp
                             )
                         )
                     } else if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
@@ -230,7 +230,7 @@ private fun ReservationCard(
                             }",
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
-                                lineHeight = 10.sp
+                                lineHeight = 16.sp
                             )
                         )
                     }
@@ -239,8 +239,11 @@ private fun ReservationCard(
                         text = "Requested by: ${reservation.getRequesterFullName()}",
                         style = LocalTextStyle.current.copy(
                             fontSize = 13.sp,
-                            lineHeight = 10.sp
-                        )
+                            lineHeight = 16.sp,
+
+                            ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
