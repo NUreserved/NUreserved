@@ -48,7 +48,9 @@ import com.it235.nureserved.R
 import com.it235.nureserved.domain.rooms.DaySchedule
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.rooms.TimeSlot
-import com.it235.nureserved.domain.rooms.getRoomById
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2.getRoomById
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
@@ -132,7 +134,7 @@ fun RoomDetailsContent(
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
 //            ScheduleGrid(room?.roomAvailabilitySchedule, viewModel)
-            ScheduleGridV2(viewModel)
+            ScheduleGridV2(viewModel, room)
             Spacer(modifier = Modifier.size(
                 if (isUser == true) 88.dp else 16.dp)
             )
@@ -142,7 +144,7 @@ fun RoomDetailsContent(
 
 @Composable
 private fun RoomImage(
-    room: Room?
+    room: RoomV2?
 ) {
     room?.imageResId?.let {
         Image(
@@ -168,7 +170,7 @@ private fun RoomImage(
 
 @Composable
 private fun RoomDetails(
-    room: Room?
+    room: RoomV2?
 ) {
     Text(
         text = room?.name ?: "Room Name Unavailable",
@@ -235,7 +237,8 @@ private fun RoomDetails(
 
 @Composable
 private fun ScheduleGridV2(
-    viewModel: RoomDetailsViewModel) {
+    viewModel: RoomDetailsViewModel,
+    room: RoomV2?) {
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -246,25 +249,32 @@ private fun ScheduleGridV2(
         Row {
             timeIndicator()
             Spacer(modifier = Modifier.size(8.dp))
-            TimeGridV2(viewModel)
+            TimeGridV2(viewModel, room)
         }
     }
 }
 
 @Composable
-private fun TimeGridV2(viewModel: RoomDetailsViewModel) {
+private fun TimeGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
     val listOfDates by viewModel.listOfDates.collectAsState()
+    val dateOne by viewModel.dateOne.collectAsState()
+    val dateTwo by viewModel.dateTwo.collectAsState()
+    val dateThree by viewModel.dateThree.collectAsState()
 
-    listOfDates.forEach { date ->
-        Row() {
+    listOf(dateOne, dateTwo, dateThree).forEachIndexed { index, date ->
+        Row {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = date,
+                    text = listOfDates[index],
                 )
                 Spacer(modifier = Modifier.size(8.dp))
-                for (i in 1..16) {
+                for (timeSlot in com.it235.nureserved.domain.rooms_v2.TimeSlot.entries) {
+                    val dayOfWeek = date.dayOfWeek
+                    val daySchedule = room?.roomAvailabilitySchedule?.find { it.day.dayOfWeek == dayOfWeek }
+                    val isAvailable = daySchedule?.timeSlots?.find { it.timeSlot == timeSlot }?.isAvailable ?: true
+
                     Box(
                         modifier = Modifier
                             .size(width = 100.dp, height = 40.dp)
@@ -273,11 +283,10 @@ private fun TimeGridV2(viewModel: RoomDetailsViewModel) {
                                 color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                             )
                             .background(
-                                indicatorColorRed
+                                if (isAvailable) Color.Transparent else indicatorColorRed
                             )
                     )
                 }
-
             }
         }
     }
@@ -383,5 +392,5 @@ private fun DateNavigator(viewModel: RoomDetailsViewModel) {
 @Preview (showBackground = true, heightDp = 2000)
 @Composable
 fun ScheduleGridV2Preview() {
-    ScheduleGridV2(viewModel = RoomDetailsViewModel())
+    ScheduleGridV2(viewModel = RoomDetailsViewModel(), room = RoomDataV2.rooms[0])
 }
