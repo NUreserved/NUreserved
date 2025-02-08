@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
@@ -60,7 +61,8 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 fun RoomDetails(
     navController: NavController,
     roomId: String?,
-    isUser: Boolean?
+    isUser: Boolean?,
+    viewModel: RoomDetailsViewModel = viewModel()
 ) {
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
@@ -75,7 +77,7 @@ fun RoomDetails(
             },
             floatingActionButton = { if (isUser == true) RoomReservationFAB(navController) }
         ) { innerPadding ->
-            RoomDetailsContent(innerPadding, roomId, isUser)
+            RoomDetailsContent(innerPadding, roomId, isUser, viewModel)
         }
     }
 }
@@ -115,7 +117,8 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 fun RoomDetailsContent(
     innerPaddingValues: PaddingValues,
     roomId: String?,
-    isUser: Boolean?) {
+    isUser: Boolean?,
+    viewModel: RoomDetailsViewModel) {
 
     val room = roomId?.toIntOrNull()?.let { getRoomById(it) }
 
@@ -128,7 +131,7 @@ fun RoomDetailsContent(
             Spacer(modifier = Modifier.size(16.dp))
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
-            ScheduleGrid(room?.roomAvailabilitySchedule)
+            ScheduleGrid(room?.roomAvailabilitySchedule, viewModel)
             Spacer(modifier = Modifier.size(
                 if (isUser == true) 88.dp else 16.dp)
             )
@@ -231,13 +234,14 @@ private fun RoomDetails(
 
 @Composable
 fun ScheduleGrid(
-    days: List<DaySchedule>?) {
+    days: List<DaySchedule>?,
+    viewModel: RoomDetailsViewModel) {
     Column (
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        DateNavigator()
+        DateNavigator(viewModel)
         Spacer(modifier = Modifier.size(16.dp))
         Row {
             timeIndicator()
@@ -295,12 +299,14 @@ private fun timeIndicator() {
 }
 
 @Composable
-private fun DateNavigator() {
+private fun DateNavigator(viewModel: RoomDetailsViewModel) {
+    val dateRange by viewModel.dateRange.collectAsState()
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = { /*TODO*/ }
+            onClick = { viewModel.minusOneDay() }
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.chevron_left),
@@ -309,11 +315,11 @@ private fun DateNavigator() {
         }
         Spacer(modifier = Modifier.size(16.dp))
         Text(
-            text = "Dec 1–3"
+            text = dateRange
         )
         Spacer(modifier = Modifier.size(16.dp))
         IconButton(
-            onClick = { /*TODO*/ }
+            onClick = { viewModel.addOneDay() }
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.chevron_right),
