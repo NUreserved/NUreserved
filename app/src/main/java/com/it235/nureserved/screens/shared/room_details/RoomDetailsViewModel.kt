@@ -25,6 +25,9 @@ class RoomDetailsViewModel : ViewModel() {
     private val _listOfDates = MutableStateFlow(getListOfDates())
     val listOfDates: StateFlow<List<String>> = _listOfDates.asStateFlow()
 
+    private val _isDateAtLeastOneDayAhead = MutableStateFlow(isDateAtLeastOneDayAhead())
+    val isDateAtLeastOneDayAhead: StateFlow<Boolean> = _isDateAtLeastOneDayAhead.asStateFlow()
+
     private fun getListOfDates(): List<String> {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM d")
 
@@ -48,12 +51,18 @@ class RoomDetailsViewModel : ViewModel() {
         }
     }
 
+    private fun isDateAtLeastOneDayAhead(): Boolean {
+        val today = OffsetDateTime.now().toLocalDate()
+        return !_dateOne.value.toLocalDate().isBefore(today.plusDays(1))
+    }
+
     fun addOneDay() {
         _dateOne.value = _dateOne.value.plusDays(1)
         _dateTwo.value = _dateTwo.value.plusDays(1)
         _dateThree.value = _dateThree.value.plusDays(1)
         _dateRange.value = getDateRange()
         _listOfDates.value = getListOfDates()
+        _isDateAtLeastOneDayAhead.value = isDateAtLeastOneDayAhead()
     }
 
     fun minusOneDay() {
@@ -62,5 +71,6 @@ class RoomDetailsViewModel : ViewModel() {
         _dateThree.value = _dateThree.value.minusDays(1)
         _dateRange.value = getDateRange()
         _listOfDates.value = getListOfDates()
+        _isDateAtLeastOneDayAhead.value = isDateAtLeastOneDayAhead()
     }
 }

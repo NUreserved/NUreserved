@@ -361,12 +361,14 @@ private fun timeIndicator() {
 @Composable
 private fun DateNavigator(viewModel: RoomDetailsViewModel) {
     val dateRange by viewModel.dateRange.collectAsState()
+    val isDateAtLeastOneDayAhead by viewModel.isDateAtLeastOneDayAhead.collectAsState()
 
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = { viewModel.minusOneDay() }
+            onClick = { viewModel.minusOneDay() },
+            enabled = isDateAtLeastOneDayAhead
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.chevron_left),
