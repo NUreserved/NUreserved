@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,11 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -251,6 +254,8 @@ private fun ScheduleGridV2(
             Spacer(modifier = Modifier.size(8.dp))
             TimeGridV2(viewModel, room)
         }
+        Spacer(modifier = Modifier.size(32.dp))
+        ColorLegend()
     }
 }
 
@@ -283,10 +288,57 @@ private fun TimeGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
                                 color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                             )
                             .background(
-                                if (isAvailable) Color.Transparent else indicatorColorRed
+                                if (isAvailable) Color.Transparent else Color(0xFFA9A9A9)
                             )
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ColorLegend() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Legend",
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Row() {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(indicatorColorRed)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Reserved",
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp
+                    )
+                )
+            }
+            Spacer(modifier = Modifier.size(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(Color(0xFFA9A9A9))
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Ongoing Classes",
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp
+                    )
+                )
             }
         }
     }
