@@ -41,40 +41,40 @@ class ReservationSubmissionHandler : ViewModel() {
         selectedRooms: List<Room>
     ) {
         _nameOfOrgDeptColg.value = nameOfOrgDeptColg
-        Log.d("ReservationDataController", "Stored nameOfOrgDeptColg: ${_nameOfOrgDeptColg.value}")
+        Log.d("ReservationSubmissionHandler", "Stored nameOfOrgDeptColg: ${_nameOfOrgDeptColg.value}")
 
         _givenName.value = givenName
-        Log.d("ReservationDataController", "Stored givenName: ${_givenName.value}")
+        Log.d("ReservationSubmissionHandler", "Stored givenName: ${_givenName.value}")
 
         _middleName.value = middleName
-        Log.d("ReservationDataController", "Stored middleName: ${_middleName.value}")
+        Log.d("ReservationSubmissionHandler", "Stored middleName: ${_middleName.value}")
 
         _lastName.value = lastName
-        Log.d("ReservationDataController", "Stored lastName: ${_lastName.value}")
+        Log.d("ReservationSubmissionHandler", "Stored lastName: ${_lastName.value}")
 
         _position.value = position
-        Log.d("ReservationDataController", "Stored position: ${_position.value}")
+        Log.d("ReservationSubmissionHandler", "Stored position: ${_position.value}")
 
         _titleOfTheActivity.value = titleOfTheActivity
-        Log.d("ReservationDataController", "Stored titleOfTheActivity: ${_titleOfTheActivity.value}")
+        Log.d("ReservationSubmissionHandler", "Stored titleOfTheActivity: ${_titleOfTheActivity.value}")
 
         _fromDatesOfActivity.value = fromDatesOfActivity
-        Log.d("ReservationDataController", "Stored fromDatesOfActivity: ${_fromDatesOfActivity.value}")
+        Log.d("ReservationSubmissionHandler", "Stored fromDatesOfActivity: ${_fromDatesOfActivity.value}")
 
         _toDatesOfActivity.value = toDatesOfActivity
-        Log.d("ReservationDataController", "Stored toDatesOfActivity: ${_toDatesOfActivity.value}")
+        Log.d("ReservationSubmissionHandler", "Stored toDatesOfActivity: ${_toDatesOfActivity.value}")
 
         _selectedFromTimeOption.value = selectedFromTimeOption
-        Log.d("ReservationDataController", "Stored selectedFromTimeOption: ${_selectedFromTimeOption.value}")
+        Log.d("ReservationSubmissionHandler", "Stored selectedFromTimeOption: ${_selectedFromTimeOption.value}")
 
         _selectedToTimeOption.value = selectedToTimeOption
-        Log.d("ReservationDataController", "Stored selectedToTimeOption: ${_selectedToTimeOption.value}")
+        Log.d("ReservationSubmissionHandler", "Stored selectedToTimeOption: ${_selectedToTimeOption.value}")
 
         _expectedNumberOfAttendees.value = expectedNumberOfAttendees
-        Log.d("ReservationDataController", "Stored expectedNumberOfAttendees: ${_expectedNumberOfAttendees.value}")
+        Log.d("ReservationSubmissionHandler", "Stored expectedNumberOfAttendees: ${_expectedNumberOfAttendees.value}")
 
         _selectedRooms.value = selectedRooms
-        Log.d("ReservationDataController", "Stored selectedRooms: ${_selectedRooms.value}")
+        Log.d("ReservationSubmissionHandler", "Stored selectedRooms: ${_selectedRooms.value}")
     }
 
     fun submitReservationRequest() {
