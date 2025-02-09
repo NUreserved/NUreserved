@@ -53,7 +53,6 @@ import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
-import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
 import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
@@ -85,8 +84,11 @@ fun ReservationFormDetailsScreen(
     val context by viewModel.context.collectAsState()
     val showConfirmReservationApprovalDialog by viewModel.showConfirmReservationApprovalDialog.collectAsState()
     val showConfirmReservationDeclineDialog by viewModel.showConfirmReservationDeclineDialog.collectAsState()
+    val showConfirmReservationCancelDialog by viewModel.showConfirmReservationCancelDialog.collectAsState()
     val showApprovedReservationDialog by viewModel.showApprovedReservationDialog.collectAsState()
     val showDeclinedReservationDialog by viewModel.showDeclinedReservationDialog.collectAsState()
+    val showCancelledReservationDialog by viewModel.showCancelledReservationDialog.collectAsState()
+    val status = reservationData.getLatestTransactionDetails()!!.status
 
 
     Column (
@@ -202,29 +204,44 @@ fun ReservationFormDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED ||
-                reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
-                Spacer(modifier = Modifier.height(16.dp))
+            when (status) {
+                TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                Column (
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    Column (
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
+                        RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
+                    }
+
                 }
+                TransactionStatus.PENDING -> {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Column (
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                    ){
+                        HorizontalDivider(
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                        )
+                        ApprovalSectionComposable(viewModel)
+                    }
+                }
+                TransactionStatus.APPROVED -> {
+                    Spacer(modifier = Modifier.height(16.dp))
 
-            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Column (
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-                ){
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                    )
-                    ApprovalSectionComposable(viewModel)
+                    Column (
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                        RequestTimelineHistory(reservationData.getTransactionHistory(), viewModel)
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                        CancelSectionComposable(viewModel)
+                    }
                 }
             }
 
@@ -243,6 +260,13 @@ fun ReservationFormDetailsScreen(
         ConfirmReservationDeclineDialog (
             onDismiss = { viewModel.setShowConfirmReservationDeclineDialog(false) },
             showDeclineReservationDialog = { viewModel.setShowDeclinedReservationDialog(true) }
+        )
+    }
+
+    if (showConfirmReservationCancelDialog) {
+        ConfirmReservationCancelDialog(
+            onDismiss = { viewModel.setShowConfirmReservationCancelDialog(false) },
+            showCancelledReservationDialog = { viewModel.setShowCancelledReservationDialog(true) }
         )
     }
 
@@ -267,10 +291,23 @@ fun ReservationFormDetailsScreen(
             declineReservation = { ReservationManagerAdmin.declineReservation(reservationData, viewModel.remarks.value) }
         )
     }
+
+    if (showCancelledReservationDialog) {
+        CancelledReservationDialog(
+            onDismiss = {
+                viewModel.setShowCancelledReservationDialog(false)
+                dismissModalBottomSheet()
+            },
+            reservation = reservationData,
+            cancelReservation = { ReservationManagerAdmin.cancelReservation(reservationData, viewModel.remarks.value) }
+        )
+    }
 }
 
 @Composable
 private fun ReservationStatusComposable(reservationData: ReservationFormDataV2) {
+    val status = reservationData.getLatestTransactionDetails()!!.status
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -281,55 +318,75 @@ private fun ReservationStatusComposable(reservationData: ReservationFormDataV2) 
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorGreen, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = TransactionStatus.APPROVED.value,
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
+            when (status) {
+                TransactionStatus.APPROVED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorGreen, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.APPROVED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
                     )
-                )
-            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorOrange, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = TransactionStatus.PENDING.value,
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
+                }
+                TransactionStatus.PENDING -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorOrange, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.PENDING.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
                     )
-                )
-            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorRed, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = TransactionStatus.DECLINED.value,
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
+                }
+                TransactionStatus.DECLINED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorRed, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.DECLINED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
                     )
-                )
+                }
+                TransactionStatus.CANCELLED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorRed, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.CANCELLED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
+                    )
+                }
             }
         }
 
-        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
+        if (status == TransactionStatus.APPROVED) {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -339,17 +396,7 @@ private fun ReservationStatusComposable(reservationData: ReservationFormDataV2) 
                     lineHeight = 16.sp
                 )
             )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-            Text(
-                modifier = Modifier
-                    .padding(end = 16.dp),
-                text = getTimeLapseString(reservationData.getDateFilled()),
-                style = LocalTextStyle.current.copy(
-                    fontSize = 13.sp,
-                    lineHeight = 16.sp
-                )
-            )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
+        } else  {
             Text(
                 modifier = Modifier
                     .padding(end = 16.dp),
@@ -369,10 +416,12 @@ private fun RequestStatusComposable(
     clipboardManager: ClipboardManager?,
     context: Context?
 ) {
+    val status = reservationData.getLatestTransactionDetails()!!.status
+
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
+       if (status == TransactionStatus.APPROVED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -394,7 +443,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
+       } else if (status == TransactionStatus.PENDING) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -416,7 +465,7 @@ private fun RequestStatusComposable(
                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
                }
            )
-       } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
+       } else if (status == TransactionStatus.DECLINED) {
            Icon (
                modifier = Modifier
                    .size(48.dp),
@@ -427,6 +476,28 @@ private fun RequestStatusComposable(
            Spacer(modifier = Modifier.height(8.dp))
            Text(
                text = "Request declined",
+               style = MaterialTheme.typography.titleLarge,
+           )
+           Spacer(modifier = Modifier.height(4.dp))
+           Text(
+               text = "#${reservationData.getTrackingNumber()}",
+               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+               modifier = Modifier.clickable {
+                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+               }
+           )
+       } else if (status == TransactionStatus.CANCELLED) {
+           Icon (
+               modifier = Modifier
+                   .size(48.dp),
+               painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+               contentDescription = "Form icon",
+               tint = indicatorColorRed
+           )
+           Spacer(modifier = Modifier.height(8.dp))
+           Text(
+               text = "Request cancelled",
                style = MaterialTheme.typography.titleLarge,
            )
            Spacer(modifier = Modifier.height(4.dp))
@@ -479,6 +550,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> indicatorColorOrange
                             TransactionStatus.APPROVED -> indicatorColorGreen
                             TransactionStatus.DECLINED -> indicatorColorRed
+                            TransactionStatus.CANCELLED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -505,6 +577,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> "Request awaiting approval"
                             TransactionStatus.APPROVED -> "Request has been approved"
                             TransactionStatus.DECLINED -> "Request has been declined"
+                            TransactionStatus.CANCELLED -> "Request has been cancelled"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
@@ -526,6 +599,7 @@ private fun RequestTimelineHistory(
                                 TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
                                 TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
                                 TransactionStatus.PENDING -> ""
+                                TransactionStatus.CANCELLED -> "Cancelled by: ${approvalDetail.processedBy}"
                             },
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,
@@ -606,6 +680,50 @@ private fun ApprovalSectionComposable(
             ) {
                 Text(
                     text = "Approve",
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CancelSectionComposable(viewModel: ReservationFormDetailsViewModel) {
+    Column (
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = "Add remarks",
+            style = LocalTextStyle.current.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+        )
+        OutlinedTextField(
+            value = viewModel.remarks.collectAsState().value,
+            onValueChange = { viewModel.updateRemarks(it) },
+            label = { Text("Remarks") },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+        ) {
+            Button(
+                onClick = { viewModel.setShowConfirmReservationCancelDialog(true) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = indicatorColorRed,
+                    contentColor = white
+                ),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "Cancel",
                     style = LocalTextStyle.current.copy(
                         fontWeight = FontWeight.Bold
                     )
@@ -733,6 +851,40 @@ private fun ConfirmReservationDeclineDialog(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ConfirmReservationCancelDialog(
+    onDismiss: () -> Unit,
+    showCancelledReservationDialog: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Confirm decline?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to cancel reservation?",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                showCancelledReservationDialog()
+            }) { Text("Confirm") }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }
+            ) { Text("Cancel") }
+        }
+    )
+}
+
 @Composable
 private fun ApprovedReservationDialog(
     onDismiss: () -> Unit,
@@ -790,6 +942,38 @@ private fun DeclinedReservationDialog(
             TextButton(onClick = {
                 onDismiss()
                 declineReservation()
+            }) {
+                Text("OK")
+            }
+        },
+    )
+}
+
+@Composable
+private fun CancelledReservationDialog(
+    onDismiss: () -> Unit,
+    reservation: ReservationFormDataV2,
+    cancelReservation: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Reservation cancelled") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Check or declined icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Reservation #${reservation.getTrackingNumber()} has been cancelled. The requester has been notified for their reservation request.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                cancelReservation()
             }) {
                 Text("OK")
             }
