@@ -406,6 +406,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> indicatorColorOrange
                             TransactionStatus.APPROVED -> indicatorColorGreen
                             TransactionStatus.DECLINED -> indicatorColorRed
+                            TransactionStatus.CANCELLED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -432,6 +433,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> "Request awaiting approval"
                             TransactionStatus.APPROVED -> "Request has been approved"
                             TransactionStatus.DECLINED -> "Request has been declined"
+                            TransactionStatus.CANCELLED -> "Request has been cancelled"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
@@ -453,6 +455,7 @@ private fun RequestTimelineHistory(
                                 TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
                                 TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
                                 TransactionStatus.PENDING -> ""
+                                TransactionStatus.CANCELLED -> "Cancelled by: ${approvalDetail.processedBy}"
                             },
                             style = LocalTextStyle.current.copy(
                                 fontSize = 13.sp,

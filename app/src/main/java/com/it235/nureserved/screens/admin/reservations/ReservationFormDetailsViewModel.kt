@@ -22,11 +22,17 @@ class ReservationFormDetailsViewModel : ViewModel() {
     private val _showConfirmReservationDeclineDialog = MutableStateFlow(false)
     val showConfirmReservationDeclineDialog: StateFlow<Boolean> = _showConfirmReservationDeclineDialog
 
+    private val _showConfirmReservationCancelDialog = MutableStateFlow(false)
+    val showConfirmReservationCancelDialog: StateFlow<Boolean> = _showConfirmReservationCancelDialog
+
     private val _showApprovedReservationDialog = MutableStateFlow(false)
     val showApprovedReservationDialog: StateFlow<Boolean> = _showApprovedReservationDialog
 
     private val _showDeclinedReservationDialog = MutableStateFlow(false)
     val showDeclinedReservationDialog: StateFlow<Boolean> = _showDeclinedReservationDialog
+
+    private val _showCancelledReservationDialog = MutableStateFlow(false)
+    val showCancelledReservationDialog: StateFlow<Boolean> = _showCancelledReservationDialog
 
     fun initialize(context: Context, clipboardManager: ClipboardManager) {
         _context.value = context
@@ -45,11 +51,19 @@ class ReservationFormDetailsViewModel : ViewModel() {
         _showConfirmReservationDeclineDialog.value = show
     }
 
+    fun setShowConfirmReservationCancelDialog(show: Boolean) {
+        _showConfirmReservationCancelDialog.value = show
+    }
+
     fun setShowApprovedReservationDialog(show: Boolean) {
         _showApprovedReservationDialog.value = show
     }
 
     fun setShowDeclinedReservationDialog(show: Boolean) {
         _showDeclinedReservationDialog.value = show
+    }
+
+    fun setShowCancelledReservationDialog(show: Boolean) {
+        _showCancelledReservationDialog.value = show
     }
 }

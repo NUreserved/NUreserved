@@ -207,6 +207,7 @@ private fun ReservationCard(
                 TransactionStatus.PENDING -> indicatorColorOrange
                 TransactionStatus.APPROVED -> indicatorColorGreen
                 TransactionStatus.DECLINED -> indicatorColorRed
+                TransactionStatus.CANCELLED -> indicatorColorRed
             },
             contentColor = Color(0xFFFEFEFE)
         )
