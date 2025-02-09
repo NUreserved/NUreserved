@@ -46,7 +46,7 @@ import com.it235.nureserved.screens.prelogin.auth.signup.RolesFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SchoolFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SignUpScreen
 import com.it235.nureserved.screens.user.HomeScreen
-import com.it235.nureserved.screens.shared.RoomDetails
+import com.it235.nureserved.screens.shared.room_details.RoomDetails
 import com.it235.nureserved.screens.prelogin.onboarding_screen.GetStartedScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
@@ -181,9 +181,9 @@ private fun Main() {
                 composable(
                     route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
                     arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
-                        FloorLocation::class.java) })
+                        com.it235.nureserved.domain.rooms_v2.FloorLocation::class.java) })
                 ) { backStackEntry ->
-                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
+                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as com.it235.nureserved.domain.rooms_v2.FloorLocation
                     val viewModel: FloorRoomsViewModel = viewModel()
                     FloorRoomsScreen(navController, floorName, viewModel)
                 }

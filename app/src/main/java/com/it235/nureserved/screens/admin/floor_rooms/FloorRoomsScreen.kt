@@ -43,6 +43,7 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.utils.rescalePicture
@@ -56,7 +57,7 @@ import com.it235.nureserved.ui.theme.white3
 @Composable
 fun FloorRoomsScreen(
     navController: NavController,
-    floorName: FloorLocation,
+    floorName: com.it235.nureserved.domain.rooms_v2.FloorLocation,
     viewModel: FloorRoomsViewModel
 ) {
     val appPreferences = AppPreferences(LocalContext.current)
@@ -81,8 +82,8 @@ fun FloorRoomsScreen(
 
 @Composable
 private fun FloorRoomsScreenContent(
-    floorName: FloorLocation,
-    roomList: List<Room>,
+    floorName: com.it235.nureserved.domain.rooms_v2.FloorLocation,
+    roomList: List<RoomV2>,
     innerPadding: PaddingValues,
     navController: NavController
 ) {
@@ -138,7 +139,7 @@ private fun TopBar(
 
 @Composable
 private fun RoomCard(
-    room: Room,
+    room: RoomV2,
     navController: NavController
 ) {
     val image = rescalePicture(imageResId = room.imageResId)

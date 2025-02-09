@@ -72,11 +72,13 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.shared.RoomReservationFAB
 import com.it235.nureserved.screens.shared.Space
-import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
 import com.it235.nureserved.domain.rooms.areAllTimeSlotsUnavailable
 import com.it235.nureserved.domain.rooms.roomList
+import com.it235.nureserved.domain.rooms_v2.FloorLocation
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
@@ -384,10 +386,10 @@ fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp))}
-            item { Floor(FloorLocation.SECOND_FLOOR, roomList, navController) }
-            item { Floor(FloorLocation.THIRD_FLOOR, roomList, navController) }
-            item { Floor(FloorLocation.FOURTH_FLOOR, roomList, navController) }
-            item { Floor(FloorLocation.FIFTH_FLOOR, roomList, navController) }
+            item { Floor(FloorLocation.SECOND_FLOOR, RoomDataV2.rooms, navController) }
+            item { Floor(FloorLocation.THIRD_FLOOR, RoomDataV2.rooms, navController) }
+            item { Floor(FloorLocation.FOURTH_FLOOR, RoomDataV2.rooms, navController) }
+            item { Floor(FloorLocation.FIFTH_FLOOR, RoomDataV2.rooms, navController) }
             item { Spacer(modifier = Modifier.size(64.dp))}
         }
     }
@@ -540,7 +542,7 @@ fun DatePickerModal(
 @Composable
 fun Floor(
     floorName: FloorLocation,
-    roomList: List<Room>,
+    roomList: List<RoomV2>,
     navController: NavController
 ) {
     Text(
@@ -567,12 +569,12 @@ fun Floor(
 }
 
 @Composable
-fun Card(room: Room, navController: NavController) {
+fun Card(room: RoomV2, navController: NavController) {
     val imagePainter = rescalePicture(room.imageResId)
 
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (areAllTimeSlotsUnavailable(room)) Color(0xFFdb5e5f) else Color(0xFF49844b),
+            containerColor = Color(0xFF49844b), // Modify later to reflect color changes when there are no available reservations
         ),
         modifier = Modifier
             .width(240.dp)

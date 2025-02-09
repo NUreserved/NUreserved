@@ -241,10 +241,10 @@ private fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp)) }
-            item { FloorCard(FloorLocation.SECOND_FLOOR, 4, navController) }
-            item { FloorCard(FloorLocation.THIRD_FLOOR, 2, navController) }
-            item { FloorCard(FloorLocation.FOURTH_FLOOR, 5, navController) }
-            item { FloorCard(FloorLocation.FIFTH_FLOOR, 0, navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.SECOND_FLOOR, 4, navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.THIRD_FLOOR, 2, navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FOURTH_FLOOR, 5, navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FIFTH_FLOOR, 0, navController) }
             item { Spacer(modifier = Modifier.size(0.dp)) }
         }
     }
@@ -264,7 +264,7 @@ private fun ReservationsScreenContent(
 
 @Composable
 private fun FloorCard(
-    floorName: FloorLocation,
+    floorName: com.it235.nureserved.domain.rooms_v2.FloorLocation,
     numberOfReservations: Int,
     navController: NavController
 ) {

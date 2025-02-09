@@ -1,4 +1,4 @@
-package com.it235.nureserved.screens.shared
+package com.it235.nureserved.screens.shared.room_details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -41,16 +43,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.it235.nureserved.R
-import com.it235.nureserved.domain.rooms.DaySchedule
-import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.rooms.TimeSlot
-import com.it235.nureserved.domain.rooms.getRoomById
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2.getRoomById
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
+import com.it235.nureserved.screens.shared.LoadingIndicator
+import com.it235.nureserved.screens.shared.RoomReservationFAB
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
 
@@ -59,7 +63,8 @@ import com.it235.nureserved.ui.theme.indicatorColorRed
 fun RoomDetails(
     navController: NavController,
     roomId: String?,
-    isUser: Boolean?
+    isUser: Boolean?,
+    viewModel: RoomDetailsViewModel = viewModel()
 ) {
     val appPreferences = AppPreferences(LocalContext.current)
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
@@ -70,18 +75,18 @@ fun RoomDetails(
 
         Scaffold (
             topBar = {
-                RDTopBar(scrollBehavior, navController)
+                TopBar(scrollBehavior, navController)
             },
             floatingActionButton = { if (isUser == true) RoomReservationFAB(navController) }
         ) { innerPadding ->
-            RoomDetailsContent(innerPadding, roomId, isUser)
+            RoomDetailsContent(innerPadding, roomId, isUser, viewModel)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavController) {
+private fun TopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavController) {
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -111,10 +116,11 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 
 
 @Composable
-fun RoomDetailsContent(
+private fun RoomDetailsContent(
     innerPaddingValues: PaddingValues,
     roomId: String?,
-    isUser: Boolean?) {
+    isUser: Boolean?,
+    viewModel: RoomDetailsViewModel) {
 
     val room = roomId?.toIntOrNull()?.let { getRoomById(it) }
 
@@ -127,7 +133,7 @@ fun RoomDetailsContent(
             Spacer(modifier = Modifier.size(16.dp))
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
-            ScheduleGrid(room?.roomAvailabilitySchedule)
+            ScheduleGrid(viewModel, room)
             Spacer(modifier = Modifier.size(
                 if (isUser == true) 88.dp else 16.dp)
             )
@@ -137,7 +143,7 @@ fun RoomDetailsContent(
 
 @Composable
 private fun RoomImage(
-    room: Room?
+    room: RoomV2?
 ) {
     room?.imageResId?.let {
         Image(
@@ -163,7 +169,7 @@ private fun RoomImage(
 
 @Composable
 private fun RoomDetails(
-    room: Room?
+    room: RoomV2?
 ) {
     Text(
         text = room?.name ?: "Room Name Unavailable",
@@ -229,35 +235,57 @@ private fun RoomDetails(
 }
 
 @Composable
-fun ScheduleGrid(
-    days: List<DaySchedule>?) {
-    Column (
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        dateNavigator()
-        Spacer(modifier = Modifier.size(16.dp))
-        Row {
-            timeIndicator()
-            Spacer(modifier = Modifier.size(8.dp))
-            timeGrid(days)
+private fun ScheduleGrid(viewModel: RoomDetailsViewModel, room: RoomV2?) {
+    val isLoading by viewModel.isLoading.collectAsState()
+
+    if (isLoading) {
+        Column (
+            modifier = Modifier
+                .heightIn(min = 0.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            LoadingIndicator()
+            Spacer(modifier = Modifier.size(16.dp))
+            Text("Loading schedule viewer")
+        }
+    } else {
+        Column (
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            DateNavigator(viewModel)
+            Spacer(modifier = Modifier.size(16.dp))
+            Row {
+                TimeIndicator()
+                Spacer(modifier = Modifier.size(8.dp))
+                TimeGrid(viewModel, room)
+            }
+            Spacer(modifier = Modifier.size(32.dp))
+            ColorLegend()
         }
     }
 }
 
 @Composable
-private fun timeGrid(days: List<DaySchedule>?) {
-    days?.forEach { day ->
-        Row() {
+private fun TimeGrid(viewModel: RoomDetailsViewModel, room: RoomV2?) {
+    val listOfDates by viewModel.listOfDates.collectAsState()
+    val dateOne by viewModel.dateOne.collectAsState()
+    val dateTwo by viewModel.dateTwo.collectAsState()
+    val dateThree by viewModel.dateThree.collectAsState()
+
+    listOf(dateOne, dateTwo, dateThree).forEachIndexed { index, date ->
+        Row {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = day.day,
+                    text = listOfDates[index],
                 )
                 Spacer(modifier = Modifier.size(8.dp))
-                day.timeSlots.forEach { timeSlot ->
+                for (timeSlot in com.it235.nureserved.domain.rooms_v2.TimeSlot.entries) {
+                    val color = viewModel.getColorIfUnavailable(room, date, timeSlot)
+
                     Box(
                         modifier = Modifier
                             .size(width = 100.dp, height = 40.dp)
@@ -265,9 +293,7 @@ private fun timeGrid(days: List<DaySchedule>?) {
                                 width = 0.5.dp,
                                 color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                             )
-                            .background(
-                                if (timeSlot.isAvailable) Color.Transparent else indicatorColorRed
-                            )
+                            .background(color)
                     )
                 }
             }
@@ -276,7 +302,55 @@ private fun timeGrid(days: List<DaySchedule>?) {
 }
 
 @Composable
-private fun timeIndicator() {
+private fun ColorLegend() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Legend",
+            style = LocalTextStyle.current.copy(
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Row() {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(indicatorColorRed)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Reserved",
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp
+                    )
+                )
+            }
+            Spacer(modifier = Modifier.size(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(Color(0xFFA9A9A9))
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Ongoing Classes",
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp
+                    )
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+private fun TimeIndicator() {
     Column(
         horizontalAlignment = Alignment.End
     ) {
@@ -294,12 +368,16 @@ private fun timeIndicator() {
 }
 
 @Composable
-private fun dateNavigator() {
+private fun DateNavigator(viewModel: RoomDetailsViewModel) {
+    val dateRange by viewModel.dateRange.collectAsState()
+    val isDateAtLeastOneDayAhead by viewModel.isDateAtLeastOneDayAhead.collectAsState()
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = { /*TODO*/ }
+            onClick = { viewModel.minusOneDay() },
+            enabled = isDateAtLeastOneDayAhead
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.chevron_left),
@@ -308,11 +386,11 @@ private fun dateNavigator() {
         }
         Spacer(modifier = Modifier.size(16.dp))
         Text(
-            text = "Dec 1–3"
+            text = dateRange
         )
         Spacer(modifier = Modifier.size(16.dp))
         IconButton(
-            onClick = { /*TODO*/ }
+            onClick = { viewModel.addOneDay() }
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.chevron_right),
@@ -324,7 +402,6 @@ private fun dateNavigator() {
 
 @Preview (showBackground = true, heightDp = 2000)
 @Composable
-fun RoomDetailsPreview() {
-    val navController = rememberNavController()
-    RoomDetails(navController, "1", true)
+fun ScheduleGridV2Preview() {
+    ScheduleGrid(viewModel = RoomDetailsViewModel(), room = RoomDataV2.rooms[0])
 }

@@ -3,6 +3,7 @@ package com.it235.nureserved.domain.reservation
 import android.util.Log
 import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms.roomList
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import java.time.LocalTime
 import java.time.OffsetDateTime
 
@@ -23,7 +24,7 @@ class ReservationDataMapper {
                         endTime = LocalTime.of(12, 0)
                     ),
                     venue = (reservationData["selectedRooms"] as? List<String>)?.mapNotNull { roomName ->
-                        roomList.find { it.name == roomName }
+                        RoomDataV2.rooms.find { it.name == roomName }
                     } ?: listOf(),
                     expectedAttendees = (reservationData["expectedNumberOfAttendees"] as? Long)?.toInt() ?: 0,
                     requesterLastName = reservationData["lastName"] as? String ?: "",

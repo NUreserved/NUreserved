@@ -5,17 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.rooms.roomList
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FloorRoomsViewModel : ViewModel() {
-    private val _rooms = MutableStateFlow<List<Room>>(emptyList())
-    val rooms: StateFlow<List<Room>> = _rooms
+    private val _rooms = MutableStateFlow<List<RoomV2>>(emptyList())
+    val rooms: StateFlow<List<RoomV2>> = _rooms
 
-    fun loadRooms(floorName: FloorLocation) {
+    fun loadRooms(floorName: com.it235.nureserved.domain.rooms_v2.FloorLocation) {
         viewModelScope.launch {
-            _rooms.value = roomList.filter { it.location == floorName }
+            _rooms.value = RoomDataV2.rooms.filter { it.location == floorName }
         }
     }
 }
