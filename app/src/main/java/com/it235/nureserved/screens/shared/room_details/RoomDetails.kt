@@ -46,7 +46,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.it235.nureserved.R
-import com.it235.nureserved.domain.rooms.DaySchedule
 import com.it235.nureserved.domain.rooms.TimeSlot
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2.getRoomById
@@ -259,7 +258,7 @@ private fun ScheduleGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
             DateNavigator(viewModel)
             Spacer(modifier = Modifier.size(16.dp))
             Row {
-                timeIndicator()
+                TimeIndicator()
                 Spacer(modifier = Modifier.size(8.dp))
                 TimeGridV2(viewModel, room)
             }
@@ -350,56 +349,9 @@ private fun ColorLegend() {
     }
 }
 
-@Composable
-fun ScheduleGrid(
-    days: List<DaySchedule>?,
-    viewModel: RoomDetailsViewModel) {
-    Column (
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        DateNavigator(viewModel)
-        Spacer(modifier = Modifier.size(16.dp))
-        Row {
-            timeIndicator()
-            Spacer(modifier = Modifier.size(8.dp))
-            timeGrid(days)
-        }
-    }
-}
 
 @Composable
-private fun timeGrid(days: List<DaySchedule>?) {
-    days?.forEach { day ->
-        Row() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = day.day,
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                day.timeSlots.forEach { timeSlot ->
-                    Box(
-                        modifier = Modifier
-                            .size(width = 100.dp, height = 40.dp)
-                            .border(
-                                width = 0.5.dp,
-                                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
-                            )
-                            .background(
-                                if (timeSlot.isAvailable) Color.Transparent else indicatorColorRed
-                            )
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun timeIndicator() {
+private fun TimeIndicator() {
     Column(
         horizontalAlignment = Alignment.End
     ) {
