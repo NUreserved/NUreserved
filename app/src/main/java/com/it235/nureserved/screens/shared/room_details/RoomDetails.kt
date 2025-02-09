@@ -75,7 +75,7 @@ fun RoomDetails(
 
         Scaffold (
             topBar = {
-                RDTopBar(scrollBehavior, navController)
+                TopBar(scrollBehavior, navController)
             },
             floatingActionButton = { if (isUser == true) RoomReservationFAB(navController) }
         ) { innerPadding ->
@@ -86,7 +86,7 @@ fun RoomDetails(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavController) {
+private fun TopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavController) {
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -116,7 +116,7 @@ fun RDTopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavControll
 
 
 @Composable
-fun RoomDetailsContent(
+private fun RoomDetailsContent(
     innerPaddingValues: PaddingValues,
     roomId: String?,
     isUser: Boolean?,
@@ -133,8 +133,7 @@ fun RoomDetailsContent(
             Spacer(modifier = Modifier.size(16.dp))
             RoomDetails(room)
             Spacer(modifier = Modifier.size(32.dp))
-//            ScheduleGrid(room?.roomAvailabilitySchedule, viewModel)
-            ScheduleGridV2(viewModel, room)
+            ScheduleGrid(viewModel, room)
             Spacer(modifier = Modifier.size(
                 if (isUser == true) 88.dp else 16.dp)
             )
@@ -236,7 +235,7 @@ private fun RoomDetails(
 }
 
 @Composable
-private fun ScheduleGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
+private fun ScheduleGrid(viewModel: RoomDetailsViewModel, room: RoomV2?) {
     val isLoading by viewModel.isLoading.collectAsState()
 
     if (isLoading) {
@@ -260,7 +259,7 @@ private fun ScheduleGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
             Row {
                 TimeIndicator()
                 Spacer(modifier = Modifier.size(8.dp))
-                TimeGridV2(viewModel, room)
+                TimeGrid(viewModel, room)
             }
             Spacer(modifier = Modifier.size(32.dp))
             ColorLegend()
@@ -269,7 +268,7 @@ private fun ScheduleGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
 }
 
 @Composable
-private fun TimeGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
+private fun TimeGrid(viewModel: RoomDetailsViewModel, room: RoomV2?) {
     val listOfDates by viewModel.listOfDates.collectAsState()
     val dateOne by viewModel.dateOne.collectAsState()
     val dateTwo by viewModel.dateTwo.collectAsState()
@@ -404,5 +403,5 @@ private fun DateNavigator(viewModel: RoomDetailsViewModel) {
 @Preview (showBackground = true, heightDp = 2000)
 @Composable
 fun ScheduleGridV2Preview() {
-    ScheduleGridV2(viewModel = RoomDetailsViewModel(), room = RoomDataV2.rooms[0])
+    ScheduleGrid(viewModel = RoomDetailsViewModel(), room = RoomDataV2.rooms[0])
 }

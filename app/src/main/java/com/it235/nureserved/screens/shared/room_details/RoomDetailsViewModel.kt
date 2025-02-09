@@ -103,11 +103,12 @@ class RoomDetailsViewModel : ViewModel() {
         _isDateAtLeastOneDayAhead.value = isDateAtLeastOneDayAhead()
     }
 
-    fun getColorIfUnavailable(
-        room: RoomV2?,
-        currentDate: OffsetDateTime,
-        currentTimeSlot: TimeSlot
-    ): Color {
+    fun getColorIfUnavailable(room: RoomV2?, currentDate: OffsetDateTime, currentTimeSlot: TimeSlot): Color {
+        // This function is used to mark the box with colors with the following conditions:
+        // - Red: If the time slot has been used due to reservation
+        // - Gray: If the time slot has scheduled classes
+        // - Transparent: If THE time slot is free
+
         val color = checkByScheduledClasses(currentDate, room, currentTimeSlot)
 
         if (color != null) {
@@ -116,36 +117,23 @@ class RoomDetailsViewModel : ViewModel() {
         return checkByAlreadyReservedTimeSlots(room, currentTimeSlot, currentDate)
     }
 
-    private fun checkByScheduledClasses(
-        currentDate: OffsetDateTime,
-        room: RoomV2?,
-        timeSlot: TimeSlot
-    ): Color? {
+    private fun checkByScheduledClasses(currentDate: OffsetDateTime, room: RoomV2?, timeSlot: TimeSlot): Color? {
         val dayOfWeek = currentDate.dayOfWeek
         val daySchedule = room?.roomAvailabilitySchedule?.find { it.day.dayOfWeek == dayOfWeek }
 
         return if (daySchedule != null) {
             val timeSlotAvailability =
                 daySchedule.timeSlots.find { it.timeSlot == timeSlot }?.isAvailable
-            Log.d(
-                "RoomDetailsViewModel",
-                "Day schedule found. Time slot availability: $timeSlotAvailability"
-            )
             if (timeSlotAvailability == true) Color(0xFFA9A9A9) else null
         } else null
     }
 
-    private fun checkByAlreadyReservedTimeSlots(
-        room: RoomV2?,
-        timeSlot: TimeSlot,
-        currentDate: OffsetDateTime
-    ): Color {
+    private fun checkByAlreadyReservedTimeSlots(room: RoomV2?, timeSlot: TimeSlot, currentDate: OffsetDateTime): Color {
         val isUnavailable = _reservationList.value.any { reservation ->
                 reservation.getVenue().any { it == room } &&
                         reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
                         isReservationTimeSlotUnavailable(reservation, timeSlot, currentDate)
             }
-            Log.d("RoomDetailsViewModel", "No day schedule found. Reservation list checked. Is unavailable: $isUnavailable")
 
         return if (isUnavailable) indicatorColorRed else Color.Transparent
     }
@@ -155,8 +143,6 @@ class RoomDetailsViewModel : ViewModel() {
         val endHour = reservation.getActivityDateTime().endDate.hour
         val reservationTimeSlots = TimeSlot.getTimeSlotsInRange(startHour - 7, endHour - 7)
 
-        Log.d("RoomDetailsViewModel", "Checking time slot availability: startHour=$startHour, endHour=$endHour, reservationTimeSlots=$reservationTimeSlots")
-
         return reservationTimeSlots.contains(timeSlot) && isDateWithinReservationRange(date, reservation)
     }
 
@@ -164,9 +150,8 @@ class RoomDetailsViewModel : ViewModel() {
         val startDate = reservation.getActivityDateTime().startDate.toLocalDate()
         val endDate = reservation.getActivityDateTime().endDate.toLocalDate()
         val currentDate = date.toLocalDate()
-
         val isWithinRange = !currentDate.isBefore(startDate) && !currentDate.isAfter(endDate)
-        Log.d("RoomDetailsViewModel", "Checking date within range: date=$date, startDate=$startDate, endDate=$endDate, isWithinRange=$isWithinRange")
+
         return isWithinRange
     }
 }
