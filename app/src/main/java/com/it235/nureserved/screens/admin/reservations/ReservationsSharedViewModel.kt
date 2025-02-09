@@ -27,12 +27,18 @@ class ReservationsSharedViewModel : ViewModel() {
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
     init {
         loadReservations()
     }
 
-    private fun loadReservations() {
+    private fun loadReservations(isRefreshing: Boolean = false) {
         viewModelScope.launch {
+            _isLoading.value = true
+            if (isRefreshing) _isRefreshing.value = true
+
             ReservationManagerAdmin.retrieveReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("ReservationsSharedViewModel", "Loaded reservations: ${_reservationList.value.size}")
@@ -46,9 +52,14 @@ class ReservationsSharedViewModel : ViewModel() {
                 _reservationHistory.value = getReservationsListHistory()
                 Log.d("ReservationsSharedViewModel", "Reservation history: ${_reservationHistory.value.size}")
 
+                if (isRefreshing) _isRefreshing.value = false
                 _isLoading.value = false
             }
         }
+    }
+
+    fun refreshData() {
+        loadReservations(isRefreshing = true)
     }
 
     fun updateReservationList() {

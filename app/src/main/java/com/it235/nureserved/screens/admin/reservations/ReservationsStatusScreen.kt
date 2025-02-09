@@ -33,6 +33,8 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -80,6 +82,8 @@ fun ReservationStatusScreen(
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val isLoadingData by sharedViewModel.isLoading.collectAsState()
     val sheetState = rememberModalBottomSheetState()
+    val isRefreshing by sharedViewModel.isRefreshing.collectAsState()
+    val refreshState = rememberPullToRefreshState()
 
     // Resets the state of sheet when viewModel.setShowBottomSheet(false) is
     // called  on dismissModalBottomSheet() to avoid triggering weird movement
@@ -139,13 +143,40 @@ fun ReservationStatusScreen(
             }
         }
 
-        when(selectedTabIndex){
-            0 -> {
-                if (isLoadingData) {
-                    LoadingIndicator()
-                } else {
-                    if (approvedReservations.isEmpty()) {
-                        EmptyListComposable("No active reservations")
+        PullToRefreshBox(
+            onRefresh = { sharedViewModel.refreshData() },
+            isRefreshing = isRefreshing,
+            state = refreshState
+        ) {
+            when(selectedTabIndex){
+                0 -> {
+                    if (isLoadingData) {
+                        LoadingIndicator()
+                    } else {
+                        if (approvedReservations.isEmpty()) {
+                            EmptyListComposable("No active reservations")
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ){
+                                items(approvedReservations) { reservation ->
+                                    ReservationCard(
+                                        reservation = reservation,
+                                        onClick = {
+                                            viewModel.setSelectedReservation(it)
+                                            viewModel.setShowBottomSheet(true)
+                                        })
+                                }
+                            }
+                        }
+                    }
+                }
+                1 -> {
+                    if (pendingReservations.isEmpty()) {
+                        EmptyListComposable("No pending reservations")
                     } else {
                         LazyColumn(
                             modifier = Modifier
@@ -153,36 +184,15 @@ fun ReservationStatusScreen(
                                 .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ){
-                            items(approvedReservations) { reservation ->
+                            items(pendingReservations) { reservation ->
                                 ReservationCard(
                                     reservation = reservation,
                                     onClick = {
                                         viewModel.setSelectedReservation(it)
                                         viewModel.setShowBottomSheet(true)
-                                    })
+                                    }
+                                )
                             }
-                        }
-                    }
-                }
-            }
-            1 -> {
-                if (pendingReservations.isEmpty()) {
-                    EmptyListComposable("No pending reservations")
-                } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ){
-                        items(pendingReservations) { reservation ->
-                            ReservationCard(
-                                reservation = reservation,
-                                onClick = {
-                                    viewModel.setSelectedReservation(it)
-                                    viewModel.setShowBottomSheet(true)
-                                }
-                            )
                         }
                     }
                 }
