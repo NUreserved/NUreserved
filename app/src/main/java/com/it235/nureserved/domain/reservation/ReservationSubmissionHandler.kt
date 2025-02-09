@@ -2,7 +2,6 @@ package com.it235.nureserved.domain.reservation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.utils.convertHourString
 import com.it235.nureserved.utils.convertSelectedTime

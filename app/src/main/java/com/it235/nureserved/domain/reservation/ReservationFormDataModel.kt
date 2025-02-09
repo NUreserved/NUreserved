@@ -1,7 +1,7 @@
 package com.it235.nureserved.domain.reservation
 
-import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms_v2.RoomV2
+import java.time.LocalTime
 import java.time.OffsetDateTime
 
 class ReservationFormDataV2(
@@ -113,3 +113,10 @@ enum class TransactionStatus(val value: String) {
     PENDING("Pending"),
     DECLINED("Declined"),
 }
+
+data class ActivityDate (
+    val startDate: OffsetDateTime,
+    val endDate: OffsetDateTime,
+    val startTime: LocalTime,
+    val endTime: LocalTime
+)
