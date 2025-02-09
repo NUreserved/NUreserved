@@ -225,13 +225,14 @@ private fun DropdownTextField(
                     tint = white3
                 )
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = white5,
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = white5,
+                focusedContainerColor = white5,
                 focusedTextColor = white3,
                 unfocusedTextColor = white3,
                 cursorColor = white3,
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             ),
             supportingText = {
                 if(showSupportText){

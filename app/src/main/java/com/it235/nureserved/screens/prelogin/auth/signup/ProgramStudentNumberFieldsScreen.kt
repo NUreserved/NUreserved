@@ -255,13 +255,14 @@ private fun DropdownTextField(
                     }
                 }
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = white5,
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = white5,
+                focusedContainerColor = white5,
                 focusedTextColor = white3,
                 unfocusedTextColor = white3,
                 cursorColor = white3,
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             ),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
