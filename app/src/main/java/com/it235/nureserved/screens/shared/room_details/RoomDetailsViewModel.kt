@@ -42,19 +42,30 @@ class RoomDetailsViewModel : ViewModel() {
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
     init {
         loadReservations()
     }
 
-    private fun loadReservations() {
+    private fun loadReservations(isRefreshing: Boolean = false) {
         viewModelScope.launch {
+            _isLoading.value = true
+            if (isRefreshing) _isRefreshing.value = true
+
             ReservationManager.retrieveReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("RoomDetailsViewModel", "Loaded reservations: ${_reservationList.value.size}")
 
+                if (isRefreshing) _isRefreshing.value = false
                 _isLoading.value = false
             }
         }
+    }
+
+    fun refreshData() {
+        loadReservations(isRefreshing = true)
     }
 
     private fun getListOfDates(): List<String> {

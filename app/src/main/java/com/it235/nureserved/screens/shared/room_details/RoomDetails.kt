@@ -26,6 +26,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -115,6 +117,7 @@ private fun TopBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavCo
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RoomDetailsContent(
     innerPaddingValues: PaddingValues,
@@ -123,20 +126,26 @@ private fun RoomDetailsContent(
     viewModel: RoomDetailsViewModel) {
 
     val room = roomId?.toIntOrNull()?.let { getRoomById(it) }
+    val refreshState = rememberPullToRefreshState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
 
-    LazyColumn(
-        modifier = Modifier
-            .padding(innerPaddingValues)
+    PullToRefreshBox(
+        onRefresh = { viewModel.refreshData() },
+        isRefreshing = isRefreshing,
+        state = refreshState,
+        modifier = Modifier.padding(innerPaddingValues)
     ) {
-        item {
-            RoomImage(room)
-            Spacer(modifier = Modifier.size(16.dp))
-            RoomDetails(room)
-            Spacer(modifier = Modifier.size(32.dp))
-            ScheduleGrid(viewModel, room)
-            Spacer(modifier = Modifier.size(
-                if (isUser == true) 88.dp else 16.dp)
-            )
+        LazyColumn {
+            item {
+                RoomImage(room)
+                Spacer(modifier = Modifier.size(16.dp))
+                RoomDetails(room)
+                Spacer(modifier = Modifier.size(32.dp))
+                ScheduleGrid(viewModel, room)
+                Spacer(modifier = Modifier.size(
+                    if (isUser == true) 88.dp else 16.dp)
+                )
+            }
         }
     }
 }

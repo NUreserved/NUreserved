@@ -2,6 +2,7 @@ package com.it235.nureserved.screens.admin.reservations
 
 import ReservationFormDetailsScreen
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,8 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -62,68 +65,82 @@ fun ReservationsHistoryScreen(
     val selectedReservation by viewModel.selectedReservation.collectAsState()
     val sheetState = rememberModalBottomSheetState()
     val isLoadingData by sharedViewModel.isLoading.collectAsState()
+    val isRefreshing by sharedViewModel.isRefreshing.collectAsState()
+    val refreshState = rememberPullToRefreshState()
 
-    Column(
-        modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize()
+    PullToRefreshBox(
+        onRefresh = { sharedViewModel.refreshData() },
+        isRefreshing = isRefreshing,
+        state = refreshState,
+        modifier = Modifier.padding(innerPadding).fillMaxSize()
     ) {
-        if (showBottomSheet && selectedReservation != null) {
-            ModalBottomSheet(
-                onDismissRequest = {
-                    viewModel.setShowBottomSheet(false)
-                },
-                sheetState = sheetState
-            ) {
-                Column (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .verticalScroll(rememberScrollState())
+        Column {
+            if (showBottomSheet && selectedReservation != null) {
+                ModalBottomSheet(
+                    onDismissRequest = {
+                        viewModel.setShowBottomSheet(false)
+                    },
+                    sheetState = sheetState
                 ) {
-                    ReservationFormDetailsScreen(
-                        reservationData = selectedReservation!!,
-                        dismissModalBottomSheet = {
-                            viewModel.setShowBottomSheet(false)
-                        }
-                    )
+                    Column (
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        ReservationFormDetailsScreen(
+                            reservationData = selectedReservation!!,
+                            dismissModalBottomSheet = {
+                                viewModel.setShowBottomSheet(false)
+                            }
+                        )
+                    }
                 }
             }
-        }
 
-        if (isLoadingData) {
-            LoadingIndicator()
-        } else {
-            if (reservationHistory.isEmpty()) {
-                EmptyListComposable("No history recorded")
+            if (isLoadingData) {
+                LoadingIndicator()
             } else {
-                val filteredList = sharedViewModel.getFilteredList()
-                val filterStatus by sharedViewModel.filterStatus.collectAsState()
-
-                ReservationFilterChipComposable(filterStatus, sharedViewModel)
-
-                if (filteredList.isEmpty()) {
-                    EmptyListComposable("No history recorded")
-                } else {
-                    LazyColumn(
+                if (reservationHistory.isEmpty()) {
+                    LazyColumn (
                         modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                            .fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        items(filteredList) { reservation ->
-                            ReservationCard(
-                                reservation = reservation,
-                                onClick = {
-                                    viewModel.setSelectedReservation(it)
-                                    viewModel.setShowBottomSheet(true)
-                                }
-                            )
+                        item { EmptyListComposable("No history recorded") }
+                    }
+                } else {
+                    val filteredList = sharedViewModel.getFilteredList()
+                    val filterStatus by sharedViewModel.filterStatus.collectAsState()
+
+                    ReservationFilterChipComposable(filterStatus, sharedViewModel)
+
+                    if (filteredList.isEmpty()) {
+                        EmptyListComposable("No history recorded")
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        ) {
+                            items(filteredList) { reservation ->
+                                ReservationCard(
+                                    reservation = reservation,
+                                    onClick = {
+                                        viewModel.setSelectedReservation(it)
+                                        viewModel.setShowBottomSheet(true)
+                                    }
+                                )
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+
 }
 
 @Composable

@@ -34,6 +34,9 @@ class ReservationsViewModel : ViewModel() {
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
     val tabs = listOf("Active", "Pending", "History")
 
     private val _selectedReservation = MutableStateFlow<ReservationFormDataV2?>(null)
@@ -43,8 +46,11 @@ class ReservationsViewModel : ViewModel() {
         loadReservations()
     }
 
-    private fun loadReservations() {
+    private fun loadReservations(isRefreshing: Boolean = false) {
         viewModelScope.launch {
+            _isLoading.value = true
+            if (isRefreshing) _isRefreshing.value = true
+
             ReservationManager.retrieveReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("ReservationsViewModel", "Loaded reservations: ${_reservationList.value.size}")
@@ -58,9 +64,14 @@ class ReservationsViewModel : ViewModel() {
                 _reservationHistory.value = getReservationsListHistory()
                 Log.d("ReservationsViewModel", "Reservation history: ${_reservationHistory.value.size}")
 
+                if (isRefreshing) _isRefreshing.value = false
                 _isLoading.value = false
             }
         }
+    }
+
+    fun refreshData() {
+        loadReservations(isRefreshing = true)
     }
 
     private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
@@ -83,7 +94,7 @@ class ReservationsViewModel : ViewModel() {
             .filter { reservation ->
                 (reservation.getLatestTransactionDetails()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
                         ||
-                (reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED || reservation.getLatestTransactionDetails()?.status == TransactionStatus.CANCELLED)
+                        (reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED || reservation.getLatestTransactionDetails()?.status == TransactionStatus.CANCELLED)
             }
             .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
