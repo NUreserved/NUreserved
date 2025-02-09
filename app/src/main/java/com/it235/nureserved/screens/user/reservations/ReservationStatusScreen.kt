@@ -50,8 +50,12 @@ import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.screens.shared.LoadingIndicator
+import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.utils.rescalePicture
 import com.it235.nureserved.ui.theme.darkGray2
+import com.it235.nureserved.ui.theme.indicatorColorGreen
+import com.it235.nureserved.ui.theme.indicatorColorOrange
+import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.white4
 import java.time.format.DateTimeFormatter
 
@@ -220,9 +224,9 @@ private fun ReservationCard(
             .clickable { onClick(reservation)},
         colors = CardDefaults.cardColors(
             containerColor = when (reservation.getLatestTransactionDetails()!!.status) {
-                TransactionStatus.PENDING -> Color(0xFFd69c40)
-                TransactionStatus.APPROVED -> Color(0xFF49844b)
-                else -> Color(0xFF49844b)
+                TransactionStatus.PENDING -> indicatorColorOrange
+                TransactionStatus.APPROVED -> indicatorColorGreen
+                TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> indicatorColorRed
             },
             contentColor = Color(0xFFFEFEFE)
         )

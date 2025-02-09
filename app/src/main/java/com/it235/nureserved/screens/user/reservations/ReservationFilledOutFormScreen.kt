@@ -201,75 +201,81 @@ private fun RequestStatusComposable(
     clipboardManager: ClipboardManager?,
     context: Context?
 ) {
+    val status = reservationData.getLatestTransactionDetails()!!.status
+    
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
-            Icon (
-                modifier = Modifier
-                    .size(48.dp),
-                painter = painterResource(id = R.drawable.check_circle),
-                contentDescription = "Form icon",
-                tint = indicatorColorGreen
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Request approved",
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "#${reservationData.getTrackingNumber()}",
-                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-                modifier = Modifier.clickable {
-                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-                }
-            )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-            Icon (
-                modifier = Modifier
-                    .size(48.dp),
-                painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                contentDescription = "Form icon",
-                tint = indicatorColorOrange
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Request pending",
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "#${reservationData.getTrackingNumber()}",
-                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-                modifier = Modifier.clickable {
-                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-                }
-            )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
-            Icon (
-                modifier = Modifier
-                    .size(48.dp),
-                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-                contentDescription = "Form icon",
-                tint = indicatorColorRed
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Request declined",
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "#${reservationData.getTrackingNumber()}",
-                color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-                modifier = Modifier.clickable {
-                    clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                    Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-                }
-            )
+        when (status) {
+            TransactionStatus.APPROVED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.check_circle),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorGreen
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request approved",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.PENDING -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorOrange
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request pending",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request declined",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
         }
     }
 }
@@ -278,6 +284,8 @@ private fun RequestStatusComposable(
 private fun ReservationStatusComposable(
     reservationData: ReservationFormDataV2,
 ) {
+    val status = reservationData.getLatestTransactionDetails()!!.status
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -288,84 +296,97 @@ private fun ReservationStatusComposable(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorGreen, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = TransactionStatus.APPROVED.value,
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
+            when (status) {
+                TransactionStatus.APPROVED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorGreen, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.APPROVED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
                     )
-                )
-            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorOrange, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = TransactionStatus.PENDING.value,
-                    style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        lineHeight = 16.sp
+                }
+                TransactionStatus.PENDING -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorOrange, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.PENDING.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
                     )
-                )
-            } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
-                Row(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .background(color = indicatorColorRed, shape = CircleShape),
-                ) {}
-                Spacer(modifier = Modifier.size(8.dp))
+                }
+                TransactionStatus.DECLINED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorRed, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.DECLINED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
+                    )
+                }
+                TransactionStatus.CANCELLED -> {
+                    Row(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(color = indicatorColorRed, shape = CircleShape),
+                    ) {}
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = TransactionStatus.CANCELLED.value,
+                        style = LocalTextStyle.current.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            lineHeight = 16.sp
+                        )
+                    )
+                }
+            }
+        }
+
+        when (status) {
+            TransactionStatus.APPROVED -> {
                 Text(
-                    text = TransactionStatus.DECLINED.value,
+                    modifier = Modifier
+                        .padding(end = 16.dp),
+                    text = getTimeLeft(reservationData.getActivityDateTime()),
                     style = LocalTextStyle.current.copy(
-                        fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         lineHeight = 16.sp
                     )
                 )
             }
-        }
-
-        if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.APPROVED) {
-            Text(
-                modifier = Modifier
-                    .padding(end = 16.dp),
-                text = getTimeLeft(reservationData.getActivityDateTime()),
-                style = LocalTextStyle.current.copy(
-                    fontSize = 13.sp,
-                    lineHeight = 16.sp
+            TransactionStatus.PENDING, TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+                Text(
+                    modifier = Modifier
+                        .padding(end = 16.dp),
+                    text = getTimeLapseString(reservationData.getDateFilled()),
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp
+                    )
                 )
-            )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
-            Text(
-                modifier = Modifier
-                    .padding(end = 16.dp),
-                text = getTimeLapseString(reservationData.getDateFilled()),
-                style = LocalTextStyle.current.copy(
-                    fontSize = 13.sp,
-                    lineHeight = 16.sp
-                )
-            )
-        } else if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
-            Text(
-                modifier = Modifier
-                    .padding(end = 16.dp),
-                text = getTimeLapseString(reservationData.getDateFilled()),
-                style = LocalTextStyle.current.copy(
-                    fontSize = 13.sp,
-                    lineHeight = 16.sp
-                )
-            )
+            }
         }
     }
 }
