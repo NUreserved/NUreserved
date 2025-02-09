@@ -2,9 +2,6 @@ package com.it235.nureserved.screens.admin.floor_rooms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.it235.nureserved.domain.rooms.FloorLocation
-import com.it235.nureserved.domain.rooms.Room
-import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import com.it235.nureserved.domain.rooms_v2.RoomV2
 import kotlinx.coroutines.flow.MutableStateFlow
