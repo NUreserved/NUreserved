@@ -175,23 +175,27 @@ fun ReservationStatusScreen(
                     }
                 }
                 1 -> {
-                    if (pendingReservations.isEmpty()) {
-                        EmptyListComposable("No pending reservations")
+                    if (isLoadingData) {
+                        LoadingIndicator()
                     } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ){
-                            items(pendingReservations) { reservation ->
-                                ReservationCard(
-                                    reservation = reservation,
-                                    onClick = {
-                                        viewModel.setSelectedReservation(it)
-                                        viewModel.setShowBottomSheet(true)
-                                    }
-                                )
+                        if (pendingReservations.isEmpty()) {
+                            EmptyListComposable("No pending reservations")
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ){
+                                items(pendingReservations) { reservation ->
+                                    ReservationCard(
+                                        reservation = reservation,
+                                        onClick = {
+                                            viewModel.setSelectedReservation(it)
+                                            viewModel.setShowBottomSheet(true)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
