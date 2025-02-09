@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.rooms_v2.RoomV2
@@ -47,7 +48,7 @@ class RoomDetailsViewModel : ViewModel() {
 
     private fun loadReservations() {
         viewModelScope.launch {
-            ReservationManagerAdmin.retrieveReservations { reservations ->
+            ReservationManager.retrieveReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("RoomDetailsViewModel", "Loaded reservations: ${_reservationList.value.size}")
 
