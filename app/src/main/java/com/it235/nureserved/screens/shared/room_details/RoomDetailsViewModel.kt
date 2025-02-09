@@ -1,11 +1,11 @@
 package com.it235.nureserved.screens.shared.room_details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.it235.nureserved.domain.rooms_v2.RoomV2
+import com.it235.nureserved.domain.rooms_v2.TimeSlot
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import okhttp3.internal.format
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -72,5 +72,11 @@ class RoomDetailsViewModel : ViewModel() {
         _dateRange.value = getDateRange()
         _listOfDates.value = getListOfDates()
         _isDateAtLeastOneDayAhead.value = isDateAtLeastOneDayAhead()
+    }
+
+    fun getTimeSlotAvailability(room: RoomV2?, date: OffsetDateTime, timeSlot: TimeSlot): Boolean {
+        val dayOfWeek = date.dayOfWeek
+        val daySchedule = room?.roomAvailabilitySchedule?.find { it.day.dayOfWeek == dayOfWeek }
+        return daySchedule?.timeSlots?.find { it.timeSlot == timeSlot }?.isAvailable ?: true
     }
 }
