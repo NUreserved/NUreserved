@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -53,6 +54,7 @@ import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
+import com.it235.nureserved.screens.shared.LoadingIndicator
 import com.it235.nureserved.screens.shared.RoomReservationFAB
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.indicatorColorRed
@@ -235,23 +237,35 @@ private fun RoomDetails(
 }
 
 @Composable
-private fun ScheduleGridV2(
-    viewModel: RoomDetailsViewModel,
-    room: RoomV2?) {
-    Column (
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        DateNavigator(viewModel)
-        Spacer(modifier = Modifier.size(16.dp))
-        Row {
-            timeIndicator()
-            Spacer(modifier = Modifier.size(8.dp))
-            TimeGridV2(viewModel, room)
+private fun ScheduleGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
+    val isLoading by viewModel.isLoading.collectAsState()
+
+    if (isLoading) {
+        Column (
+            modifier = Modifier
+                .heightIn(min = 0.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            LoadingIndicator()
+            Spacer(modifier = Modifier.size(16.dp))
+            Text("Loading schedule viewer")
         }
-        Spacer(modifier = Modifier.size(32.dp))
-        ColorLegend()
+    } else {
+        Column (
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            DateNavigator(viewModel)
+            Spacer(modifier = Modifier.size(16.dp))
+            Row {
+                timeIndicator()
+                Spacer(modifier = Modifier.size(8.dp))
+                TimeGridV2(viewModel, room)
+            }
+            Spacer(modifier = Modifier.size(32.dp))
+            ColorLegend()
+        }
     }
 }
 
