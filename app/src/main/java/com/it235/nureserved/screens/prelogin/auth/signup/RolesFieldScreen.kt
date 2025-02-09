@@ -257,7 +257,6 @@ private fun DropdownTextField(
 
         ExposedDropdownMenu(
             modifier = Modifier
-                .fillMaxWidth()
                 .background(white5)
                 .heightIn(max = 200.dp)
                 .verticalScroll(rememberScrollState()),
