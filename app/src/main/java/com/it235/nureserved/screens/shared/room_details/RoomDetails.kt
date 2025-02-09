@@ -272,7 +272,7 @@ private fun TimeGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 for (timeSlot in com.it235.nureserved.domain.rooms_v2.TimeSlot.entries) {
-                    val isAvailable = viewModel.getTimeSlotAvailability(room, date, timeSlot)
+                    val color = viewModel.getColorIfUnavailable(room, date, timeSlot)
 
                     Box(
                         modifier = Modifier
@@ -281,9 +281,7 @@ private fun TimeGridV2(viewModel: RoomDetailsViewModel, room: RoomV2?) {
                                 width = 0.5.dp,
                                 color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                             )
-                            .background(
-                                if (isAvailable) Color.Transparent else Color(0xFFA9A9A9)
-                            )
+                            .background(color)
                     )
                 }
             }

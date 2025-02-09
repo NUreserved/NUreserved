@@ -1,15 +1,25 @@
 package com.it235.nureserved.screens.shared.room_details
 
+import android.util.Log
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
+import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.domain.rooms_v2.TimeSlot
+import com.it235.nureserved.ui.theme.indicatorColorRed
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 class RoomDetailsViewModel : ViewModel() {
+    private val _reservationList = MutableStateFlow<List<ReservationFormDataV2>>(emptyList())
+
     private val _dateOne = MutableStateFlow<OffsetDateTime>(OffsetDateTime.now())
     val dateOne: StateFlow<OffsetDateTime> = _dateOne.asStateFlow()
 
@@ -27,6 +37,24 @@ class RoomDetailsViewModel : ViewModel() {
 
     private val _isDateAtLeastOneDayAhead = MutableStateFlow(isDateAtLeastOneDayAhead())
     val isDateAtLeastOneDayAhead: StateFlow<Boolean> = _isDateAtLeastOneDayAhead.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    init {
+        loadReservations()
+    }
+
+    private fun loadReservations() {
+        viewModelScope.launch {
+            ReservationManagerAdmin.retrieveReservations { reservations ->
+                _reservationList.value = reservations
+                Log.d("RoomDetailsViewModel", "Loaded reservations: ${_reservationList.value.size}")
+
+                _isLoading.value = false
+            }
+        }
+    }
 
     private fun getListOfDates(): List<String> {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM d")
@@ -74,9 +102,70 @@ class RoomDetailsViewModel : ViewModel() {
         _isDateAtLeastOneDayAhead.value = isDateAtLeastOneDayAhead()
     }
 
-    fun getTimeSlotAvailability(room: RoomV2?, date: OffsetDateTime, timeSlot: TimeSlot): Boolean {
-        val dayOfWeek = date.dayOfWeek
+    fun getColorIfUnavailable(
+        room: RoomV2?,
+        currentDate: OffsetDateTime,
+        currentTimeSlot: TimeSlot
+    ): Color {
+        val color = checkByScheduledClasses(currentDate, room, currentTimeSlot)
+
+        if (color != null) {
+            return color
+        }
+        return checkByAlreadyReservedTimeSlots(room, currentTimeSlot, currentDate)
+    }
+
+    private fun checkByScheduledClasses(
+        currentDate: OffsetDateTime,
+        room: RoomV2?,
+        timeSlot: TimeSlot
+    ): Color? {
+        val dayOfWeek = currentDate.dayOfWeek
         val daySchedule = room?.roomAvailabilitySchedule?.find { it.day.dayOfWeek == dayOfWeek }
-        return daySchedule?.timeSlots?.find { it.timeSlot == timeSlot }?.isAvailable ?: true
+
+        return if (daySchedule != null) {
+            val timeSlotAvailability =
+                daySchedule.timeSlots.find { it.timeSlot == timeSlot }?.isAvailable
+            Log.d(
+                "RoomDetailsViewModel",
+                "Day schedule found. Time slot availability: $timeSlotAvailability"
+            )
+            if (timeSlotAvailability == true) Color(0xFFA9A9A9) else null
+        } else null
+    }
+
+    private fun checkByAlreadyReservedTimeSlots(
+        room: RoomV2?,
+        timeSlot: TimeSlot,
+        currentDate: OffsetDateTime
+    ): Color {
+        val isUnavailable = _reservationList.value.any { reservation ->
+                reservation.getVenue().any { it == room } &&
+                        reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
+                        isReservationTimeSlotUnavailable(reservation, timeSlot, currentDate)
+            }
+            Log.d("RoomDetailsViewModel", "No day schedule found. Reservation list checked. Is unavailable: $isUnavailable")
+
+        return if (isUnavailable) indicatorColorRed else Color.Transparent
+    }
+
+    private fun isReservationTimeSlotUnavailable(reservation: ReservationFormDataV2, timeSlot: TimeSlot, date: OffsetDateTime): Boolean {
+        val startHour = reservation.getActivityDateTime().startDate.hour
+        val endHour = reservation.getActivityDateTime().endDate.hour
+        val reservationTimeSlots = TimeSlot.getTimeSlotsInRange(startHour - 7, endHour - 7)
+
+        Log.d("RoomDetailsViewModel", "Checking time slot availability: startHour=$startHour, endHour=$endHour, reservationTimeSlots=$reservationTimeSlots")
+
+        return reservationTimeSlots.contains(timeSlot) && isDateWithinReservationRange(date, reservation)
+    }
+
+    private fun isDateWithinReservationRange(date: OffsetDateTime, reservation: ReservationFormDataV2): Boolean {
+        val startDate = reservation.getActivityDateTime().startDate.toLocalDate()
+        val endDate = reservation.getActivityDateTime().endDate.toLocalDate()
+        val currentDate = date.toLocalDate()
+
+        val isWithinRange = !currentDate.isBefore(startDate) && !currentDate.isAfter(endDate)
+        Log.d("RoomDetailsViewModel", "Checking date within range: date=$date, startDate=$startDate, endDate=$endDate, isWithinRange=$isWithinRange")
+        return isWithinRange
     }
 }

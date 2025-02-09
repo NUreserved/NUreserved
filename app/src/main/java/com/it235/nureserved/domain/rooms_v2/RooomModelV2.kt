@@ -51,7 +51,13 @@ enum class TimeSlot(val displayName: String) {
     SEVEN_PM("7 pm"),
     EIGHT_PM("8 pm"),
     NINE_PM("9 pm"),
-    TEN_PM("10 pm")
+    TEN_PM("10 pm");
+
+    companion object {
+        fun getTimeSlotsInRange(startHour: Int, endHour: Int): List<TimeSlot> {
+            return entries.filter { it.ordinal in startHour until endHour }
+        }
+    }
 }
 
 enum class Days(val dayOfWeek: DayOfWeek) {
