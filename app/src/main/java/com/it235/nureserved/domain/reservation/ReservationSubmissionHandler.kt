@@ -4,11 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.utils.convertHourString
+import com.it235.nureserved.utils.convertSelectedTime
 import com.it235.nureserved.utils.generateReservationNumber
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.time.LocalTime
 import java.time.OffsetDateTime
-import java.time.ZoneOffset
 import java.util.Date
 
 class ReservationSubmissionHandler : ViewModel() {
@@ -20,6 +21,8 @@ class ReservationSubmissionHandler : ViewModel() {
     private val _titleOfTheActivity = MutableStateFlow<String?>(null)
     private val _fromDatesOfActivity = MutableStateFlow<Date?>(null)
     private val _toDatesOfActivity = MutableStateFlow<Date?>(null)
+    private val _selectedFromTimeOption = MutableStateFlow<String?>(null)
+    private val _selectedToTimeOption = MutableStateFlow<String?>(null)
     private val _expectedNumberOfAttendees = MutableStateFlow<String?>(null)
     private val _selectedRooms = MutableStateFlow<List<Room>?>(null)
 
@@ -32,6 +35,8 @@ class ReservationSubmissionHandler : ViewModel() {
         titleOfTheActivity: String,
         fromDatesOfActivity: Date,
         toDatesOfActivity: Date,
+        selectedFromTimeOption: String,
+        selectedToTimeOption: String,
         expectedNumberOfAttendees: String,
         selectedRooms: List<Room>
     ) {
@@ -59,6 +64,12 @@ class ReservationSubmissionHandler : ViewModel() {
         _toDatesOfActivity.value = toDatesOfActivity
         Log.d("ReservationDataController", "Stored toDatesOfActivity: ${_toDatesOfActivity.value}")
 
+        _selectedFromTimeOption.value = selectedFromTimeOption
+        Log.d("ReservationDataController", "Stored selectedFromTimeOption: ${_selectedFromTimeOption.value}")
+
+        _selectedToTimeOption.value = selectedToTimeOption
+        Log.d("ReservationDataController", "Stored selectedToTimeOption: ${_selectedToTimeOption.value}")
+
         _expectedNumberOfAttendees.value = expectedNumberOfAttendees
         Log.d("ReservationDataController", "Stored expectedNumberOfAttendees: ${_expectedNumberOfAttendees.value}")
 
@@ -72,10 +83,10 @@ class ReservationSubmissionHandler : ViewModel() {
             activityTitle = _titleOfTheActivity.value!!,
             dateFilled = OffsetDateTime.now(),
             activityDateTime = ActivityDate(
-                startDate = _fromDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.ofHours(8)),
-                endDate = _toDatesOfActivity.value!!.toInstant().atOffset(ZoneOffset.ofHours(8)),
-                startTime = LocalTime.of(8, 0),
-                endTime = LocalTime.of(12, 0)
+                startDate = convertSelectedTime(_fromDatesOfActivity.value!!, _selectedFromTimeOption.value!!),
+                endDate = convertSelectedTime(_toDatesOfActivity.value!!, _selectedToTimeOption.value!!),
+                startTime = LocalTime.of(convertHourString(_selectedFromTimeOption.value!!), 0),
+                endTime = LocalTime.of(convertHourString(_selectedToTimeOption.value!!), 0)
             ),
             venue = _selectedRooms.value!!,
             expectedAttendees = 15,
