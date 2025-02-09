@@ -106,6 +106,37 @@ class ReservationManagerAdmin {
             }
         }
 
+        fun cancelReservation(reservation: ReservationFormDataV2, remarks: String) {
+            getFullName { name ->
+                reservation.addTransactionDetails(
+                    TransactionDetails(
+                        status = TransactionStatus.CANCELLED,
+                        processedBy = name,
+                        eventDate = OffsetDateTime.now(),
+                        remarks = remarks,
+                    )
+                )
+
+                val data = mapTransactionDetails(reservation)
+
+                val db = FirebaseFirestore.getInstance()
+                Log.d("ReservationManagerAdmin", "Updating reservation transaction history")
+
+                db.collection("reservations").document(reservation.getTrackingNumber())
+                    .update(mapOf(
+                        "transactionHistory" to data,
+                        "status" to reservation.getLatestTransactionDetails()!!.status,
+                        "processedBy" to reservation.getLatestTransactionDetails()!!.processedBy
+                    ))
+                    .addOnSuccessListener {
+                        Log.d("ReservationManagerAdmin", "Transaction history updated successfully")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("ReservationManagerAdmin", "Error updating transaction history", e)
+                    }
+            }
+        }
+
         fun declineReservation(reservation: ReservationFormDataV2, remarks: String) {
             getFullName { name ->
                 reservation.addTransactionDetails(
