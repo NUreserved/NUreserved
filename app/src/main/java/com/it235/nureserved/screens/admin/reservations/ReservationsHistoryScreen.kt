@@ -153,7 +153,7 @@ private fun ReservationFilterChipComposable(
                     if (filterStatus == TransactionStatus.APPROVED) sharedViewModel.setFilterStatus(null)
                     else sharedViewModel.setFilterStatus(TransactionStatus.APPROVED)
                 },
-                label = { Text("Approved") }
+                label = { Text(TransactionStatus.APPROVED.value) }
             )
             FilterChip(
                 selected = filterStatus == TransactionStatus.DECLINED,
@@ -161,7 +161,15 @@ private fun ReservationFilterChipComposable(
                     if (filterStatus == TransactionStatus.DECLINED) sharedViewModel.setFilterStatus(null)
                     else sharedViewModel.setFilterStatus(TransactionStatus.DECLINED)
                 },
-                label = { Text("Declined") }
+                label = { Text(TransactionStatus.DECLINED.value) }
+            )
+            FilterChip(
+                selected = filterStatus == TransactionStatus.CANCELLED,
+                onClick = {
+                    if (filterStatus == TransactionStatus.CANCELLED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(TransactionStatus.CANCELLED)
+                },
+                label = { Text(TransactionStatus.CANCELLED.value) }
             )
         }
     }
