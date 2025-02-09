@@ -72,10 +72,7 @@ import com.it235.nureserved.R
 import com.it235.nureserved.ScreenRoutes
 import com.it235.nureserved.screens.shared.RoomReservationFAB
 import com.it235.nureserved.screens.shared.Space
-import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
-import com.it235.nureserved.domain.rooms.areAllTimeSlotsUnavailable
-import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.domain.rooms_v2.FloorLocation
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import com.it235.nureserved.domain.rooms_v2.RoomV2

@@ -46,10 +46,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.it235.nureserved.R
-import com.it235.nureserved.domain.rooms.TimeSlot
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2.getRoomById
 import com.it235.nureserved.domain.rooms_v2.RoomV2
+import com.it235.nureserved.domain.rooms_v2.TimeSlot
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption

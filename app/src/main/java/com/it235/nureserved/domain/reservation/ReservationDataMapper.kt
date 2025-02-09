@@ -1,8 +1,6 @@
 package com.it235.nureserved.domain.reservation
 
 import android.util.Log
-import com.it235.nureserved.domain.rooms.ActivityDate
-import com.it235.nureserved.domain.rooms.roomList
 import com.it235.nureserved.domain.rooms_v2.RoomDataV2
 import java.time.LocalTime
 import java.time.OffsetDateTime
