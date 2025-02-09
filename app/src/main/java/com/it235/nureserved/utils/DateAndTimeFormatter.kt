@@ -3,7 +3,9 @@ package com.it235.nureserved.utils
 import com.it235.nureserved.domain.rooms.ActivityDate
 import java.time.Duration
 import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 fun formatDateFilled(dateTime: OffsetDateTime): String {
     val formattedDateTime = DateTimeFormatter.ofPattern("MMM d, yyyy")
@@ -89,4 +91,31 @@ fun formatHistoryDate(date: OffsetDateTime): String {
     val timeFormatter = DateTimeFormatter.ofPattern("h:mm a")
 
     return "${date.format(dateFormatter)}, ${date.format(timeFormatter)}"
+}
+
+fun convertSelectedTime(date: Date, startTime: String): OffsetDateTime {
+    val dateAsOffsetDateTimeWithOffset = date.toInstant().atOffset(ZoneOffset.ofHours(8))
+    val dateWithAttachedTime = dateAsOffsetDateTimeWithOffset.withHour(convertHourString(startTime))
+
+    return dateWithAttachedTime
+}
+
+fun convertHourString(time: String): Int {
+    return when (time) {
+        "8 AM" -> 8
+        "9 AM" -> 9
+        "10 AM" -> 10
+        "11 AM" -> 11
+        "12 PM" -> 12
+        "1 PM" -> 13
+        "2 PM" -> 14
+        "3 PM" -> 15
+        "4 PM" -> 16
+        "5 PM" -> 17
+        "6 PM" -> 18
+        "7 PM" -> 19
+        "8 PM" -> 20
+        "9 PM" -> 21
+        else -> throw IllegalArgumentException("Invalid time format")
+    }
 }

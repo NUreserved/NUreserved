@@ -830,6 +830,8 @@ fun RoomReservationForm(
                     titleOfTheActivity.value,
                     fromDatesOfActivity,
                     toDatesOfActivity,
+                    selectedFromTimeOption,
+                    selectedToTimeOption,
                     expectedNumberOfAttendees.value,
                     selectedRooms
                 )
