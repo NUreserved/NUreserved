@@ -48,7 +48,12 @@ fun formatActivityDateAndTIme(activityDate: ActivityDate): String {
         }
     }
 
-    return date
+    val time = when {
+        startDate.hour == endDate.hour -> { startDate.format(timeFormat) }
+        else -> { "${startDate.format(timeFormat)} - ${endDate.format(timeFormat)}" }
+    }
+
+    return "${date}\n${time}"
 }
 
 fun getTimeLeft(activityDate: ActivityDate): String {
