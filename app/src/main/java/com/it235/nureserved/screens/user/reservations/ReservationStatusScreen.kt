@@ -89,7 +89,7 @@ fun RoomReservationStatusScreen(
             sheetState.hide()
         }
     }
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
