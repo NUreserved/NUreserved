@@ -24,80 +24,80 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 )
             )
@@ -112,67 +112,67 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 )
             )
@@ -187,76 +187,76 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 )
             )
@@ -271,66 +271,66 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -351,72 +351,72 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
                     )
                 )
             )
@@ -431,79 +431,79 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 )
             )
@@ -518,65 +518,65 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 )
             )
@@ -591,51 +591,51 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -656,52 +656,52 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -722,54 +722,54 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false)
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true)
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false)
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true)
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
                     )
                 )
             )
@@ -784,59 +784,59 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 )
             )
@@ -851,41 +851,41 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -912,27 +912,27 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -944,24 +944,24 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 )
             )
@@ -976,9 +976,9 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -990,25 +990,25 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1035,51 +1035,51 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1112,25 +1112,25 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
@@ -1151,65 +1151,65 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
@@ -1236,49 +1236,49 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 )
             )
@@ -1293,17 +1293,17 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1314,19 +1314,19 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
@@ -1348,53 +1348,53 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1415,44 +1415,44 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1472,71 +1472,71 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
 
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 )
             )
@@ -1551,65 +1551,65 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 )
             )
@@ -1624,20 +1624,20 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
                     )
                 ),
                 DaySchedule(
@@ -1653,9 +1653,9 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1688,22 +1688,22 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1730,56 +1730,56 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1806,22 +1806,22 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
                     )
                 ),
                 DaySchedule(
@@ -1832,19 +1832,19 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
                     )
                 )
             )
@@ -1859,69 +1859,69 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -1936,63 +1936,63 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -2007,67 +2007,67 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 )
             )
@@ -2082,57 +2082,57 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
                     )
                 )
             )
@@ -2147,58 +2147,58 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 )
             )
@@ -2213,55 +2213,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -2276,61 +2276,61 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
 
                     )
                 )
@@ -2346,63 +2346,63 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 )
             )
@@ -2417,63 +2417,63 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 )
             )
@@ -2489,59 +2489,59 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 )
             )
@@ -2556,60 +2556,60 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -2624,63 +2624,63 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 )
             )
@@ -2695,56 +2695,56 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -2759,57 +2759,57 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 )
             )
@@ -2824,58 +2824,58 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -2890,57 +2890,57 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
 
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
                     )
                 ),
             )
@@ -2955,55 +2955,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false)
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true)
                     )
                 )
             )
@@ -3018,56 +3018,56 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3082,54 +3082,54 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3144,55 +3144,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 )
             )
@@ -3207,55 +3207,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
                     )
                 )
             )
@@ -3270,59 +3270,59 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3337,58 +3337,58 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3403,60 +3403,60 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 )
             )
@@ -3471,59 +3471,59 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.SEVEN_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.SEVEN_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3538,55 +3538,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3601,59 +3601,59 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
                     )
                 )
             )
@@ -3668,57 +3668,57 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TWO_PM, false),
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TWO_PM, true),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_PM, true),
                     )
                 )
             )
@@ -3733,55 +3733,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3796,54 +3796,54 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3859,55 +3859,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 )
             )
@@ -3922,55 +3922,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.ONE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.ONE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.THREE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.NINE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.THREE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.NINE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 )
             )
@@ -3985,55 +3985,55 @@ object RoomDataV2 {
                 DaySchedule(
                     day = Days.MONDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.TUESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.WEDNESDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.THURSDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.TWELVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.TWELVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.FRIDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.SEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.EIGHT_AM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.SIX_PM, false),
+                        TimeSlotAvailability(TimeSlot.SEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.EIGHT_AM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.SIX_PM, true),
                     )
                 ),
                 DaySchedule(
                     day = Days.SATURDAY,
                     timeSlots = listOf(
-                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, false),
-                        TimeSlotAvailability(TimeSlot.FOUR_PM, false),
-                        TimeSlotAvailability(TimeSlot.FIVE_PM, false),
-                        TimeSlotAvailability(TimeSlot.TEN_PM, false),
+                        TimeSlotAvailability(TimeSlot.ELEVEN_AM, true),
+                        TimeSlotAvailability(TimeSlot.FOUR_PM, true),
+                        TimeSlotAvailability(TimeSlot.FIVE_PM, true),
+                        TimeSlotAvailability(TimeSlot.TEN_PM, true),
                     )
                 )
             )
