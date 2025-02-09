@@ -2,6 +2,7 @@ package com.it235.nureserved.domain.reservation
 
 import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -10,7 +11,7 @@ class ReservationFormDataV2(
     private var activityTitle: String,
     private var dateFilled: OffsetDateTime,
     private var activityDateTime: ActivityDate,
-    private var venue: List<Room>,
+    private var venue: List<RoomV2>,
     private var expectedAttendees: Int,
     private var requesterLastName: String,
     private var requesterMiddleName: String,
@@ -39,8 +40,8 @@ class ReservationFormDataV2(
         activityDateTime = value
     }
 
-    fun getVenue(): List<Room> = venue
-    fun setVenue(value: List<Room>) {
+    fun getVenue(): List<RoomV2> = venue
+    fun setVenue(value: List<RoomV2>) {
         venue = value
     }
 

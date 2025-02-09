@@ -181,9 +181,9 @@ private fun Main() {
                 composable(
                     route = "${ScreenRoutes.FloorRooms.route}/{floorName}",
                     arguments = listOf(navArgument("floorName") { type = NavType.EnumType(
-                        FloorLocation::class.java) })
+                        com.it235.nureserved.domain.rooms_v2.FloorLocation::class.java) })
                 ) { backStackEntry ->
-                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as FloorLocation
+                    val floorName = backStackEntry.arguments?.getSerializable("floorName") as com.it235.nureserved.domain.rooms_v2.FloorLocation
                     val viewModel: FloorRoomsViewModel = viewModel()
                     FloorRoomsScreen(navController, floorName, viewModel)
                 }

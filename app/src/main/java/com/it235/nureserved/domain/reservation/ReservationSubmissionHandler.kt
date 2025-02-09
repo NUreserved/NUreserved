@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.it235.nureserved.domain.rooms.ActivityDate
 import com.it235.nureserved.domain.rooms.Room
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.utils.convertHourString
 import com.it235.nureserved.utils.convertSelectedTime
 import com.it235.nureserved.utils.generateReservationNumber
@@ -24,7 +25,7 @@ class ReservationSubmissionHandler : ViewModel() {
     private val _selectedFromTimeOption = MutableStateFlow<String?>(null)
     private val _selectedToTimeOption = MutableStateFlow<String?>(null)
     private val _expectedNumberOfAttendees = MutableStateFlow<String?>(null)
-    private val _selectedRooms = MutableStateFlow<List<Room>?>(null)
+    private val _selectedRooms = MutableStateFlow<List<RoomV2>?>(null)
 
     fun storeValues(
         nameOfOrgDeptColg: String,
@@ -38,7 +39,7 @@ class ReservationSubmissionHandler : ViewModel() {
         selectedFromTimeOption: String,
         selectedToTimeOption: String,
         expectedNumberOfAttendees: String,
-        selectedRooms: List<Room>
+        selectedRooms: List<RoomV2>
     ) {
         _nameOfOrgDeptColg.value = nameOfOrgDeptColg
         Log.d("ReservationSubmissionHandler", "Stored nameOfOrgDeptColg: ${_nameOfOrgDeptColg.value}")

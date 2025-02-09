@@ -82,6 +82,8 @@ import com.it235.nureserved.domain.rooms.FloorLocation
 import com.it235.nureserved.domain.rooms.Room
 import com.it235.nureserved.domain.auth.User
 import com.it235.nureserved.domain.rooms.roomList
+import com.it235.nureserved.domain.rooms_v2.RoomDataV2
+import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.font.poppinsFamily
 import com.it235.nureserved.ui.theme.brandColorBlue
 import com.it235.nureserved.ui.theme.darkGray
@@ -276,10 +278,10 @@ fun DatePickerTextField(
 
 @Composable
 fun FilterChipComposable(
-    room: Room,
-    selectedRooms: List<Room>,
-    onRoomSelected: (Room) -> Unit,
-    onRoomDeselected: (Room) -> Unit
+    room: RoomV2,
+    selectedRooms: List<RoomV2>,
+    onRoomSelected: (RoomV2) -> Unit,
+    onRoomDeselected: (RoomV2) -> Unit
 ) {
     val isSelected = selectedRooms.contains(room)
 
@@ -322,7 +324,7 @@ fun OutlineTextFieldComposable(
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
     readOnly: Boolean = false,
-    selectedRooms: List<Room> = listOf(),
+    selectedRooms: List<RoomV2> = listOf(),
     textStyle: TextStyle? = null,
     onValueChange: (String) -> Unit,
 ){
@@ -581,7 +583,7 @@ fun InputAndLabelLayout(
     dimension: String,
     showSuppText: MutableState<Boolean> = remember { mutableStateOf(false) },
     isValidInput: MutableState<Boolean> = remember { mutableStateOf(false) },
-    selectedRooms: List<Room> = listOf(),
+    selectedRooms: List<RoomV2> = listOf(),
 ){
     if(dimension == "col"){
         Column(
@@ -713,7 +715,7 @@ fun RoomReservationForm(
     navController: NavController,
     reservationSubmissionHandler: ReservationSubmissionHandler
 ){
-    var selectedRooms by rememberSaveable { mutableStateOf(listOf<Room>()) }
+    var selectedRooms by rememberSaveable { mutableStateOf(listOf<RoomV2>()) }
     val focusManager = LocalFocusManager.current
 
     var venueShowSuppTxt by remember { mutableStateOf(false) }
@@ -749,7 +751,7 @@ fun RoomReservationForm(
     var istoDatesOfActivitySelected by rememberSaveable { mutableStateOf(false) }
     val toDatesOfActivityShowModal = remember { mutableStateOf(false) }
 
-    var currentFloorLocation by rememberSaveable { mutableStateOf<FloorLocation?>(null) }
+    var currentFloorLocation by rememberSaveable { mutableStateOf<com.it235.nureserved.domain.rooms_v2.FloorLocation?>(null) }
 
     var user by remember { mutableStateOf<User?>(null) }
     var loadingUserData by remember { mutableStateOf(true)}
@@ -1149,7 +1151,7 @@ fun RoomReservationForm(
                             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                         ) {
 
-                            roomList.forEachIndexed { index, room ->
+                            RoomDataV2.rooms.forEachIndexed { index, room ->
                                 if (currentFloorLocation == null) {
                                     FilterChipsLabel(label = room.location.value)
                                 } else {
@@ -1170,7 +1172,7 @@ fun RoomReservationForm(
                                     }
                                 )
 
-                                if (index < roomList.size - 1 && room.location != roomList[index + 1].location) {
+                                if (index < RoomDataV2.rooms.size - 1 && room.location != RoomDataV2.rooms[index + 1].location) {
                                     FilterChipsCategoryDivider()
                                 }
 
