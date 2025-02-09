@@ -154,7 +154,14 @@ fun ReservationStatusScreen(
                         LoadingIndicator()
                     } else {
                         if (approvedReservations.isEmpty()) {
-                            EmptyListComposable("No active reservations")
+                            LazyColumn (
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item { EmptyListComposable("No active reservations") }
+                            }
                         } else {
                             LazyColumn(
                                 modifier = Modifier
@@ -179,7 +186,14 @@ fun ReservationStatusScreen(
                         LoadingIndicator()
                     } else {
                         if (pendingReservations.isEmpty()) {
-                            EmptyListComposable("No pending reservations")
+                            LazyColumn (
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item { EmptyListComposable("No pending reservations") }
+                            }
                         } else {
                             LazyColumn(
                                 modifier = Modifier

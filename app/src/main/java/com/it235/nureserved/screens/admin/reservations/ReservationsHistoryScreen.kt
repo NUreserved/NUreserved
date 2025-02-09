@@ -2,6 +2,7 @@ package com.it235.nureserved.screens.admin.reservations
 
 import ReservationFormDetailsScreen
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -100,7 +101,14 @@ fun ReservationsHistoryScreen(
                 LoadingIndicator()
             } else {
                 if (reservationHistory.isEmpty()) {
-                    EmptyListComposable("No history recorded")
+                    LazyColumn (
+                        modifier = Modifier
+                            .fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        item { EmptyListComposable("No history recorded") }
+                    }
                 } else {
                     val filteredList = sharedViewModel.getFilteredList()
                     val filterStatus by sharedViewModel.filterStatus.collectAsState()
