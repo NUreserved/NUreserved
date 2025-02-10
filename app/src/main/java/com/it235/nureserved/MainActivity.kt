@@ -4,10 +4,13 @@ import AuthService.Companion.checkIfAdmin
 import AuthService.Companion.isVerified
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.Manifest
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -21,6 +24,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -30,6 +34,7 @@ import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
 import com.it235.nureserved.domain.reservation.notification.ReservationNotificationManager
+import com.it235.nureserved.permission.checkAndRequestNotificationPermission
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
@@ -63,7 +68,11 @@ class MainActivity : ComponentActivity() {
             Main()
         }
 
-        reservationNotificationManager = ReservationNotificationManager(this)
+        checkAndRequestNotificationPermission(this) { isGranted ->
+            if (isGranted) {
+                reservationNotificationManager = ReservationNotificationManager(this)
+            }
+        }
     }
 
     override fun onDestroy() {
