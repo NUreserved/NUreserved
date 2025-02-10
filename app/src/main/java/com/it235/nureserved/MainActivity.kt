@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -28,6 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
+import com.it235.nureserved.domain.reservation.notification.ReservationNotificationManager
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
@@ -51,12 +53,23 @@ import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
+    // Initialize the reservation notification manager
+    private lateinit var reservationNotificationManager: ReservationNotificationManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             Main()
         }
+
+        reservationNotificationManager = ReservationNotificationManager(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        reservationNotificationManager.stopListener()
     }
 }
 
