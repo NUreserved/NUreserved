@@ -37,7 +37,7 @@ data class DaySchedule(
 
 data class TimeSlotAvailability(
     val timeSlot: TimeSlot,
-    val isAvailable: Boolean
+    val isOccupied: Boolean
 )
 
 enum class TimeSlot(val displayName: String) {

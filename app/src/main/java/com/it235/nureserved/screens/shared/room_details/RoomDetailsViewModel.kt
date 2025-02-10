@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.ReservationManager
-import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
 import com.it235.nureserved.domain.reservation.TransactionStatus
 import com.it235.nureserved.domain.rooms_v2.RoomV2
 import com.it235.nureserved.domain.rooms_v2.TimeSlot
@@ -134,7 +133,7 @@ class RoomDetailsViewModel : ViewModel() {
 
         return if (daySchedule != null) {
             val timeSlotAvailability =
-                daySchedule.timeSlots.find { it.timeSlot == timeSlot }?.isAvailable
+                daySchedule.timeSlots.find { it.timeSlot == timeSlot }?.isOccupied
             if (timeSlotAvailability == true) Color(0xFFA9A9A9) else null
         } else null
     }
