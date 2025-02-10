@@ -24,6 +24,7 @@ class ReservationNotificationManager(val context: Context) {
     private val userId = auth.currentUser?.uid
     private val db = FirebaseFirestore.getInstance()
     private var listenerRegistration: ListenerRegistration? = null
+    private val notificationChannelName = "reservation_notification_channel"
 
     init {
         createNotificationChannel()
@@ -75,7 +76,7 @@ class ReservationNotificationManager(val context: Context) {
             context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val builder = NotificationCompat.Builder(context, "reservation_approval_channel")
+        val builder = NotificationCompat.Builder(context, notificationChannelName)
             .setSmallIcon(R.drawable.logo)
             .setContentTitle(title)
             .setContentText(message)
@@ -98,7 +99,7 @@ class ReservationNotificationManager(val context: Context) {
     }
 
     private fun createNotificationChannel() {
-        val name = "reservation_notification_channel"
+        val name = notificationChannelName
         val descriptionText = null
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel("reservation_notification_channel", name, importance).apply {
