@@ -21,17 +21,29 @@ import com.it235.nureserved.domain.reservation.TransactionStatus
 
 class ReservationNotificationManager(val context: Context) {
     private val auth = FirebaseAuth.getInstance()
-    private val userId = auth.currentUser?.uid
+    private var userId = auth.currentUser?.uid
     private val db = FirebaseFirestore.getInstance()
     private var listenerRegistration: ListenerRegistration? = null
     private val notificationChannelName = "reservation_notification_channel"
 
     init {
         createNotificationChannel()
-        listenForReservationUpdates()
+
+        auth.addAuthStateListener { auth ->
+            Log.d("ReservationNotificationManager", "Auth state changed: ${auth.currentUser?.uid}")
+            userId = auth.currentUser?.uid
+            if (userId != null) {
+                listenForReservationUpdates()
+            }
+        }
+
+        if (userId != null) {
+            listenForReservationUpdates()
+        }
     }
 
     private fun listenForReservationUpdates() {
+        Log.d("ReservationNotificationManager", "Listening for reservation updates for user: $userId")
         listenerRegistration = db.collection("reservations")
             .whereEqualTo("userId", userId)
             .addSnapshotListener { snapshot, e ->
@@ -41,6 +53,7 @@ class ReservationNotificationManager(val context: Context) {
                 }
 
                 if (snapshot != null && !snapshot.isEmpty) {
+                    Log.d("ReservationNotificationManager", "Received reservation updates: ${snapshot.documents.size} documents")
                     for (documentChange in snapshot.documentChanges) {
                         if (documentChange.type == DocumentChange.Type.MODIFIED) {
                             val newData = documentChange.document.data
@@ -49,6 +62,7 @@ class ReservationNotificationManager(val context: Context) {
 
                             if (!transactionHistory.isNullOrEmpty() && !trackingNumber.isNullOrEmpty()) {
                                 val latestStatus = transactionHistory[0]["status"]
+                                Log.d("ReservationNotificationManager", "Reservation $trackingNumber status changed to $latestStatus")
 
                                 // Trigger local notification based on the latest status
                                 when (latestStatus) {
@@ -60,6 +74,8 @@ class ReservationNotificationManager(val context: Context) {
                             }
                         }
                     }
+                } else {
+                    Log.d("ReservationNotificationManager", "No reservation updates found.")
                 }
             }
     }
