@@ -52,9 +52,9 @@ class ReservationNotificationManager(val context: Context) {
 
                                 // Trigger local notification based on the latest status
                                 when (latestStatus) {
-                                    TransactionStatus.APPROVED.value -> showNotification("Reservation approved", "Your reservation with a #${trackingNumber} has been approved.", trackingNumber)
-                                    TransactionStatus.DECLINED.value -> showNotification("Reservation declined", "Your reservation with a #${trackingNumber} has been declined.", trackingNumber)
-                                    TransactionStatus.CANCELLED.value -> showNotification("Reservation cancelled", "Your reservation with a #${trackingNumber} has been cancelled.", trackingNumber)
+                                    TransactionStatus.APPROVED.toString() -> showNotification("Reservation approved", "Your reservation with a #${trackingNumber} has been approved.", trackingNumber)
+                                    TransactionStatus.DECLINED.toString() -> showNotification("Reservation declined", "Your reservation with a #${trackingNumber} has been declined.", trackingNumber)
+                                    TransactionStatus.CANCELLED.toString() -> showNotification("Reservation cancelled", "Your reservation with a #${trackingNumber} has been cancelled.", trackingNumber)
                                     else -> showNotification("Reservation reversed", "Your reservation with a #${trackingNumber} status has changed.", trackingNumber)
                                 }
                             }
