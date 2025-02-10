@@ -12,10 +12,15 @@ data class RoomV2(
 )
 
 enum class RoomType(val value: String) {
+    AVR("AVR"),
+    CHEMISTRY_LABORATORY("Chemistry Laboratory"),
+    CIRCUIT_LABORATORY("Circuit Laboratory"),
     CLASSROOM("Classroom"),
     COMPUTER_LABORATORY("Computer Laboratory"),
     DRAFTING_ROOM("Drafting Room"),
-    PHYSICS_LABORATORY("Physics Laboratory")
+    PHYSICS_LABORATORY("Physics Laboratory"),
+    PSYCHOLOGY_LAB("Psychology Laboratory"),
+    ZOOLOGY_LAB("Zoology laboratory"),
 }
 
 enum class FloorLocation(val value: String) {
@@ -32,7 +37,7 @@ data class DaySchedule(
 
 data class TimeSlotAvailability(
     val timeSlot: TimeSlot,
-    val isAvailable: Boolean
+    val isOccupied: Boolean
 )
 
 enum class TimeSlot(val displayName: String) {
