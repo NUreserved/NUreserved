@@ -36,10 +36,6 @@ class ReservationNotificationManager(val context: Context) {
                 listenForReservationUpdates()
             }
         }
-
-        if (userId != null) {
-            listenForReservationUpdates()
-        }
     }
 
     private fun listenForReservationUpdates() {
