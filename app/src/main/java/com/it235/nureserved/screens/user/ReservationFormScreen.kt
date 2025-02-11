@@ -1,5 +1,6 @@
 package com.it235.nureserved.screens.user
 
+import AuthService.Companion.getRole
 import AuthService.Companion.getUserData
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -724,7 +725,7 @@ fun RoomReservationForm(
     val nameOfOrgShowSuppTxt = remember { mutableStateOf(false) }
     val isNameOfOrgValid = rememberSaveable { mutableStateOf(false) }
 
-    val position = rememberSaveable { mutableStateOf("") }
+    var position = rememberSaveable { mutableStateOf("") }
     val positionShowSuppTxt = remember { mutableStateOf(false) }
     val isPositionValid = rememberSaveable { mutableStateOf(false) }
 
@@ -757,6 +758,10 @@ fun RoomReservationForm(
         getUserData { fetchedUser ->
             user = fetchedUser
             loadingUserData = false
+        }
+
+        getRole { fetchedRole ->
+            position.value = fetchedRole ?: ""
         }
     }
 
