@@ -101,9 +101,10 @@ class ReservationsViewModel : ViewModel() {
     private fun getReservationsListHistory(): List<ReservationFormDataV2> {
         return _reservationList.value
             .filter { reservation ->
-                (reservation.getLatestTransactionDetails()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
+                val status = reservation.getLatestTransactionDetails()?.status
+                (status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
                         ||
-                        (reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED || reservation.getLatestTransactionDetails()?.status == TransactionStatus.CANCELLED)
+                (status == TransactionStatus.DECLINED || status == TransactionStatus.CANCELLED || status == TransactionStatus.USER_CANCELLED)
             }
             .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
