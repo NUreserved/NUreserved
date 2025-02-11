@@ -161,6 +161,7 @@ fun RoomReservationStatusScreen(
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .fillMaxHeight()
                                     .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
@@ -194,6 +195,7 @@ fun RoomReservationStatusScreen(
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .fillMaxHeight()
                                     .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ){
@@ -227,6 +229,7 @@ fun RoomReservationStatusScreen(
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .fillMaxHeight()
                                     .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ){

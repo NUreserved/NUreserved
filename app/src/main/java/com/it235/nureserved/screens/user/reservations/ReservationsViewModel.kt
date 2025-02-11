@@ -61,7 +61,7 @@ class ReservationsViewModel : ViewModel() {
             _isLoading.value = true
             if (isRefreshing) _isRefreshing.value = true
 
-            delay(5L)
+            delay(50L)
 
             ReservationManager.retrieveUserReservations { reservations ->
                 _reservationList.value = reservations
