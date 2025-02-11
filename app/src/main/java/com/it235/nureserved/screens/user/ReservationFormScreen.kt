@@ -762,6 +762,7 @@ fun RoomReservationForm(
 
         getRole { fetchedRole ->
             position.value = fetchedRole ?: ""
+            positionShowSuppTxt.value = true
         }
     }
 
