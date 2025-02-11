@@ -116,11 +116,19 @@ fun ReservationsHistoryScreen(
                     ReservationFilterChipComposable(filterStatus, sharedViewModel)
 
                     if (filteredList.isEmpty()) {
-                        EmptyListComposable("No history recorded")
+                        LazyColumn (
+                            modifier = Modifier
+                                .fillMaxHeight(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            item { EmptyListComposable("No history recorded") }
+                        }
                     } else {
                         LazyColumn(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
                             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
                         ) {
