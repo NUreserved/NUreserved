@@ -1,5 +1,6 @@
 package com.it235.nureserved.domain.reservation.notification
 
+import AuthService.Companion.checkIfAdmin
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -33,7 +34,9 @@ class ReservationNotificationManager(val context: Context) {
             Log.d("ReservationNotificationManager", "Auth state changed: ${auth.currentUser?.uid}")
             userId = auth.currentUser?.uid
             if (userId != null) {
-                listenForReservationUpdates()
+                checkIfAdmin { admin ->
+                    if (!admin) { listenForReservationUpdates() }
+                }
             }
         }
     }
