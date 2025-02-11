@@ -70,20 +70,20 @@ class ReservationNotificationManager(val context: Context) {
                                     TransactionStatus.APPROVED.toString() ->
                                         showNotification(
                                             title = "Reservation approved",
-                                            message = "Your reservation with a #${trackingNumber} has been approved.",
+                                            message = "Your reservation with a tracking number #${trackingNumber} has been approved.",
                                             trackingNumber = trackingNumber,
                                             transactionStatus = TransactionStatus.APPROVED
                                         )
                                     TransactionStatus.DECLINED.toString() ->
                                         showNotification(
                                             title = "Reservation declined",
-                                            message = "Your reservation with a #${trackingNumber} has been declined.",
+                                            message = "Your reservation with a tracking number #${trackingNumber} has been declined.",
                                             trackingNumber = trackingNumber,
                                             transactionStatus = TransactionStatus.DECLINED
                                         )
                                     TransactionStatus.CANCELLED.toString() ->
                                         showNotification("Reservation cancelled",
-                                            message = "Your reservation with a #${trackingNumber} has been cancelled.",
+                                            message = "Your reservation with a tracking number #${trackingNumber} has been cancelled.",
                                             trackingNumber = trackingNumber,
                                             transactionStatus = TransactionStatus.CANCELLED
                                         )
@@ -91,7 +91,7 @@ class ReservationNotificationManager(val context: Context) {
                                     else ->
                                         showNotification(
                                             title = "Reservation status changed",
-                                            message = "Your reservation with a #${trackingNumber} status has changed.",
+                                            message = "Your reservation with a tracking number #${trackingNumber} status has changed.",
                                             trackingNumber = trackingNumber,
                                             transactionStatus = null
                                         )
