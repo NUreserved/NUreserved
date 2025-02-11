@@ -69,16 +69,20 @@ class ReservationsSharedViewModel : ViewModel() {
     }
 
     private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
-        return _reservationList.value.filter { reservation ->
-            reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
+        return _reservationList.value
+            .filter { reservation ->
+                reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
                     reservation.getActivityDateTime().endDate.isAfter(OffsetDateTime.now())
-        }
+            }
+            .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
 
     private fun getPendingReservationsList(): List<ReservationFormDataV2> {
-        return _reservationList.value.filter { reservation ->
-            reservation.getLatestTransactionDetails()?.status == TransactionStatus.PENDING
-        }
+        return _reservationList.value
+            .filter { reservation ->
+                reservation.getLatestTransactionDetails()?.status == TransactionStatus.PENDING
+            }
+            .sortedByDescending { it.getDateFilled() }
     }
 
     // It displays the reservations that was approved in the past, OR reservations

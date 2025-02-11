@@ -287,6 +287,20 @@ private fun ReservationCard(
                         )
                     }
 
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
+                        Text(
+                            text = "Requested: ${
+                                reservation.getDateFilled().format(
+                                    DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
+                                )
+                            }",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                lineHeight = 16.sp
+                            )
+                        )
+                    }
+
                     Text(
                         text = "Requested by: ${reservation.getRequesterFullName()}",
                         style = LocalTextStyle.current.copy(
