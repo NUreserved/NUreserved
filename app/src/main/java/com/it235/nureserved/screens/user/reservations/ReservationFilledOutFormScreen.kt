@@ -245,7 +245,7 @@ private fun ConfirmReservationCancelDialog(
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
-        title = { Text(text = "Confirm decline?") },
+        title = { Text(text = "Confirm cancellation?") },
         icon = {
             Icon(
                 painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
@@ -667,7 +667,7 @@ private fun CancelSectionComposable(viewModel: ReservationsViewModel) {
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ) {
         Text(
-            text = "Add remarks",
+            text = "Cancel your request",
             style = LocalTextStyle.current.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
