@@ -613,7 +613,8 @@ private fun RequestTimelineHistory(
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            lineHeight = 20.sp
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
