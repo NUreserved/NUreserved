@@ -53,7 +53,7 @@ class RoomDetailsViewModel : ViewModel() {
             _isLoading.value = true
             if (isRefreshing) _isRefreshing.value = true
 
-            ReservationManager.retrieveReservations { reservations ->
+            ReservationManager.retrieveAllReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("RoomDetailsViewModel", "Loaded reservations: ${_reservationList.value.size}")
 
