@@ -205,7 +205,7 @@ fun ReservationFormDetailsScreen(
             }
 
             when (status) {
-                TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+                TransactionStatus.DECLINED, TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Column (
@@ -367,7 +367,7 @@ private fun ReservationStatusComposable(reservationData: ReservationFormDataV2) 
                         )
                     )
                 }
-                TransactionStatus.CANCELLED -> {
+                TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> {
                     Row(
                         modifier = Modifier
                             .size(16.dp)
@@ -421,95 +421,123 @@ private fun RequestStatusComposable(
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if (status == TransactionStatus.APPROVED) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.check_circle),
-               contentDescription = "Form icon",
-               tint = indicatorColorGreen
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request approved",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       } else if (status == TransactionStatus.PENDING) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-               contentDescription = "Form icon",
-               tint = indicatorColorOrange
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request pending",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       } else if (status == TransactionStatus.DECLINED) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-               contentDescription = "Form icon",
-               tint = indicatorColorRed
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request declined",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       } else if (status == TransactionStatus.CANCELLED) {
-           Icon (
-               modifier = Modifier
-                   .size(48.dp),
-               painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
-               contentDescription = "Form icon",
-               tint = indicatorColorRed
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Request cancelled",
-               style = MaterialTheme.typography.titleLarge,
-           )
-           Spacer(modifier = Modifier.height(4.dp))
-           Text(
-               text = "#${reservationData.getTrackingNumber()}",
-               color = if (isSystemInDarkTheme()) textColor4 else textColor3,
-               modifier = Modifier.clickable {
-                   clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
-                   Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
-               }
-           )
-       }
+        when (status) {
+            TransactionStatus.APPROVED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.check_circle),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorGreen
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request approved",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.PENDING -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.pending_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorOrange
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request pending",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.DECLINED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request declined",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.CANCELLED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request cancelled",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.USER_CANCELLED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request cancelled by user",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+        }
     }
 }
 
@@ -550,7 +578,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> indicatorColorOrange
                             TransactionStatus.APPROVED -> indicatorColorGreen
                             TransactionStatus.DECLINED -> indicatorColorRed
-                            TransactionStatus.CANCELLED -> indicatorColorRed
+                            TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -578,10 +606,12 @@ private fun RequestTimelineHistory(
                             TransactionStatus.APPROVED -> "Request has been approved"
                             TransactionStatus.DECLINED -> "Request has been declined"
                             TransactionStatus.CANCELLED -> "Request has been cancelled"
+                            TransactionStatus.USER_CANCELLED -> "Request has been cancelled by user"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            lineHeight = 20.sp
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
@@ -598,7 +628,7 @@ private fun RequestTimelineHistory(
                             text = when (approvalDetail.status) {
                                 TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
                                 TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
-                                TransactionStatus.PENDING -> ""
+                                TransactionStatus.PENDING, TransactionStatus.USER_CANCELLED -> ""
                                 TransactionStatus.CANCELLED -> "Cancelled by: ${approvalDetail.processedBy}"
                             },
                             style = LocalTextStyle.current.copy(

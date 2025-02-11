@@ -86,25 +86,26 @@ class ReservationsSharedViewModel : ViewModel() {
     private fun getReservationsListHistory(): List<ReservationFormDataV2> {
         return _reservationList.value
             .filter { reservation ->
-                (reservation.getLatestTransactionDetails()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
+                val status = reservation.getLatestTransactionDetails()?.status
+                (status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
                         ||
-                (reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED || reservation.getLatestTransactionDetails()?.status == TransactionStatus.CANCELLED)
+                (status == TransactionStatus.DECLINED || status == TransactionStatus.CANCELLED || status == TransactionStatus.USER_CANCELLED)
             }
             .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
 
-    private val _filterStatus = MutableStateFlow<TransactionStatus?>(null)
-    val filterStatus: StateFlow<TransactionStatus?> = _filterStatus.asStateFlow()
+    private val _filterStatus = MutableStateFlow<List<TransactionStatus>?>(null)
+    val filterStatus: StateFlow<List<TransactionStatus>?> = _filterStatus.asStateFlow()
 
     fun getFilteredList(): List<ReservationFormDataV2>{
         return getReservationsListHistory()
             .filter {
-                _filterStatus.value == null || it.getLatestTransactionDetails()?.status == _filterStatus.value
+                _filterStatus.value == null || _filterStatus.value!!.contains(it.getLatestTransactionDetails()?.status)
             }
 
     }
 
-    fun setFilterStatus(filterStatus: TransactionStatus?) {
+    fun setFilterStatus(filterStatus: List<TransactionStatus>?) {
         _filterStatus.value = filterStatus
     }
 }

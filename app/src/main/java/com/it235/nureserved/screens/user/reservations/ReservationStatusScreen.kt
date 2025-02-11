@@ -87,6 +87,7 @@ fun RoomReservationStatusScreen(
     LaunchedEffect(showBottomSheet) {
         if (!showBottomSheet) {
             sheetState.hide()
+            viewModel.updateReservationList()
         }
     }
 
@@ -257,7 +258,7 @@ private fun ReservationCard(
             containerColor = when (reservation.getLatestTransactionDetails()!!.status) {
                 TransactionStatus.PENDING -> indicatorColorOrange
                 TransactionStatus.APPROVED -> indicatorColorGreen
-                TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> indicatorColorRed
+                TransactionStatus.DECLINED, TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> indicatorColorRed
             },
             contentColor = Color(0xFFFEFEFE)
         )

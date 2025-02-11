@@ -19,14 +19,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -37,18 +46,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.it235.nureserved.R
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
+import com.it235.nureserved.domain.reservation.ReservationManager
+import com.it235.nureserved.domain.reservation.ReservationManagerAdmin
 import com.it235.nureserved.domain.reservation.TransactionDetails
 import com.it235.nureserved.domain.reservation.TransactionStatus
+import com.it235.nureserved.screens.admin.reservations.ReservationFormDetailsViewModel
 import com.it235.nureserved.ui.theme.darkGray
 import com.it235.nureserved.ui.theme.indicatorColorGreen
 import com.it235.nureserved.ui.theme.indicatorColorOrange
 import com.it235.nureserved.ui.theme.indicatorColorRed
 import com.it235.nureserved.ui.theme.textColor3
 import com.it235.nureserved.ui.theme.textColor4
+import com.it235.nureserved.ui.theme.white
 import com.it235.nureserved.ui.theme.white3
 import com.it235.nureserved.ui.theme.white5
 import com.it235.nureserved.utils.formatActivityDateAndTIme
@@ -61,10 +76,14 @@ import com.it235.nureserved.utils.getTimeLeft
 fun ReservationFilledOutFormScreen(
     reservationData: ReservationFormDataV2,
     dismissModalBottomSheet: () -> Unit,
+    viewModel: ReservationsViewModel = viewModel()
 ) {
     // Clipboard manager to handle copy functionality
     val clipboardManager = LocalClipboardManager.current
     val context = LocalContext.current
+    val showConfirmReservationCancelDialog by viewModel.showConfirmReservationCancelDialog.collectAsState()
+    val showCancelledReservationDialog by viewModel.showCancelledReservationDialog.collectAsState()
+
 
     Column (
         modifier = Modifier
@@ -188,11 +207,100 @@ fun ReservationFilledOutFormScreen(
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
                 RequestTimelineHistory(reservationData.getTransactionHistory())
+
+                if (reservationData.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    CancelSectionComposable(viewModel)
+                }
             }
 
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
+
+    if (showConfirmReservationCancelDialog) {
+        ConfirmReservationCancelDialog(
+            onDismiss = { viewModel.setShowConfirmReservationCancelDialog(false) },
+            showCancelledReservationDialog = { viewModel.setShowCancelledReservationDialog(true) }
+        )
+    }
+
+    if (showCancelledReservationDialog) {
+        CancelledReservationDialog(
+            onDismiss = {
+                viewModel.setShowCancelledReservationDialog(false)
+                dismissModalBottomSheet()
+            },
+            reservation = reservationData,
+            cancelReservation = { ReservationManager.cancelReservation(reservationData, viewModel.remarks.value) }
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ConfirmReservationCancelDialog(
+    onDismiss: () -> Unit,
+    showCancelledReservationDialog: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Confirm cancellation?") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Question mark icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Are you sure you want to cancel reservation? This action cannot be reversed once cancelled.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                showCancelledReservationDialog()
+            }) { Text("Confirm") }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }
+            ) { Text("Cancel") }
+        }
+    )
+}
+
+@Composable
+private fun CancelledReservationDialog(
+    onDismiss: () -> Unit,
+    reservation: ReservationFormDataV2,
+    cancelReservation: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "Reservation cancelled") },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Check or declined icon"
+            )
+        },
+        text = {
+            Text(
+                text = "Reservation #${reservation.getTrackingNumber()} has been cancelled. Please take note you can't reversed this and you have to create another request.",
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onDismiss()
+                cancelReservation()
+            }) {
+                Text("OK")
+            }
+        },
+    )
 }
 
 @Composable
@@ -253,7 +361,7 @@ private fun RequestStatusComposable(
                     }
                 )
             }
-            TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+            TransactionStatus.DECLINED -> {
                 Icon (
                     modifier = Modifier
                         .size(48.dp),
@@ -264,6 +372,52 @@ private fun RequestStatusComposable(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Request declined",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.CANCELLED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request cancelled",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "#${reservationData.getTrackingNumber()}",
+                    color = if (isSystemInDarkTheme()) textColor4 else textColor3,
+                    modifier = Modifier.clickable {
+                        clipboardManager!!.setText(AnnotatedString("#${reservationData.getTrackingNumber()}"))
+                        Toast.makeText(context, "Tracking number copied to clipboard.", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            TransactionStatus.USER_CANCELLED -> {
+                Icon (
+                    modifier = Modifier
+                        .size(48.dp),
+                    painter = painterResource(id = R.drawable.cancel_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                    contentDescription = "Form icon",
+                    tint = indicatorColorRed
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Request cancelled by user",
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
@@ -345,7 +499,7 @@ private fun ReservationStatusComposable(
                         )
                     )
                 }
-                TransactionStatus.CANCELLED -> {
+                TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> {
                     Row(
                         modifier = Modifier
                             .size(16.dp)
@@ -376,7 +530,7 @@ private fun ReservationStatusComposable(
                     )
                 )
             }
-            TransactionStatus.PENDING, TransactionStatus.DECLINED, TransactionStatus.CANCELLED -> {
+            TransactionStatus.PENDING, TransactionStatus.DECLINED, TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> {
                 Text(
                     modifier = Modifier
                         .padding(end = 16.dp),
@@ -427,7 +581,7 @@ private fun RequestTimelineHistory(
                             TransactionStatus.PENDING -> indicatorColorOrange
                             TransactionStatus.APPROVED -> indicatorColorGreen
                             TransactionStatus.DECLINED -> indicatorColorRed
-                            TransactionStatus.CANCELLED -> indicatorColorRed
+                            TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED -> indicatorColorRed
                         }
                         drawCircle(
                             color = circleColor
@@ -455,10 +609,12 @@ private fun RequestTimelineHistory(
                             TransactionStatus.APPROVED -> "Request has been approved"
                             TransactionStatus.DECLINED -> "Request has been declined"
                             TransactionStatus.CANCELLED -> "Request has been cancelled"
+                            TransactionStatus.USER_CANCELLED -> "Request has been cancelled by user"
                         },
                         style = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            lineHeight = 20.sp
                         ),
                         color = if (isSystemInDarkTheme()) white3 else darkGray
                     )
@@ -475,7 +631,7 @@ private fun RequestTimelineHistory(
                             text = when (approvalDetail.status) {
                                 TransactionStatus.APPROVED -> "Approved by: ${approvalDetail.processedBy}"
                                 TransactionStatus.DECLINED -> "Declined by: ${approvalDetail.processedBy}"
-                                TransactionStatus.PENDING -> ""
+                                TransactionStatus.PENDING, TransactionStatus.USER_CANCELLED -> ""
                                 TransactionStatus.CANCELLED -> "Cancelled by: ${approvalDetail.processedBy}"
                             },
                             style = LocalTextStyle.current.copy(
@@ -503,6 +659,51 @@ private fun RequestTimelineHistory(
         }
     }
 }
+
+@Composable
+private fun CancelSectionComposable(viewModel: ReservationsViewModel) {
+    Column (
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = "Cancel your request",
+            style = LocalTextStyle.current.copy(
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+        )
+        OutlinedTextField(
+            value = viewModel.remarks.collectAsState().value,
+            onValueChange = { viewModel.updateRemarks(it) },
+            label = { Text("Remarks") },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+        ) {
+            Button(
+                onClick = { viewModel.setShowConfirmReservationCancelDialog(true) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = indicatorColorRed,
+                    contentColor = white
+                ),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "Cancel",
+                    style = LocalTextStyle.current.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun HeadingComposable(

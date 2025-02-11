@@ -112,7 +112,8 @@ enum class TransactionStatus(val value: String) {
     APPROVED("Approved"),
     PENDING("Pending"),
     DECLINED("Declined"),
-    CANCELLED("Cancelled")
+    CANCELLED("Cancelled"),
+    USER_CANCELLED("User Cancelled")
 }
 
 data class ActivityDate (
