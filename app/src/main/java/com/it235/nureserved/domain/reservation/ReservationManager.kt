@@ -8,8 +8,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapFromModelToDb
 import com.it235.nureserved.domain.reservation.ReservationDataMapper.Companion.mapTransactionDetails
-import com.it235.nureserved.domain.reservation.ReservationManager.Companion
-import com.it235.nureserved.domain.reservation.ReservationManager.Companion.retrieveFromDb
 import java.time.OffsetDateTime
 
 class ReservationManager {

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.it235.nureserved.domain.reservation.ReservationFormDataV2
 import com.it235.nureserved.domain.reservation.ReservationManager
 import com.it235.nureserved.domain.reservation.TransactionStatus
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -59,6 +60,8 @@ class ReservationsViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             if (isRefreshing) _isRefreshing.value = true
+
+            delay(5L)
 
             ReservationManager.retrieveReservations { reservations ->
                 _reservationList.value = reservations

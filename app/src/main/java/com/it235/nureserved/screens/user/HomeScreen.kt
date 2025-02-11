@@ -193,7 +193,6 @@ fun TopBar(
     showThemeSettingsDialog: () -> Unit,
     showProfileDialog: () -> Unit) {
 
-    var showNotificationPopup by remember { mutableStateOf(false) }
     var showProfilePopup by remember { mutableStateOf(false) }
 
     TopAppBar(
@@ -209,64 +208,6 @@ fun TopBar(
             )
         },
         actions = {
-            IconButton(onClick = { showNotificationPopup = !showNotificationPopup }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.notifications),
-                    contentDescription = "Notification icon about the status of reservation"
-                )
-                DropdownMenu(
-                    expanded = showNotificationPopup,
-                    onDismissRequest = { showNotificationPopup = false }
-                ) {
-                    Text(
-                        text = "Notifications",
-                        modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
-                        style = TextStyle(
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp
-                        )
-                    )
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                buildAnnotatedString {
-                                    append("Greetings! The room you reserved with tracking number #131256 is now ")
-                                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                        append("Approved")
-                                    }
-                                }
-                            )
-                        },
-                        onClick = { /* Handle notification click */ },
-                        leadingIcon = {
-                            Canvas(modifier = Modifier.size(16.dp)) {
-                                drawCircle(color = Color(0xFF49844b))
-                            }
-                        }
-                    )
-                    Spacer(modifier = Modifier.size(8.dp))
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                buildAnnotatedString {
-                                    append("Greetings! Due to unforeseen circumstances, your reservation request with tracking number #54764 got ")
-                                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                        append("Declined")
-                                    }
-                                }
-                            )
-                        },
-                        onClick = { /* Handle notification click */ },
-                        leadingIcon = {
-                            Canvas(modifier = Modifier.size(16.dp)) {
-                                drawCircle(color = Color(0xFFDB5E5F))
-                            }
-                        }
-                    )
-                    Spacer(modifier = Modifier.size(8.dp))
-                }
-            };
             IconButton(onClick = { showProfilePopup = !showProfilePopup }) {
                 Icon(
                     painter = painterResource(id = R.drawable.more_vert),

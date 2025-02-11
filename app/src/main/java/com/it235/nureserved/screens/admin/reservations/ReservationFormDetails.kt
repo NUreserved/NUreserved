@@ -889,7 +889,7 @@ private fun ConfirmReservationCancelDialog(
 ) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
-        title = { Text(text = "Confirm decline?") },
+        title = { Text(text = "Confirm cancel?") },
         icon = {
             Icon(
                 painter = painterResource(id = R.drawable.help_24dp_e8eaed_fill0_wght400_grad0_opsz24),

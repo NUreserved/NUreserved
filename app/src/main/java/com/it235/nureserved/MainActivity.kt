@@ -28,6 +28,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
+import com.it235.nureserved.domain.reservation.notification.ReservationStatusDialog
+import com.it235.nureserved.domain.reservation.notification.ReservationNotificationManager
+import com.it235.nureserved.permission.checkAndRequestNotificationPermission
 import com.it235.nureserved.preferences.AppPreferences
 import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.floor_rooms.FloorRoomsScreen
@@ -44,19 +47,34 @@ import com.it235.nureserved.screens.prelogin.auth.signup.ProgramStudentNumberSig
 import com.it235.nureserved.screens.prelogin.auth.signup.RolesFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SchoolFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SignUpScreen
-import com.it235.nureserved.screens.user.HomeScreen
 import com.it235.nureserved.screens.shared.room_details.RoomDetails
 import com.it235.nureserved.screens.prelogin.onboarding_screen.GetStartedScreen
+import com.it235.nureserved.screens.user.HomeScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
+    // Initialize the reservation notification manager
+    private lateinit var reservationNotificationManager: ReservationNotificationManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             Main()
         }
+
+        checkAndRequestNotificationPermission(this) { isGranted ->
+            if (isGranted) {
+                reservationNotificationManager = ReservationNotificationManager(this)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        reservationNotificationManager.stopListener()
     }
 }
 
@@ -67,6 +85,8 @@ private fun Main() {
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
 
     NUreservedTheme(themeOption) {
+        ReservationStatusDialog()
+
         val navController = rememberNavController()
         val showSplash = rememberSaveable { mutableStateOf(true) }
         val auth = FirebaseAuth.getInstance()
