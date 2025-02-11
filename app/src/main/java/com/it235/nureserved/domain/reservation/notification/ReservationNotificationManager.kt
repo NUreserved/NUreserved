@@ -12,6 +12,8 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -65,11 +67,34 @@ class ReservationNotificationManager(val context: Context) {
 
                                 // Trigger local notification based on the latest status
                                 when (latestStatus) {
-                                    TransactionStatus.APPROVED.toString() -> showNotification("Reservation approved", "Your reservation with a #${trackingNumber} has been approved.", trackingNumber)
-                                    TransactionStatus.DECLINED.toString() -> showNotification("Reservation declined", "Your reservation with a #${trackingNumber} has been declined.", trackingNumber)
-                                    TransactionStatus.CANCELLED.toString() -> showNotification("Reservation cancelled", "Your reservation with a #${trackingNumber} has been cancelled.", trackingNumber)
+                                    TransactionStatus.APPROVED.toString() ->
+                                        showNotification(
+                                            title = "Reservation approved",
+                                            message = "Your reservation with a #${trackingNumber} has been approved.",
+                                            trackingNumber = trackingNumber,
+                                            transactionStatus = TransactionStatus.APPROVED
+                                        )
+                                    TransactionStatus.DECLINED.toString() ->
+                                        showNotification(
+                                            title = "Reservation declined",
+                                            message = "Your reservation with a #${trackingNumber} has been declined.",
+                                            trackingNumber = trackingNumber,
+                                            transactionStatus = TransactionStatus.DECLINED
+                                        )
+                                    TransactionStatus.CANCELLED.toString() ->
+                                        showNotification("Reservation cancelled",
+                                            message = "Your reservation with a #${trackingNumber} has been cancelled.",
+                                            trackingNumber = trackingNumber,
+                                            transactionStatus = TransactionStatus.CANCELLED
+                                        )
                                     TransactionStatus.USER_CANCELLED.toString() -> return@addSnapshotListener
-                                    else -> showNotification("Reservation status changed", "Your reservation with a #${trackingNumber} status has changed.", trackingNumber)
+                                    else ->
+                                        showNotification(
+                                            title = "Reservation status changed",
+                                            message = "Your reservation with a #${trackingNumber} status has changed.",
+                                            trackingNumber = trackingNumber,
+                                            transactionStatus = null
+                                        )
                                 }
                             }
                         }
@@ -84,7 +109,7 @@ class ReservationNotificationManager(val context: Context) {
         listenerRegistration?.remove()
     }
 
-    private fun showNotification(title: String, message: String, trackingNumber: String) {
+    private fun showNotification(title: String, message: String, trackingNumber: String, transactionStatus: TransactionStatus?) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -112,6 +137,10 @@ class ReservationNotificationManager(val context: Context) {
             notify(trackingNumber.hashCode(), builder.build())
             Log.d("ReservationNotificationManager", "Notification sent for reservation ID: $trackingNumber")
         }
+
+        // Trigger the dialog
+        val dialogViewModel = ViewModelProvider(context as ViewModelStoreOwner).get(ReservationStatusDialogViewModel::class.java)
+        dialogViewModel.showDialog(title, message, transactionStatus)
     }
 
     private fun createNotificationChannel() {
