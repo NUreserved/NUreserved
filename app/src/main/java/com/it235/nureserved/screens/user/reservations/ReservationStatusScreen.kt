@@ -147,31 +147,32 @@ fun RoomReservationStatusScreen(
                 0 -> {
                     if (isLoadingData) {
                         LoadingIndicator()
-                    }
-                    else if (approvedReservations.isEmpty()) {
-                        LazyColumn (
-                            modifier = Modifier
-                                .fillMaxHeight(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            item { EmptyListComposable("No active reservations") }
-                        }
                     } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            items(approvedReservations) { reservation ->
-                                ReservationCard(
-                                    reservation = reservation,
-                                    onClick = {
-                                        viewModel.setSelectedReservation(it)
-                                        viewModel.setShowBottomSheet(true)
-                                    }
-                                )
+                        if (approvedReservations.isEmpty()) {
+                            LazyColumn (
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item { EmptyListComposable("No active reservations") }
+                            }
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                items(approvedReservations) { reservation ->
+                                    ReservationCard(
+                                        reservation = reservation,
+                                        onClick = {
+                                            viewModel.setSelectedReservation(it)
+                                            viewModel.setShowBottomSheet(true)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
@@ -179,30 +180,32 @@ fun RoomReservationStatusScreen(
                 1 -> {
                     if (isLoadingData) {
                         LoadingIndicator()
-                    } else if (pendingReservations.isEmpty()) {
-                        LazyColumn (
-                            modifier = Modifier
-                                .fillMaxHeight(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            item { EmptyListComposable("No pending reservations") }
-                        }
                     } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ){
-                            items(pendingReservations) { reservation ->
-                                ReservationCard(
-                                    reservation = reservation,
-                                    onClick = {
-                                        viewModel.setSelectedReservation(it)
-                                        viewModel.setShowBottomSheet(true)
-                                    }
-                                )
+                        if (pendingReservations.isEmpty()) {
+                            LazyColumn (
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item { EmptyListComposable("No pending reservations") }
+                            }
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ){
+                                items(pendingReservations) { reservation ->
+                                    ReservationCard(
+                                        reservation = reservation,
+                                        onClick = {
+                                            viewModel.setSelectedReservation(it)
+                                            viewModel.setShowBottomSheet(true)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
@@ -210,30 +213,32 @@ fun RoomReservationStatusScreen(
                 2 -> {
                     if (isLoadingData) {
                         LoadingIndicator()
-                    } else if (reservationHistory.isEmpty()) {
-                        LazyColumn (
-                            modifier = Modifier
-                                .fillMaxHeight(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            item { EmptyListComposable("No history available") }
-                        }
                     } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ){
-                            items(reservationHistory) { reservation ->
-                                ReservationCard(
-                                    reservation = reservation,
-                                    onClick = {
-                                        viewModel.setSelectedReservation(it)
-                                        viewModel.setShowBottomSheet(true)
-                                    }
-                                )
+                        if (reservationHistory.isEmpty()) {
+                            LazyColumn (
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item { EmptyListComposable("No history available") }
+                            }
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ){
+                                items(reservationHistory) { reservation ->
+                                    ReservationCard(
+                                        reservation = reservation,
+                                        onClick = {
+                                            viewModel.setSelectedReservation(it)
+                                            viewModel.setShowBottomSheet(true)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
