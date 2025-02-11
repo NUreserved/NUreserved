@@ -31,6 +31,12 @@ class ReservationsViewModel : ViewModel() {
     private val _showBottomSheet = MutableStateFlow(false)
     val showBottomSheet: StateFlow<Boolean> = _showBottomSheet.asStateFlow()
 
+    private val _showConfirmReservationCancelDialog = MutableStateFlow(false)
+    val showConfirmReservationCancelDialog: StateFlow<Boolean> = _showConfirmReservationCancelDialog
+
+    private val _showCancelledReservationDialog = MutableStateFlow(false)
+    val showCancelledReservationDialog: StateFlow<Boolean> = _showCancelledReservationDialog
+
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
@@ -41,6 +47,9 @@ class ReservationsViewModel : ViewModel() {
 
     private val _selectedReservation = MutableStateFlow<ReservationFormDataV2?>(null)
     val selectedReservation: StateFlow<ReservationFormDataV2?> = _selectedReservation.asStateFlow()
+
+    private var _remarks = MutableStateFlow<String>("")
+    var remarks: StateFlow<String> = _remarks
 
     init {
         loadReservations()
@@ -74,6 +83,12 @@ class ReservationsViewModel : ViewModel() {
         loadReservations(isRefreshing = true)
     }
 
+    fun updateReservationList() {
+        _approvedReservations.value = getApprovedReservationsList()
+        _pendingReservations.value = getPendingReservationsList()
+        _reservationHistory.value = getReservationsListHistory()
+    }
+
     private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
         return _reservationList.value.filter { reservation ->
             reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&
@@ -92,9 +107,10 @@ class ReservationsViewModel : ViewModel() {
     private fun getReservationsListHistory(): List<ReservationFormDataV2> {
         return _reservationList.value
             .filter { reservation ->
-                (reservation.getLatestTransactionDetails()?.status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
+                val status = reservation.getLatestTransactionDetails()?.status
+                (status != TransactionStatus.PENDING && reservation.getActivityDateTime().endDate.isBefore(OffsetDateTime.now()))
                         ||
-                        (reservation.getLatestTransactionDetails()?.status == TransactionStatus.DECLINED || reservation.getLatestTransactionDetails()?.status == TransactionStatus.CANCELLED)
+                (status == TransactionStatus.DECLINED || status == TransactionStatus.CANCELLED || status == TransactionStatus.USER_CANCELLED)
             }
             .sortedByDescending { it.getLatestTransactionDetails()?.eventDate }
     }
@@ -109,5 +125,17 @@ class ReservationsViewModel : ViewModel() {
 
     fun setSelectedReservation(reservation: ReservationFormDataV2?) {
         _selectedReservation.value = reservation
+    }
+
+    fun updateRemarks(newRemarks: String) {
+        _remarks.value = newRemarks
+    }
+
+    fun setShowConfirmReservationCancelDialog(show: Boolean) {
+        _showConfirmReservationCancelDialog.value = show
+    }
+
+    fun setShowCancelledReservationDialog(show: Boolean) {
+        _showCancelledReservationDialog.value = show
     }
 }

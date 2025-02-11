@@ -145,7 +145,7 @@ fun ReservationsHistoryScreen(
 
 @Composable
 private fun ReservationFilterChipComposable(
-    filterStatus: TransactionStatus?,
+    filterStatus: List<TransactionStatus>?,
     sharedViewModel: ReservationsSharedViewModel
 ) {
 
@@ -165,26 +165,26 @@ private fun ReservationFilterChipComposable(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             FilterChip(
-                selected = filterStatus == TransactionStatus.APPROVED,
+                selected = filterStatus?.get(0) == TransactionStatus.APPROVED,
                 onClick = {
-                    if (filterStatus == TransactionStatus.APPROVED) sharedViewModel.setFilterStatus(null)
-                    else sharedViewModel.setFilterStatus(TransactionStatus.APPROVED)
+                    if (filterStatus?.get(0) == TransactionStatus.APPROVED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(listOf(TransactionStatus.APPROVED))
                 },
                 label = { Text(TransactionStatus.APPROVED.value) }
             )
             FilterChip(
-                selected = filterStatus == TransactionStatus.DECLINED,
+                selected = filterStatus?.get(0)  == TransactionStatus.DECLINED,
                 onClick = {
-                    if (filterStatus == TransactionStatus.DECLINED) sharedViewModel.setFilterStatus(null)
-                    else sharedViewModel.setFilterStatus(TransactionStatus.DECLINED)
+                    if (filterStatus?.get(0) == TransactionStatus.DECLINED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(listOf(TransactionStatus.DECLINED))
                 },
                 label = { Text(TransactionStatus.DECLINED.value) }
             )
             FilterChip(
-                selected = filterStatus == TransactionStatus.CANCELLED,
+                selected = filterStatus?.get(0) == TransactionStatus.CANCELLED,
                 onClick = {
-                    if (filterStatus == TransactionStatus.CANCELLED) sharedViewModel.setFilterStatus(null)
-                    else sharedViewModel.setFilterStatus(TransactionStatus.CANCELLED)
+                    if (filterStatus?.get(0) == TransactionStatus.CANCELLED) sharedViewModel.setFilterStatus(null)
+                    else sharedViewModel.setFilterStatus(listOf(TransactionStatus.CANCELLED, TransactionStatus.USER_CANCELLED))
                 },
                 label = { Text(TransactionStatus.CANCELLED.value) }
             )
