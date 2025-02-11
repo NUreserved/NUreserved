@@ -88,7 +88,7 @@ class ReservationSubmissionHandler : ViewModel() {
                 endTime = LocalTime.of(convertHourString(_selectedToTimeOption.value!!), 0)
             ),
             venue = _selectedRooms.value!!,
-            expectedAttendees = 15,
+            expectedAttendees = _expectedNumberOfAttendees.value!!.toInt(),
             requesterLastName = _lastName.value!!,
             requesterMiddleName = _middleName.value!!,
             requesterGivenName = _givenName.value!!,
