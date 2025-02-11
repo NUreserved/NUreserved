@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -57,6 +58,7 @@ import com.it235.nureserved.preferences.ThemeOption
 import com.it235.nureserved.screens.admin.reservations.ReservationStatusScreen
 import com.it235.nureserved.screens.admin.reservations.ReservationsHistoryScreen
 import com.it235.nureserved.screens.shared.LogoutConfirmationDialog
+import com.it235.nureserved.screens.shared.Space
 import com.it235.nureserved.screens.shared.ThemeSettingsDialog
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import com.it235.nureserved.ui.theme.brandColorBlue
@@ -76,6 +78,7 @@ fun AdminHomeScreen(
     val selectedItem by viewModel.selectedItem.collectAsState()
     val showThemeSettingsDialog by viewModel.showThemeSettingsDialog.collectAsState()
     val showLogoutConfirmationDialog by viewModel.showLogoutConfirmationDialog.collectAsState()
+    val floorsCount by viewModel.floorsCount.collectAsState()
 
     BackHandler {
         if (viewModel.isIndexStackAtDefault()) {
@@ -125,7 +128,7 @@ fun AdminHomeScreen(
             }
 
             when (selectedItem) {
-                0 -> { HomeScreenContent(innerPadding = innerPadding, navController) }
+                0 -> { HomeScreenContent(innerPadding = innerPadding, navController, floorsCount) }
                 1 -> { ReservationStatusScreen(innerPadding = innerPadding) }
                 2 -> { ReservationsHistoryScreen(innerPadding = innerPadding) }
             }
@@ -228,7 +231,8 @@ private fun NavigationBar(
 @Composable
 private fun HomeScreenContent(
     innerPadding: PaddingValues,
-    navController: NavController
+    navController: NavController,
+    floorsCount: List<Int>
 ) {
     Column(
         modifier = Modifier
@@ -240,10 +244,10 @@ private fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item { Spacer(modifier = Modifier.size(0.dp)) }
-            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.SECOND_FLOOR, 4, navController) }
-            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.THIRD_FLOOR, 2, navController) }
-            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FOURTH_FLOOR, 5, navController) }
-            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FIFTH_FLOOR, 0, navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.SECOND_FLOOR, floorsCount[0], navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.THIRD_FLOOR, floorsCount[1], navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FOURTH_FLOOR, floorsCount[2], navController) }
+            item { FloorCard(com.it235.nureserved.domain.rooms_v2.FloorLocation.FIFTH_FLOOR, floorsCount[3], navController) }
             item { Spacer(modifier = Modifier.size(0.dp)) }
         }
     }
@@ -297,21 +301,34 @@ private fun FloorCard(
         }
 
         // Pending Reservations
-        Text(
-            text = if (numberOfReservations > 1) {
-                "Pending Reservations: $numberOfReservations"
-            } else {
-                "No Pending Reservations"
-            },
-            fontSize = 16.sp,
-            color = Color.White,
+        Row(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(8.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color(0xAA000000)) // Semi-transparent background
                 .padding(horizontal = 8.dp, vertical = 4.dp)
-        )
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(24.dp),
+                tint = Color.White,
+                painter = painterResource(id = R.drawable.pending_actions_24dp_e8eaed_fill0_wght400_grad0_opsz24),
+                contentDescription = "Pending Reservations Icon",
+            )
+            Spacer(modifier = Modifier.size(6.dp))
+            Text(
+                text = if (numberOfReservations == 1) {
+                    "$numberOfReservations pending"
+                } else if (numberOfReservations > 1) {
+                    "$numberOfReservations pendings"
+                } else {
+                    "No pending reservations"
+                },
+                fontSize = 16.sp,
+                color = Color.White,
+            )
+        }
 
     }
 }
