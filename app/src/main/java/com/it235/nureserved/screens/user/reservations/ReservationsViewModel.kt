@@ -63,7 +63,7 @@ class ReservationsViewModel : ViewModel() {
 
             delay(5L)
 
-            ReservationManager.retrieveReservations { reservations ->
+            ReservationManager.retrieveUserReservations { reservations ->
                 _reservationList.value = reservations
                 Log.d("ReservationsViewModel", "Loaded reservations: ${_reservationList.value.size}")
 

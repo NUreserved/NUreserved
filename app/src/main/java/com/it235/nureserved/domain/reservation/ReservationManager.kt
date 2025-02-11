@@ -60,13 +60,19 @@ class ReservationManager {
                 }
         }
 
-        fun retrieveReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
-            retrieveFromDb() { data ->
+        fun retrieveUserReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
+            retrieveUserReservationsFromDb() { data ->
                 callback(ReservationDataMapper.mapFromDbToModel(data))
             }
         }
 
-        private fun retrieveFromDb(callback: (List<Map<String, Any>>?) -> Unit) {
+        fun retrieveAllReservations(callback: (List<ReservationFormDataV2>) -> Unit) {
+            retrieveAllReservationsFromDb() { data ->
+                callback(ReservationDataMapper.mapFromDbToModel(data))
+            }
+        }
+
+        private fun retrieveUserReservationsFromDb(callback: (List<Map<String, Any>>?) -> Unit) {
             val db = FirebaseFirestore.getInstance()
             Log.d("ReservationManager", "Retrieving reservations for user: $userId")
 
@@ -80,6 +86,28 @@ class ReservationManager {
                         callback(reservations)
                     } else {
                         Log.w("ReservationManager", "No reservations found for user")
+                        callback(null)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.w("ReservationManager", "Error getting reservations", e)
+                    callback(null)
+                }
+        }
+
+        private fun retrieveAllReservationsFromDb(callback: (List<Map<String, Any>>?) -> Unit) {
+            val db = FirebaseFirestore.getInstance()
+            Log.d("ReservationManager", "Retrieving all reservations")
+
+            db.collection("reservations")
+                .get()
+                .addOnSuccessListener { documents ->
+                    if (!documents.isEmpty) {
+                        val reservations = documents.map { it.data }
+                        Log.d("ReservationManager", "Reservations retrieved: $reservations")
+                        callback(reservations)
+                    } else {
+                        Log.w("ReservationManager", "No reservations found")
                         callback(null)
                     }
                 }
