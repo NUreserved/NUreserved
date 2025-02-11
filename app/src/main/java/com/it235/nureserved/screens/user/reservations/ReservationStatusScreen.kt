@@ -321,7 +321,35 @@ private fun ReservationCard(
                     if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.PENDING) {
                         Text(
                             text = "Requested: ${
-                                reservation.getDateFilled().format(
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
+                                    DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
+                                )
+                            }",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                lineHeight = 16.sp
+                            )
+                        )
+                    }
+
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.DECLINED) {
+                        Text(
+                            text = "Declined: ${
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
+                                    DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
+                                )
+                            }",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                lineHeight = 16.sp
+                            )
+                        )
+                    }
+
+                    if (reservation.getLatestTransactionDetails()!!.status == TransactionStatus.CANCELLED || reservation.getLatestTransactionDetails()!!.status == TransactionStatus.USER_CANCELLED) {
+                        Text(
+                            text = "Cancelled: ${
+                                reservation.getLatestTransactionDetails()!!.eventDate.format(
                                     DateTimeFormatter.ofPattern("hh:mm a, MM/dd/yy")
                                 )
                             }",
