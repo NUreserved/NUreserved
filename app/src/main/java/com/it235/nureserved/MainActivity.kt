@@ -4,14 +4,10 @@ import AuthService.Companion.checkIfAdmin
 import AuthService.Companion.isVerified
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.Manifest
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -24,7 +20,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -33,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
 import com.it235.nureserved.domain.reservation.ReservationSubmissionHandler
+import com.it235.nureserved.domain.reservation.notification.ReservationStatusDialog
 import com.it235.nureserved.domain.reservation.notification.ReservationNotificationManager
 import com.it235.nureserved.permission.checkAndRequestNotificationPermission
 import com.it235.nureserved.preferences.AppPreferences
@@ -51,9 +47,9 @@ import com.it235.nureserved.screens.prelogin.auth.signup.ProgramStudentNumberSig
 import com.it235.nureserved.screens.prelogin.auth.signup.RolesFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SchoolFieldScreen
 import com.it235.nureserved.screens.prelogin.auth.signup.SignUpScreen
-import com.it235.nureserved.screens.user.HomeScreen
 import com.it235.nureserved.screens.shared.room_details.RoomDetails
 import com.it235.nureserved.screens.prelogin.onboarding_screen.GetStartedScreen
+import com.it235.nureserved.screens.user.HomeScreen
 import com.it235.nureserved.ui.theme.NUreservedTheme
 import kotlinx.coroutines.delay
 
@@ -89,6 +85,8 @@ private fun Main() {
     val themeOption by appPreferences.themeOption.collectAsState(initial = ThemeOption.SYSTEM)
 
     NUreservedTheme(themeOption) {
+        ReservationStatusDialog()
+
         val navController = rememberNavController()
         val showSplash = rememberSaveable { mutableStateOf(true) }
         val auth = FirebaseAuth.getInstance()
