@@ -31,6 +31,12 @@ class ReservationsViewModel : ViewModel() {
     private val _showBottomSheet = MutableStateFlow(false)
     val showBottomSheet: StateFlow<Boolean> = _showBottomSheet.asStateFlow()
 
+    private val _showConfirmReservationCancelDialog = MutableStateFlow(false)
+    val showConfirmReservationCancelDialog: StateFlow<Boolean> = _showConfirmReservationCancelDialog
+
+    private val _showCancelledReservationDialog = MutableStateFlow(false)
+    val showCancelledReservationDialog: StateFlow<Boolean> = _showCancelledReservationDialog
+
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
@@ -41,6 +47,9 @@ class ReservationsViewModel : ViewModel() {
 
     private val _selectedReservation = MutableStateFlow<ReservationFormDataV2?>(null)
     val selectedReservation: StateFlow<ReservationFormDataV2?> = _selectedReservation.asStateFlow()
+
+    private var _remarks = MutableStateFlow<String>("")
+    var remarks: StateFlow<String> = _remarks
 
     init {
         loadReservations()
@@ -109,5 +118,17 @@ class ReservationsViewModel : ViewModel() {
 
     fun setSelectedReservation(reservation: ReservationFormDataV2?) {
         _selectedReservation.value = reservation
+    }
+
+    fun updateRemarks(newRemarks: String) {
+        _remarks.value = newRemarks
+    }
+
+    fun setShowConfirmReservationCancelDialog(show: Boolean) {
+        _showConfirmReservationCancelDialog.value = show
+    }
+
+    fun setShowCancelledReservationDialog(show: Boolean) {
+        _showCancelledReservationDialog.value = show
     }
 }
