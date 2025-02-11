@@ -80,6 +80,36 @@ class AuthService {
             }
         }
 
+        fun getRole(onResult: (String?) -> Unit) {
+            val auth = FirebaseAuth.getInstance()
+            val firestore = Firebase.firestore
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                val uid = currentUser.uid
+                val userDocRef = firestore.collection("user").document(uid)
+
+                userDocRef.get()
+                    .addOnSuccessListener { document ->
+                        if (document != null && document.exists()) {
+                            val role = document.getString("role")
+                            Log.d("UserData", "Role: $role")
+                            onResult(role)
+                        } else {
+                            Log.d("UserData", "Document does not exist")
+                            onResult(null)
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d("UserData", "Error getting documents: ", exception)
+                        onResult(null)
+                    }
+            } else {
+                Log.d("UserData", "No current user")
+                onResult(null)
+            }
+        }
+
         fun checkIfAdmin(onResult: (Boolean) -> Unit) {
             val auth = FirebaseAuth.getInstance()
             val firestore = Firebase.firestore
