@@ -83,6 +83,12 @@ class ReservationsViewModel : ViewModel() {
         loadReservations(isRefreshing = true)
     }
 
+    fun updateReservationList() {
+        _approvedReservations.value = getApprovedReservationsList()
+        _pendingReservations.value = getPendingReservationsList()
+        _reservationHistory.value = getReservationsListHistory()
+    }
+
     private fun getApprovedReservationsList(): List<ReservationFormDataV2> {
         return _reservationList.value.filter { reservation ->
             reservation.getLatestTransactionDetails()?.status == TransactionStatus.APPROVED &&

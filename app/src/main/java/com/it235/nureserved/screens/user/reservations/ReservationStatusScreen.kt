@@ -87,6 +87,7 @@ fun RoomReservationStatusScreen(
     LaunchedEffect(showBottomSheet) {
         if (!showBottomSheet) {
             sheetState.hide()
+            viewModel.updateReservationList()
         }
     }
 
